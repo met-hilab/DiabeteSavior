@@ -5,6 +5,9 @@ set :scm_passphrase, ""
 
 set :user, "deploy"
 set :use_sudo, false
+set :normalize_asset_timestamps, false
+set :keep_releases, 5
+
 # set :scm, :git # You can set :scm explicitly or Capistrano will make an intelligent guess based on known version control directory names
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
 #require 'capistrano/ext/multistage'
@@ -34,3 +37,21 @@ set :deploy_to, "/srv/cs673/"
 #     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
 #   end
 # end
+after "deploy:update", "deploy:cleanup" 
+after "deploy:update_code", "cs673:symlink"
+after "deploy:setup", "cs673:make_tmp"
+
+namespace :cs673 do
+  desc "Create symlink"
+  task :symlink do
+    run "rm -rf #{release_path}/app/tmp"
+    #run "rm -rf #{shared_path}/tmp"
+    #run "mkdir -m 777 -p #{shared_path}/tmp"
+    run "ln -nfs #{shared_path}/tmp #{release_path}/app/tmp"
+  end
+
+  desc "Create tmp folder"
+  task :make_tmp do 
+    run "mkdir -m 777 -p #{shared_path}/tmp"
+  end 
+end
