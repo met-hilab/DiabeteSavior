@@ -32,5 +32,12 @@ App::uses('Controller', 'Controller');
  * @link		http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
-  public $components = array('DebugKit.Toolbar');
+  public $components = array('DebugKit.Toolbar', 'Session');
+  //public $components = array('Session');
+
+  
+  public function beforeFilter() {
+    parent::beforeFilter();
+    $this->set('current_user', $this->Session->read('user'));
+  }
 }

@@ -38,6 +38,12 @@ class PagesController extends AppController {
  */
 	public $uses = array();
 
+	//function __construct() {
+		//$this->assign('title', "TEST");
+		//parent::__construct();
+		//$this->set('title', "Title");
+	//}
+
 /**
  * Displays a view
  *
@@ -48,6 +54,7 @@ class PagesController extends AppController {
  */
 	public function display() {
 		$path = func_get_args();
+		$this->set('title', "Title");
 
 		$count = count($path);
 		if (!$count) {

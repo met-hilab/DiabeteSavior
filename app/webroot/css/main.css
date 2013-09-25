@@ -1,0 +1,33 @@
+.bs-social-buttons {
+display: inline-block;
+margin-bottom: 0;
+padding-left: 0;
+list-style: none;
+}
+
+.bs-social-buttons li {
+display: inline-block;
+line-height: 1;
+padding: 5px 8px;
+}
+
+.bs-social-buttons li:first-child {
+padding-left: 0;
+}
+
+.login-form {
+  padding:20px;
+  min-width: 250px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+h2 img {
+    display: block;
+    margin: 5px auto;
+  }
+@media (min-width: 768px) {
+  h2 img {
+    display: inline;
+  }
+}
