@@ -3,7 +3,7 @@ CREATE TABLE `cs673`.`patients` (
   `email` VARCHAR(255) NULL,
   `firstname` VARCHAR(45) NULL,
   `lastname` VARCHAR(45) NULL,
-  `dob` DATE NULL,
+  `dob` INT NULL,
   `gender` INT NULL,
   `created` DATETIME NULL,
   `modified` DATETIME NULL,
