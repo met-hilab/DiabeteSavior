@@ -4,7 +4,7 @@ CREATE TABLE `cs673`.`patients` (
   `firstname` VARCHAR(45) NULL,
   `lastname` VARCHAR(45) NULL,
   `dob` DATE NULL,
-  `gender` INT NULL,
+  `gender` TINYINT NULL,
   `created` DATETIME NULL,
   `modified` DATETIME NULL,
   PRIMARY KEY (`id`));
