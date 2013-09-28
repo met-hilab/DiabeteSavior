@@ -3,8 +3,8 @@ CREATE TABLE `cs673`.`patients` (
   `email` VARCHAR(255) NULL,
   `firstname` VARCHAR(45) NULL,
   `lastname` VARCHAR(45) NULL,
-  `dob` INT NULL,
-  `gender` INT NULL,
+  `dob` DATE NULL,
+  `gender` TINYINT NULL,
   `created` DATETIME NULL,
   `modified` DATETIME NULL,
   PRIMARY KEY (`id`));
