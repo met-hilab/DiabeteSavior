@@ -60,8 +60,7 @@ class UsersController extends AppController {
  *  or MissingViewException in debug mode.
  */
   public function index() {
-    // Just a test here.
-    echo "Hello";
+    
   }
 
 
