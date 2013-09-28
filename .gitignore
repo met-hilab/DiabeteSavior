@@ -4,3 +4,6 @@ app/tmp/*
 #OS junk files
 [Tt]humbs.db
 .DS_Store
+.metadata
+RemoteSystemsTempFiles
+.settings
