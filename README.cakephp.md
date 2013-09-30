@@ -1,4 +1,4 @@
 cs673
 =====
 
-Diabetes Management System
+Type II Diabetes Management System
