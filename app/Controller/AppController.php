@@ -40,4 +40,19 @@ class AppController extends Controller {
     parent::beforeFilter();
     $this->set('current_user', $this->Session->read('user'));
   }
+
+  public function authenticate_user() {
+    if($this->Session->read('user')) {
+      return true;
+    } else {
+      throw new ForbiddenException();
+      return false;
+    }
+  }
+
+  public function can($params) {
+    $controller = $params['controller'];
+    $action = $params['action'];
+    return true;
+  }
 }

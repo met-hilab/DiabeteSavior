@@ -43,14 +43,6 @@ class UsersController extends AppController {
     Security::setHash('sha512');
   }
 
-  //function __construct() {
-    //$this->assign('title', "TEST");
-    //parent::__construct();
-    //$this->set('title', "Title");
-  //}
-
-
-
 /**
  * Displays a view
  *
@@ -60,7 +52,11 @@ class UsersController extends AppController {
  *  or MissingViewException in debug mode.
  */
   public function index() {
-    
+    $this->authenticate_user();
+    $users = $this->User->find('all');
+    //var_dump($users);
+    //exit;
+    $this->set('users', $users);
   }
 
 
@@ -132,16 +128,103 @@ class UsersController extends AppController {
  *  or MissingViewException in debug mode.
  */
   public function add() {
-    $email = $this->request->data('email');
-    $password = $this->request->data('password');
-    $data = array("User" => array('email' => $email, 'password' => $password));
-    $this->User->create();
-    $res = $this->User->save($data);
+    $this->authenticate_user();
+    if ($this->request->is('post')){
+      $user = $this->request->data['User'];
+      $email = $user['email'];
+      $password = $user['password'];
+      //$data = array("User" => array('email' => $email, 'password' => $password));
+      $data = $user;
+      $this->User->create();
+      $res = $this->User->save($data);
 
-    echo json_encode($res);
-    exit;
-
+      echo json_encode($res);
+      exit;
+    }
   }
+
+/**
+ * Edit user
+ *
+ * @param email, password
+ * @return void
+ * @throws NotFoundException When the view file could not be found
+ *  or MissingViewException in debug mode.
+ */
+  public function edit() {
+    $this->authenticate_user();
+    //get the id of the user to be edited
+    $id = $this->request->params['pass'][0];
+    //var_dump($this->request->params); exit;
+    //set the user id
+    $this->User->id = $id;
+    //check if a user with this id really exists
+    if( $this->User->exists() ){
+        if( $this->request->is( 'post' ) || $this->request->is( 'put' ) ){
+            //save user
+            if( $this->User->save( $this->request->data ) ){
+                //set to user's screen
+                $this->Session->setFlash('User was edited.');
+                //redirect to user's list
+                $this->redirect(array('action' => 'index'));
+            }else{
+                $this->Session->setFlash('Unable to edit user. Please, try again.');
+            }
+        }else{
+            //we will read the user data
+            //so it will fill up our html form automatically
+            $this->request->data = $this->User->read();
+        }
+        
+    }else{
+        //if not found, we will tell the user that user does not exist
+        $this->Session->setFlash('The user you are trying to edit does not exist.');
+        $this->redirect(array('action' => 'index'));
+        //or, since it we are using php5, we can throw an exception
+        //it looks like this
+        //throw new NotFoundException('The user you are trying to edit does not exist.');
+    }
+  }
+ /**
+ * Delete user
+ *
+ * @param id
+ * @return void
+ * @throws NotFoundException When the view file could not be found
+ *  or MissingViewException in debug mode.
+ */
+  public function delete() {
+    $id = $this->request->params['pass'][0];
+    //the request must be a post request 
+    //that's why we use postLink method on our view for deleting user
+    if( $this->request->is('get') ){
+        $this->Session->setFlash('Delete method is not allowed.');
+        $this->redirect(array('action' => 'index'));
+        
+        //since we are using php5, we can also throw an exception like:
+        //throw new MethodNotAllowedException();
+    }else{
+    
+        if( !$id ) {
+            $this->Session->setFlash('Invalid id for user');
+            $this->redirect(array('action'=>'index'));
+            
+        }else{
+            //delete user
+            if( $this->User->delete( $id ) ){
+                //set to screen
+                $this->Session->setFlash('User was deleted.');
+                //redirect to users's list
+                $this->redirect(array('action'=>'index'));
+                
+            }else{  
+                //if unable to delete
+                $this->Session->setFlash('Unable to delete user.');
+                $this->redirect(array('action' => 'index'));
+            }
+        }
+    }
+}
 
 
 /**
@@ -152,34 +235,17 @@ class UsersController extends AppController {
  * @throws NotFoundException When the view file could not be found
  *  or MissingViewException in debug mode.
  */
-  public function display() {
-    $path = func_get_args();
-    $this->set('title', "Title");
-
-    $count = count($path);
-    if (!$count) {
-      return $this->redirect('/');
-    }
-    $page = $subpage = $title_for_layout = null;
-
-    if (!empty($path[0])) {
-      $page = $path[0];
-    }
-    if (!empty($path[1])) {
-      $subpage = $path[1];
-    }
-    if (!empty($path[$count - 1])) {
-      $title_for_layout = Inflector::humanize($path[$count - 1]);
-    }
-    $this->set(compact('page', 'subpage', 'title_for_layout'));
-
+  public function view() {
+    $id = $this->request->params['pass'][0];
     try {
-      $this->render(implode('/', $path));
-    } catch (MissingViewException $e) {
-      if (Configure::read('debug')) {
-        throw $e;
-      }
-      throw new NotFoundException();
+      $user = $this->User->find('first', 
+        array('conditions' => array(
+          'User.id' => $id
+        ))
+      );
+      $this->set('user', $user);
+    } catch (NotFoundException $e) {
+      throw $e;
     }
   }
 }

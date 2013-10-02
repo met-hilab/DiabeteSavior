@@ -7,3 +7,5 @@ app/tmp/*
 .metadata
 RemoteSystemsTempFiles
 .settings
+.project
+.buildpath

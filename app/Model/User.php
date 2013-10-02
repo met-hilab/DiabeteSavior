@@ -19,105 +19,124 @@ public $displayField = 'email';
  * @var array
  */
 public $validate = array(
-	'email' => array(
-		'email' => array(
-			'rule' => array('email'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		'notempty' => array(
-			'rule' => array('notempty'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-	'password' => array(
-		'notempty' => array(
-			'rule' => array('notempty'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-	'username' => array(
-		'alphanumeric' => array(
-			'rule' => array('alphanumeric'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-	'created' => array(
-		'datetime' => array(
-			'rule' => array('datetime'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-	'modified' => array(
-		'datetime' => array(
-			'rule' => array('datetime'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-	);
-public $hasOne = 'Profile';
-public $hasMany = array(
-	'Recipe' => array(
-		'className' => 'Recipe',
-		'conditions' => array('Recipe.approved' => '1'),
-		'order' => 'Recipe.created DESC'
-		)
-);
+  'email' => array(
+    'email' => array(
+      'rule' => array('email'),
+        //'message' => 'Your custom message here',
+        //'allowEmpty' => false,
+        //'required' => false,
+        //'last' => false, // Stop validation after this rule
+        //'on' => 'create', // Limit validation to 'create' or 'update' operations
+      ),
+    'notempty' => array(
+      'rule' => array('notempty'),
+        //'message' => 'Your custom message here',
+        //'allowEmpty' => false,
+        //'required' => false,
+        //'last' => false, // Stop validation after this rule
+        //'on' => 'create', // Limit validation to 'create' or 'update' operations
+      ),
+    ),
+  'password' => array(
+    'notempty' => array(
+      'rule' => array('notempty'),
+        //'message' => 'Your custom message here',
+        //'allowEmpty' => false,
+        //'required' => false,
+        //'last' => false, // Stop validation after this rule
+        //'on' => 'create', // Limit validation to 'create' or 'update' operations
+      ),
+    ),
+  'username' => array(
+    'alphanumeric' => array(
+      'rule' => array('alphanumeric'),
+        //'message' => 'Your custom message here',
+        //'allowEmpty' => false,
+        //'required' => false,
+        //'last' => false, // Stop validation after this rule
+        //'on' => 'create', // Limit validation to 'create' or 'update' operations
+      ),
+    ),
+  'created' => array(
+    'datetime' => array(
+      'rule' => array('datetime'),
+        //'message' => 'Your custom message here',
+        //'allowEmpty' => false,
+        //'required' => false,
+        //'last' => false, // Stop validation after this rule
+        //'on' => 'create', // Limit validation to 'create' or 'update' operations
+      ),
+    ),
+  'modified' => array(
+    'datetime' => array(
+      'rule' => array('datetime'),
+        //'message' => 'Your custom message here',
+        //'allowEmpty' => false,
+        //'required' => false,
+        //'last' => false, // Stop validation after this rule
+        //'on' => 'create', // Limit validation to 'create' or 'update' operations
+      ),
+    ),
+  );
+/**
+ * hasOne associations
+ *
+ * @var array
+ */
+  public $hasOne = array(
+    'Profile' => array(
+      'className' => 'Profile',
+      'foreignKey' => 'user_id',
+      'conditions' => '',
+      'fields' => '',
+      'order' => ''
+    )
+  );
+  /*
+  public $hasOne = 'Profile';
+  public $hasMany = array(
+    'Recipe' => array(
+      'className' => 'Recipe',
+      'conditions' => array('Recipe.approved' => '1'),
+      'order' => 'Recipe.created DESC'
+    )
+  );
+  */
 
 
 public function afterFind($results = array(), $primary) {
-	foreach($results as $key => $value) {
+  foreach($results as $key => $value) {
       //if(isset($results[$key]['User']['password'])) {
 
       //}
-		unset($results[$key]['User']['password']);
-		unset($results[$key]['User']['reset_token']);
-	}
-	return $results;
+    unset($results[$key]['User']['password']);
+    unset($results[$key]['User']['reset_token']);
+  }
+  return $results;
 }
 
 
 public function beforeFind($query)  {
-	$query['conditions']['password'] = sha1($query['conditions']['password']);
-	parent::beforeFind($query);
-	return $query;
+  parent::beforeFind($query);
+  var_dump($query['conditions']);
+  if($query['conditions']['password'] != '') {
+    $query['conditions']['password'] = sha1($query['conditions']['password']);
+  }
+  return $query;
 }
 
 
 public function beforeValidate($options = array()) {
-	parent::beforeValidate();
-	$this->data['User']['password'] = sha1($this->data['User']['password']);
-	return true;
+  parent::beforeValidate();
+  $this->data['User']['password'] = sha1($this->data['User']['password']);
+  return true;
 }
 
 
 public function beforeSave($options = array()) {
-	parent::beforeSave();
+  parent::beforeSave();
     //$this->data['User']['password'] = sha1($this->data['User']['password']);
-	return true;
+  return true;
 }
 
 }

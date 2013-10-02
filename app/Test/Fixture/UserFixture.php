@@ -42,8 +42,8 @@ class UserFixture extends CakeTestFixture {
 			'username' => 'Lorem ipsum dolor sit amet',
 			'openid' => 'Lorem ipsum dolor sit amet',
 			'service' => 'Lorem ipsum dolor sit amet',
-			'created' => '2013-09-24 18:19:51',
-			'modified' => '2013-09-24 18:19:51'
+			'created' => '2013-10-02 18:53:19',
+			'modified' => '2013-10-02 18:53:19'
 		),
 	);
 
