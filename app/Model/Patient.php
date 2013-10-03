@@ -93,12 +93,4 @@ class Patient extends AppModel {
 			),
 		),
 	);
-
-	function beforeSave ($res) {
-   		$patient_number = generatePatientNumber();
-   		$res['patient_number'] = $res['last_name'] + ( $res['id '] * 7 - 2);
-   		return $res;
- 	}
-
-
 }
