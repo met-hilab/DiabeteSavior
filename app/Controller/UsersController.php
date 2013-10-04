@@ -39,6 +39,8 @@ class UsersController extends AppController {
   public $uses = array();
 
   public function beforeFilter(){
+
+
     parent::beforeFilter();
     Security::setHash('sha512');
   }
