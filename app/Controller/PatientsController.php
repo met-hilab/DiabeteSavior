@@ -98,7 +98,7 @@ public function index(){
  *  or MissingViewException in debug mode.
  */
 	public function add(){
-		$this->authenticate_user();
+		//$this->authenticate_user();
 		if ($this->request->is('post')){
 			$patient = $this->request->data['Patient'];
 			$first_name = $patient['first_name'];
@@ -148,10 +148,19 @@ public function index(){
  *  or MissingViewException in debug mode.
  */
 	public function view(){
-		$this->authenticate_user();
+		//view all patients
+		//$patients = $this->Patient->find(all);
+		//$this->set('patients', $patients);
+
+		//view a patient
+		$id = $this->request->params['pass'][0];
 		try{
-			$patients = $this->Patient->find(all);
-			$this->set('patients', $patients);
+
+			$patient = $this->Patient->find('first',
+				array('conditions' => array('Patient.id' => $id
+			 	))
+			);
+			$this->set('patient', $patient);
 		}catch(NotFoundException $e){
 			throw $e;
 			
@@ -167,6 +176,31 @@ public function index(){
  *  or MissingViewException in debug mode.
  */
 	public function delete(){
-
+		$id = $this->request->params['pass'][0];
+ 
+   		if( $this->request->is('get') ){
+        	$this->Session->setFlash('Delete method is not allowed.');
+        	$this->redirect(array('action' => 'view'));
+        
+	    }else{
+    
+     	   if( !$id ) {
+    	        $this->Session->setFlash('Invalid id for patient');
+    	        $this->redirect(array('action'=>'view'));
+            
+    	    }else{
+    	        //delete patient
+    	        if( $this->Patient->delete( $id ) ){
+    	            //set to screen
+    	            $this->Session->setFlash('Patient was deleted.');
+    	            //redirect to users's list
+    	            $this->redirect(array('action'=>'view'));
+                
+    	        }else{  
+     	           //if unable to delete
+      	          $this->Session->setFlash('Unable to delete patient.');
+      	          $this->redirect(array('action' => 'view'));
+    	        }
+    	    }
+		}
 	}
-}
