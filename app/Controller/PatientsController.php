@@ -83,7 +83,8 @@ class PatientsController extends AppController {
 	}
 
 public function index(){
-	$this->authenticate_user();
+	//$this->authenticate_user();
+
 	$patients = $this->Patient->find('all');
 	$this->set('patients',$patients);
 }
@@ -136,8 +137,28 @@ public function index(){
  *  or MissingViewException in debug mode.
  */
 	public function edit(){
+		//$this->authenticate_user();
 
-	}
+		$id = $this->request->params['pass'][0];
+		$this->Patient->id = $id;
+		if($this->Patient->exists()){
+			if($this->request->is('post') || $this->request->is('put')){
+				//save patient
+				if($this->Patient->save($this->request->data)){
+					$this->Session->setFlash('Patient was edited.');
+					$this->redirect(array('action'=>'view'));
+				}else{
+					$this->Session->setFlash('Unable to edit patient. Please, try again.');
+				}
+			}else{
+				$this->request->data = $this->Patient->read();
+			}
+
+		}else{
+			$this->Session->setFlash('The patient you are trying to edit does not exist.');
+			$this->redirect(array('action' => 'view'));
+		}
+	}	
 
 /**
  * Displays a view
@@ -148,6 +169,9 @@ public function index(){
  *  or MissingViewException in debug mode.
  */
 	public function view(){
+		//this->authenticate_user();
+
+
 		//view all patients
 		//$patients = $this->Patient->find(all);
 		//$this->set('patients', $patients);
@@ -176,6 +200,8 @@ public function index(){
  *  or MissingViewException in debug mode.
  */
 	public function delete(){
+		//this->authenticate_user();
+
 		$id = $this->request->params['pass'][0];
  
    		if( $this->request->is('get') ){
@@ -204,3 +230,4 @@ public function index(){
     	    }
 		}
 	}
+}
