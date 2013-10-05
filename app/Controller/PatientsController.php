@@ -98,7 +98,7 @@ public function index(){
  *  or MissingViewException in debug mode.
  */
 	public function add(){
-		
+		$this->authenticate_user();
 		if ($this->request->is('post')){
 			$patient = $this->request->data['Patient'];
 			$first_name = $patient['first_name'];
@@ -148,7 +148,14 @@ public function index(){
  *  or MissingViewException in debug mode.
  */
 	public function view(){
-
+		$this->authenticate_user();
+		try{
+			$patients = $this->Patient->find(all);
+			$this->set('patients', $patients);
+		}catch(NotFoundException $e){
+			throw $e;
+			
+		}
 	}
 
  /**
