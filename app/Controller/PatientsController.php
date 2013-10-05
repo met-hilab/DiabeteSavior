@@ -98,11 +98,11 @@ public function index(){
  *  or MissingViewException in debug mode.
  */
 	public function add(){
-		$this->authenticate_user();
+		
 		if ($this->request->is('post')){
 			$patient = $this->request->data['Patient'];
-			$firstname = $patient['firstname'];
-			$lastname = $patient['lastname'];
+			$first_name = $patient['first_name'];
+			$last_name = $patient['last_name'];
 			$dob = $patient['dob'];
 			$gender = $gender['gender'];
 			$data = $patient;
@@ -110,9 +110,6 @@ public function index(){
 			$res = $this->Patient->save($data);
 
 			echo json_encode($res);
-			$this->Session->setFlash('Patient is added.');
-			$this->Session->set('patient', $data);
-			$this->redirect(array('action' => 'index'));
 			
 			exit;
 		}

@@ -46,7 +46,7 @@ class Patient extends AppModel {
 			'alphanumeric' => array(
 				'rule' => array('alphanumeric'),
 				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
+				'allowEmpty' => true,
 				//'required' => false,
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
@@ -94,11 +94,12 @@ class Patient extends AppModel {
 		),
 	);
 
+	
 	function beforeSave ($res) {
-   		$patient_number = generatePatientNumber();
-   		$res['patient_number'] = $res['last_name'] + ( $res['id '] * 7 - 2);
+		parent::beforeSave();
+   		$this->data['Patient']['patient_number'] = $this->data['Patient']['first_name'];
    		return $res;
  	}
 
-
+	
 }
