@@ -82,6 +82,13 @@ class PatientsController extends AppController {
 		}
 	}
 
+public function index(){
+	$this->authenticate_user();
+	$patients = $this->Patient->find('all');
+	$this->set('patients',$patients);
+}
+
+
 /**
  * Create new patient
  *
@@ -91,7 +98,24 @@ class PatientsController extends AppController {
  *  or MissingViewException in debug mode.
  */
 	public function add(){
+		$this->authenticate_user();
+		if ($this->request->is('post')){
+			$patient = $this->request->data['Patient'];
+			$firstname = $patient['firstname'];
+			$lastname = $patient['lastname'];
+			$dob = $patient['dob'];
+			$gender = $gender['gender'];
+			$data = $patient;
+			$this->Patient->create();
+			$res = $this->Patient->save($data);
 
+			echo json_encode($res);
+			$this->Session->setFlash('Patient is added.');
+			$this->Session->set('patient', $data);
+			$this->redirect(array('action' => 'index'));
+			
+			exit;
+		}
 	}
 
 /**
@@ -107,14 +131,14 @@ class PatientsController extends AppController {
 	}
 
 /**
- * update patient
+ * edit patient
  *
  * @param firstname, lastname, dob, gender
  * @return void
  * @throws NotFoundException When the view file could not be found
  *  or MissingViewException in debug mode.
  */
-	public function update(){
+	public function edit(){
 
 	}
 
