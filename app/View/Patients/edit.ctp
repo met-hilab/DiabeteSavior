@@ -1,4 +1,4 @@
-<h2>Update Patient</h2>
+<h2>Edit Patient</h2>
 
 
 <?php 
