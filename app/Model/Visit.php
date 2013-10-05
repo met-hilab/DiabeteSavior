@@ -11,10 +11,6 @@ class Visit extends AppModel {
  *
  * @var array
  */
-	public $belongsTo = array(
-		'patient'
-	);
-
 	public $validate = array(
 		'id' => array(
 			'notempty' => array(
