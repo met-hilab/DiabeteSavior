@@ -51,19 +51,21 @@ $cakeDescription = __d('cake_dev', 'Diabetes Savior: Type II Diabetes Infomatic 
 	<div id="container" class="container">
 
 		<header id="header" class="header">
-			<h1><?php echo $this->Html->link($cakeDescription, '/'); ?></h1>
+			<!--<h1><?php echo $this->Html->link($cakeDescription, '/'); ?></h1>-->
 		</header>
-		<nav class="navbar navbar-default" role="navigation">
+		<nav class="navbar navbar-default" role="navigation" style="padding-top: 15px; border:none; background-color: #FFFFFF;">
   <!-- Brand and toggle get grouped for better mobile display -->
   <div class="navbar-header">
-    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse" 
       <span class="sr-only">Toggle navigation</span>
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
+      <img src="/img/hilab-logo.png"/>
     <?php echo $this->Html->link(
-						$this->Html->image('bu-logo.gif', array('alt' => $cakeDescription, 'border' => '0', 'style' => 'height:50px;')),
+            
+            $this->Html->image(array('alt' => $cakeDescription, 'border' => '0', 'style' => 'height:60px;')),
 						'/',
 						array('class' => 'navbar-brand', 'escape' => false, 'style' => 'padding:0;')
 					);
@@ -71,9 +73,31 @@ $cakeDescription = __d('cake_dev', 'Diabetes Savior: Type II Diabetes Infomatic 
   </div>
 
   <!-- Collect the nav links, forms, and other content for toggling -->
-  <div class="collapse navbar-collapse navbar-ex1-collapse">
+<!--  <div class="collapse navbar-collapse navbar-ex1-collapse">-->
+<div class="nav container navbar-right">
     <ul class="nav navbar-nav">
-      <li class="active"><a href="/announcements">Announcement</a></li>
+<!--      <li class="active"><a href="/announcements">Home</a></li>-->
+                        <li id="nav-home" <?php if($currentSelection == 'home')
+                                                       {echo "class='active'";}?>>
+                            <a href="${createLink(uri: '/')}" data-toggle="tooltip" title="home">
+                                          <svg class="svg-normal" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                                   width="43px" height="33px" viewBox="0 0 43 33" enable-background="new 0 0 43 33" xml:space="preserve">
+                                                  <path fill="#999999" d="M26.449,11.963L23,8.492V2.67C23,2.118,22.508,2,21.955,2h-3C18.402,2,18,2.118,18,2.67v0.825l-2.289-2.266
+                                                          c-0.391-0.39-1.035-0.39-1.426,0L3.541,11.962c-0.286,0.286-0.375,0.881-0.22,1.255C3.476,13.591,3.838,14,4.242,14H7v5.67
+                                                          C7,20.223,7.403,21,7.955,21h14C22.508,21,23,20.223,23,19.67V14h2.72c0.404,0,0.78-0.409,0.935-0.782
+                                                          C26.81,12.844,26.735,12.248,26.449,11.963z M16,19h-2v-6h2V19z M21.955,12C21.402,12,21,12.117,21,12.67V19h-4v-7h-4v7H9v-6.33
+                                                          C9,12.117,8.507,12,7.955,12H6.657l8.324-8.485l3.267,3.183c0.287,0.286,0.74,0.33,1.112,0.175C19.734,6.719,20,6.312,20,5.908V4h1
+                                                          v4.907c0,0.265,0.083,0.685,0.271,0.872L23.305,12H21.955z"/>
+                                          </svg>
+<!--                                          <svg class="svg-active" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                                   width="43px" height="33px" viewBox="0 0 43 33" enable-background="new 0 0 43 33" xml:space="preserve">
+                                                  <path fill="#231F20" d="M26.492,11.981L23,8.002V2.644C23,2.091,22.508,2,21.955,2h-3C18.402,2,18,2.091,18,2.644v0.432
+                                                          l-2.312-2.145c-0.396-0.371-1.03-0.359-1.41,0.03L3.533,11.944c-0.282,0.288-0.365,0.894-0.21,1.265C3.479,13.58,3.84,14,4.242,14H7
+                                                          v5.644C7,20.196,7.402,21,7.955,21h14C22.508,21,23,20.196,23,19.644V14h2.72c0.394,0,0.761-0.408,0.923-0.768
+                                                          C26.805,12.875,26.752,12.276,26.492,11.981z M17,19h-1.045H13v-6.356V12h4V19z"/>
+                                          </svg>-->
+                                  </a>
+                          </li>
       <li class="dropdown">
       	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Calculators <b class="caret"></b></a>
       	<ul class="dropdown-menu">
@@ -141,6 +165,7 @@ $cakeDescription = __d('cake_dev', 'Diabetes Savior: Type II Diabetes Infomatic 
     </ul>
   </div><!-- /.navbar-collapse -->
 </nav>
+<hr style="padding-top:0;"/>
 		<div id="content">
 
 			<?php echo $this->Session->flash(); ?>

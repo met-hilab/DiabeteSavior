@@ -1,4 +1,5 @@
-<h2 class="text-center"><img src="/img/hilab-logo.png">HIlab Medical Algorithm Repository</h2>
+<!--<h2 class="text-center"><img src="/img/hilab-logo.png">HIlab Medical Algorithm Repository</h2>-->
+<h2 class="text-center">HIlab Medical Algorithm Repository</h2>
 <p>
 A medical algorithm describes any formula, statistical survey, graph, or look-up table that provides useful information in some aspect of health care. The purpose of medical algorithms is to improve and standardize decisions made in the delivery of medical care. Medical algorithms therefore play a prominent role in medical informatics, as well as control and operation of medical instrumentation. They are particularly useful in diagnosis, prognosis, selection of medical tests, and determining therapies.
 </p>

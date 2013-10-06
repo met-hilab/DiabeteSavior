@@ -7,5 +7,9 @@ app/tmp/*
 .metadata
 RemoteSystemsTempFiles
 .settings
+<<<<<<< HEAD
 .project
 .buildpath
+=======
+nbproject
+>>>>>>> WIP
