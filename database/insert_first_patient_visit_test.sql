@@ -44,7 +44,7 @@ INSERT INTO vitals_labs(
 `notes`
 )
 VALUES (
-'01', '2013-10-05 23:32:51', '2013-10-05 23:32:53', '01', '80', '182', '120', '80', NULL , NULL , NULL , NULL , 'Test notes field'
+'01', '2013-10-05 23:32:51', '2013-10-05 23:32:53', '01', '80', '182', '120', '80', NULL , NULL , '6.5' , NULL , 'Test notes field'
 );
 
 INSERT INTO diagnoses(
@@ -65,7 +65,6 @@ INSERT INTO drug_allergies(
 `created` ,
 `modified` ,
 `patient_id` ,
-`allergy` ,
 `met` ,
 `dpp_4i` ,
 `glp_1ra` ,
@@ -79,7 +78,7 @@ INSERT INTO drug_allergies(
 `praml`
 )
 VALUES (
-'01', '2013-10-05 23:36:35', '2013-10-05 23:36:38', '01', 'Drug Allergy', 'no', 'yes', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no'
+'01', '2013-10-05 23:36:35', '2013-10-05 23:36:38', '01', 'no', 'yes', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no'
 );
 
 INSERT INTO treatments (
@@ -95,13 +94,13 @@ VALUES (
 '01', '2013-10-05 23:38:11', '2013-10-05 23:38:13', '01', 'Paul', NULL , '78'
 );
 
-NSERT INTO treatment_run_algorithms (
+INSERT INTO treatment_run_algorithms (
 `id` ,
 `created` ,
 `modified` ,
 `treatment_id` ,
 `type` ,
-`recomendations` ,
+`recommendations` ,
 `medicine_name_one` ,
 `dose_one` ,
 `medicine_name_two` ,
