@@ -63,13 +63,7 @@ $cakeDescription = __d('cake_dev', 'Diabetes Savior: Type II Diabetes Infomatic 
       <span class="icon-bar"></span>
     </button>
       <img src="/img/hilab-logo.png"/>
-    <?php echo $this->Html->link(
-            
-            $this->Html->image(array('alt' => $cakeDescription, 'border' => '0', 'style' => 'height:60px;')),
-						'/',
-						array('class' => 'navbar-brand', 'escape' => false, 'style' => 'padding:0;')
-					);
-		?>
+  
   </div>
 
   <!-- Collect the nav links, forms, and other content for toggling -->
@@ -169,8 +163,10 @@ $cakeDescription = __d('cake_dev', 'Diabetes Savior: Type II Diabetes Infomatic 
 		<div id="content">
 
 			<?php echo $this->Session->flash(); ?>
-
+<!-- The main content from controller / view START -->
 			<?php echo $this->fetch('content'); ?>
+<!-- The main content from controller / view END -->
+
 		</div>
 		<footer id="footer" class="footer">
 			<div class="bs-social">

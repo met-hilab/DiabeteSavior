@@ -20,3 +20,4 @@ echo $patient['Patient']['last_name'];
 echo $patient['Patient']['dob'];
 echo $patient['Patient']['gender'];
 ?>
+
