@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS `cs673`.`patients`;
 CREATE TABLE `cs673`.`patients` (
   `id` INT NOT NULL,
   `email` VARCHAR(255) NULL,
