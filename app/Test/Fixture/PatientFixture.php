@@ -11,19 +11,24 @@ class PatientFixture extends CakeTestFixture {
  * @var array
  */
 	public $fields = array(
+		'id' => array('type' => 'string', 'null' => false, 'length' => 36, 'key' => 'primary', 'collate' => 'utf8_unicode_ci', 'charset' => 'utf8'),
 		'created' => array('type' => 'datetime', 'null' => false),
-		'modified' => array('type' => 'datetime', 'null' => true, 'default' => null),
-		'last_name' => array('type' => 'string', 'null' => false, 'length' => 50, 'collate' => 'latin1_swedish_ci', 'charset' => 'latin1'),
-		'patient_number' => array('type' => 'string', 'null' => false, 'length' => 8, 'key' => 'index', 'collate' => 'latin1_swedish_ci', 'comment' => 'generate automatically by a function', 'charset' => 'latin1'),
-		'id' => array('type' => 'integer', 'null' => false, 'default' => null, 'key' => 'primary'),
-		'gender' => array('type' => 'string', 'null' => false, 'length' => 1, 'collate' => 'latin1_swedish_ci', 'charset' => 'latin1'),
+		'modified' => array('type' => 'datetime', 'null' => false),
+		'patient_number' => array('type' => 'string', 'null' => false, 'length' => 8, 'key' => 'unique', 'collate' => 'utf8_unicode_ci', 'charset' => 'utf8'),
+		'patient_firstname' => array('type' => 'string', 'null' => false, 'collate' => 'utf8_unicode_ci', 'charset' => 'utf8'),
+		'patient_lastname' => array('type' => 'string', 'null' => false, 'collate' => 'utf8_unicode_ci', 'charset' => 'utf8'),
+		'patient_middlename' => array('type' => 'string', 'null' => true, 'default' => null, 'collate' => 'utf8_unicode_ci', 'charset' => 'utf8'),
 		'dob' => array('type' => 'date', 'null' => false),
-		'first_name' => array('type' => 'string', 'null' => false, 'length' => 50, 'collate' => 'latin1_swedish_ci', 'charset' => 'latin1'),
+		'picture' => array('type' => 'binary', 'null' => true, 'default' => null),
+		'occupation' => array('type' => 'string', 'null' => true, 'default' => null, 'collate' => 'utf8_unicode_ci', 'charset' => 'utf8'),
+		'street' => array('type' => 'string', 'null' => true, 'default' => null, 'collate' => 'utf8_unicode_ci', 'charset' => 'utf8'),
+		'postal_code' => array('type' => 'integer', 'null' => true, 'default' => null, 'length' => 5),
+		'city' => array('type' => 'string', 'null' => true, 'default' => null, 'collate' => 'utf8_unicode_ci', 'charset' => 'utf8'),
 		'indexes' => array(
 			'PRIMARY' => array('column' => 'id', 'unique' => 1),
-			'visit_patient_num' => array('column' => 'patient_number', 'unique' => 0)
+			'patient_number' => array('column' => 'patient_number', 'unique' => 1)
 		),
-		'tableParameters' => array('charset' => 'latin1', 'collate' => 'latin1_swedish_ci', 'engine' => 'InnoDB')
+		'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_unicode_ci', 'engine' => 'InnoDB')
 	);
 
 /**
@@ -33,14 +38,19 @@ class PatientFixture extends CakeTestFixture {
  */
 	public $records = array(
 		array(
-			'created' => '2013-09-30 19:24:14',
-			'modified' => '2013-09-30 19:24:14',
-			'last_name' => 'Lorem ipsum dolor sit amet',
+			'id' => '52549fbc-3980-458e-a592-1fcccbdd56cb',
+			'created' => '2013-10-08 20:13:48',
+			'modified' => '2013-10-08 20:13:48',
 			'patient_number' => 'Lorem ',
-			'id' => 1,
-			'gender' => 'Lorem ipsum dolor sit ame',
-			'dob' => '2013-09-30',
-			'first_name' => 'Lorem ipsum dolor sit amet'
+			'patient_firstname' => 'Lorem ipsum dolor sit amet',
+			'patient_lastname' => 'Lorem ipsum dolor sit amet',
+			'patient_middlename' => 'Lorem ipsum dolor sit amet',
+			'dob' => '2013-10-08',
+			'picture' => 'Lorem ipsum dolor sit amet',
+			'occupation' => 'Lorem ipsum dolor sit amet',
+			'street' => 'Lorem ipsum dolor sit amet',
+			'postal_code' => 1,
+			'city' => 'Lorem ipsum dolor sit amet'
 		),
 	);
 

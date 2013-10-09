@@ -13,7 +13,13 @@ class PatientTest extends CakeTestCase {
  * @var array
  */
 	public $fixtures = array(
-		'app.patient'
+		'app.patient',
+		'app.diagnosis',
+		'app.drug_allergy',
+		'app.visit',
+		'app.medhistory_complaint',
+		'app.treatment',
+		'app.vitals_lab'
 	);
 
 /**

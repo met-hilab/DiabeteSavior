@@ -13,7 +13,11 @@ class VisitTest extends CakeTestCase {
  * @var array
  */
 	public $fixtures = array(
-		'app.visit'
+		'app.visit',
+		'app.patient',
+		'app.medhistory_complaint',
+		'app.treatment',
+		'app.vitals_lab'
 	);
 
 /**

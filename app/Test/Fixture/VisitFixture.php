@@ -11,15 +11,15 @@ class VisitFixture extends CakeTestFixture {
  * @var array
  */
 	public $fields = array(
-		'id' => array('type' => 'integer', 'null' => false, 'default' => null, 'key' => 'primary'),
-		'modified' => array('type' => 'datetime', 'null' => true, 'default' => null),
+		'id' => array('type' => 'integer', 'null' => false, 'default' => null, 'length' => 10, 'key' => 'primary'),
 		'created' => array('type' => 'datetime', 'null' => false),
-		'patient_number' => array('type' => 'string', 'null' => false, 'length' => 8, 'key' => 'index', 'collate' => 'latin1_swedish_ci', 'charset' => 'latin1'),
+		'modified' => array('type' => 'datetime', 'null' => false),
+		'patient_id' => array('type' => 'string', 'null' => false, 'length' => 36, 'key' => 'index', 'collate' => 'utf8_unicode_ci', 'charset' => 'utf8'),
 		'indexes' => array(
 			'PRIMARY' => array('column' => 'id', 'unique' => 1),
-			'patient_num' => array('column' => 'patient_number', 'unique' => 0)
+			'patient_id' => array('column' => 'patient_id', 'unique' => 0)
 		),
-		'tableParameters' => array('charset' => 'latin1', 'collate' => 'latin1_swedish_ci', 'engine' => 'InnoDB')
+		'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_unicode_ci', 'engine' => 'InnoDB')
 	);
 
 /**
@@ -30,9 +30,9 @@ class VisitFixture extends CakeTestFixture {
 	public $records = array(
 		array(
 			'id' => 1,
-			'modified' => '2013-09-30 19:24:54',
-			'created' => '2013-09-30 19:24:54',
-			'patient_number' => 'Lorem '
+			'created' => '2013-10-08 20:09:39',
+			'modified' => '2013-10-08 20:09:39',
+			'patient_id' => 'Lorem ipsum dolor sit amet'
 		),
 	);
 
