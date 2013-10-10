@@ -31,3 +31,10 @@ h2 img {
     display: inline;
   }
 }
+
+html,body{
+  height: 100%;
+}
+footer, .push{
+  height: 75px;
+}

@@ -90,7 +90,7 @@ $cakeDescription = __d('cake_dev', 'Diabetes Savior: Type II Diabetes Infomatic 
                                                           v5.644C7,20.196,7.402,21,7.955,21h14C22.508,21,23,20.196,23,19.644V14h2.72c0.394,0,0.761-0.408,0.923-0.768
                                                           C26.805,12.875,26.752,12.276,26.492,11.981z M17,19h-1.045H13v-6.356V12h4V19z"/>
                                           </svg>-->
-                                  </a>
+                             </a>
                           </li>
 
       <li class="dropdown">
@@ -178,7 +178,7 @@ $cakeDescription = __d('cake_dev', 'Diabetes Savior: Type II Diabetes Infomatic 
 <!-- The main content from controller / view END -->
 
 		</div>
-		<footer id="footer" class="footer">
+		<footer id="footer" class="footer container navbar-fixed-bottom">
 			<div class="bs-social">
   <ul class="bs-social-buttons">
     <li class="follow-btn">
