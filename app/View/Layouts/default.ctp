@@ -92,14 +92,7 @@ $cakeDescription = __d('cake_dev', 'Diabetes Savior: Type II Diabetes Infomatic 
                                           </svg>-->
                                   </a>
                           </li>
-      <li class="dropdown">
-      	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Calculators <b class="caret"></b></a>
-      	<ul class="dropdown-menu">
-          <li><a href="/calculators/bmi">Body Mass Index</a></li>
-          <li><a href="/calculators/bsa">Body Surface Area</a></li>
-          <li><a href="/calculators/bgl">Blood Glucose Level</a></li>
-        </ul>
-      </li>
+
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Patients <b class="caret"></b></a>
         <ul class="dropdown-menu">
@@ -109,7 +102,24 @@ $cakeDescription = __d('cake_dev', 'Diabetes Savior: Type II Diabetes Infomatic 
           <li><a href="/patients/edit">Update Patient</a></li>
         </ul>
       </li>
-
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Visits <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+          <li><a href="/visits/add">Add Visit</a></li>
+          <li><a href="/visits/index">Index</a></li>
+          <li><a href="/visits/view">View Visit</a></li>
+          <li><a href="/visits/algorithm">Algorithm</a></li>
+          <li><a href="/visits/plot">Plot</a></li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Calculators <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+          <li><a href="/calculators/bmi">Body Mass Index</a></li>
+          <li><a href="/calculators/bsa">Body Surface Area</a></li>
+          <li><a href="/calculators/bgl">Blood Glucose Level</a></li>
+        </ul>
+      </li>
       
     </ul>
     
