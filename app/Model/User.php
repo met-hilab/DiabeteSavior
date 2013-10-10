@@ -135,7 +135,7 @@ public function beforeValidate($options = array()) {
 
 public function beforeSave($options = array()) {
   parent::beforeSave();
-    //$this->data['User']['password'] = sha1($this->data['User']['password']);
+  // $this->data['User']['password'] = sha1($this->data['User']['password']);
   return true;
 }
 

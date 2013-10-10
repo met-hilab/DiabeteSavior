@@ -199,15 +199,15 @@ class Patient extends AppModel {
 /**
  * generate the patient_number (imcompletely)
  */	
-	function beforeSave ($res) {
+	function beforeSave($options = array()) {
 		parent::beforeSave();
 	  $fullname = $this->data['Patient']['patient_firstname'] . $this->data['Patient']['patient_lastname'];
 	  // data['Patient']['patient_number'] 8 chars
 
- 		$this->data['Patient']['patient_number'] = substr($this->data['Patient']['gender'], 0, 1) . substr($this->data['Patient']['patient_firstname'], 0, 1) . substr($this->data['Patient']['patient_lastname'], 0, 1) . substr($this->data['Patient']['dob'], 7, 2) . date('i') . date('s');
+ 		$this->data['Patient']['patient_number'] = substr($this->data['Patient']['gender'], 0, 1) . substr($this->data['Patient']['patient_firstname'], 0, 1) . substr($this->data['Patient']['patient_lastname'], 0, 1) . substr($this->data['Patient']['dob'], 8, 2) . date('i') . date('s');
  		$this->data['Patient']['patient_number'] = strtolower($this->data['Patient']['patient_number']);
- 		var_dump($res); exit;
- 		return $res;
+ 		//var_dump($this->data); exit;
+ 		return true;
  	}
 
 
