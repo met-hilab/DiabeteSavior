@@ -1,3 +1,4 @@
+
 INSERT INTO visits (
 `id` ,
 `created` ,
