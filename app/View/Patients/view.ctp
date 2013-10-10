@@ -14,10 +14,18 @@
 -->
 
 <?php
-echo $patient['Patient']['patient_id'];
-echo $patient['Patient']['first_name'];
-echo $patient['Patient']['last_name'];
+echo $patient['Patient']['patient_number'];
+echo $patient['Patient']['patient_firstname'];
+echo $patient['Patient']['patient_lastname'];
+echo $patient['Patient']['patient_middlename'];
 echo $patient['Patient']['dob'];
+echo $patient['Patient']['picture'];
+echo $patient['Patient']['occupation'];
 echo $patient['Patient']['gender'];
+echo $patient['Patient']['race'];
+echo $patient['Patient']['street'];
+echo $patient['Patient']['pastal_code'];
+echo $patient['Patient']['city'];
+echo $patient['Patient']['state'];
 ?>
 
