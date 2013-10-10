@@ -73,7 +73,7 @@ VALUES (
 );
 
 
-
+USE `cs673`;
 INSERT INTO patients(
 `id` ,
 `created` ,

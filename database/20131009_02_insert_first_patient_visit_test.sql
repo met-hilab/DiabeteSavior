@@ -1,4 +1,4 @@
-
+USE `cs673`;
 INSERT INTO visits (
 `id` ,
 `created` ,

@@ -8,6 +8,10 @@ Target Database: diabetes
 Date: 2013/10/9 7:04:59
 */
 
+DROP DATABASE IF EXISTS `cs673`;
+CREATE DATABASE `cs673` DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+USE `cs673`;
+
 SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 -- Table structure for diagnoses
