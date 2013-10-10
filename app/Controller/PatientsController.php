@@ -102,10 +102,18 @@ public function index(){
 		//$this->authenticate_user();
 		if ($this->request->is('post')){
 			$patient = $this->request->data['Patient'];
-			$first_name = $patient['first_name'];
-			$last_name = $patient['last_name'];
+			$patient_firstname = $patient['patient_firstname'];
+			$patient_lastname = $patient['patient_lastname'];
+			$patient_middlename = $patient['patient_middlename'];
 			$dob = $patient['dob'];
-			$gender = $gender['gender'];
+			$picture = $patient['picture'];
+			$occupation = $patient['occupation'];
+			$gender = $patient['gender'];
+			$race = $patient['race'];
+			$street = $patient['street'];
+			$postal_code = $patient['postal_code'];
+			$city = $patient['city'];
+			$state = $patient['state'];
 			$data = $patient;
 			$this->Patient->create();
 			$res = $this->Patient->save($data);
