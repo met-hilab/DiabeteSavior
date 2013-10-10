@@ -1,3 +1,4 @@
+USE `cs673`;
 DROP TABLE IF EXISTS `cs673`.`patients`;
 CREATE TABLE `cs673`.`patients` (
   `id` INT NOT NULL,

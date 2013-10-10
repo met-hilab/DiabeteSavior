@@ -1,3 +1,4 @@
+USE `cs673`;
 DROP TABLE IF EXISTS `cs673`.`profiles`;
 CREATE  TABLE `cs673`.`profiles` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,

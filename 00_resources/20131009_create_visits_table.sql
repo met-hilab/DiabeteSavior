@@ -7,7 +7,7 @@ Target Database: diabetes
 Date: 2013/10/9 7:21:59
 Because of the foreign key, this sql should be run before the patients_create sql
 */
-
+USE `cs673`;
 SET FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS `visits`;
 -- ----------------------------

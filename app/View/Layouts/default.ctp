@@ -73,7 +73,7 @@ $cakeDescription = __d('cake_dev', 'Diabetes Savior: Type II Diabetes Infomatic 
 <!--      <li class="active"><a href="/announcements">Home</a></li>-->
                         <li id="nav-home" <?php if($currentSelection == 'home')
                                                        {echo "class='active'";}?>>
-                            <a href="${createLink(uri: '/')}" data-toggle="tooltip" title="home">
+                            <a href="/" data-toggle="tooltip" title="home">
                                           <svg class="svg-normal" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                                    width="43px" height="33px" viewBox="0 0 43 33" enable-background="new 0 0 43 33" xml:space="preserve">
                                                   <path fill="#999999" d="M26.449,11.963L23,8.492V2.67C23,2.118,22.508,2,21.955,2h-3C18.402,2,18,2.118,18,2.67v0.825l-2.289-2.266
@@ -199,6 +199,6 @@ $cakeDescription = __d('cake_dev', 'Diabetes Savior: Type II Diabetes Infomatic 
 			?>
 		</footer>
 	</div>
-	<?php echo $this->element('sql_dump'); ?>
+	<?php // echo $this->element('sql_dump'); ?>
 </body>
 </html>
