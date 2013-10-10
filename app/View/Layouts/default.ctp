@@ -170,7 +170,7 @@ $cakeDescription = __d('cake_dev', 'Diabetes Savior: Type II Diabetes Infomatic 
   </div><!-- /.navbar-collapse -->
 </nav>
 <hr style="padding-top:0;"/>
-		<div id="content">
+		<div id="content" style="padding-bottom:85px;">
 
 			<?php echo $this->Session->flash(); ?>
 <!-- The main content from controller / view START -->
