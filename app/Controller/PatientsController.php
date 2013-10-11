@@ -106,9 +106,11 @@ public function index(){
 			$patient_lastname = $patient['patient_lastname'];
 			$patient_middlename = $patient['patient_middlename'];
 			$dob = $patient['dob'];
-			$picture = $patient['picture'];
+			//$picture = $patient['picture'];
 			$occupation = $patient['occupation'];
+			//enum type
 			$gender = $patient['gender'];
+
 			$race = $patient['race'];
 			$street = $patient['street'];
 			$postal_code = $patient['postal_code'];
@@ -133,7 +135,13 @@ public function index(){
  *  or MissingViewException in debug mode.
  */
 	public function search(){
-
+		$patient_number = $this->request->params['pass'][0];
+		$this->Patient->patient_number = $patient_number;
+		if($this->Patient->exists()){
+			$this->redirect(array('action'=>'view'));
+		}else{
+			$this->Session->setFlash('The patient you are trying to search does not exist.');
+		}
 	}
 
 /**
@@ -147,8 +155,8 @@ public function index(){
 	public function edit(){
 		//$this->authenticate_user();
 
-		$id = $this->request->params['pass'][0];
-		$this->Patient->id = $id;
+		$patient_number = $this->request->params['pass'][0];
+		$this->Patient->patient_number = $patient_number;
 		if($this->Patient->exists()){
 			if($this->request->is('post') || $this->request->is('put')){
 				//save patient
@@ -185,11 +193,11 @@ public function index(){
 		//$this->set('patients', $patients);
 
 		//view a patient
-		$id = $this->request->params['pass'][0];
+		$patient_number = $this->request->params['pass'][0];
 		try{
 
 			$patient = $this->Patient->find('first',
-				array('conditions' => array('Patient.id' => $id
+				array('conditions' => array('Patient.patient_number' => $patient_number
 			 	))
 			);
 			$this->set('patient', $patient);
@@ -210,8 +218,13 @@ public function index(){
 	public function delete(){
 		//this->authenticate_user();
 
-		$id = $this->request->params['pass'][0];
+		$patient_number = $this->request->params['pass'][0];
  
+ 		$patient = $this->Patient->find('first',
+				array('conditions' => array('Patient.patient_number' => $patient_number
+			 	))
+			);
+ 		$id = $patient['id'];
    		if( $this->request->is('get') ){
         	$this->Session->setFlash('Delete method is not allowed.');
         	$this->redirect(array('action' => 'view'));
