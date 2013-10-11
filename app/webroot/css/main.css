@@ -39,3 +39,7 @@ html,body{
   height: 75px;
   background: white;
 }
+
+.section-title{
+  padding-bottom: 25px;
+}

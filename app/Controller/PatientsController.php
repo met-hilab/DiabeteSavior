@@ -133,7 +133,43 @@ public function index(){
  *  or MissingViewException in debug mode.
  */
 	public function search(){
+          if(!$this->request->is('post') && !$this->request->is('put')) {
+                //$this->header('HTTP/1.1 403 Forbidden');
+                //$this->Session->setFlash(__('Go away'));
+                //throw new ForbiddenException();
+                //$this->cakeError('error403');
+                //exit;
+              }
+              if($this->request->is('post')){
 
+              $patient_number = $this->request->data('patient_number');
+              $conditions = array("patient_number" => $patient_number);
+              $patient = $this->Patient->find('first', array('conditions' => $conditions));
+              $patient = $patient['Patient'];
+              $id = $patient['id'];
+              $res = new stdClass();
+              $res->status = 0;
+              $res->message = "Initialized";
+              $res->data = null;
+              if (!$patient) {
+                $res->status = -1;
+                $res->message = __d("search", "Search failed");
+                $res->data = $patient;
+              } else {
+                $res->status = 1;
+                $res->message = __d("search", "search succeed");
+                $res->data = $patient;
+                $this->Session->write('patient', $patient);
+                $this->set('patient', $patient);
+                $this->redirect(array('action'=>'view',$id));
+              }
+//              $this->set('patient', $patient);
+//              $this->autoRender = false;
+//              $this->redirect(array('action'=>'view'));
+                $this->Session->setFlash('Unable to find patient, please try again.');
+              
+              }
+        
 	}
 
 /**
