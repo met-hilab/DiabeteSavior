@@ -11,6 +11,7 @@ echo $this->Form->creat('Patient', array('type'=>'file'));
 // file of uploading image
 echo $this->Form->end(__('Upload'));
 
+
 ?>
         
   </div>      
@@ -25,7 +26,7 @@ echo $this->Form->create('Patient');
     echo $this->Form->input('patient_lastname');
     echo $this->Form->input('patient_middlename');
     echo $this->Form->input('dob');
-    echo $this->Form->input('picture');
+    //echo $this->Form->input('picture');
     echo $this->Form->input('occupation');
     echo $this->Form->input('gender');
     echo $this->Form->input('race');

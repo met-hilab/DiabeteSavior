@@ -1,4 +1,3 @@
-
 <h2 class="section-title">Patient Search</h2>
   <form class="form-horizontal" role="form" action="/patients/search" method="post">
     <div class="form-group">
@@ -13,3 +12,4 @@
       </div>
     </div>
   </form>
+
