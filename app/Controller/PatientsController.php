@@ -118,11 +118,27 @@ public function index(){
 			$state = $patient['state'];
 			$data = $patient;
 			$this->Patient->create();
-			$res = $this->Patient->save($data);
-
-			echo json_encode($res);
+			//$res = $this->Patient->save($this->data);
 			
-			exit;
+			if($this->Patient->save($this->data)){
+				$this->Session->setFlash('Patient is saved.');
+              	//$patient = $this->Patient->find('first', $data);
+              	$conditions = array("Patient" => $patient);
+              	$patient = $this->Patient->find('first', array('conditions' => $conditions));
+              	$patient = $patient['Patient'];
+              	 $this->Session->write('patient', $patient);
+                $this->set('patient', $patient);
+              	//$patient_number = $this->Session->patient_number;
+              	$this->redirect(array('action'=>'view',$patient_number));
+			}else{
+				$this->Session->setFlash('Patient is not saved.');
+				$this->redirect(array('action'=>'add'));
+			}
+			
+			//echo json_encode($res);
+			
+
+			//exit;
 		}
 	}
 
@@ -146,7 +162,9 @@ public function index(){
               if($this->request->is('post')){
 
               $patient_number = $this->request->data('patient_number');
-              $conditions = array("patient_number" => $patient_number);
+              $patient_firstname = $this->request->data('patient_firstname');
+              $patient_lastname = $this->request->data('patient_lastname');
+              $conditions = array("patient_number" => $patient_number, "patient_firstname" => $patient_firstname, "patient_lastname" => $patient_lastname);
               $patient = $this->Patient->find('first', array('conditions' => $conditions));
               $patient = $patient['Patient'];
               $res = new stdClass();
@@ -168,7 +186,7 @@ public function index(){
 //              $this->set('patient', $patient);
 //              $this->autoRender = false;
 //              $this->redirect(array('action'=>'view'));
-                $this->Session->setFlash('Unable to find patient, please try again.');
+                $this->Session->setFlash('Patient not found, please enter information again or add a new patient.');
               
               }
 

@@ -206,6 +206,7 @@ class Patient extends AppModel {
 
  		$this->data['Patient']['patient_number'] = substr($this->data['Patient']['gender'], 0, 1) . substr($this->data['Patient']['patient_firstname'], 0, 1) . substr($this->data['Patient']['patient_lastname'], 0, 1) . substr($this->data['Patient']['dob'], 8, 2) . date('i') . date('s');
  		$this->data['Patient']['patient_number'] = strtolower($this->data['Patient']['patient_number']);
+ 		
  		//var_dump($this->data); exit;
  		return true;
  	}
