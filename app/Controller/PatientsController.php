@@ -121,24 +121,20 @@ public function index(){
 			//$res = $this->Patient->save($this->data);
 			
 			if($this->Patient->save($this->data)){
-				$this->Session->setFlash('Patient is saved.');
-              	//$patient = $this->Patient->find('first', $data);
-              	$conditions = array("Patient" => $patient);
-              	$patient = $this->Patient->find('first', array('conditions' => $conditions));
-              	$patient = $patient['Patient'];
-              	 $this->Session->write('patient', $patient);
+				$this->Session->setFlash($_SESSION["patientnum"].' Patient is saved.');
+              	$patient_number = $_SESSION["patientnum"];
+				$conditions = array("patient_number" => $patient_number);
+                //$conditions = array("patient_number" => "M0000001");
+                $patient = $this->Patient->find('first', array('conditions' => $conditions));
+                $patient = $patient['Patient'];
+                $this->Session->write('patient', $patient);
                 $this->set('patient', $patient);
-              	//$patient_number = $this->Session->patient_number;
-              	$this->redirect(array('action'=>'view',$patient_number));
+                $this->redirect(array('action'=>'view',$patient_number));
+                 
 			}else{
 				$this->Session->setFlash('Patient is not saved.');
 				$this->redirect(array('action'=>'add'));
 			}
-			
-			//echo json_encode($res);
-			
-
-			//exit;
 		}
 	}
 
