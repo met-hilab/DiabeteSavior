@@ -121,7 +121,7 @@ public function index(){
 			//$res = $this->Patient->save($this->data);
 			
 			if($this->Patient->save($this->data)){
-				$this->Session->setFlash($_SESSION["patientnum"].' Patient is saved.');
+				//$this->Session->setFlash($_SESSION["patientnum"].' Patient is saved.');
               	$patient_number = $_SESSION["patientnum"];
 				$conditions = array("patient_number" => $patient_number);
                 //$conditions = array("patient_number" => "M0000001");
@@ -132,7 +132,7 @@ public function index(){
                 $this->redirect(array('action'=>'view',$patient_number));
                  
 			}else{
-				$this->Session->setFlash('Patient is not saved.');
+				//$this->Session->setFlash('Patient is not saved.');
 				$this->redirect(array('action'=>'add'));
 			}
 		}
