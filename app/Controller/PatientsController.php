@@ -158,9 +158,11 @@ public function index(){
               if($this->request->is('post')){
 
               $patient_number = $this->request->data('patient_number');
-              $patient_firstname = $this->request->data('patient_firstname');
-              $patient_lastname = $this->request->data('patient_lastname');
-              $conditions = array("patient_number" => $patient_number, "patient_firstname" => $patient_firstname, "patient_lastname" => $patient_lastname);
+              $patient_firstname = strtolower($this->request->data('patient_firstname'));
+              $patient_lastname = strtolower($this->request->data('patient_lastname'));
+              $patient_dob = $this->request->data('patient_dob');
+              $conditions = array("patient_number" => $patient_number, strtolower("patient_firstname") => $patient_firstname, strtolower("patient_lastname") => $patient_lastname, "patient_dob" => $patient_dob);
+              //$conditions = array("patient_number" => $patient_number);
               $patient = $this->Patient->find('first', array('conditions' => $conditions));
               $patient = $patient['Patient'];
               $res = new stdClass();
@@ -283,7 +285,7 @@ public function index(){
     	        //delete patient
     	        if( $this->Patient->delete( $id ) ){
     	            //set to screen
-    	            $this->Session->setFlash('Patient was deleted.');
+    	            $this->Session->setFlash('Patient deleted.');
     	            //redirect to users's list
     	            $this->redirect(array('action'=>'view'));
                 
