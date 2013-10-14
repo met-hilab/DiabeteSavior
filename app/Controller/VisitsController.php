@@ -31,26 +31,92 @@ App::uses('AppController', 'Controller');
 class VisitsController extends AppController {
 	
 	public $uses = array();
-	
-	public function index(){
-		
+
+/**
+ * Displays a view
+ *
+ * @param mixed What page to display
+ * @return void
+ * @throws NotFoundException When the view file could not be found
+ *  or MissingViewException in debug mode.
+ */	
+	public function index(){		      
+        $visits = $this->Visit->find('all'); 
+        $this->set('visits', $visits);
+        //pr($visits);
 	}
 	
-	public function add(){
-	
+/**
+ * Create new vitals_lab
+ *
+ * @param weight, height, bps, bpd, bmi, bmi_status, A1c, eGFR, notes
+ * @return void
+ * @throws NotFoundException When the view file could not be found
+ *  or MissingViewException in debug mode.
+ */
+	public function add(){	
+		// $patients = $this->Visit->Patient->find('list'); 
+
+		// if ( $this->request->is('post')) {
+		// 	$visit = $this->request->data['VitalsLab'];
+		// 	$patient_id = $visit['patient_id'];
+		// 	//var_dump($patient_id); exit;
+		// 	$data = $visit;
+		// 	$this->Visit->create();
+		// 	$this->Visit->save($this->data);
+		// }
+		// $this->set('patients',$patients);
+
+		$visits = $this->Visit->find('list'); 
+ 
+		if ( $this->request->is('post')) {
+			$vitalslab = $this->request->data['VitalsLab'];
+			$visit_id = $vitalslab['visit_id'];
+			//var_dump($visit_id); exit;
+			$weight = $vitalslab['weight'];
+			$height = $vitalslab['height'];
+			$bps = $vitalslab['bps'];
+			$bpd = $vitalslab['bpd'];
+			$bmi = $vitalslab['bmi'];
+			$bmi_status = $vitalslab['bmi_status'];
+			$A1c = $vitalslab['A1c'];
+			$eGFR = $vitalslab['eGFR'];
+			$notes = $vitalslab['notes'];
+			$data = $vitalslab;
+			$this->Visit->VitalsLab->create();
+			if ($this->Visit->VitalsLab->save($this->data)) {
+				$this->Session->setFlash('VitalsLab has been saved!');
+				$this->redirect(array('action'=>'add'));
+			}else {
+				$this->Session->setFlash('Sorry, vitalsLab not saved. Try again please.');
+			}
+		}
+		$this->set('visits',$visits);
 	}
-	
+ 
+ /**
+ * Displays a view
+ *
+ * @param mixed What page to display
+ * @return void
+ * @throws NotFoundException When the view file could not be found
+ *  or MissingViewException in debug mode.
+ */       	
 	public function view(){
-	
-	}
-	
-	public function algorithm(){
-	
-	}
-	
-	public function plot(){
-	
-	}
+	    $id = $this->request->params['pass'][0];
+	    try {
+	      $vitalslab = $this->Visit->VitalsLab->find('first', 
+	        array('conditions' => array(
+	          'VitalsLab.id' => $id
+	        ))
+	      );
+	      $this->set('vitalslab', $vitalslab);
+	    } catch (NotFoundException $e) {
+	      throw $e;
+	    }
+	    //pr($id);
+	    //pr($vitalslab);
+	}	
 	
 /**
  * Displays a view
