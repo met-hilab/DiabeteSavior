@@ -50,9 +50,9 @@
   <div class="col-lg-4">
     <select id="Patient_Race" name="Patient_Race" class="form-control">
       <option></option>
-      <option>White</option>
-      <option>Black</option>
-      <option>Yellow</option>
+      <option></option>
+      <option></option>
+      <option></option>
     </select>
   </div>
 </div>
