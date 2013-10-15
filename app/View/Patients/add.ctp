@@ -1,42 +1,47 @@
+<html lang="en">
 <h2 class="section-title">Add Patient</h2>
 <form class="form-horizontal"role="form" action="/patients/add" method="post">
 <!-- Text input-->
+<?php
 
+?>
 <div class="form-group">
-  <label class="col-lg-1 control-label" for="Patient_Name">Name</label>
+  <label class="col-lg-1 control-label" for="patient_firstname">Name</label>
   <div class="col-lg-2">
-    <input id="Patient_Name" name="Patient_FirstName" type="Patient_FirstName" placeholder="First Name" class="form-control">   
+    <input id="patient_firstname" name="patient_firstname" type="Patient_FirstName" placeholder="First Name" class="form-control">   
   </div>
   <div class="col-lg-2">
-    <input id="Patient_Name" name="Patient_MiddleName" type="Patient_MiddleName" placeholder="Middle Name" class="form-control">   
+    <input id="patient_middlename" name="patient_middlename" type="Patient_MiddleName" placeholder="Middle Name" class="form-control">   
   </div>
   <div class="col-lg-2">
-    <input id="Patient_Name" name="Patient_LastName" type="Patient_LastName" placeholder="Last Name" class="form-control">   
+    <input id="patient_lastname" name="patient_lastname" type="Patient_LastName" placeholder="Last Name" class="form-control">   
   </div>
+  
 </div>
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-lg-1 control-label" for="Patient_Birthdate">Birthdate</label>
+  <label class="col-lg-1 control-label" for="dob">Birthdate</label>
   <div class="col-lg-4">
-    <input id="Patient_Birthdate" name="Patient_Birthdate" type="Patient_Birthdate" placeholder="MM / DD / YYYY" class="form-control">   
+    <input id="dob" name="dob" type="dob" placeholder="MM / DD / YYYY" class="form-control">   
   </div>
 </div>
+
 
 <!-- Text input-->
 <div class="form-group">
   <label class="col-lg-1 control-label" for="Patient_Occupation">Occupation</label>
   <div class="col-lg-4">
-    <input id="Patient_Occupation" name="Patient_Occupation" type="text" placeholder="Occupation" class="form-control">
+    <input id="occupation" name="occupation" type="occupation" placeholder="Occupation" class="form-control">
     
   </div>
 </div>
 
 <!-- Select Basic -->
 <div class="form-group">
-  <label class="col-lg-1 control-label" for="Patient_Gender">Gender</label>
+  <label class="col-lg-1 control-label" for="gender">Gender</label>
   <div class="col-lg-4">
-    <select id="Patient_Gender" name="Patient_Gender" class="form-control">
+    <select id="gender" name="gender" class="form-control">
       <option></option>
       <option>Male</option>
       <option>Female</option>
@@ -46,49 +51,51 @@
 
 <!-- Select Basic -->
 <div class="form-group">
-  <label class="col-lg-1 control-label" for="Patient_Race">Race</label>
+  <label class="col-lg-1 control-label" for="race">Race</label>
   <div class="col-lg-4">
-    <select id="Patient_Race" name="Patient_Race" class="form-control">
+    <select id="race" name="race" class="form-control">
       <option></option>
-      <option></option>
-      <option></option>
-      <option></option>
+      <option>African or African American</option>
+      <option>Asian or Asian American</option>
+      <option>Caucasian or European American</option>
+      <option>Native American or Native Alaskan</option>
+      <option>Other Race</option>
     </select>
   </div>
 </div>
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-lg-1 control-label" for="Patient_Street">Address</label>
+  <label class="col-lg-1 control-label" for="street">Address</label>
   <div class="col-lg-4">
-    <input id="Patient_Street" name="Patient_Street" type="Patient_Street" placeholder="Street Address" class="form-control">
+    <input id="street" name="street" type="street" placeholder="Street Address" class="form-control">
     
   </div>
 </div>
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-lg-1 control-label" for="Patient_City">City</label>
+  <label class="col-lg-1 control-label" for="city">City</label>
   <div class="col-lg-4">
-    <input id="Patient_City" name="Patient_City" type="text" placeholder="City Name" class="form-control">
+    <input id="city" name="city" type="text" placeholder="City Name" class="form-control">
     
   </div>
 </div>
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-lg-1 control-label" for="Patient_State">State</label>
+  <label class="col-lg-1 control-label" for="state">State</label>
   <div class="col-lg-4">
-    <input id="Patient_State" name="Patient_State" type="text" placeholder="State Name" class="form-control">
+    <input id="state" name="state" type="text" placeholder="State Name" class="form-control">
     
   </div>
 </div>
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-lg-1 control-label" for="Patient_ZIP">ZIP</label>
+  <label class="col-lg-1 control-label" for="postal_code">ZIP</label>
   <div class="col-lg-4">
-    <input id="Patient_ZIP" name="Patient_ZIP" type="text" placeholder="Zipcode" class="form-control">
+    <input id="postal_code" name="postal_code" type="text" placeholder="Zipcode" class="form-control">
     
   </div>
 </div>
@@ -203,4 +210,4 @@
 </div>
 
 <!-- Form Name</fieldset>
-</form>
+</form--->
