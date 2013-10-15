@@ -75,6 +75,8 @@ class Visit extends AppModel {
 		)
 	);
 
+
+
 /**
  * hasMany associations
  *

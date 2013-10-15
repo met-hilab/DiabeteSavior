@@ -108,8 +108,6 @@ $cakeDescription = __d('cake_dev', 'Diabetes Savior: Type II Diabetes Infomatic 
           <li><a href="/visits/add">Add Visit</a></li>
           <li><a href="/visits/index">Index</a></li>
           <li><a href="/visits/view">View Visit</a></li>
-          <li><a href="/visits/algorithm">Algorithm</a></li>
-          <li><a href="/visits/plot">Plot</a></li>
         </ul>
       </li>
       <li class="dropdown">
