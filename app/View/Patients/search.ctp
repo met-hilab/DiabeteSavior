@@ -26,4 +26,7 @@
         <button type="submit" class="btn btn-primary">Search</button>
       </div>
     </div>
+   
+  
+    <?php echo $this->Session->flash() ?>
   </form>

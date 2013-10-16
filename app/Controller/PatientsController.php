@@ -184,7 +184,7 @@ public function index(){
 //              $this->set('patient', $patient);
 //              $this->autoRender = false;
 //              $this->redirect(array('action'=>'view'));
-                $this->Session->setFlash('Patient not found, please enter information again or add a new patient.');
+                $this->Session->setFlash('Patient not found, please enter information again or add a new patient.','flash_search_failure');
               
               }
 
