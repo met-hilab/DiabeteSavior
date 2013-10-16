@@ -14,10 +14,10 @@
           <input id="Update_Name" name="Update_FirstName" type="Patient_FirstName" placeholder="First Name" class="form-control" value="<?php echo $patient['Patient']['patient_firstname'] ?>">   
         </div>
         <div class="col-lg-2">
-          <input id="Update_MiddleName1" name="Update_MiddleName" type="Patient_MiddleName" placeholder="Middle Name" class="form-control">   
+          <input id="Update_MiddleName1" name="Update_MiddleName" type="Patient_MiddleName" placeholder="Middle Name" class="form-control" value="<?php echo $patient['Patient']['patient_middlename'] ?>">   
         </div>
         <div class="col-lg-2">
-          <input id="Update_LastName1" name="Update_LastName" type="Patient_LastName" placeholder="Last Name" class="form-control">   
+          <input id="Update_LastName1" name="Update_LastName" type="Patient_LastName" placeholder="Last Name" class="form-control"  value="<?php echo $patient['Patient']['patient_lastname'] ?>">   
         </div>
       </div>
       <div class="form-group">
@@ -208,13 +208,13 @@
   </form>
 </div>
 </div>
-<div class="col-2">
+<!--<div class="col-2">
  <ul>
   <li><img src="images/m1mx5bga327j_sqr256.jpg" /></li>
   <li><input id="Submit1" type="submit" value="upload" /> </li>
 
   <li><strong><a href="#">Appoint History</a></strong>82.29.2013</li>
 </ul>
-</div>
+</div>-->
 </div>
 </div>

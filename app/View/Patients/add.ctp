@@ -86,7 +86,7 @@
 <div class="form-group">
   <label class="col-lg-1 control-label" for="state">State</label>
   <div class="col-lg-4">
-    <select id="state" name="state" type="text" class="form-control">
+    <select id="state" class="selectpicker">
       <option value=""></option>
       <option value="Alabama">Alabama</option>
       <option value="Alaska">Alaska</option>
