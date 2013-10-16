@@ -106,9 +106,15 @@ class VisitsController extends AppController {
 		if ( $this->request->is('post')) {
 			$patient_id = $patient['Patient']['id'];
 			//pr($patient_id); exit;
-			$data = array('patient_id' => $patient_id);
+			//$data = array('patient_id' => $patient_id);
+
+			$this->data['Visit']['patient_id'] = $patient_id;
+			//var_dump($this->data); exit;
 			$this->Visit->create();
-			if($this->Visit->save($this->data)){
+			$this->Visit->patient_id = $patient_id;
+
+			
+			if($this->Visit->save()){
 				$vitalslab = $this->request->data['VitalsLab'];
 				$visit = $this->Visit->find('first', array('conditions' => array('patient_id' => $patient_id)));
 				$visit_id = $visit['Visit']['id'];

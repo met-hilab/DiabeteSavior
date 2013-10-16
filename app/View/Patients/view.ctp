@@ -165,7 +165,7 @@
            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
            <a href="/patients/edit" class="btn btn-lg btn-primary"><span class="glyphicon glyphicon-edit"></span> Update Patient</a>
            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-           <a href="/patients/delete" date-method="delete" class="btn btn-lg btn-primary"><span class="glyphicon glyphicon-trash"></span> Delete Patient</a>
+           <a href="/patients/delete" data-confirm="Do you want to delete this patient record?" date-method="delete" class="btn btn-lg btn-primary"><span class="glyphicon glyphicon-trash"></span> Delete Patient</a>
           <?php
             ?>
           </div>
