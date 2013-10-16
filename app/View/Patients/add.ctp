@@ -3,7 +3,8 @@
 <form class="form-horizontal"role="form" action="/patients/add" method="post">
 <!-- Text input-->
 <?php
-
+  echo $this->Html->css('bootstrap-select');
+  echo $this->Html->script('bootstrap-select');
 ?>
 <div class="form-group">
   <label class="col-lg-1 control-label" for="patient_firstname">Name</label>
@@ -86,7 +87,7 @@
 <div class="form-group">
   <label class="col-lg-1 control-label" for="state">State</label>
   <div class="col-lg-4">
-    <select id="state" class="selectpicker">
+    <select id="state" class="form-control">
       <option value=""></option>
       <option value="Alabama">Alabama</option>
       <option value="Alaska">Alaska</option>
@@ -161,3 +162,17 @@
 
 <!-- Form Name</fieldset>
 </form--->
+
+
+<script>
+  
+  //document ready function to initialize components
+  $( document ).ready(function() {
+    
+    //init select picker
+    $('.selectpicker').selectpicker ({
+      
+    });
+  });
+  
+</script>

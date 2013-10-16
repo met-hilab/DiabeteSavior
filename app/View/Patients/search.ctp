@@ -1,3 +1,8 @@
+<?php
+  echo $this->Html->css('bootstrap-select');
+  echo $this->Html->script('bootstrap-select');
+?>
+
 <h2 class="section-title">Patient Search</h2>
   <form class="form-horizontal" role="form" action="/patients/search" method="post">
     <div class="form-group">
