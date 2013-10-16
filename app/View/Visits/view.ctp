@@ -2,6 +2,15 @@
 
 <div>
 <?php
+	echo "Patient ID: ".$patient['Patient']['patient_number']."<br>";
+	echo "First Name: ".$patient['Patient']['patient_firstname']."<br>";
+	echo "Last Name: ".$patient['Patient']['patient_lastname']."<br>";
+	echo "DOB: ".$patient['Patient']['dob']."<br>";
+?>
+</div>
+<hr>
+<div>
+<?php
 	echo "weight: ".$vitalslab['VitalsLab']['weight']."<br>";
 	echo "height: ".$vitalslab['VitalsLab']['height']."<br>";
 	echo "bps: ".$vitalslab['VitalsLab']['bps']."<br>";

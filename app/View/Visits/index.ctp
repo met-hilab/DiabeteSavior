@@ -1,4 +1,5 @@
 <h2>Index</h2>
+
 <table>
 	<tr>
 		<th>visit_id</th>
