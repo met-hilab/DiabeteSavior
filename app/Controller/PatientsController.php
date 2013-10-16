@@ -100,6 +100,9 @@ public function index(){
  */
 	public function add(){
 		//$this->authenticate_user();
+    //unset($_SERVER['patient_number']);
+    $this->Session->delete('patient_id');
+
 		if ($this->request->is('post')){
 			$patient = $this->request->data['Patient'];
 			$patient_firstname = $patient['patient_firstname'];
@@ -121,15 +124,22 @@ public function index(){
 			//$res = $this->Patient->save($this->data);
 			
 			if($this->Patient->save($this->data)){
+
 				//$this->Session->setFlash($_SESSION["patientnum"].' Patient is saved.');
-              	$patient_number = $_SESSION["patientnum"];
-				$conditions = array("patient_number" => $patient_number);
-                //$conditions = array("patient_number" => "M0000001");
-                $patient = $this->Patient->find('first', array('conditions' => $conditions));
-                $patient = $patient['Patient'];
-                $this->Session->write('patient', $patient);
-                $this->set('patient', $patient);
-                $this->redirect(array('action'=>'view',$patient_number));
+        //$patient_number = $_SESSION["patientnum"];
+				//$conditions = array("patient_number" => $patient_number);
+        //$conditions = array("patient_number" => "M0000001");
+        //$patient = $this->Patient->find('first', array('conditions' => $conditions));
+        //$patient = $patient['Patient'];
+        $id = $this->Patient->getLastInsertId();
+        $patient = $this->Patient->findById($id);
+        $this->Session->write('patient_id', $id);
+        $this->Session->write('patient', $patient);
+        //var_dump($_SESSION); exit;
+        //$this->set('patient', $patient);
+        //$_SERVER['patient_number'] = $patient_number;
+        //$this->redirect(array('action'=>'view',$patient_number));
+        $this->redirect(array('action'=>'view'));
                  
 			}else{
 				//$this->Session->setFlash('Patient is not saved.');
@@ -147,7 +157,8 @@ public function index(){
  *  or MissingViewException in debug mode.
  */
 	public function search(){
-
+      $this->Session->delete('patient_id');
+        
           if(!$this->request->is('post') && !$this->request->is('put')) {
                 //$this->header('HTTP/1.1 403 Forbidden');
                 //$this->Session->setFlash(__('Go away'));
@@ -177,9 +188,12 @@ public function index(){
                 $res->status = 1;
                 $res->message = __d("search", "search succeed");
                 $res->data = $patient;
+                $id = $patient['id'];
                 $this->Session->write('patient', $patient);
+                $this->Session->write('patient_id', $id);
+        
                 $this->set('patient', $patient);
-                $this->redirect(array('action'=>'view',$patient_number));
+                $this->redirect(array('action'=>'view'));
               }
 //              $this->set('patient', $patient);
 //              $this->autoRender = false;
@@ -200,9 +214,10 @@ public function index(){
  */
 	public function edit(){
 		//$this->authenticate_user();
+    $id = $this->Session->read('patient_id');
 
-		$patient_number = $this->request->params['pass'][0];
-		$this->Patient->patient_number = $patient_number;
+		//$patient_number = $this->request->params['pass'][0];
+		$this->Patient->id = $id;
 		if($this->Patient->exists()){
 			if($this->request->is('post') || $this->request->is('put')){
 				//save patient
@@ -232,7 +247,15 @@ public function index(){
  */
 	public function view(){
 		//this->authenticate_user();
+    $id = $this->Session->read('patient_id');
 
+    //cakephp way
+    //$this->Session->delete('patient_id');
+
+    // native php way.
+    //start_session();
+    //$_SESSION['patient_id'] = null;
+    //unset($_SESSION['patient_id']);
 
 		//view all patients
 		//$patients = $this->Patient->find(all);
@@ -241,15 +264,10 @@ public function index(){
 		//view a patient
 		$patient_number = $this->request->params['pass'][0];
 		try{
-
-			$patient = $this->Patient->find('first',
-				array('conditions' => array('Patient.patient_number' => $patient_number
-			 	))
-			);
+			$patient = $this->Patient->findById($id);
 			$this->set('patient', $patient);
 		}catch(NotFoundException $e){
 			throw $e;
-			
 		}
 	}
 

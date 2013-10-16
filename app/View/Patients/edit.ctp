@@ -1,21 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-
-<link href="style.css" rel="stylesheet" type="text/css" />
-
-<!--[if lt IE 7]>
-	<script type="text/javascript" src="js/ie_png.js"></script>
-	<script type="text/javascript">
-		 ie_png.fix('.png, #header .row-2 ul li a, #content, .list li');
-	</script>
-<![endif]-->
-</head>
-<body>
-<div class="tail-top">
-	<div class="tail-bottom">
-		<div class="body-bg">
-			<div id="content"><div class="inner_copy">More <a href="http://www.templates.com/">Website Templates</a> @ Templates.com!</div>
+<link href="/css/Update.css" rel="stylesheet" type="text/css" />
+<div class="inner_copy">More <a href="http://www.templates.com/">Website Templates</a> @ Templates.com!</div>
 				<div class="tail-right">
 					<div class="wrapper">
 						<div class="col-1">
@@ -237,12 +221,3 @@
 						</div>
 					</div>
 				</div>
-			</div>
-			
-			
-		</div>
-	</div>
-</div>
-
-</body>
-</html>

@@ -1,8 +1,4 @@
 
-<!DOCTYPE html>
-<html lang="en">
-
-  <body>
     <div class="container">
       <div class="row row-offcanvas row-offcanvas-right">
   <!------Patient Information ------------------------------------------------------------------------------------------------------>
@@ -165,11 +161,11 @@
             <br> 
             
      <!-----Add Three Buttons------------------------------------------>
-           <a href="#" class="btn btn-lg btn-primary"><span class="glyphicon glyphicon-plus"></span> Add Visit</a>
+           <a href="/visits/add" class="btn btn-lg btn-primary"><span class="glyphicon glyphicon-plus"></span> Add Visit</a>
            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-           <a href="#" class="btn btn-lg btn-primary"><span class="glyphicon glyphicon-edit"></span> Update Patient</a>
+           <a href="/patients/edit" class="btn btn-lg btn-primary"><span class="glyphicon glyphicon-edit"></span> Update Patient</a>
            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-           <a href="#" class="btn btn-lg btn-primary"><span class="glyphicon glyphicon-trash"></span> Delete Patient</a>
+           <a href="/patients/delete" date-method="delete" class="btn btn-lg btn-primary"><span class="glyphicon glyphicon-trash"></span> Delete Patient</a>
           <?php
             ?>
           </div>
@@ -256,6 +252,4 @@
     <script src="../../assets/js/jquery.js"></script>
     <script src="../../dist/js/bootstrap.min.js"></script>
     <script src="offcanvas.js"></script>
-  </body>
-</html>
 
