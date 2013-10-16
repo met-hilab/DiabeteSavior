@@ -228,7 +228,9 @@ public function index(){
 					$this->Session->setFlash('Unable to edit patient. Please, try again.');
 				}
 			}else{
-				$this->request->data = $this->Patient->read();
+				$patient = $this->Patient->read();
+        $this->set('patient', $patient);
+        //$this->render('add');
 			}
 
 		}else{
