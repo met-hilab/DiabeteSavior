@@ -21,13 +21,13 @@ ul, ol {list-style:none}
 .wrapper {width:100%;overflow:hidden}
 /* TAILING */
 .tail-top {
-    background: url(images/tail-top.gif) left top repeat-x #fff;
+     left top repeat-x #fff;
 }
 .body-bg {
     background: no-repeat center top;
     background-color: #FFFFFF;
 }
-.tail-bottom {background:url(images/tail-bottom.gif) left bottom repeat-x}
+.tail-bottom { left bottom repeat-x}
 /* FORMS */
 #contacts-form {clear:right;width:100%;overflow:hidden}
 #contacts-form fieldset {border:none;float:left}
@@ -44,8 +44,8 @@ h3 {font-size:40px;line-height:1.2em;font-weight:normal;color:#000;letter-spacin
 /* button5 */
 /* button6 */
 /* CONTENT */
-#content {background:url(images/cont-tail.png) repeat-y left top;position:relative}
-#content .tail-right {background:url(images/cont-tail-right.gif) repeat-y right top}
+#content { repeat-y left top;position:relative}
+#content .tail-right {repeat-y right top}
 #content .col-1 {width:630px}
 #content .col-2 {width:290px;padding:94px 0 170px 0}
 #content .col-2 ul {padding:0 43px 0 41px}
