@@ -21,12 +21,19 @@
     <input id="patient_dob" name="patient_dob" type="patient_dob" placeholder="YYYY-MM-DD" class="form-control">   
   </div>
 </div>
+<!--    <div class="form-group">
+      <label class="col-lg-1 control-label" for="patient_dob">DOB</label>
+     <div class="col-lg-4 input-append date" id="dp3" data-date="12-02-2012" data-date-format="yyyy-mm-dd">
+      <input class="span2" size="16" type="text" value="12-02-2012"><span class="add-on glyphicon glyphicon-calendar"><i class="icon-th"></span>
+     </div>
+    </div>    -->
+    
     <div class="form-group">
       <div class="col-lg-offset-1 col-lg-4">
         <button type="submit" class="btn btn-primary">Search</button>
       </div>
     </div>
    
-  
+
     <?php echo $this->Session->flash() ?>
   </form>
