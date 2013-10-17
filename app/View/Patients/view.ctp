@@ -222,6 +222,7 @@
         </div><!--/span-->
         
 <!-------------------------side bar --appointment history------------------------------------------------------------------------------->
+<!--
         <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
           <div class="well sidebar-nav">
               <h4>Appointment History</h4>
@@ -237,10 +238,11 @@
               <p>Tenth</p>
              
           </div><!--/.well -->
-        </div><!--/span-->
-      </div><!--/row-->
+        <!--</div><!--/span-->
+     <!-- </div><!--/row-->
+      
 
-      <hr>
+<!--      <hr>-->
 
     </div><!--/.container-->
 

@@ -99,23 +99,13 @@ $cakeDescription = __d('cake_dev', 'Diabetes Savior: Type II Diabetes Infomatic 
         <ul class="dropdown-menu">
           <li><a href="/patients/add">Add Patient</a></li>
           <li><a href="/patients/search">Search Patient</a></li>
-          <li><a href="/patients/view">View Patient</a></li>
-          <li><a href="/patients/edit">Update Patient</a></li>
-        </ul>
-      </li>
-      <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Visits <b class="caret"></b></a>
-        <ul class="dropdown-menu">
-          <li><a href="/visits/search">Add Visit</a></li>
-          <li><a href="/visits/view">View Visit</a></li>
-          <li><a href="/visits/index">Index</a></li>
         </ul>
       </li>
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Calculators <b class="caret"></b></a>
         <ul class="dropdown-menu">
           <li><a href="/calculators/bmi">Body Mass Index</a></li>
-          <li><a href="/calculators/bsa">Body Surface Area</a></li>
+<!--          <li><a href="/calculators/bsa">Body Surface Area</a></li>-->
           <li><a href="/calculators/bgl">Blood Glucose Level</a></li>
         </ul>
       </li>

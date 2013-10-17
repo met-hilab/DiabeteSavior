@@ -6,6 +6,3 @@ A medical algorithm describes any formula, statistical survey, graph, or look-up
 <p>
 It has been estimated that there are more than 250,000 medical algorithms contained in biomedical peer-reRetriveed literature across all specialties of medicine. These algorithms range from simple calculations to complex outcome predictions. Standardization and automation of medical algorithms improves information sharing among health care providers, assists in the correct assessment, diagnosis, planning of therapy, and helps reduce medical errors. The HILab contributes to the improvement of healthcare by cataloging and implementing the medical algorithms. This website servers as an educational resource to provide up-to-date clinical/medical information and easy-to-use automated calculators.
 </p>
-<p>
-<a>Back To MET-HIlab</a>
-</p>
