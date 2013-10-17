@@ -50,7 +50,8 @@
         <div class="col-lg-4">
 
  <select id="race" name="race" class="form-control">
-      <option></option>
+     
+<option> <option value="<?php echo $patient['Patient']['race']?>"></option>
       <option>African or African American</option>
       <option>Asian or Asian American</option>
       <option>Caucasian or European American</option>
