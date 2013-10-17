@@ -30,7 +30,7 @@
         <label class="col-lg-1 control-label" for="Update_Gender">Gender</label>
         <div class="col-lg-4">
           <select id="Update_Gender" name="Update_Gender" class="form-control">
-            <option></option>
+            <option> <?php echo $patient['Patient']['gender']?></option>
             <option>Male</option>
             <option>Female</option>
           </select>
@@ -51,7 +51,7 @@
 
  <select id="race" name="race" class="form-control">
      
-<option> <option value="<?php echo $patient['Patient']['race']?>"></option>
+<option> <?php echo $patient['Patient']['race']?></option>
       <option>African or African American</option>
       <option>Asian or Asian American</option>
       <option>Caucasian or European American</option>
