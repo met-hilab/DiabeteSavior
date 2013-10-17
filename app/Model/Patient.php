@@ -205,15 +205,16 @@ class Patient extends AppModel {
 	function beforeSave($options = array()) {
 		//first we need to judge if this is a creation of a new patient or just an update
 		
-		//if($this->data['Patient']['patient_number'] == "" ){
+		
 		
 			
 		parent::beforeSave();
 	  //$fullname = $this->data['Patient']['patient_firstname'] . $this->data['Patient']['patient_lastname'];
 	  // data['Patient']['patient_number'] 8 chars
-
- 		$this->data['Patient']['patient_number'] = substr($this->data['Patient']['gender'], 0, 1) . substr($this->data['Patient']['patient_firstname'], 0, 1) . substr($this->data['Patient']['patient_lastname'], 0, 1) . substr($this->data['Patient']['dob'], 8, 2) . date('B');
- 		$this->data['Patient']['patient_number'] = strtolower($this->data['Patient']['patient_number']);
+	  if($this->data['Patient']['patient_number'] == NULL || $this->data['Patient']['patient_number'] == ""){
+ 			$this->data['Patient']['patient_number'] = substr($this->data['Patient']['gender'], 0, 1) . substr($this->data['Patient']['patient_firstname'], 0, 1) . substr($this->data['Patient']['patient_lastname'], 0, 1) . substr($this->data['Patient']['dob'], 8, 2) . date('B');
+ 			$this->data['Patient']['patient_number'] = strtolower($this->data['Patient']['patient_number']);
+ 		}
  		//session_start();
  		//$_SESSION["patientnum"] = $this->data['Patient']['patient_number'];
              //   $this->session->set('patientnum', $patientnum);

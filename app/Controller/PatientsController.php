@@ -139,11 +139,11 @@ public function index(){
         //$this->set('patient', $patient);
         //$_SERVER['patient_number'] = $patient_number;
         //$this->redirect(array('action'=>'view',$patient_number));
-        $this->redirect(array('action'=>'view'));
+        $this->redirect(array('action'=>'show'));
                  
 			}else{
-				//$this->Session->setFlash('Patient is not saved.');
-				$this->redirect(array('action'=>'add'));
+				$this->Session->setFlash('Patient is not saved.');
+				//$this->redirect(array('action'=>'add'));
 			}
 		}
 	}
@@ -193,11 +193,11 @@ public function index(){
                 $this->Session->write('patient_id', $id);
         
                 $this->set('patient', $patient);
-                $this->redirect(array('action'=>'view'));
+                $this->redirect(array('action'=>'show'));
               }
 //              $this->set('patient', $patient);
 //              $this->autoRender = false;
-//              $this->redirect(array('action'=>'view'));
+//              $this->redirect(array('action'=>'show'));
                 $this->Session->setFlash('Patient not found, please enter information again or add a new patient.','flash_search_failure');
               
               }
@@ -223,7 +223,7 @@ public function index(){
 				//save patient
 				if($this->Patient->save($this->request->data)){
 					$this->Session->setFlash('Patient was edited.');
-					$this->redirect(array('action'=>'view'));
+					$this->redirect(array('action'=>'show'));
 				}else{
 					$this->Session->setFlash('Unable to edit patient. Please, try again.');
 				}
@@ -235,7 +235,7 @@ public function index(){
 
 		}else{
 			$this->Session->setFlash('The patient you are trying to edit does not exist.');
-			$this->redirect(array('action' => 'view'));
+			$this->redirect(array('action' => 'show'));
 		}
 	}	
 
@@ -247,10 +247,9 @@ public function index(){
  * @throws NotFoundException When the view file could not be found
  *  or MissingViewException in debug mode.
  */
-	public function view(){
+	public function show(){
 		//this->authenticate_user();
     $id = $this->Session->read('patient_id');
-
     //cakephp way
     //$this->Session->delete('patient_id');
 
@@ -268,9 +267,8 @@ public function index(){
 		try{
 			$patient = $this->Patient->findById($id);
 			$this->set('patient', $patient);
-
-                $this->Session->write('patient', $patient);
-                $this->Session->write('patient_id', $id);
+      $this->Session->write('patient', $patient);
+      $this->Session->write('patient_id', $id);
 		}catch(NotFoundException $e){
 			throw $e;
 		}
@@ -287,37 +285,28 @@ public function index(){
 	public function delete(){
 		//this->authenticate_user();
 		$id = $this->Session->read('patient_id');
-		//$patient_number = $this->request->params['pass'][0];
- 
- 		$patient = $this->Patient->find('first',
-				array('conditions' => array('Patient.id' => $id
-			 	))
-			);
- 		//$id = $patient['id'];
-   		//if( $this->request->is('get') ){
-        //	$this->Session->setFlash('Delete method is not allowed.');
-        //	$this->redirect(array('action' => 'view'));
-        
-	    //}else{
-    
-     	   if( !$id ) {
-    	        $this->Session->setFlash('Invalid id for patient');
-    	        $this->redirect(array('action'=>'view'));
-            
-    	    }else{
-    	        //delete patient
-    	        if( $this->Patient->delete( $id ) ){
-    	            //set to screen
-    	            $this->Session->setFlash('Patient deleted.');
-    	            //redirect to users's list
-    	            $this->redirect(array('action'=>'search'));
-                
-    	        }else{  
-     	           //if unable to delete
-      	          $this->Session->setFlash('Unable to delete patient.');
-      	          $this->redirect(array('action' => 'view'));
-    	        }
-    	    }
-		}
-	//}
+ 		$patient = $this->Patient->findById($id);
+
+ 		if($this->request->is('get') ){
+      $this->Session->setFlash('Delete method is not allowed.');
+      $this->redirect(array('action' => 'show'));
+    } else {
+   	  if(!$id) {
+  	    $this->Session->setFlash('Invalid id for patient');
+  	    $this->redirect(array('action'=>'show'));
+  	  }else{
+        //delete patient
+        if( $this->Patient->delete( $id ) ){
+            //set to screen
+            $this->Session->setFlash('Patient deleted.');
+            //redirect to users's list
+            $this->redirect(array('action'=>'search'));
+        }else{  
+             //if unable to delete
+            $this->Session->setFlash('Unable to delete patient.');
+            $this->redirect(array('action' => 'show'));
+        }
+      }
+    }
+  }
 }

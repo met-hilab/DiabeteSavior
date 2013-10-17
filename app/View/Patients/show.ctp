@@ -14,7 +14,7 @@
 <!--           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
            <a href="/patients/edit" class="btn btn-primary" style="padding-left:5px;"><span class="glyphicon glyphicon-edit"></span> Update Patient</a>
 <!--           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
-           <a href="/patients/delete" data-confirm="Do you want to delete this patient record?" date-method="delete" class="btn btn-primary" style="padding-left:5px;"><span class="glyphicon glyphicon-trash"></span> Delete Patient</a>
+           <a href="/patients/delete" data-confirm="Do you want to delete this patient record?" data-method="delete" class="btn btn-primary" style="padding-left:5px;"><span class="glyphicon glyphicon-trash"></span> Delete Patient</a>
             </div>
            <!--            <br> -->
             <div class="jumbotron" style="padding-bottom:0;">  
@@ -259,7 +259,7 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="../../assets/js/jquery.js"></script>
-    <script src="../../dist/js/bootstrap.min.js"></script>
-    <script src="offcanvas.js"></script>
+    
+    
+    
 
