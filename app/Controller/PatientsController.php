@@ -125,9 +125,9 @@ public function index(){
 			
 			if($this->Patient->save($this->data)){
 
-				//$this->Session->setFlash($_SESSION["patientnum"].' Patient is saved.');
+		//$this->Session->setFlash($_SESSION["patientnum"].' Patient is saved.');
         //$patient_number = $_SESSION["patientnum"];
-				//$conditions = array("patient_number" => $patient_number);
+		//$conditions = array("patient_number" => $patient_number);
         //$conditions = array("patient_number" => "M0000001");
         //$patient = $this->Patient->find('first', array('conditions' => $conditions));
         //$patient = $patient['Patient'];
@@ -264,10 +264,13 @@ public function index(){
 		//$this->set('patients', $patients);
 
 		//view a patient
-		$patient_number = $this->request->params['pass'][0];
+		//$patient_number = $this->request->params['pass'][0];
 		try{
 			$patient = $this->Patient->findById($id);
 			$this->set('patient', $patient);
+
+                $this->Session->write('patient', $patient);
+                $this->Session->write('patient_id', $id);
 		}catch(NotFoundException $e){
 			throw $e;
 		}
@@ -283,19 +286,19 @@ public function index(){
  */
 	public function delete(){
 		//this->authenticate_user();
-
-		$patient_number = $this->request->params['pass'][0];
+		$id = $this->Session->read('patient_id');
+		//$patient_number = $this->request->params['pass'][0];
  
  		$patient = $this->Patient->find('first',
-				array('conditions' => array('Patient.patient_number' => $patient_number
+				array('conditions' => array('Patient.id' => $id
 			 	))
 			);
- 		$id = $patient['id'];
-   		if( $this->request->is('get') ){
-        	$this->Session->setFlash('Delete method is not allowed.');
-        	$this->redirect(array('action' => 'view'));
+ 		//$id = $patient['id'];
+   		//if( $this->request->is('get') ){
+        //	$this->Session->setFlash('Delete method is not allowed.');
+        //	$this->redirect(array('action' => 'view'));
         
-	    }else{
+	    //}else{
     
      	   if( !$id ) {
     	        $this->Session->setFlash('Invalid id for patient');
@@ -307,7 +310,7 @@ public function index(){
     	            //set to screen
     	            $this->Session->setFlash('Patient deleted.');
     	            //redirect to users's list
-    	            $this->redirect(array('action'=>'view'));
+    	            $this->redirect(array('action'=>'search'));
                 
     	        }else{  
      	           //if unable to delete
@@ -316,5 +319,5 @@ public function index(){
     	        }
     	    }
 		}
-	}
+	//}
 }
