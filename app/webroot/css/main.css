@@ -35,6 +35,9 @@ h2 img {
 html,body{
   height: 100%;
 }
+body{
+  padding-bottom: 75px;
+}
 .footer{
   height: 75px;
   background: white;
