@@ -1,14 +1,23 @@
-
+<!--
     <div class="container">
       <div class="row row-offcanvas row-offcanvas-right">
-  <!------Patient Information ------------------------------------------------------------------------------------------------------>
+  ----Patient Information ----------------------------------------------------------------------------------------------------
         <div class="col-xs-12 col-sm-9">
           <p class="pull-right visible-xs">
             <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
           </p>
-          <div class="jumbotron">          
-            <h2>View Patient</h2>
-            <br>         
+                  -->
+            <h2 class="section-title" style="padding-bottom: 0;">View Patient</h2>
+            <!-----Add Three Buttons------------------------------------------>
+            <div style="padding-bottom:10px;">
+           <a href="/visits/add" class="btn btn-primary" style="padding-left:5px;"><span class="glyphicon glyphicon-plus"></span> Add Visit</a>
+<!--           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
+           <a href="/patients/edit" class="btn btn-primary" style="padding-left:5px;"><span class="glyphicon glyphicon-edit"></span> Update Patient</a>
+<!--           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
+           <a href="/patients/delete" data-confirm="Do you want to delete this patient record?" date-method="delete" class="btn btn-primary" style="padding-left:5px;"><span class="glyphicon glyphicon-trash"></span> Delete Patient</a>
+            </div>
+           <!--            <br> -->
+            <div class="jumbotron" style="padding-bottom:0;">  
             <div class ="col-2">
                 
                 <!---First Column----------------------------------------->
@@ -50,7 +59,7 @@
                             </div>
                             <div class ="col-6 col-lg-6">
                                 <?php
-                                 echo $patient['Patient']['dob'];
+                                 echo $patient['Patient']['dob'] ?: 'N/A';
                                 // echo "<h4>08/06/1990</h4>"
                                 ?>
                             </div>
@@ -63,7 +72,7 @@
                             </div>
                             <div class ="col-6 col-lg-6">
                                 <?php
-                                 echo $patient['Patient']['occupation'];
+                                 echo $patient['Patient']['occupation'] ?: 'N/A';
                                 // echo "<h4>Student</h4>"
                                 ?>
                             </div>
@@ -76,7 +85,7 @@
                             </div>
                             <div class ="col-6 col-lg-6">
                                 <?php
-                                 echo $patient['Patient']['race'];
+                                 echo $patient['Patient']['race'] ?: 'N/A';
                                 // echo "<h4>Native American</h4>";
                                 ?>
                             </div>
@@ -94,7 +103,7 @@
                             </div>
                             <div class ="col-6 col-lg-6">
                                 <?php
-                                 echo $patient['Patient']['gender'];
+                                 echo $patient['Patient']['gender'] ?: 'N/A';
                                  //echo "<h4>Female</h4>";
                                 ?>
                             </div>
@@ -107,7 +116,7 @@
                             </div>
                             <div class ="col-6 col-lg-6">
                                 <?php
-                                 echo $patient['Patient']['street'];
+                                 echo $patient['Patient']['street'] ?: 'N/A';
                                 // echo "<h4>44 Cummington St</h4>";
                                 ?>
                             </div>
@@ -121,7 +130,7 @@
                             </div>
                             <div class ="col-6 col-lg-6">
                                 <?php
-                                 echo $patient['Patient']['city'];
+                                 echo $patient['Patient']['city'] ?: 'N/A';
                                 // echo "<h4>Boston</h4>";
                                 ?>
                             </div>
@@ -134,7 +143,7 @@
                             </div>
                             <div class ="col-6 col-lg-6">
                                 <?php
-                                 echo $patient['Patient']['state'];
+                                 echo $patient['Patient']['state'] ?: 'N/A';
                                 // echo "<h4>Massachusetts</h4>";
                                 ?>
                             </div>
@@ -147,7 +156,7 @@
                             </div>
                             <div class ="col-6 col-lg-6">
                                 <?php
-                                 echo $patient['Patient']['pastal_code'];
+                                 echo $patient['Patient']['postal_code'] ?: 'N/A';
                                //  echo "<h4>02215</h4>";
                                 ?>
                             </div>
@@ -160,12 +169,7 @@
             </div>
             <br> 
             
-     <!-----Add Three Buttons------------------------------------------>
-           <a href="/visits/add" class="btn btn-lg btn-primary"><span class="glyphicon glyphicon-plus"></span> Add Visit</a>
-           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-           <a href="/patients/edit" class="btn btn-lg btn-primary"><span class="glyphicon glyphicon-edit"></span> Update Patient</a>
-           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-           <a href="/patients/delete" data-confirm="Do you want to delete this patient record?" date-method="delete" class="btn btn-lg btn-primary"><span class="glyphicon glyphicon-trash"></span> Delete Patient</a>
+     
           <?php
             ?>
           </div>
@@ -173,8 +177,8 @@
  <!--------------------Save For Further Information like Allegic etc-------------------------------------------------------------------------->
           <div class="row">
             <div class="col-6 col-sm-6 col-lg-12">
-                <div class="col-1 col-lg-1">
-                </div>
+<!--                <div class="col-1 col-lg-1">
+                </div>-->
                 <div class ="col-6 col-lg-6">
               <div class="row">
                             <div class ="col-6 col-lg-6">
@@ -184,15 +188,17 @@
                             </div>
                             <div class ="col-6 col-lg-6">
                                 <?php
-                                 echo $patient['Patient']['Patient_Allergic'];
-                                 echo "<h4>None</h4>";
+                                 echo '<h4>';
+                                 echo $patient['Patient']['Patient_Allergic'] ?: 'N/A';
+                                 echo '</h4>';
+//                                 echo "<h4>None</h4>";
                                 ?>
                             </div>
                         </div>
                 <div class="row">
                             <div class ="col-6 col-lg-6">
                                 <?php
-                                 echo "<h4>Dignosis  :</h4>"
+                                 echo "<h4>Diagnosis  :</h4>"
                                 ?>
                             </div>
                             <div class ="col-6 col-lg-6">
@@ -210,8 +216,10 @@
                             </div>
                             <div class ="col-6 col-lg-6">
                                 <?php
-                                 echo $patient['Patient']['Patient_Medication'];
-                                 echo "<h4>Medicine 1, 2,3</h4>";
+                                echo '<h4>';
+                                 echo $patient['Patient']['Patient_Medication'] ?: 'N/A';
+                                 echo '</h4>';
+//                                 echo "<h4>Medicine 1, 2,3</h4>";
                                 ?>
                             </div>
                         </div>
@@ -219,7 +227,7 @@
             </div>
             
           </div><!--/row-->
-        </div><!--/span-->
+        <!--</div><!--/span-->
         
 <!-------------------------side bar --appointment history------------------------------------------------------------------------------->
 <!--
@@ -244,7 +252,7 @@
 
 <!--      <hr>-->
 
-    </div><!--/.container-->
+   <!-- </div><!--/.container-->
 
 
 

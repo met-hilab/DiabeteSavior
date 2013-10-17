@@ -104,7 +104,9 @@ class Patient extends AppModel {
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
-		)/*,
+		)
+		//The following attributes are allowed empty, for now, but maybe not in the future
+		/*,
 		'street' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
@@ -201,8 +203,13 @@ class Patient extends AppModel {
  * generate the patient_number (imcompletely)
  */	
 	function beforeSave($options = array()) {
+		//first we need to judge if this is a creation of a new patient or just an update
+		
+		//if($this->data['Patient']['patient_number'] == "" ){
+		
+			
 		parent::beforeSave();
-	  $fullname = $this->data['Patient']['patient_firstname'] . $this->data['Patient']['patient_lastname'];
+	  //$fullname = $this->data['Patient']['patient_firstname'] . $this->data['Patient']['patient_lastname'];
 	  // data['Patient']['patient_number'] 8 chars
 
  		$this->data['Patient']['patient_number'] = substr($this->data['Patient']['gender'], 0, 1) . substr($this->data['Patient']['patient_firstname'], 0, 1) . substr($this->data['Patient']['patient_lastname'], 0, 1) . substr($this->data['Patient']['dob'], 8, 2) . date('B');
@@ -211,7 +218,10 @@ class Patient extends AppModel {
  		//$_SESSION["patientnum"] = $this->data['Patient']['patient_number'];
              //   $this->session->set('patientnum', $patientnum);
  		//var_dump($this->data); exit;
+		
+		//}
  		return true;
+		
  	}
 
 

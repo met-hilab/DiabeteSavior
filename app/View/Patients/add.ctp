@@ -22,7 +22,7 @@
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-lg-1 control-label" for="dob">Birthdate</label>
+  <label class="col-lg-1 control-label" for="dob">DOB</label>
   <div class="col-lg-4">
     <input id="dob" name="dob" type="dob" placeholder="YYYY-MM-DD" class="form-control">   
   </div>
