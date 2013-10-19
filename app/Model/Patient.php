@@ -104,6 +104,16 @@ class Patient extends AppModel {
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
+		),
+		'postal_code' => array(
+			'postal' => array(
+				'rule' => array('postal'),
+				//'message' => 'Your custom message here',
+				'allowEmpty' => true, //Allow empty at the 1st iteration
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
 		)
 		//The following attributes are allowed empty, for now, but maybe not in the future
 		/*,
@@ -117,16 +127,7 @@ class Patient extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
-		'postal_code' => array(
-			'notempty' => array(
-				'rule' => array('notempty'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
+		
 		'city' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
