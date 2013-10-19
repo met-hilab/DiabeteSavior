@@ -87,7 +87,7 @@
 <div class="form-group">
   <label class="col-lg-1 control-label" for="state">State</label>
   <div class="col-lg-4">
-    <select id="state" class="form-control">
+    <select id="state" name="state" class="form-control">
       <option value=""></option>
       <option value="Alabama">Alabama</option>
       <option value="Alaska">Alaska</option>
