@@ -208,8 +208,9 @@ class VisitsController extends AppController {
 
     public function algtest(){
 
-     //$a1c = $this->Algorithm->getA1C();
-        $this->Algorithm->printA1C();
+        $this->Algorithm->setA1C(6.2);
+        $a1cnew = $this->Algorithm->getA1C();
+        $this->set('a1cnew', $a1cnew);
 
     }
 
