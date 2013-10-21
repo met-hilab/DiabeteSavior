@@ -1,47 +1,28 @@
 <?php
 /**
- * Patient controller.
- *
- * This file will render views from views/patients/
- *
- * PHP 5
- *
- * Copyright (c) Wenjie Shi (wjshi@bu.edu) 
- *
- * Licensed under The MIT License
- * For full copyright and license information, please see the LICENSE.txt
- * Redistributions of files must retain the above copyright notice.
- *
- * @copyright     Copyright (c) Wenjie Shi(wjshi@bu.edu)
- * @link          http://github.com/bumetcs/cs673
- * @package       app.Controller
- * @since         CakePHP(tm) v 0.2.9
- * @license       http://www.opensource.org/licenses/mit-license.php MIT License
+ * Created by JetBrains PhpStorm.
+ * User: Singh/garima
+ * Date: 10/20/13
+ * Time: 12:09 PM
+ * To change this template use File | Settings | File Templates.
  */
-App::uses('AppController', 'Controller');
+Class MedicinesController extends AppController {
 
-/**
- * Static content controller
- *
- * Override this controller by placing a copy in controllers directory of an application
- *
- * @package       app.Controller
- * @link http://book.cakephp.org/2.0/en/controllers/pages-controller.html
- */
-class MedicinesController extends AppController {
+    public function index() {
 
-/**
- * This controller does not use a model
- *
- * @var array
- */
-	public $uses = array();
+        $Medicines= $this->Medicine->find('all');
 
-public function add(){
+        $this->set('Medicines',$Medicines);
+    }
+
+
+    public function add() {
+      if($this->request->is('Post'))
+      {
+         $this->Medicine->save($this->request->data);
+      }
+    }
 
 }
-public function View() {
 
-	}
-}
 ?>
