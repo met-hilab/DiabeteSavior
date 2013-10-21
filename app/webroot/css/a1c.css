@@ -1,0 +1,72 @@
+@charset "UTF-8";
+/* CSS for form */
+
+#main{
+	background-color:#FFFFFF;	
+/*	padding:1em;*/
+	padding-left:50px;
+	padding-right:0px;
+	width:800px;
+	height:400px;
+	text-align:left;
+
+	}
+
+form {background-color:#33CCFF;
+	background:;
+	padding:1em;	
+	height:250px;
+	width:530px;
+	border-radius: 15px;
+	/*box-shadow: 25px 25px 50px #333333;*/
+	}
+	
+/*
+form p {
+	font-family:Helvetiva, Geneva, sans-serif;
+	font-size:14px;
+	color:#000;
+	}
+*/
+		
+#user {
+	border-style:dotted;
+    border-width:1px;
+    border-color:#000000;
+    background-color:#FFFFFF;
+	border-radius: 10px;
+	color:#000;
+    padding:1em;
+
+	width:200px;
+	height:100px;
+
+    float:left;
+}
+
+#results {
+	border-style:dotted;
+    border-width:1px;
+    border-color:#000000;
+    background-color:#FFFFFF;
+	border-radius: 10px;
+	color:#000;
+	float:left;
+    padding:1em;
+
+	width:260px;
+	height:100px;
+}
+
+#message {
+    float:left;
+}
+
+#methilablogo img{
+    position:absolute;
+    top:60px;
+    left:100px;
+}
+
+	
+	
