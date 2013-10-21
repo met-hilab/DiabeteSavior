@@ -1,4 +1,4 @@
-<h2>Add a User
+<h2>Add Medicine
 <?php
 echo $this->form->create();
 
