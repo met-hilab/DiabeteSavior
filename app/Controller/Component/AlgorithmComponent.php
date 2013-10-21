@@ -420,3 +420,5 @@ class AlgorithmComponent extends Component {
     }
 
 }
+
+?>

@@ -33,7 +33,9 @@ class VisitsController extends AppController {
 	
 	public $uses = array();
 
-/**
+    public $components = array('Algorithm');
+
+    /**
  * Displays a view
  *
  * @param mixed What page to display
@@ -203,6 +205,13 @@ class VisitsController extends AppController {
 			throw new NotFoundException();
 		}
 	}
+
+    public function algtest(){
+
+     //$a1c = $this->Algorithm->getA1C();
+        $this->Algorithm->printA1C();
+
+    }
 
 }
 
