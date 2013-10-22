@@ -18,7 +18,7 @@
  * @since         CakePHP(tm) v 0.2.9
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
-
+ 
 App::uses('AppController', 'Controller');
 
 /**
@@ -49,47 +49,6 @@ class VisitsController extends AppController {
         $this->set('visits', $visits);
         //pr($visits);
 	}
-
-/**
- * Search a patient
- *
- * @param patientid, firstname, lastname, dob
- * @return void
- * @throws NotFoundException When the view file could not be found
- *  or MissingViewException in debug mode.
- */
-	public function search(){
-
-		if($this->request->is('post')){
-			$patient_number = $this->request->data('patient_number');
-			$patient_firstname = strtolower($this->request->data('Patient_FirstName'));
-			$patient_lastname = strtolower($this->request->data('Patient_LastName'));
-			$patient_dob = $this->request->data('patient_dob');
-			$conditions = array(
-				"patient_number" => $patient_number, 
-				strtolower("patient_firstname") => $patient_firstname, 
-				strtolower("patient_lastname") => $patient_lastname, 
-				"dob" => $patient_dob);
-			$visit = $this->Visit->Patient->find('first', array('conditions' => $conditions));
-			$visit = $visit['Patient'];
-			$res = new stdClass();
-			$res->status = 0;
-			$res->message = "Initialized";
-			$res->data = null;
-			if (!$visit) {
-				$res->status = -1;
-				$res->message = __d("search", "Search failed");
-				$res->data = $visit;
-			} else {
-				$res->status = 1;
-				$res->message = __d("search", "search succeed");
-				$res->data = $visit;
-				$this->Session->write('visit', $visit);
-				$this->redirect(array('action'=>'add', $patient_number));
-			}
-			$this->Session->setFlash('Patient not found, please enter information again or add a new patient.');
-		}
-	}
 	
 /**
  * Create new vitals_lab
@@ -100,49 +59,77 @@ class VisitsController extends AppController {
  *  or MissingViewException in debug mode.
  */
 	public function add(){	
- 
- 		$patient_number = $this->request->params['pass'][0];
-		$patient = $this->Visit->Patient->find('first', array('conditions' => array('patient_number' => $patient_number)));
-		$this->set('patient', $patient);
+		$this->Session->delete('visit_id');
 
-		if ( $this->request->is('post')) {
-			$patient_id = $patient['Patient']['id'];
-			//pr($patient_id); exit;
-			//$data = array('patient_id' => $patient_id);
+ 		$p_id = $this->Session->read('patient_id');
+ 		$patient = $this->Visit->Patient->findById($p_id);
+ 		$this->set('patient', $patient);
+ 	    $this->Session->write('patient', $patient);
+        $this->Session->write('patient_id', $p_id);
 
-			$this->data['Visit']['patient_id'] = $patient_id;
-			//var_dump($this->data); exit;
+		 if ( $this->request->is('post')) {		
+			$this->Visit->patient_id = $p_id;
 			$this->Visit->create();
-			$this->Visit->patient_id = $patient_id;
-
 			
 			if($this->Visit->save()){
-				$vitalslab = $this->request->data['VitalsLab'];
-				$visit = $this->Visit->find('first', array('conditions' => array('patient_id' => $patient_id)));
-				$visit_id = $visit['Visit']['id'];
-				//pr($visit_id); exit;
-				$weight = $vitalslab['weight'];
-				$height = $vitalslab['height'];
-				$bps = $vitalslab['bps'];
-				$bpd = $vitalslab['bpd'];
-				$bmi = $vitalslab['bmi'];
-				$bmi_status = $vitalslab['bmi_status'];
-				$A1c = $vitalslab['A1c'];
-				$eGFR = $vitalslab['eGFR'];
-				$notes = $vitalslab['notes'];
-				$data = $vitalslab;
-				$this->Visit->VitalsLab->create();
-				if ($this->Visit->VitalsLab->save($this->data)) {
-					$this->Session->setFlash('VitalsLab has been saved!');
-					$this->redirect(array('action'=>'view', $visit_id));
-				}else {
-					$this->Session->setFlash('Sorry, vitalsLab not saved. Try again please.');
-				}
+				$v_id = $this->Visit->getLastInsertId();
+        		//$visit = $this->Visit->findById($id);
+        		//$this->Session->write('visit', $visit);
+				$this->Session->write('visit_id', $v_id);
 
+			/*vitals_labs table*/
+				$vitals_labs = $this->request->data;
+				$visit_id = $v_id;
+				$weight = $vitals_labs['weight'];
+				$height = $vitals_labs['height'];
+				$bmi = $vitals_labs['bmi'];
+				$bps = $vitals_labs['bps'];
+				$bpd = $vitals_labs['bpd'];
+				$A1c = $vitals_labs['A1c'];
+				$eGFR = $vitals_labs['eGFR'];
+				$notes = $vitals_labs['notes'];
+				$data = $vitals_labs;
+				$this->Visit->VitalsLab->create();
+				$this->Visit->VitalsLab->save($this->data);
+
+			/*treatments table*/
+				$treatments = $this->request->data;
+				$prescriber_username = $patient['patient_firstname'].' '.$patient['patient_lastname'];
+				$a1c_goal = $treatments['a1c_goal'];
+				$weight_goal = $treatments['weight_goal'];
+				$data = $treatments;
+				$this->Visit->Treatment->create();
+				$this->Visit->Treatment->save($this->data);
+
+			/*medhistory_complaints table*/
+
+
+			/*drug_allergies table*/
+				$drug_allergies = $this->request->data;
+				$met = $drug_allergies['met'];
+				$dpp_4i = $drug_allergies['dpp_4i'];
+				$glp_1ra = $drug_allergies['glp_1ra'];
+				$tzd = $drug_allergies['tzd'];
+				$agi = $drug_allergies['agi'];
+				$colsvl = $drug_allergies['colsvl'];
+				$bcr_or = $drug_allergies['bcr_or'];
+				$su_gln = $drug_allergies['su_gln'];
+				$insulin = $drug_allergies['insulin'];
+				$sglt_2 = $drug_allergies['sglt_2'];
+				$praml = $drug_allergies['praml'];
+				$data = $drug_allergies;
+				$this->Visit->DrugAllergy->create();
+				$this->Visit->DrugAllergy->save($this->data);
+
+			/*diagnoses table*/
+
+			
+			}else {
+				$this->Session->setFlash('Sorry, add visit failed.');
 			}		
 		}
 	}
- 
+	
  /**
  * Displays a view
  *
@@ -151,20 +138,24 @@ class VisitsController extends AppController {
  * @throws NotFoundException When the view file could not be found
  *  or MissingViewException in debug mode.
  */       	
-	public function view(){
-	    $visit_id = $this->request->params['pass'][0];
-	    try {
-	      $vitalslab = $this->Visit->VitalsLab->find('first', 
-	        array('conditions' => array(
-	          'VitalsLab.visit_id' => $visit_id
-	        ))
-	      );
-	      $this->set('vitalslab', $vitalslab);
-	    } catch (NotFoundException $e) {
-	      throw $e;
-	    }
-	    //pr($id);
-	    //pr($vitalslab);
+	public function show(){
+		$p_id = $this->Session->read('patient_id');
+		try{
+			$patient = $this->Visit->Patient->findById($p_id);
+			$this->set('patient', $patient);
+      		$this->Session->write('patient_id', $p_id);
+		}catch(NotFoundException $e){
+			throw $e;
+		}
+
+    	$v_id = $this->Session->read('visit_id');
+		try{
+			$vitals_labs = $this->Visit->Vitalslab->findById($v_id);
+			$this->set('vitals_labs', $vitals_labs);
+      		$this->Session->write('visit_id', $v_id);
+		}catch(NotFoundException $e){
+			throw $e;
+		}
 	}	
 	
 /**
@@ -201,7 +192,7 @@ class VisitsController extends AppController {
 		} catch (MissingViewException $e) {
 			if (Configure::read('debug')) {
 				throw $e;
-			}
+			} 
 			throw new NotFoundException();
 		}
 	}
