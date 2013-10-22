@@ -43,7 +43,7 @@ CREATE TABLE `drug_allergies` (
   `tzd` enum('yes','no') collate utf8_unicode_ci NOT NULL,
   `agi` enum('yes','no') collate utf8_unicode_ci NOT NULL,
   `colsvl` enum('yes','no') collate utf8_unicode_ci NOT NULL,
-  `bcr-or` enum('yes','no') collate utf8_unicode_ci NOT NULL,
+  `bcr_or` enum('yes','no') collate utf8_unicode_ci NOT NULL,
   `su_gln` enum('yes','no') collate utf8_unicode_ci NOT NULL,
   `insulin` enum('yes','no') collate utf8_unicode_ci NOT NULL,
   `sglt_2` enum('yes','no') collate utf8_unicode_ci NOT NULL,
