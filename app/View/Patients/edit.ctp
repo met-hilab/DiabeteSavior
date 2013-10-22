@@ -6,11 +6,14 @@
    <div class="indent">
      <h2 class="section-title">Update Patient</h2>
      <form class="form-horizontal" role="form" action="/patients/edit" method="post">
-      <div style="display:none">
-        <input id="Maintain_patientNum" name="['Patient']['patient_number']" type="hidden" value="<?php echo $patient['Patient']['patient_number'] ?>">
-      </div>
+      
       <fieldset>
       <div class="form-group">
+	<div style="display:none">
+        <input id="patient_number" name="patient_number" type="hidden" value="<?php echo $patient['Patient']['patient_number'] ?>">
+      </div>
+	<br />
+
         <label class="col-lg-1 control-label" for="Patient_Name">Name</label>
         <div class="col-lg-2">
 

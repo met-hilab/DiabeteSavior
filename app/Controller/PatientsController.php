@@ -219,9 +219,7 @@ public function index(){
 		//$patient_number = $this->request->params['pass'][0];
 		$this->Patient->id = $id;
 		if($this->Patient->exists()){
-			if($this->request->is('post') || $this->request->is('put')){
-				//keep patient_number unchanged
-
+			if($this->request->is('post') || $this->request->is('put')){				
 				//save patient
 				if($this->Patient->save($this->request->data)){
 					$this->Session->setFlash('Patient was edited.');
