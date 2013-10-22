@@ -23,6 +23,14 @@ Class MedicinesController extends AppController {
       }
     }
 
+    public function edit(){
+
+    }
+
+    public function show(){
+      
+    }
+
 }
 
 ?>
