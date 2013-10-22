@@ -105,6 +105,7 @@ class Patient extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
+		//the postal code must be numbers
 		'postal_code' => array(
 			'postal' => array(
 				'rule' => array('postal'),

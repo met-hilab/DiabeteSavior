@@ -44,8 +44,8 @@
                             </div>
                             <div class ="col-6 col-lg-6">
                                 <?php
-                                 echo $patient['Patient']['patient_firstname'];
-                                 echo $patient['Patient']['patient_middlename'];
+                                 echo $patient['Patient']['patient_firstname']." ";
+                                 echo $patient['Patient']['patient_middlename']." ";
                                  echo $patient['Patient']['patient_lastname'];
                                 // echo "<h4>Doris Lewis</h4>"
                                 ?>
@@ -165,7 +165,7 @@
          
             
           </div><!--/row-->
-         
+      </div>
             </div>
             <br> 
             

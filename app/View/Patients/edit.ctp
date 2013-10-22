@@ -7,7 +7,7 @@
      <h2 class="section-title">Update Patient</h2>
      <form class="form-horizontal" role="form" action="/patients/edit" method="post">
       <div style="display:none">
-        <input id="" name="['Patient']['patient_number']" type="hidden" value="<?php echo $patient['Patient']['patient_number'] ?>">
+        <input id="Maintain_patientNum" name="['Patient']['patient_number']" type="hidden" value="<?php echo $patient['Patient']['patient_number'] ?>">
       </div>
       <fieldset>
       <div class="form-group">
@@ -26,7 +26,7 @@
       <div class="form-group">
         <label class="col-lg-1 control-label" for="Update_Birthday">Birthday</label>
         <div class="col-lg-4">
-          <input id="Update_Birthday" name="dob" type="text" class="form-control" onClick="getDateString(this, oCalendarEn)" value="<?php echo $patient['Patient']['dob'] ?>">   
+          <input id="Update_Birthday" name="dob" type="date" class="form-control" onClick="getDateString(this, oCalendarEn)" value="<?php echo $patient['Patient']['dob'] ?>">   
         </div>
       </div>
       <div class="form-group">
