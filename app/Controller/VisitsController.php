@@ -94,6 +94,7 @@ class VisitsController extends AppController {
 
 			/*treatments table*/
 				$treatments = $this->request->data;
+				$visit_id = $v_id;
 				$prescriber_username = $patient['patient_firstname'].' '.$patient['patient_lastname'];
 				$a1c_goal = $treatments['a1c_goal'];
 				$weight_goal = $treatments['weight_goal'];
@@ -102,10 +103,23 @@ class VisitsController extends AppController {
 				$this->Visit->Treatment->save($this->data);
 
 			/*medhistory_complaints table*/
-
+				$medhistory_complaints = $this->request->data;
+				$visit_id = $v_id;
+				$complaints = $medhistory_complaints['complaints'];
+				$hypo = $medhistory_complaints['hypo'];
+				$weight_gain = $medhistory_complaints['weight_gain'];
+				$renal_gu = $medhistory_complaints['renal_gu'];
+				$gi_sx = $medhistory_complaints['gi_sx'];
+				$chf = $medhistory_complaints['chf'];
+				$cvd = $medhistory_complaints['cvd'];
+				$bone = $medhistory_complaints['bone'];
+				$data = $medhistory_complaints;
+				$this->Visit->MedhistoryComplaint->create();
+				$this->Visit->MedhistoryComplaint->save($this->data);
 
 			/*drug_allergies table*/
 				$drug_allergies = $this->request->data;
+				$patient_id = $p_id;
 				$met = $drug_allergies['met'];
 				$dpp_4i = $drug_allergies['dpp_4i'];
 				$glp_1ra = $drug_allergies['glp_1ra'];
@@ -118,12 +132,11 @@ class VisitsController extends AppController {
 				$sglt_2 = $drug_allergies['sglt_2'];
 				$praml = $drug_allergies['praml'];
 				$data = $drug_allergies;
-				$this->Visit->DrugAllergy->create();
-				$this->Visit->DrugAllergy->save($this->data);
+				$this->Visit->Patient->DrugAllergy->create();
+				$this->Visit->Patient->DrugAllergy->save($this->data);
 
 			/*diagnoses table*/
-
-			
+		
 			}else {
 				$this->Session->setFlash('Sorry, add visit failed.');
 			}		
@@ -148,10 +161,21 @@ class VisitsController extends AppController {
 			throw $e;
 		}
 
-    	$v_id = $this->Session->read('visit_id');
+    	//$v_id = $this->Session->read('visit_id');
+    	$v_id = 1;
 		try{
-			$vitals_labs = $this->Visit->Vitalslab->findById($v_id);
+			$vitals_labs = $this->Visit->VitalsLab->findById($v_id);
 			$this->set('vitals_labs', $vitals_labs);
+
+			$treatments = $this->Visit->Treatment->findById($v_id);
+			$this->set('treatments', $treatments);
+
+			$medhistory_complaints = $this->Visit->MedhistoryComplaint->findById($v_id);
+			$this->set('medhistory_complaints', $medhistory_complaints);
+
+			$drug_allergies = $this->Visit->Patient->DrugAllergy->findById($p_id);
+			$this->set('drug_allergies', $drug_allergies);
+
       		$this->Session->write('visit_id', $v_id);
 		}catch(NotFoundException $e){
 			throw $e;

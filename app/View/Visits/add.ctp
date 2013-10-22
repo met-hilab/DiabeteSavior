@@ -11,10 +11,10 @@
             var val2 = document.getElementById("weight").value;
             var ansD = document.getElementById("bmi");
             if (heivalue == "Cm" && weivalue == "Kg"){
-                ansD.value = 10000*val2/val1/val1;
+                ansD.value = (10000*val2/val1/val1).toFixed(1);
             }
             if (heivalue == "Inch" && weivalue == "Lb"){
-                ansD.value = 703*val2/val1/val1;
+                ansD.value = (703*val2/val1/val1).toFixed(1);
             };
         }
 </script>
@@ -37,89 +37,165 @@
 ?>
 
 <!-- vitals_labs -->
+<h3>Vitals and Labs</h3>
 <div class="form-group">
-  <label class="col-lg-1 control-label" for="weight">weight</label>
+  <label class="col-lg-1 control-label" for="weight">Weight</label>
   <div class="col-lg-4">
-    <input id="weight" name="weight" type="weight" placeholder="weight" class="form-control">
+    <input id="weight" name="weight" type="text" placeholder="weight" class="">
     <select name="weight_units" id="weight_units" onchange="document.all.height_units.options[this.selectedIndex].selected=true;">
         <option value="Lb">Lb</option>
         <option value="Kg">Kg</option>
-    </select>&nbsp;&nbsp;&nbsp;&nbsp;
-    BMI = 703&nbsp;* &nbsp;Weight(lb) / Height<sup>2</sup>(inch)
+    </select>
   </div>
 </div>
 
 <div class="form-group">
-  <label class="col-lg-1 control-label" for="height">height</label>
+  <label class="col-lg-1 control-label" for="height">Height</label>
   <div class="col-lg-4">
-    <input id="height" name="height" type="height" placeholder="height" class="form-control">
+    <input id="height" name="height" type="text" placeholder="height" class="">
     <select id="height_units" name="height_units" onchange="document.all.weight_units.options[this.selectedIndex].selected=true;">
         <option value="Inch">Inch</option>
         <option value="Cm">Cm</option>
-    </select>&nbsp;&nbsp;&nbsp;&nbsp; 
-    BMI = Weight(kg) / Height<sup>2</sup>(m)  
+    </select> 
   </div>
 </div>
 
-<div>
+<div class="form-group">
+  <label class="col-lg-1 control-label" for="bmi">BMI</label>
+  <div class="col-lg-4">
+    <input id="bmi" name="bmi" type="text" placeholder="bmi" class="">
     <input name="Sumbit" value="Calculate" onclick="calculateBmi();" type="button">
-    <p>BMI&nbsp;&nbsp;&nbsp;&nbsp;<input id="bmi" name="bmi" value="" type="text"></p>
+    <p>BMI = 703&nbsp;* &nbsp;Weight(lb) / Height<sup>2</sup>(inch)</p>
+    <p>BMI = Weight(kg) / Height<sup>2</sup>(m)</p>
+  </div>
 </div>
 
 <div class="form-group">
   <label class="col-lg-1 control-label" for="bps">bps</label>
   <div class="col-lg-4">
-    <input id="bps" name="bps" type="bps" placeholder="bps" class="form-control">   
+    <input id="bps" name="bps" type="text" placeholder="bps" class="form-control">   
   </div>
 </div>
 
 <div class="form-group">
   <label class="col-lg-1 control-label" for="bpd">bpd</label>
   <div class="col-lg-4">
-    <input id="bpd" name="bpd" type="bpd" placeholder="bpd" class="form-control">   
+    <input id="bpd" name="bpd" type="text" placeholder="bpd" class="form-control">   
   </div>
 </div>
 
 <div class="form-group">
   <label class="col-lg-1 control-label" for="A1c">A1c</label>
   <div class="col-lg-4">
-    <input id="A1c" name="A1c" type="A1c" placeholder="A1c" class="form-control">   
+    <input id="A1c" name="A1c" type="text" placeholder="A1c" class="form-control">   
   </div>
 </div>
 
 <div class="form-group">
   <label class="col-lg-1 control-label" for="eGFR">eGFR</label>
   <div class="col-lg-4">
-    <input id="eGFR" name="eGFR" type="eGFR" placeholder="eGFR" class="form-control">   
+    <input id="eGFR" name="eGFR" type="text" placeholder="eGFR" class="form-control">   
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="col-lg-1 control-label" for="notes">Notes</label>
+  <div class="col-lg-4">
+    <input id="notes" name="notes" type="textarea" placeholder="notes" class="form-control">   
   </div>
 </div>
 
 <hr>
 
 <!-- treatments -->
+<h3>Therapy Goals</h3>
 <div class="form-group">
-  <label class="col-lg-1 control-label" for="a1c_goal">a1c_goal</label>
+  <label class="col-lg-1 control-label" for="a1c_goal">A1c Goal</label>
   <div class="col-lg-4">
-    <input id="a1c_goal" name="a1c_goal" type="a1c_goal" placeholder="a1c_goal" class="form-control">   
+    <input id="a1c_goal" name="a1c_goal" type="text" placeholder="a1c_goal" class="form-control">   
   </div>
 </div>
 
 <div class="form-group">
-  <label class="col-lg-1 control-label" for="weight_goal">weight_goal</label>
+  <label class="col-lg-1 control-label" for="weight_goal">Weight Goal</label>
   <div class="col-lg-4">
-    <input id="weight_goal" name="weight_goal" type="weight_goal" placeholder="weight_goales" class="form-control">   
+    <input id="weight_goal" name="weight_goal" type="text" placeholder="weight_goales" class="form-control">   
   </div>
 </div>
+
+<hr>
 
 <!-- medhistory_complaints -->
+<h3>Medical History and Complaints</h3>
+<div class="form-group">
+  <label class="col-lg-1 control-label" for="complaints">Complaints</label>
+  <div class="col-lg-4">
+    <input id="complaints" name="complaints" type="textarea" placeholder="complaints" class="form-control"> 
+  </div>
+</div>
 
+<div class="form-group">
+  <label class="col-lg-1 control-label" for="hypo">Hypo</label>
+  <div class="col-lg-4">
+    <input name="hypo" type="radio" value="yes">yes&nbsp;&nbsp; 
+    <input name="hypo" type="radio" value="no">no  
+  </div>
+</div>
 
+<div class="form-group">
+  <label class="col-lg-1 control-label" for="weight_gain">Weight_gain</label>
+  <div class="col-lg-4">
+    <input name="weight_gain" type="radio" value="yes">yes&nbsp;&nbsp; 
+    <input name="weight_gain" type="radio" value="no">no  
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="col-lg-1 control-label" for="renal_gu">Renal_gu</label>
+  <div class="col-lg-4">
+    <input name="renal_gu" type="radio" value="yes">yes&nbsp;&nbsp; 
+    <input name="renal_gu" type="radio" value="no">no  
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="col-lg-1 control-label" for="gi_sx">Gi_sx</label>
+  <div class="col-lg-4">
+    <input name="gi_sx" type="radio" value="yes">yes&nbsp;&nbsp; 
+    <input name="gi_sx" type="radio" value="no">no  
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="col-lg-1 control-label" for="chf">Chf</label>
+  <div class="col-lg-4">
+    <input name="chf" type="radio" value="yes">yes&nbsp;&nbsp; 
+    <input name="chf" type="radio" value="no">no  
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="col-lg-1 control-label" for="cvd">Cvd</label>
+  <div class="col-lg-4">
+    <input name="cvd" type="radio" value="yes">yes&nbsp;&nbsp; 
+    <input name="cvd" type="radio" value="no">no  
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="col-lg-1 control-label" for="bone">Bone</label>
+  <div class="col-lg-4">
+    <input name="bone" type="radio" value="yes">yes&nbsp;&nbsp; 
+    <input name="bone" type="radio" value="no">no  
+  </div>
+</div>
 
 <hr>
 
 <!-- drug_allergies -->
+<h3>Drug Allergies</h3>
 <div class="form-group">
-  <label class="col-lg-1 control-label" for="met">met</label>
+  <label class="col-lg-1 control-label" for="met">Met</label>
   <div class="col-lg-4">
     <input name="met" type="radio" value="yes">yes&nbsp;&nbsp; 
     <input name="met" type="radio" value="no">no  
@@ -127,23 +203,7 @@
 </div>
 
 <div class="form-group">
-  <label class="col-lg-1 control-label" for="met">met</label>
-  <div class="col-lg-4">
-    <input name="met" type="radio" value="yes">yes&nbsp;&nbsp; 
-    <input name="met" type="radio" value="no">no  
-  </div>
-</div>
-
-<div class="form-group">
-  <label class="col-lg-1 control-label" for="met">met</label>
-  <div class="col-lg-4">
-    <input name="met" type="radio" value="yes">yes&nbsp;&nbsp; 
-    <input name="met" type="radio" value="no">no  
-  </div>
-</div>
-
-<div class="form-group">
-  <label class="col-lg-1 control-label" for="medpp_4it">dpp_4i</label>
+  <label class="col-lg-1 control-label" for="dpp_4i">Dpp_4i</label>
   <div class="col-lg-4">
     <input name="dpp_4i" type="radio" value="yes">yes&nbsp;&nbsp; 
     <input name="dpp_4i" type="radio" value="no">no  
@@ -151,7 +211,7 @@
 </div>
 
 <div class="form-group">
-  <label class="col-lg-1 control-label" for="glp_1ra">glp_1ra</label>
+  <label class="col-lg-1 control-label" for="glp_1ra">Glp_1ra</label>
   <div class="col-lg-4">
     <input name="glp_1ra" type="radio" value="yes">yes&nbsp;&nbsp; 
     <input name="glp_1ra" type="radio" value="no">no  
@@ -159,7 +219,7 @@
 </div>
 
 <div class="form-group">
-  <label class="col-lg-1 control-label" for="tzd">tzd</label>
+  <label class="col-lg-1 control-label" for="tzd">Tzd</label>
   <div class="col-lg-4">
     <input name="tzd" type="radio" value="yes">yes&nbsp;&nbsp; 
     <input name="tzd" type="radio" value="no">no  
@@ -167,7 +227,7 @@
 </div>
 
 <div class="form-group">
-  <label class="col-lg-1 control-label" for="agi">agi</label>
+  <label class="col-lg-1 control-label" for="agi">Agi</label>
   <div class="col-lg-4">
     <input name="agi" type="radio" value="yes">yes&nbsp;&nbsp; 
     <input name="agi" type="radio" value="no">no  
@@ -175,7 +235,7 @@
 </div>
 
 <div class="form-group">
-  <label class="col-lg-1 control-label" for="colsvl">colsvl</label>
+  <label class="col-lg-1 control-label" for="colsvl">Colsvl</label>
   <div class="col-lg-4">
     <input name="colsvl" type="radio" value="yes">yes&nbsp;&nbsp; 
     <input name="colsvl" type="radio" value="no">no  
@@ -183,7 +243,7 @@
 </div>
 
 <div class="form-group">
-  <label class="col-lg-1 control-label" for="bcr_or">bcr_or</label>
+  <label class="col-lg-1 control-label" for="bcr_or">Bcr_or</label>
   <div class="col-lg-4">
     <input name="bcr_or" type="radio" value="yes">yes&nbsp;&nbsp; 
     <input name="bcr_or" type="radio" value="no">no  
@@ -191,7 +251,7 @@
 </div>
 
 <div class="form-group">
-  <label class="col-lg-1 control-label" for="su_gln">su_gln</label>
+  <label class="col-lg-1 control-label" for="su_gln">Su_gln</label>
   <div class="col-lg-4">
     <input name="su_gln" type="radio" value="yes">yes&nbsp;&nbsp; 
     <input name="su_gln" type="radio" value="no">no  
@@ -199,7 +259,7 @@
 </div>
 
 <div class="form-group">
-  <label class="col-lg-1 control-label" for="insulin">insulin</label>
+  <label class="col-lg-1 control-label" for="insulin">Insulin</label>
   <div class="col-lg-4">
     <input name="insulin" type="radio" value="yes">yes&nbsp;&nbsp; 
     <input name="insulin" type="radio" value="no">no  
@@ -207,7 +267,7 @@
 </div>
 
 <div class="form-group">
-  <label class="col-lg-1 control-label" for="sglt_2">sglt_2</label>
+  <label class="col-lg-1 control-label" for="sglt_2">Sglt_2</label>
   <div class="col-lg-4">
     <input name="sglt_2" type="radio" value="yes">yes&nbsp;&nbsp; 
     <input name="sglt_2" type="radio" value="no">no  
@@ -215,18 +275,14 @@
 </div>
 
 <div class="form-group">
-  <label class="col-lg-1 control-label" for="praml">praml</label>
+  <label class="col-lg-1 control-label" for="praml">Praml</label>
   <div class="col-lg-4">
     <input name="praml" type="radio" value="yes">yes&nbsp;&nbsp; 
     <input name="praml" type="radio" value="no">no  
   </div>
 </div>
 
-<hr>
-
 <!-- diagnoses -->
-
-
 
 <div class="control-group">
   <label class="col-lg-1 control-label" for="singlebutton"></label>
