@@ -67,6 +67,7 @@ class MedicinesController extends AppController {
                 $this->Session->setFlash('medicine is not saved.');
                 //$this->redirect(array('action'=>'add'));
             }
+
         }
 
 }
