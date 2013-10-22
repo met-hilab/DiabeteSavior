@@ -327,6 +327,10 @@ class AlgorithmComponent extends Component {
     {
         return $this->therapy;
     }
+    public function getDecision()
+    {
+        return $this->decision;
+    }
 
     /**
      * @return bool - returns true if medicine 1 selected

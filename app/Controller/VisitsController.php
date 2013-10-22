@@ -223,7 +223,42 @@ class VisitsController extends AppController {
 
     public function algtest(){
 
-        $this->Algorithm->setA1C(6.2);
+        // Medicine list
+        // "Metformin", "GLP-1RA", "DPP4-i", "AG-i", "SGLT-2","TZD", "SU/GLN",  "BasalInsulin", "Colesevelam",
+        // "Bromocriptine-QR"
+
+        // set A1C values
+        $this->Algorithm->setA1C(6.6);
+        $this->Algorithm->setA1Clast(6.4);
+        $this->Algorithm->setA1CTarget(6.0);
+        $this->Algorithm->setSymptoms(true);
+
+        // set allergies
+        $testAllergy = array("Metformin");
+        $this->Algorithm->setAllergies($testAllergy);
+
+        // set current medicines
+        $this->Algorithm->setMedicine1("none");
+        $this->Algorithm->setMedicine1("none");
+        $this->Algorithm->setMedicine1("none");
+
+        // run glcymic control algorithm
+        $this->Algorithm->gcAlgorithm();
+
+
+        // get algorithm results
+        $decision = $this->Algorithm->getDecision();
+        $therapy = $this->Algorithm->getTherapy();
+        $medicine1 = $this->Algorithm->getMedicine1();
+        $medicine2 = $this->Algorithm->getMedicine2();
+        $medicine3 = $this->Algorithm->getMedicine3();
+
+        $this->set('decision', $decision);
+        $this->set('therapy', $therapy);
+        $this->set('medicine1', $medicine1);
+        $this->set('medicine2', $medicine2);
+        $this->set('medicine3', $medicine3);
+
         $a1cnew = $this->Algorithm->getA1C();
         $this->set('a1cnew', $a1cnew);
 
