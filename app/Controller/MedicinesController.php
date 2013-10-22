@@ -6,8 +6,9 @@
  * Time: 12:09 PM
  * To change this template use File | Settings | File Templates.
  */
+App::uses('AppController', 'Controller');
 
-Class MedicinesController extends AppController {
+class MedicinesController extends AppController {
 
     public $uses = array();
 
@@ -27,7 +28,7 @@ Class MedicinesController extends AppController {
        $this->Session->delete('medicine_id');
 
         if ($this->request->is('post')){
-            $medicine = $this->request->data['medicine'];
+            $medicine = $this->request->data['Medicine'];
             $medicine_name = $medicine['medicine_name'];
             $min_dose = $medicine['min_dose'];
             $max_dose = $medicine['max_dose'];
@@ -53,14 +54,14 @@ Class MedicinesController extends AppController {
                 //$patient = $this->Patient->find('first', array('conditions' => $conditions));
                 //$patient = $patient['Patient'];
                 $id = $this->Medicine->getLastInsertId();
-                $Medicine = $this->Medicine->findById($id);
-                $this->Session->write('Medicine_id', $id);
-                $this->Session->write('Medicine', $Medicine);
+                $medicine = $this->Medicine->findById($id);
+                $this->Session->write('medicine_id', $id);
+                $this->Session->write('medicine', $medicine);
                 //var_dump($_SESSION); exit;
                 //$this->set('patient', $patient);
                 //$_SERVER['patient_number'] = $patient_number;
                 //$this->redirect(array('action'=>'view',$patient_number));
-                $this->redirect(array('action'=>'show'));
+                //$this->redirect(array('action'=>'show'));
 
             }else{
                 $this->Session->setFlash('medicine is not saved.');
