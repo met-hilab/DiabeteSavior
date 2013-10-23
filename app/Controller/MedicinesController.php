@@ -32,7 +32,7 @@ class MedicinesController extends AppController {
             $medicine_name = $medicine['medicine_name'];
             $min_dose = $medicine['min_dose'];
             $max_dose = $medicine['max_dose'];
-            $matric = $medicine['matric'];
+            $metric = $medicine['metric'];
             $hypo = $medicine['hypo'];
             $weight = $medicine['weight'];
             $renal_gu = $medicine['renal_gu'];

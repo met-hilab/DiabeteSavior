@@ -11,7 +11,7 @@
 <div class="form-group" align="center">
   <label class="col-lg-1 control-label" for="Medicine_Name">Name </label>
   <div class="col-lg-2">
-    <input id="medicine_name" name="medicine_Name" type="Medicine_Name" placeholder="Medicine Name" class="form-control">
+    <input id="medicine_name" name="medicine_name" type="Medicine_Name" placeholder="Medicine Name" class="form-control">
   </div>
 </div>
 
