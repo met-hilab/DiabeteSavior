@@ -9,13 +9,16 @@
 <div class="form-group">
   <label class="col-lg-1 control-label" for="patient_firstname">Name</label>
   <div class="col-lg-2">
-    <input id="patient_firstname" name="patient_firstname" type="Patient_FirstName" placeholder="First Name" class="form-control">   
+    <input id="patient_firstname" name="patient_firstname" type="Patient_FirstName" placeholder="First Name"
+           class="form-control"  required="require">
   </div>
   <div class="col-lg-2">
-    <input id="patient_middlename" name="patient_middlename" type="Patient_MiddleName" placeholder="Middle Name" class="form-control">   
+    <input id="patient_middlename" name="patient_middlename" type="Patient_MiddleName" placeholder="Middle Name"
+           class="form-control">
   </div>
   <div class="col-lg-2">
-    <input id="patient_lastname" name="patient_lastname" type="Patient_LastName" placeholder="Last Name" class="form-control">   
+    <input id="patient_lastname" name="patient_lastname" type="Patient_LastName" placeholder="Last Name"
+           class="form-control" required="require">
   </div>
   
 </div>
@@ -24,7 +27,7 @@
 <div class="form-group">
   <label class="col-lg-1 control-label" for="dob">DOB</label>
   <div class="col-lg-4">
-    <input id="dob" name="dob" type="date" placeholder="YYYY-MM-DD" class="form-control">   
+    <input id="dob" name="dob" type="date" placeholder="YYYY-MM-DD" class="form-control" required="require">
   </div>
 </div>
 
@@ -42,7 +45,7 @@
 <div class="form-group">
   <label class="col-lg-1 control-label" for="gender">Gender</label>
   <div class="col-lg-4">
-    <select id="gender" name="gender" class="form-control">
+    <select id="gender" name="gender" class="form-control" required="require">
       <option></option>
       <option>Male</option>
       <option>Female</option>
@@ -54,7 +57,7 @@
 <div class="form-group">
   <label class="col-lg-1 control-label" for="race">Race</label>
   <div class="col-lg-4">
-    <select id="race" name="race" class="form-control">
+    <select id="race" name="race" class="form-control" required="require">
       <option></option>
       <option>African or African American</option>
       <option>Asian or Asian American</option>
