@@ -1,15 +1,15 @@
 <h2>View Medicine</h2>
 
-<?php echo $user['Medicine']['medicine_name']; ?>
-<?php echo $user['Medicine']['min_dose']; ?>
-<?php echo $user['Medicine']['max_dose']; ?>
-<?php echo $user['Medicine']['metric']; ?>
-<?php echo $user['Medicine']['hypo']; ?>
-<?php echo $user['Medicine']['weight']; ?>
-<?php echo $user['Medicine']['renal_gu']; ?>
-<?php echo $user['Medicine']['gi_sx']; ?>
-<?php echo $user['Medicine']['chf']; ?>
-<?php echo $user['Medicine']['cvd']; ?>
-<?php echo $user['Medicine']['bone']; ?>
+<?php echo $medicine['Medicine']['medicine_name']; ?>
+<?php echo $medicine['Medicine']['min_dose']; ?>
+<?php echo $medicine['Medicine']['max_dose']; ?>
+<?php echo $medicine['Medicine']['metric']; ?>
+<?php echo $medicine['Medicine']['hypo']; ?>
+<?php echo $medicine['Medicine']['weight']; ?>
+<?php echo $medicine['Medicine']['renal_gu']; ?>
+<?php echo $medicine['Medicine']['gi_sx']; ?>
+<?php echo $medicine['Medicine']['chf']; ?>
+<?php echo $medicine['Medicine']['cvd']; ?>
+<?php echo $medicine['Medicine']['bone']; ?>
 
  
