@@ -139,6 +139,7 @@ public function index(){
         //$this->set('patient', $patient);
         //$_SERVER['patient_number'] = $patient_number;
         //$this->redirect(array('action'=>'view',$patient_number));
+		$this->Session->setFlash('Patient was added. Please save the patient ID so you can search for the patient later');
         $this->redirect(array('action'=>'show'));
                  
 			}else{

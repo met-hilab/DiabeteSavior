@@ -11,7 +11,8 @@
 <div class="form-group" align="center">
   <label class="col-lg-1 control-label" for="Medicine_Name">Name </label>
   <div class="col-lg-2">
-    <input id="medicine_name" name="medicine_name" type="Medicine_Name" placeholder="Medicine Name" class="form-control">
+    <input id="medicine_name" name="medicine_name" type="Medicine_Name" placeholder="Medicine Name"
+           class="form-control" required="require">
   </div>
 </div>
 
@@ -20,7 +21,8 @@
 <div class="form-group">
   <label class="col-lg-1 control-label" for="Min_dose">Min_dose</label>
   <div class="col-lg-2">
-    <input id="min_dose" name="min_dose" type="Min_dose" placeholder="Min_dose" class="form-control">
+    <input id="min_dose" name="min_dose" type="Min_dose" placeholder="Min_dose"
+           class="form-control" required="require">
   </div>
 </div>
 
@@ -29,7 +31,7 @@
 <div class="form-group">
   <label class="col-lg-1 control-label" for="Max_dose">Max_dose</label>
   <div class="col-lg-2">
-    <input id="max_dose" name="max_dose" type="Max_dose" placeholder="Max_dose" class="form-control">
+    <input id="max_dose" name="max_dose" type="Max_dose" placeholder="Max_dose" class="form-control" required="require">
   </div>
 </div>
 
@@ -38,7 +40,7 @@
 <div class="form-group">
   <label class="col-lg-1 control-label" for="Metric">Metric</label>
   <div class="col-lg-2">
-    <input id="metric" name="metric" type="Metric" placeholder="Metric" class="form-control">
+    <input id="metric" name="metric" type="Metric" placeholder="Metric" class="form-control" required="require">
   </div>
 </div>
 
@@ -165,3 +167,6 @@
 <!-- Form Name</fieldset>
 </form--->
 
+<br />
+
+<br />
