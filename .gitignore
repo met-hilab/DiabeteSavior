@@ -14,3 +14,5 @@ RemoteSystemsTempFiles
 nbproject
 >>>>>>> WIP
 .idea
+
+*.log
