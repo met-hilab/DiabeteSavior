@@ -19,9 +19,9 @@
 	echo "Height: ".$vitals_labs['VitalsLab']['height']."<br>";
 	echo "BMI: ".$vitals_labs['VitalsLab']['bmi']."<br>";
 	echo "BMI Status: ".$vitals_labs['VitalsLab']['bmi_status']."<br>";
-	echo "bps: ".$vitals_labs['VitalsLab']['bps']."<br>";
-	echo "bpd: ".$vitals_labs['VitalsLab']['bpd']."<br>";
 	echo "A1c: ".$vitals_labs['VitalsLab']['A1c']."<br>";
+	echo "bps: ".$vitals_labs['VitalsLab']['bps']."<br>";
+	echo "bpd: ".$vitals_labs['VitalsLab']['bpd']."<br>";	
 	echo "eGFR: ".$vitals_labs['VitalsLab']['eGFR']."<br>";	
 	echo "Notes: ".$vitals_labs['VitalsLab']['notes']."<br>";	
 ?>
@@ -44,7 +44,7 @@
 <h3>Medical History and Complaints</h3>
 <div>
 <?php
-	echo "Complaints: ".$medhistory_complaints['MedhistoryComplaint']['complaints']."<br>";
+	echo "Chief Complaint: ".$medhistory_complaints['MedhistoryComplaint']['complaints']."<br>";
 	echo "Hypo: ".$medhistory_complaints['MedhistoryComplaint']['hypo']."<br>";
 	echo "Weight_gain: ".$medhistory_complaints['MedhistoryComplaint']['weight_gain']."<br>";
 	echo "Renal_gu: ".$medhistory_complaints['MedhistoryComplaint']['renal_gu']."<br>";
@@ -76,3 +76,5 @@
 </div>
 
 <!-- diagnoses -->
+<br/>
+<br/>

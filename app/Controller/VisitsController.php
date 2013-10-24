@@ -53,7 +53,7 @@ class VisitsController extends AppController {
 /**
  * Create new vitals_lab
  *
- * @param weight, height, bps, bpd, bmi, bmi_status, A1c, eGFR, notes
+ * @param weight, height, bps, bpd, A1c, eGFR, notes, a1c_goal, weight_goal, drug_allergies
  * @return void
  * @throws NotFoundException When the view file could not be found
  *  or MissingViewException in debug mode.
@@ -82,7 +82,17 @@ class VisitsController extends AppController {
 				$visit_id = $v_id;
 				$weight = $vitals_labs['weight'];
 				$height = $vitals_labs['height'];
-				$bmi = $vitals_labs['bmi'];
+				$weight_units = $vitals_labs['weight_units'];
+				$height_units = $vitals_labs['height_units'];
+
+            	if ($height_units == "Cm" && $weight_units == "Kg"){
+                	$bmi = round((10000*$weight/$height/$height),1);
+            	}
+            	if ($height_units == "Inch" && $weight_units == "Lb"){
+                	$bmi = round((703*$weight/$height/$height),1);
+            	};
+            	//pr($bmi); exit;
+
 				$bps = $vitals_labs['bps'];
 				$bpd = $vitals_labs['bpd'];
 				$A1c = $vitals_labs['A1c'];
