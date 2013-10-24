@@ -231,7 +231,7 @@ class VisitsController extends AppController {
 		}
 	}
 
-    public function algtest(){
+    public function gcalgorithm(){
 
         // Medicine list
         // "Metformin", "GLP-1RA", "DPP4-i", "AG-i", "SGLT-2","TZD", "SU/GLN",  "BasalInsulin", "Colesevelam",
@@ -269,10 +269,8 @@ class VisitsController extends AppController {
         $this->set('medicine2', $medicine2);
         $this->set('medicine3', $medicine3);
 
-        $a1cnew = $this->Algorithm->getA1C();
-        $this->set('a1cnew', $a1cnew);
-
     }
+
 
 }
 
