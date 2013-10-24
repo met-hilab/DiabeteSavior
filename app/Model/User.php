@@ -94,14 +94,17 @@ public $validate = array(
   );
   /*
   public $hasOne = 'Profile';
+  */
   public $hasMany = array(
-    'Recipe' => array(
-      'className' => 'Recipe',
-      'conditions' => array('Recipe.approved' => '1'),
-      'order' => 'Recipe.created DESC'
+    'Patients' => array(
+      'className' => 'Patient',
+      //'conditions' => array('Recipe.approved' => '1'),
+      'conditions' => '',
+      'order' => 'patients.patient_lastname DESC, patients.patient_firstname DESC',
+      'dependent' => true
     )
   );
-  */
+  
 
 
 public function afterFind($results = array(), $primary) {

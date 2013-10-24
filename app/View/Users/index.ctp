@@ -15,8 +15,8 @@
 <?php foreach($users as $u) :?>
   <tr>
     <td><?php echo $u['User']['email'];?></td>
-    <td><?php echo $u['User'];?></td>
-    <td><?php echo $u['User'];?></td>
+    <td><?php echo $u['User']['firstname'] . ' ' . $u['User']['lastname'];?></td>
+    <td><a class="btn btn-danger" href="/users/delete/<?php echo $u['User']['id'];?>" data-method="delete" data-confirm="Are you sure to delete this user and all the data related to this user?"><span class="glyphicon glyphicon-trash"></span> Delete</a></td>
   </tr>
 <?php endforeach; ?>
 </table>

@@ -1,0 +1,5 @@
+USE `cs673`;
+
+ALTER TABLE `cs673`.`users` 
+ADD COLUMN `roles` INT NOT NULL DEFAULT 0 AFTER `modified`,
+ADD COLUMN `activated` TINYINT NOT NULL DEFAULT 0 AFTER `roles`;

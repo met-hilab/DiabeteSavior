@@ -94,6 +94,7 @@ $cakeDescription = __d('cake_dev', 'Diabetes Savior: Type II Diabetes Infomatic 
                              </a>
                           </li>
 
+      <?php if(!isset($current_user)): ?>
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Patients <b class="caret"></b></a>
         <ul class="dropdown-menu">
@@ -101,6 +102,7 @@ $cakeDescription = __d('cake_dev', 'Diabetes Savior: Type II Diabetes Infomatic 
           <li><a href="/patients/search">Search Patient</a></li>
         </ul>
       </li>
+      <?php endif; ?>
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Calculators <b class="caret"></b></a>
         <ul class="dropdown-menu">
@@ -110,9 +112,7 @@ $cakeDescription = __d('cake_dev', 'Diabetes Savior: Type II Diabetes Infomatic 
         </ul>
       </li>
       
-    </ul>
-    
-    <ul class="nav navbar-nav navbar-right">
+  
     	<?php if(!isset($current_user)): ?>
     	<li class="dropdown">
     		<a class="dropdown-toggle" data-toggle="dropdown" href="/login">Login <b class="caret"></b></a>
@@ -137,6 +137,7 @@ $cakeDescription = __d('cake_dev', 'Diabetes Savior: Type II Diabetes Infomatic 
     			</li>
     		</ul>
     	</li>
+      <li><a href="/sign_up">sign up</a></li>
       <?php else: ?>
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin <b class="caret"></b></a>

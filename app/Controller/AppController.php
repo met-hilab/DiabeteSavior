@@ -33,12 +33,14 @@ App::uses('Controller', 'Controller');
  */
 class AppController extends Controller {
   public $components = array('DebugKit.Toolbar', 'Session');
+  public $current_user = array();
   //public $components = array('Session');
 
   
   public function beforeFilter() {
     parent::beforeFilter();
     $this->set('current_user', $this->Session->read('user'));
+    $this->current_user = $this->Session->read('user');
   }
 
   public function authenticate_user() {

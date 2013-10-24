@@ -83,9 +83,12 @@ class PatientsController extends AppController {
 	}
 
 public function index(){
-	//$this->authenticate_user();
-
-	$patients = $this->Patient->find('all');
+	$this->authenticate_user();
+  $uid = (int)$this->current_user['id'];
+	$patients = $this->Patient->find('all', 
+    ["conditions" =>
+      ["user_id" => $uid]
+    ]);
 	$this->set('patients',$patients);
 }
 
@@ -99,12 +102,16 @@ public function index(){
  *  or MissingViewException in debug mode.
  */
 	public function add(){
-		//$this->authenticate_user();
+		$this->authenticate_user();
+    $uid = (int)$this->current_user['id'];
     //unset($_SERVER['patient_number']);
     $this->Session->delete('patient_id');
 
 		if ($this->request->is('post')){
 			$patient = $this->request->data['Patient'];
+      /*
+       ** TODO:: What are these for?
+       */
 			$patient_firstname = $patient['patient_firstname'];
 			$patient_lastname = $patient['patient_lastname'];
 			$patient_middlename = $patient['patient_middlename'];
@@ -119,6 +126,8 @@ public function index(){
 			$postal_code = $patient['postal_code'];
 			$city = $patient['city'];
 			$state = $patient['state'];
+
+      $patient['user_id'] = $uid;
 			$data = $patient;
 			$this->Patient->create();
 			//$res = $this->Patient->save($this->data);

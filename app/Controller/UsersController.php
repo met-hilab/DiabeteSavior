@@ -226,7 +226,17 @@ class UsersController extends AppController {
             }
         }
     }
-}
+  }
+/**
+ * Sign up page
+ * @author Jason Lu 
+ * @return void
+ * @throws NotFoundException When the view file could not be found
+ *  or MissingViewException in debug mode.
+ */
+  public function sign_up() {
+
+  }
 
 
 /**
@@ -237,7 +247,7 @@ class UsersController extends AppController {
  * @throws NotFoundException When the view file could not be found
  *  or MissingViewException in debug mode.
  */
-  public function view() {
+  public function show() {
     $id = $this->request->params['pass'][0];
     try {
       $user = $this->User->find('first', 
