@@ -1,6 +1,47 @@
 <html lang="en">
 <h2 class="section-title">Add Patient</h2>
-<form class="form-horizontal"role="form" action="/patients/add" method="post">
+<!-- Load jQuery and the validate plugin -->
+<script src="//code.jquery.com/jquery-1.9.1.js"></script>
+<script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
+  
+  <!-- jQuery Form Validation code -->
+  <script type="text/javascript">
+  
+  // When the browser is ready...
+  $(function() {
+  
+    // Setup form validation on the #add_patient element
+    $("#add_patient").validate({
+    
+        // Specify the validation rules
+        rules: {
+            patient_firstname: "required",
+            patient_lastname: "required",
+            dob:"required",
+            gender: "required",
+            race: "required"
+            
+        },
+        
+        // Specify the validation error messages
+        messages: {
+            patient_firstname: "Please enter your first name",
+            patient_lastname: "Please enter you last name",
+            dob:"Please enter your birthdate",
+            gender: "Please specify your gender",
+            race: "Please specify your race"
+          
+        },
+        
+        submitHandler: function(form) {
+            form.submit();
+        }
+    });
+
+  });
+  
+  </script>
+<form id="add_patient" class="form-horizontal"role="form" action="/patients/add" method="post">
 <!-- Text input-->
 <?php
   echo $this->Html->css('bootstrap-select');
@@ -163,8 +204,8 @@
   </div>
 </div>
 
-<!-- Form Name</fieldset>
-</form--->
+<!-- Form Name</fieldset--->
+</form>
 
 <br />
 

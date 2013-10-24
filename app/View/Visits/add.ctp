@@ -1,5 +1,41 @@
 <h2>Add Visit</h2>
+<!-- Load jQuery and the validate plugin -->
+  <script src="//code.jquery.com/jquery-1.9.1.js"></script>
+  <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
+  
+  <!-- jQuery Form Validation code -->
+  <script type="text/javascript">
+  
+  // When the browser is ready...
+  $(function() {
+  
+    // Setup form validation on the #add_patient element
+    $("#add_visit").validate({
+    
+        // Specify the validation rules
+        rules: {
+            weight: "required",
+            height: "required",
+            
+            
+        },
+        
+        // Specify the validation error messages
+        messages: {
+            weight: "Please enter your weight",
+            height: "Please enter you height",
+            
+          
+        },
+        
+        submitHandler: function(form) {
+            form.submit();
+        }
+    });
 
+  });
+  
+  </script>
 <div>
 <?php
     echo "Patient ID: ".$patient['Patient']['patient_number']."<br>";
@@ -11,7 +47,7 @@
                       
 <hr>
 
-<form class="form-horizontal" role="form" action="/visits/add" method="post">
+<form id="add_visit" class="form-horizontal" role="form" action="/visits/add" method="post">
 <?php
   echo $this->Html->css('bootstrap-select');
   echo $this->Html->script('bootstrap-select');
