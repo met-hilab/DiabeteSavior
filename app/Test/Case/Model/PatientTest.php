@@ -14,11 +14,14 @@ class PatientTest extends CakeTestCase {
  */
 	public $fixtures = array(
 		'app.patient',
+		'app.user',
+		'app.profile',
 		'app.diagnosis',
 		'app.drug_allergy',
 		'app.visit',
 		'app.medhistory_complaint',
 		'app.treatment',
+		'app.treatment_run_algorithm',
 		'app.vitals_lab'
 	);
 

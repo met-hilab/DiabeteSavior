@@ -3,6 +3,7 @@ App::uses('AppModel', 'Model');
 /**
  * Patient Model
  *
+ * @property User $User
  * @property Diagnosis $Diagnosis
  * @property DrugAllergy $DrugAllergy
  * @property Visit $Visit
@@ -38,6 +39,16 @@ class Patient extends AppModel {
 		'modified' => array(
 			'datetime' => array(
 				'rule' => array('datetime'),
+				//'message' => 'Your custom message here',
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+		),
+		'user_id' => array(
+			'numeric' => array(
+				'rule' => array('numeric'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,
@@ -105,54 +116,34 @@ class Patient extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
-		//the postal code must be numbers
 		'postal_code' => array(
 			'postal' => array(
 				'rule' => array('postal'),
 				//'message' => 'Your custom message here',
-				'allowEmpty' => true, //Allow empty at the 1st iteration
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		)
-		//The following attributes are allowed empty, for now, but maybe not in the future
-		/*,
-		'street' => array(
-			'notempty' => array(
-				'rule' => array('notempty'),
-				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
-		
-		'city' => array(
-			'notempty' => array(
-				'rule' => array('notempty'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-		'state' => array(
-			'notempty' => array(
-				'rule' => array('notempty'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-		*/
 	);
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
+
+/**
+ * belongsTo associations
+ *
+ * @var array
+ */
+	public $belongsTo = array(
+		'User' => array(
+			'className' => 'User',
+			'foreignKey' => 'user_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		)
+	);
 
 /**
  * hasMany associations
@@ -200,34 +191,5 @@ class Patient extends AppModel {
 			'counterQuery' => ''
 		)
 	);
-
-/**
- * generate the patient_number (imcompletely)
- */	
-	function beforeSave($options = array()) {
-		//first we need to judge if this is a creation of a new patient or just an update
-		
-		
-		
-			
-		parent::beforeSave();
-	  //$fullname = $this->data['Patient']['patient_firstname'] . $this->data['Patient']['patient_lastname'];
-	  // data['Patient']['patient_number'] 8 chars
-	  
-	  if($this->data['Patient']['patient_number'] == NULL || $this->data['Patient']['patient_number'] == ""){
- 			$this->data['Patient']['patient_number'] = substr($this->data['Patient']['gender'], 0, 1) . substr($this->data['Patient']['patient_firstname'], 0, 1) . substr($this->data['Patient']['patient_lastname'], 0, 1) . substr($this->data['Patient']['dob'], 8, 2) . date('B');
- 			$this->data['Patient']['patient_number'] = strtolower($this->data['Patient']['patient_number']);
- 		}
-		
- 		//session_start();
- 		//$_SESSION["patientnum"] = $this->data['Patient']['patient_number'];
-             //   $this->session->set('patientnum', $patientnum);
- 		//var_dump($this->data); exit;
-		
-		//}
- 		return true;
-		
- 	}
-
 
 }
