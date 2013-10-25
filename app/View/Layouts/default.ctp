@@ -94,7 +94,7 @@ $cakeDescription = __d('cake_dev', 'Diabetes Savior: Type II Diabetes Infomatic 
                              </a>
                           </li>
 
-      <?php if(!isset($current_user)): ?>
+      <?php if(isset($current_user)): ?>
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Patients <b class="caret"></b></a>
         <ul class="dropdown-menu">
