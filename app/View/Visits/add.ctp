@@ -77,16 +77,6 @@
   </div>
 </div>
 
-<!-- <div class="form-group">
-  <label class="col-lg-1 control-label" for="bmi">BMI</label>
-  <div class="col-lg-4">
-    <input id="bmi" name="bmi" type="text" placeholder="bmi" class="">
-    <input name="Sumbit" value="Calculate" onclick="calculateBmi();" type="button">
-    <p>BMI = 703&nbsp;* &nbsp;Weight(lb) / Height<sup>2</sup>(inch)</p>
-    <p>BMI = Weight(kg) / Height<sup>2</sup>(m)</p>
-  </div>
-</div> -->
-
 <div class="form-group">
   <label class="col-lg-1 control-label" for="A1c"><font color="red">* </font>A1c</label>
   <div class="col-lg-4">

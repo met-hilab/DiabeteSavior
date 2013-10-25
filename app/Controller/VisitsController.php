@@ -111,6 +111,8 @@ class VisitsController extends AppController {
 				$data = $treatments;
 				$this->Visit->Treatment->create();
 				$this->Visit->Treatment->save($this->data);
+				$t_id = $this->Visit->Treatment->getLastInsertId();
+				$this->Session->write('treatment_id', $t_id);
 
 			/*medhistory_complaints table*/
 				$medhistory_complaints = $this->request->data;
@@ -231,43 +233,80 @@ class VisitsController extends AppController {
 		}
 	}
 
-    public function gcalgorithm(){
 
-        // Medicine list
-        // "Metformin", "GLP-1RA", "DPP4-i", "AG-i", "SGLT-2","TZD", "SU/GLN",  "BasalInsulin", "Colesevelam",
-        // "Bromocriptine-QR"
+// Medicine list
+// "Metformin", "GLP_1RA", "DPP4_i", "AG_i", "SGLT_2","TZD", "SU_GLN",  "BasalInsulin", "Colesevelam",
+// "Bromocriptine-QR"
+    public function gcalgorithm(){        
+        //$p_id = $this->Session->read('patient_id'); 
+        $p_id = '01';
+        //$v_id = $this->Session->read('visit_id');
+    	$v_id = 1;
+    	//$t_id = $this->Session->read('treatment_id');
+    	$t_id = 1;
 
-        // set A1C values
-        $this->Algorithm->setA1C(6.6);
-        $this->Algorithm->setA1Clast(6.4);
-        $this->Algorithm->setA1CTarget(6.0);
+    /* set A1C values */
+        $vitals_labs = $this->Visit->VitalsLab->find('all', array(
+        	'conditions' => array('visit_id' => $v_id),
+        	'fields' => 'VitalsLab.A1c',
+        	'order' => 'VitalsLab.modified DESC'));
+        $A1C = $vitals_labs[0]['VitalsLab']['A1c'];  //current a1c value
+        //pr($A1C); exit;
+        $A1Clast = $vitals_labs[1]['VitalsLab']['A1c'];  // last a1c value
+        //pr($A1Clast); exit;
+
+        $treatments = $this->Visit->Treatment->find('all', array(
+        	'conditions' => array('visit_id' => $v_id),
+        	'fields' => 'Treatment.a1c_goal',
+        	'order' => 'Treatment.modified DESC'));
+        $A1CTarget = $treatments[0]['Treatment']['a1c_goal'];  //current a1c_goal value
+        //pr($A1CTarget); exit;
+
         $this->Algorithm->setSymptoms(true);
 
-        // set allergies
-        $testAllergy = array("Metformin");
-        $this->Algorithm->setAllergies($testAllergy);
+    /* set allergies */
+        $drug_allergies = $this->Visit->Patient->DrugAllergy->findById($p_id);  //current patient's drug allergies
+        //pr($drug_allergies); exit;
+        $Metformin = $drug_allergies['DrugAllergy']['met'];
+        $GLP_1RA = $drug_allergies['DrugAllergy']['glp_1ra'];
+        $DPP4_i = $drug_allergies['DrugAllergy']['dpp_4i'];
+        $AG_i = $drug_allergies['DrugAllergy']['agi'];
+        $SGLT_2 = $drug_allergies['DrugAllergy']['sglt_2'];
+        $TZD = $drug_allergies['DrugAllergy']['tzd'];
+		$SU_GLN = $drug_allergies['DrugAllergy']['su_gln'];
+        $BasalInsulin = $drug_allergies['DrugAllergy']['insulin'];
+        $Colesevelam = $drug_allergies['DrugAllergy']['colsvl'];
 
-        // set current medicines
-        $this->Algorithm->setMedicine1("none");
-        $this->Algorithm->setMedicine1("none");
-        $this->Algorithm->setMedicine1("none");
+    /* set current medicines */
+        // $this->Algorithm->setMedicine1("none");
+        // $this->Algorithm->setMedicine2("none");
+        // $this->Algorithm->setMedicine3("none");
+        $treatment_run_algorithms = $this->Visit->Treatment->TreatmentRunAlgorithm->findById($t_id); //current medicines
+    	$Medicine1 = $treatment_run_algorithms['TreatmentRunAlgorithm']['medicine_name_one'];
+		$Medicine2 = $treatment_run_algorithms['TreatmentRunAlgorithm']['medicine_name_two'];
+		$Medicine3 = $treatment_run_algorithms['TreatmentRunAlgorithm']['medicine_name_three'];
+		//pr($Medicine1); pr($Medicine2); pr($Medicine3); exit;
 
-        // run glcymic control algorithm
+    /* run glcymic control algorithm */
         $this->Algorithm->gcAlgorithm();
 
 
-        // get algorithm results
+    /* get algorithm results */
         $decision = $this->Algorithm->getDecision();
         $therapy = $this->Algorithm->getTherapy();
-        $medicine1 = $this->Algorithm->getMedicine1();
-        $medicine2 = $this->Algorithm->getMedicine2();
-        $medicine3 = $this->Algorithm->getMedicine3();
+        // $medicine1 = $this->Algorithm->getMedicine1();
+        // $medicine2 = $this->Algorithm->getMedicine2();
+        // $medicine3 = $this->Algorithm->getMedicine3();
 
         $this->set('decision', $decision);
         $this->set('therapy', $therapy);
-        $this->set('medicine1', $medicine1);
-        $this->set('medicine2', $medicine2);
-        $this->set('medicine3', $medicine3);
+        // $this->set('medicine1', $medicine1);
+        // $this->set('medicine2', $medicine2);
+        // $this->set('medicine3', $medicine3);
+        $this->set('medicine1', $Medicine1);
+        $this->set('medicine2', $Medicine2);
+        $this->set('medicine3', $Medicine3);
+
 
     }
 
