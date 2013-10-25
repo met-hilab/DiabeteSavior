@@ -160,7 +160,7 @@ $cakeDescription = __d('cake_dev', 'Diabetes Savior: Type II Diabetes Infomatic 
   </div><!-- /.navbar-collapse -->
 </nav>
 <hr style="padding-top:0;"/>
-		<div id="content" style="padding-bottom:85px;">
+		<div id="content" style="padding-bottom:45px;">
 
 			<?php echo $this->Session->flash(); ?>
 <!-- The main content from controller / view START -->
@@ -172,17 +172,17 @@ $cakeDescription = __d('cake_dev', 'Diabetes Savior: Type II Diabetes Infomatic 
                     <div class="row" style="height:75%;">
                       <div class="col-lg-offset-4 col-lg-4" style="display: inline-block; height:75%; text-align: center;">
                         <div class="container">
-                          <img src="/img/bu-logo-small.gif" style="padding-bottom:32px;"/>
-                             <div style="display: inline-block;">
-                                <div style="text-align:left;">
+                          <img src="/img/bu-logo-small.gif"/>
+                             <div style="display: inline-block; vertical-align: bottom;">
+                                
                                   <?php echo $this->Html->link(
                                                      'Back to MET-HIlab',
                                                      'http://sites.bu.edu/met-hilab/',
                                                      array('target' => '_blank', 'escape' => false)
                                              );
                                              ?>
-                               </div>
-                               <ul class="bs-social-buttons">
+                             
+<!--                               <ul class="bs-social-buttons">
                                 <li class="follow-btn" style="display: inline-block;">
                                    <a href="https://twitter.com/BU_Tweets" class="twitter-follow-button" data-show-count="false" data-show-screen-name="false">Follow @BU_Tweets</a>
                                    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
@@ -191,14 +191,14 @@ $cakeDescription = __d('cake_dev', 'Diabetes Savior: Type II Diabetes Infomatic 
                                    <a href="https://twitter.com/share" class="twitter-share-button" data-via="BU_Tweets">Tweet</a>
                                    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
                                 </li>
-                               </ul>  
+                               </ul>  -->
                             </div>
                         </div>
                       </div>
                      </div>
-                     <div class="col-lg-offset-4 col-lg-4" style="text-align:center;">
+<!--                     <div class="col-lg-offset-4 col-lg-4" style="text-align:center;">
                         <a href="http://www.bu.edu/" style="font-size:11px; color: gray;">Copyright © 2013 Boston University</a>
-                     </div>	
+                     </div>	-->
 		</footer>
 	</div>
 	<?php // echo $this->element('sql_dump'); ?>
