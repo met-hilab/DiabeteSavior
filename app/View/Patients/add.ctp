@@ -3,10 +3,11 @@
 <!-- Load jQuery and the validate plugin -->
 
 
-  
+
   <!-- jQuery Form Validation code -->
+<!--
   <script type="text/javascript">
-  
+
   // When the browser is ready...
   $(function() {
   
@@ -39,8 +40,9 @@
     });
 
   });
-  
+
   </script>
+  -->
 <form id="add_patient" class="form-horizontal"role="form" action="/patients/add" method="post">
 <!-- Text input-->
 <?php
@@ -68,7 +70,7 @@
 <div class="form-group">
   <label class="col-lg-1 control-label" for="dob"><font color="red">* </font>DOB</label>
   <div class="col-lg-4">
-    <input id="dob" name="dob" type="date" placeholder="YYYY-MM-DD" min="1905-01-01" value="<?php echo date('Y-m-d', time() - 20 * (86400*365))?>" class="form-control" required="require">
+    <input id="dob" name="dob" type="date" placeholder="YYYY-MM-DD" min="1800-01-01" value="<?php echo date('Y-m-d', time() - 20 * (86400*365))?>" class="form-control" required="require">
   </div>
 </div>
 
