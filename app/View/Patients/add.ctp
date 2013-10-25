@@ -1,8 +1,8 @@
 <html lang="en">
 <h2 class="section-title">Add Patient</h2>
 <!-- Load jQuery and the validate plugin -->
-<script src="//code.jquery.com/jquery-1.9.1.js"></script>
-<script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
+
+
   
   <!-- jQuery Form Validation code -->
   <script type="text/javascript">
