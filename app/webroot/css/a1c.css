@@ -2,8 +2,7 @@
 /* CSS for form */
 
 #main{
-	background-color:#FFFFFF;	
-/*	padding:1em;*/
+	background-color:#FFFFFF;
 	padding-left:50px;
 	padding-right:0px;
 	width:800px;
@@ -12,23 +11,22 @@
 
 	}
 
-form {background-color:#33CCFF;
-	background:;
+form {background-color:#808080;
 	padding:1em;	
 	height:250px;
 	width:530px;
 	border-radius: 15px;
-	/*box-shadow: 25px 25px 50px #333333;*/
+	box-shadow: 25px 25px 50px #333333;
 	}
 	
-/*
+
 form p {
-	font-family:Helvetiva, Geneva, sans-serif;
-	font-size:14px;
-	color:#000;
-	}
-*/
-		
+    font-size:12px;
+    margin:0 0 8px 0;
+    line-height:18px;
+    width:650px;
+}
+
 #user {
 	border-style:dotted;
     border-width:1px;

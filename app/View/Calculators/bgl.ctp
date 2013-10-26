@@ -1,7 +1,6 @@
 <h2 class="section-title">A1C and eAG</h2>
 
 <?php
-echo $this->Html->css('a1cpage');
 echo $this->Html->css('a1c');
 echo $this->Html->script('a1c');
 
@@ -26,7 +25,7 @@ echo $this->Html->script('a1c');
         <div id="user" >
 
             <p>A1C</p>
-            <p>&nbsp;</p>
+
             <p>
                 <label for "a1clevel"><input name="a1clevel" type="number" min="4.0" max="16" step="0.1"
                                              value="" size="5" required="required"  onfocus="color(1)" onblur="deColor(1)" id="1" onchange="a1cToAG(); return false;" /> %</label>
@@ -37,7 +36,7 @@ echo $this->Html->script('a1c');
         <!-- calculator results -->
         <div id="results" >
             <p>Estimated Average Glucose (eAG)</p>
-            <p>&nbsp;</p>
+
             <p>
                 <label for "aglevel1"><input name="aglevel1" value="" type="number" min="40" max="400" step="1" size="5"
                                              onfocus="color(2)" onblur="deColor(2)" id="2" onchange="AGmgToA1C(); return false;" /> mg/dL &nbsp;&nbsp;</label>
@@ -59,6 +58,7 @@ echo $this->Html->script('a1c');
 
     </form>
 
+    <p>&nbsp;</p>
     <p>Formula*</p>
     <p>eAG (mg/dL) = 28.7 x A1C - 46.7</p>
     <p>eAG (mmol/L) = 1.5944 x A1C - 2.5944</p>
