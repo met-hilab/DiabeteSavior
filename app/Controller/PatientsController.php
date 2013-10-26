@@ -131,7 +131,7 @@ public function index(){
 			$data = $patient;
 			$this->Patient->create();
 			//$res = $this->Patient->save($this->data);
-			
+
 			if($this->Patient->save($this->data)){
 
 		//$this->Session->setFlash($_SESSION["patientnum"].' Patient is saved.');

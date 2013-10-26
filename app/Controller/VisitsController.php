@@ -254,6 +254,8 @@ class VisitsController extends AppController {
         //pr($A1C); exit;
         $A1Clast = $vitals_labs[1]['VitalsLab']['A1c'];  // last a1c value
         //pr($A1Clast); exit;
+        $this->Algorithm->setA1C($A1C);
+        $this->Algorithm->setA1Clast($A1Clast);
 
         $treatments = $this->Visit->Treatment->find('all', array(
         	'conditions' => array('visit_id' => $v_id),
@@ -261,6 +263,7 @@ class VisitsController extends AppController {
         	'order' => 'Treatment.modified DESC'));
         $A1CTarget = $treatments[0]['Treatment']['a1c_goal'];  //current a1c_goal value
         //pr($A1CTarget); exit;
+        $this->Algorithm->setA1CTarget($A1CTarget);
 
         $this->Algorithm->setSymptoms(true);
 
@@ -277,14 +280,44 @@ class VisitsController extends AppController {
         $BasalInsulin = $drug_allergies['DrugAllergy']['insulin'];
         $Colesevelam = $drug_allergies['DrugAllergy']['colsvl'];
 
+        $stack = array();
+        if ($Metformin)
+            array_push($stack,"Metformin");
+        if ($GLP_1RA)
+            array_push($stack, "GLP_1RA");
+        if ($DPP4_i)
+            array_push($stack, "DPP4_i");
+        if ($AG_i)
+            array_push($stack, "AG_i");
+        if ($SGLT_2)
+            array_push($stack, "SGLT_2");
+        if ($SGLT_2)
+            array_push($stack, "SGLT_2");
+        if ($TZD)
+            array_push($stack, "TZD");
+        if ($SU_GLN)
+            array_push($stack, "SU_GLN");
+        if ($BasalInsulin)
+            array_push($stack, "BasalInsulin");
+        if ($Colesevelam)
+            array_push($stack, "Colesevelam");
+
+        $this->Algorithm->setAllergies($stack);
+
     /* set current medicines */
-        // $this->Algorithm->setMedicine1("none");
-        // $this->Algorithm->setMedicine2("none");
-        // $this->Algorithm->setMedicine3("none");
         $treatment_run_algorithms = $this->Visit->Treatment->TreatmentRunAlgorithm->findById($t_id); //current medicines
     	$Medicine1 = $treatment_run_algorithms['TreatmentRunAlgorithm']['medicine_name_one'];
 		$Medicine2 = $treatment_run_algorithms['TreatmentRunAlgorithm']['medicine_name_two'];
 		$Medicine3 = $treatment_run_algorithms['TreatmentRunAlgorithm']['medicine_name_three'];
+        if ($Medicine1 == null)
+            $Medicine1 = "none";
+        if ($Medicine2 == null)
+            $Medicine2 = "none";
+        if ($Medicine3 == null)
+            $Medicine3 = "none";
+        $this->Algorithm->setMedicine1($Medicine1);
+        $this->Algorithm->setMedicine2($Medicine2);
+        $this->Algorithm->setMedicine3($Medicine3);
 		//pr($Medicine1); pr($Medicine2); pr($Medicine3); exit;
 
     /* run glcymic control algorithm */
@@ -294,19 +327,15 @@ class VisitsController extends AppController {
     /* get algorithm results */
         $decision = $this->Algorithm->getDecision();
         $therapy = $this->Algorithm->getTherapy();
-        // $medicine1 = $this->Algorithm->getMedicine1();
-        // $medicine2 = $this->Algorithm->getMedicine2();
-        // $medicine3 = $this->Algorithm->getMedicine3();
+        $med1 = $this->Algorithm->getMedicine1();
+        $med2 = $this->Algorithm->getMedicine2();
+        $med3 = $this->Algorithm->getMedicine3();
 
         $this->set('decision', $decision);
         $this->set('therapy', $therapy);
-        // $this->set('medicine1', $medicine1);
-        // $this->set('medicine2', $medicine2);
-        // $this->set('medicine3', $medicine3);
-        $this->set('medicine1', $Medicine1);
-        $this->set('medicine2', $Medicine2);
-        $this->set('medicine3', $Medicine3);
-
+        $this->set('medicine1', $med1);
+        $this->set('medicine2', $med2);
+        $this->set('medicine3', $med3);
 
     }
 
