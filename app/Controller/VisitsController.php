@@ -51,7 +51,7 @@ class VisitsController extends AppController {
 	}
 	
 /**
- * Create new vitals_lab
+ * Add a visit
  *
  * @param weight, height, bps, bpd, A1c, eGFR, notes, a1c_goal, weight_goal, drug_allergies
  * @return void
@@ -68,10 +68,10 @@ class VisitsController extends AppController {
         $this->Session->write('patient_id', $p_id);
 
 		 if ( $this->request->is('post')) {		
-			$this->Visit->patient_id = $p_id;
+			$data = array('patient_id' => $p_id);
 			$this->Visit->create();
 			
-			if($this->Visit->save()){
+			if($this->Visit->save($data)){
 				$v_id = $this->Visit->getLastInsertId();
         		//$visit = $this->Visit->findById($id);
         		//$this->Session->write('visit', $visit);
@@ -79,7 +79,6 @@ class VisitsController extends AppController {
 
 			/*vitals_labs table*/
 				$vitals_labs = $this->request->data;
-				$visit_id = $v_id;
 				$weight = $vitals_labs['weight'];
 				$height = $vitals_labs['height'];
 				$weight_units = $vitals_labs['weight_units'];
@@ -92,31 +91,40 @@ class VisitsController extends AppController {
                 	$bmi = round((703*$weight/$height/$height),1);
             	};
             	//pr($bmi); exit;
-
 				$bps = $vitals_labs['bps'];
 				$bpd = $vitals_labs['bpd'];
 				$A1c = $vitals_labs['A1c'];
 				$eGFR = $vitals_labs['eGFR'];
 				$notes = $vitals_labs['notes'];
-				$data = $vitals_labs;
+				$data = array(
+					'visit_id' => $v_id,
+					'weight' => $weight,
+					'height' => $height,
+					'bps' => $bps,
+					'bmi' => $bmi,
+					'A1c' => $A1c,
+					'eGFR' => $eGFR,
+					'notes' => $notes);
 				$this->Visit->VitalsLab->create();
-				$this->Visit->VitalsLab->save($this->data);
+				$this->Visit->VitalsLab->save($data);
 
 			/*treatments table*/
-				$treatments = $this->request->data;
-				$visit_id = $v_id;
-				$prescriber_username = $patient['patient_firstname'].' '.$patient['patient_lastname'];
-				$a1c_goal = $treatments['a1c_goal'];
-				$weight_goal = $treatments['weight_goal'];
-				$data = $treatments;
-				$this->Visit->Treatment->create();
-				$this->Visit->Treatment->save($this->data);
-				$t_id = $this->Visit->Treatment->getLastInsertId();
-				$this->Session->write('treatment_id', $t_id);
+			 	$treatments = $this->request->data;
+			 	$prescriber_username = $patient['Patient']['patient_firstname'].' '.$patient['Patient']['patient_lastname'];
+			 	$a1c_goal = $treatments['a1c_goal'];
+		    	$weight_goal = $treatments['weight_goal'];
+			 	$data = array(
+			 		'visit_id' => $v_id,
+					'prescriber_username' => $prescriber_username,
+					'a1c_goal' => $a1c_goal,
+					'weight_goal' => $weight_goal);
+			 	$this->Visit->Treatment->create();
+			 	$this->Visit->Treatment->save($data);
+			 	$t_id = $this->Visit->Treatment->getLastInsertId();
+			 	$this->Session->write('treatment_id', $t_id);
 
 			/*medhistory_complaints table*/
 				$medhistory_complaints = $this->request->data;
-				$visit_id = $v_id;
 				$complaints = $medhistory_complaints['complaints'];
 				$hypo = $medhistory_complaints['hypo'];
 				$weight_gain = $medhistory_complaints['weight_gain'];
@@ -125,13 +133,21 @@ class VisitsController extends AppController {
 				$chf = $medhistory_complaints['chf'];
 				$cvd = $medhistory_complaints['cvd'];
 				$bone = $medhistory_complaints['bone'];
-				$data = $medhistory_complaints;
+				$data = array(
+					'visit_id' => $v_id,
+					'complaints' => $complaints,
+					'hypo' => $hypo,
+					'weight_gain' => $weight_gain,
+					'renal_gu' => $renal_gu,
+					'gi_sx' => $gi_sx,
+					'chf' => $chf,
+					'cvd' => $cvd,
+					'bone' => $bone);
 				$this->Visit->MedhistoryComplaint->create();
-				$this->Visit->MedhistoryComplaint->save($this->data);
+				$this->Visit->MedhistoryComplaint->save($data);
 
 			/*drug_allergies table*/
 				$drug_allergies = $this->request->data;
-				$patient_id = $p_id;
 				$met = $drug_allergies['met'];
 				$dpp_4i = $drug_allergies['dpp_4i'];
 				$glp_1ra = $drug_allergies['glp_1ra'];
@@ -143,27 +159,41 @@ class VisitsController extends AppController {
 				$insulin = $drug_allergies['insulin'];
 				$sglt_2 = $drug_allergies['sglt_2'];
 				$praml = $drug_allergies['praml'];
-				$data = $drug_allergies;
+				$data = array(
+					'patient_id' => $p_id,
+					'met' => $met,
+					'dpp_4i' => $dpp_4i,
+					'glp_1ra' => $glp_1ra,
+					'tzd' => $tzd,
+					'agi' => $agi,
+					'colsvl' => $colsvl,
+					'bcr_or' => $bcr_or,
+					'su_gln' => $su_gln,
+					'insulin' => $insulin,
+					'sglt_2' => $sglt_2,
+					'praml' => $praml);
 				$this->Visit->Patient->DrugAllergy->create();
-				$this->Visit->Patient->DrugAllergy->save($this->data);
+				if($this->Visit->Patient->DrugAllergy->save($data)){
+					$this->redirect(array('action'=>'current'));
+				};
 
 			/*diagnoses table*/
-		
+		        
 			}else {
 				$this->Session->setFlash('Sorry, add visit failed.');
 			}		
 		}
 	}
-	
+
  /**
- * Displays a view
+ * Displays a current visit
  *
  * @param mixed What page to display
  * @return void
  * @throws NotFoundException When the view file could not be found
  *  or MissingViewException in debug mode.
  */       	
-	public function show(){
+	public function current(){
 		$p_id = $this->Session->read('patient_id');
 		try{
 			$patient = $this->Visit->Patient->findById($p_id);
@@ -173,19 +203,18 @@ class VisitsController extends AppController {
 			throw $e;
 		}
 
-    	//$v_id = $this->Session->read('visit_id');
-    	$v_id = 1;
+    	$v_id = $this->Session->read('visit_id');
 		try{
-			$vitals_labs = $this->Visit->VitalsLab->findById($v_id);
+			$vitals_labs = $this->Visit->VitalsLab->findByVisit_id($v_id);
 			$this->set('vitals_labs', $vitals_labs);
 
-			$treatments = $this->Visit->Treatment->findById($v_id);
+			$treatments = $this->Visit->Treatment->findByVisit_id($v_id);
 			$this->set('treatments', $treatments);
 
-			$medhistory_complaints = $this->Visit->MedhistoryComplaint->findById($v_id);
+			$medhistory_complaints = $this->Visit->MedhistoryComplaint->findByVisit_id($v_id);
 			$this->set('medhistory_complaints', $medhistory_complaints);
 
-			$drug_allergies = $this->Visit->Patient->DrugAllergy->findById($p_id);
+			$drug_allergies = $this->Visit->Patient->DrugAllergy->findByPatient_id($p_id);
 			$this->set('drug_allergies', $drug_allergies);
 
       		$this->Session->write('visit_id', $v_id);
@@ -193,6 +222,45 @@ class VisitsController extends AppController {
 			throw $e;
 		}
 	}	
+
+ // /**
+ // * Displays a show visit
+ // *
+ // * @param mixed What page to display
+ // * @return void
+ // * @throws NotFoundException When the view file could not be found
+ // *  or MissingViewException in debug mode.
+ // */       	
+	// public function show(){
+	// 	$p_id = $this->Session->read('patient_id');
+	// 	try{
+	// 		$patient = $this->Visit->Patient->findById($p_id);
+	// 		$this->set('patient', $patient);
+ //      		$this->Session->write('patient_id', $p_id);
+	// 	}catch(NotFoundException $e){
+	// 		throw $e;
+	// 	}
+
+ //    	//$v_id = $this->Session->read('visit_id');
+ //    	$v_id = 1;
+	// 	try{
+	// 		$vitals_labs = $this->Visit->VitalsLab->findById($v_id);
+	// 		$this->set('vitals_labs', $vitals_labs);
+
+	// 		$treatments = $this->Visit->Treatment->findById($v_id);
+	// 		$this->set('treatments', $treatments);
+
+	// 		$medhistory_complaints = $this->Visit->MedhistoryComplaint->findById($v_id);
+	// 		$this->set('medhistory_complaints', $medhistory_complaints);
+
+	// 		$drug_allergies = $this->Visit->Patient->DrugAllergy->findById($p_id);
+	// 		$this->set('drug_allergies', $drug_allergies);
+
+ //      		$this->Session->write('visit_id', $v_id);
+	// 	}catch(NotFoundException $e){
+	// 		throw $e;
+	// 	}
+	// }	
 	
 /**
  * Displays a view
