@@ -108,11 +108,11 @@ public function index(){
     $this->Session->delete('patient_id');
 
 		if ($this->request->is('post')){
-			$patient = $this->request->data['Patient'];
+/*			$patient = $this->request->data['Patient']; */
       /*
        ** TODO:: What are these for?
        */
-			$patient_firstname = $patient['patient_firstname'];
+/*			$patient_firstname = $patient['patient_firstname'];
 			$patient_lastname = $patient['patient_lastname'];
 			$patient_middlename = $patient['patient_middlename'];
 			$dob = $patient['dob'];
@@ -126,13 +126,14 @@ public function index(){
 			$postal_code = $patient['postal_code'];
 			$city = $patient['city'];
 			$state = $patient['state'];
-
+*/
+      $patient = $this->request->data;
       $patient['user_id'] = $uid;
-			$data = $patient;
-			$this->Patient->create();
+
+            $this->Patient->create();
 			//$res = $this->Patient->save($this->data);
 
-			if($this->Patient->save($this->data)){
+			if($this->Patient->save($patient)){
 
 		//$this->Session->setFlash($_SESSION["patientnum"].' Patient is saved.');
         //$patient_number = $_SESSION["patientnum"];
