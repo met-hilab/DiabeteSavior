@@ -306,12 +306,15 @@ class VisitsController extends AppController {
 // "Metformin", "GLP_1RA", "DPP4_i", "AG_i", "SGLT_2","TZD", "SU_GLN",  "BasalInsulin", "Colesevelam",
 // "Bromocriptine-QR"
     public function gcalgorithm(){        
-        //$p_id = $this->Session->read('patient_id'); 
-        $p_id = '01';
-        //$v_id = $this->Session->read('visit_id');
-    	$v_id = 1;
-    	//$t_id = $this->Session->read('treatment_id');
-    	$t_id = 1;
+        $p_id = $this->Session->read('patient_id');
+        echo $p_id;
+        //$p_id = '01';
+        $v_id = $this->Session->read('visit_id');
+    	//$v_id = 1;
+        echo $v_id;
+    	$t_id = $this->Session->read('treatment_id');
+    	//$t_id = 1;
+       // echo $t_id;
 
     /* set A1C values */
         $vitals_labs = $this->Visit->VitalsLab->find('all', array(
