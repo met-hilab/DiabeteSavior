@@ -29,7 +29,7 @@ class MedicinesController extends AppController {
 
         if ($this->request->is('post')){
             $medicine = $this->request->data['Medicine'];
-            $medicine_name = $medicine['medicine_name'];
+/*            $medicine_name = $medicine['medicine_name'];
             $min_dose = $medicine['min_dose'];
             $max_dose = $medicine['max_dose'];
             $metric = $medicine['metric'];
@@ -41,7 +41,7 @@ class MedicinesController extends AppController {
             $cvd = $medicine['cvd'];
             $bone= $medicine['bone'];
 
-            $data = $medicine;
+            $data = $medicine;*/
             $this->Medicine->create();
             //$res = $this->Patient->save($this->data);
 

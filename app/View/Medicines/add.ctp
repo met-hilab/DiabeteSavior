@@ -52,10 +52,10 @@
   <div class="col-lg-4">
     <select id="hypo" name="hypo" class="form-control">
       <option></option>
-      <option>0</option>
       <option>1</option>
-	  <option>2</option>
-      <option>3</option>
+      <option>2</option>
+	  <option>3</option>
+      <option>4</option>
     </select>
   </div>
 </div>
@@ -68,10 +68,10 @@
   <div class="col-lg-4">
     <select id="weight" name="weight" class="form-control">
       <option></option>
-      <option>0</option>
       <option>1</option>
-	  <option>2</option>
-      <option>3</option>
+      <option>2</option>
+	  <option>3</option>
+      <option>4</option>
     </select>
   </div>
 </div>
@@ -83,10 +83,10 @@
   <div class="col-lg-4">
     <select id="renal_gu" name="renal_gu" class="form-control">
       <option></option>
-      <option>0</option>
       <option>1</option>
-	  <option>2</option>
-      <option>3</option>
+      <option>2</option>
+	  <option>3</option>
+      <option>4</option>
     </select>
   </div>
 </div>
@@ -99,10 +99,10 @@
   <div class="col-lg-4">
     <select id="gi_sx" name="gi_sx" class="form-control">
       <option></option>
-      <option>0</option>
       <option>1</option>
-	  <option>2</option>
-      <option>3</option>
+      <option>2</option>
+	  <option>3</option>
+      <option>4</option>
     </select>
   </div>
 </div>
@@ -115,10 +115,10 @@
   <div class="col-lg-4">
     <select id="chf" name="chf" class="form-control">
       <option></option>
-      <option>0</option>
       <option>1</option>
-	  <option>2</option>
-      <option>3</option>
+      <option>2</option>
+	  <option>3</option>
+      <option>4</option>
     </select>
   </div>
 </div>
@@ -131,10 +131,10 @@
   <div class="col-lg-4">
     <select id="cvd" name="cvd" class="form-control">
       <option></option>
-      <option>0</option>
       <option>1</option>
-	  <option>2</option>
-      <option>3</option>
+      <option>2</option>
+	  <option>3</option>
+      <option>4</option>
     </select>
   </div>
 </div>
@@ -147,10 +147,10 @@
   <div class="col-lg-4">
     <select id="bone" name="bone" class="form-control">
       <option></option>
-      <option>0</option>
       <option>1</option>
-	  <option>2</option>
-      <option>3</option>
+      <option>2</option>
+	  <option>3</option>
+      <option>4</option>
     </select>
   </div>
 </div>
