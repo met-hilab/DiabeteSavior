@@ -336,7 +336,7 @@ class VisitsController extends AppController {
         //pr($A1CTarget); exit;
         $this->Algorithm->setA1CTarget($A1CTarget);
 
-        $this->Algorithm->setSymptoms(true);
+        $this->Algorithm->setSymptoms(false);       // diabetes symptoms - only used for insulin therapy
 
     /* set allergies */
         $drug_allergies = $this->Visit->Patient->DrugAllergy->findById($p_id);  //current patient's drug allergies
