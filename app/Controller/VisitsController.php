@@ -394,7 +394,6 @@ class VisitsController extends AppController {
     /* run glcymic control algorithm */
         $this->Algorithm->gcAlgorithm();
 
-
     /* get algorithm results */
         $decision = $this->Algorithm->getDecision();
         $therapy = $this->Algorithm->getTherapy();
@@ -407,9 +406,7 @@ class VisitsController extends AppController {
         $this->set('medicine1', $med1);
         $this->set('medicine2', $med2);
         $this->set('medicine3', $med3);
-
     }
-
 
 }
 
