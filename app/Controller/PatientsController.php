@@ -225,14 +225,21 @@ public function index(){
  */
 	public function edit(){
 		//$this->authenticate_user();
+        $this->authenticate_user();
+        $uid = (int)$this->current_user['id'];
+
     $id = $this->Session->read('patient_id');
 
 		//$patient_number = $this->request->params['pass'][0];
 		$this->Patient->id = $id;
 		if($this->Patient->exists()){
-			if($this->request->is('post') || $this->request->is('put')){				
-				//save patient
-				if($this->Patient->save($this->request->data)){
+			if($this->request->is('post') || $this->request->is('put')){
+
+                $data = $this->request->data;
+                $data['user_id'] = $uid;
+
+                //save patient
+				if($this->Patient->save($data)){
 					$this->Session->setFlash('Patient was edited.');
 					$this->redirect(array('action'=>'show'));
 				}else{
