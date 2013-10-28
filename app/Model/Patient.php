@@ -122,7 +122,7 @@ class Patient extends AppModel {
 			'postal' => array(
 				'rule' => array('postal'),
 				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
+				'allowEmpty' => true,
 				//'required' => false,
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
