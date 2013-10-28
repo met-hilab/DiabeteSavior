@@ -184,7 +184,7 @@ CREATE TABLE `treatment_run_algorithms` (
   `modified` datetime NOT NULL,
   `treatment_id` int(10) unsigned NOT NULL,
   `type` varchar(255) collate utf8_unicode_ci default NULL,
-/*  `type` enum('lifestyle modification','monotherapy','dual_therapy','triple_therapy')*/ collate utf8_unicode_ci NOT NULL,
+/*  `type` enum('lifestyle modification','monotherapy','dual_therapy','triple_therapy') collate utf8_unicode_ci NOT NULL,*/
   `recommendations` text collate utf8_unicode_ci,
   `medicine_name_one` varchar(255) collate utf8_unicode_ci default NULL,
   `dose_one` float default NULL,
