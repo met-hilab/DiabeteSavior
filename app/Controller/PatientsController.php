@@ -90,6 +90,13 @@ public function index(){
       ["user_id" => $uid]
     ]);
 	$this->set('patients',$patients);
+	if ($this->request->is('post')){
+		$id = $this->request->data('patient_id');
+    	$patient = $this->Patient->findById($id);
+    	$this->Session->write('patient_id', $id);
+    	$this->Session->write('patient', $patient);
+    	$this->redirect(array('action'=>'show'));
+	}
 }
 
 
