@@ -47,6 +47,12 @@ public $validate = array(
         //'on' => 'create', // Limit validation to 'create' or 'update' operations
       ),
     ),
+  'confirm_password' => array(
+    'identical' => array(
+      'rule' => array('identicalFieldValues', 'password'),
+        'message' => 'Password confirmation does not match password.'
+      )
+    ),
   'username' => array(
     'alphanumeric' => array(
       'rule' => array('alphanumeric'),
@@ -89,7 +95,8 @@ public $validate = array(
       'foreignKey' => 'user_id',
       'conditions' => '',
       'fields' => '',
-      'order' => ''
+      'order' => '',
+      'dependent' => true
     )
   );
   /*
@@ -121,8 +128,8 @@ public function afterFind($results = array(), $primary) {
 
 public function beforeFind($query)  {
   parent::beforeFind($query);
-  var_dump($query['conditions']);
-  if($query['conditions']['password'] != '') {
+  //var_dump($query['conditions']);
+  if(!empty($query['conditions']['password'])) {
     $query['conditions']['password'] = sha1($query['conditions']['password']);
   }
   return $query;
@@ -131,7 +138,12 @@ public function beforeFind($query)  {
 
 public function beforeValidate($options = array()) {
   parent::beforeValidate();
-  $this->data['User']['password'] = sha1($this->data['User']['password']);
+  if($this->data['User']['password'] == '') {
+    unset($this->data['User']['password']);
+
+  }
+  
+
   return true;
 }
 
@@ -139,6 +151,10 @@ public function beforeValidate($options = array()) {
 public function beforeSave($options = array()) {
   parent::beforeSave();
   // $this->data['User']['password'] = sha1($this->data['User']['password']);
+  // empty() to check if the variable is empty i.e: null, 0, "", '', false, array()
+  if(!empty($this->data['User']['password'])) {
+    $this->data['User']['password'] = sha1($this->data['User']['password']);
+  }
   return true;
 }
 

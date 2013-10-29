@@ -34,6 +34,7 @@ App::uses('Controller', 'Controller');
 class AppController extends Controller {
   public $components = array('DebugKit.Toolbar', 'Session');
   public $current_user = array();
+  public $helpers = array('Form' => array('className' => 'BootstrapForm'));
   //public $components = array('Session');
 
   
@@ -52,9 +53,9 @@ class AppController extends Controller {
     }
   }
 
-  public function can($params) {
-    $controller = $params['controller'];
-    $action = $params['action'];
+  public function can($action, $modelName) {
+    //$controller = $params['controller'];
+    //$action = $params['action'];
     return true;
   }
 }

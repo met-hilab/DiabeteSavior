@@ -40,6 +40,7 @@ $cakeDescription = __d('cake_dev', 'Diabetes Savior: Type II Diabetes Infomatic 
 		echo $this->Html->script('jquery-1.10.2.min');
     echo $this->Html->script('jquery-ujs.js');
 		echo $this->Html->script('jquery-ui-1.10.3.custom.min');
+    echo $this->Html->script('jquery.validate.min');
 		echo $this->Html->script('bootstrap');
     echo $this->Html->script('modernizr');
     echo $this->Html->script('main');
@@ -52,7 +53,6 @@ $cakeDescription = __d('cake_dev', 'Diabetes Savior: Type II Diabetes Infomatic 
 		echo $this->fetch('css');
 		echo $this->fetch('script');
 	?>
-  <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
 </head>
 <body>
 

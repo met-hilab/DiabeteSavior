@@ -39,8 +39,6 @@ class UsersController extends AppController {
   public $uses = array();
 
   public function beforeFilter(){
-
-
     parent::beforeFilter();
     Security::setHash('sha512');
   }
@@ -56,8 +54,6 @@ class UsersController extends AppController {
   public function index() {
     $this->authenticate_user();
     $users = $this->User->find('all');
-    //var_dump($users);
-    //exit;
     $this->set('users', $users);
   }
 
@@ -120,7 +116,6 @@ class UsersController extends AppController {
     exit;
   }
 
-
 /**
  * Create new user
  *
@@ -130,18 +125,63 @@ class UsersController extends AppController {
  *  or MissingViewException in debug mode.
  */
   public function add() {
-    $this->authenticate_user();
+    //$this->authenticate_user();
     if ($this->request->is('post')){
-      $user = $this->request->data['User'];
-      $email = $user['email'];
-      $password = $user['password'];
-      //$data = array("User" => array('email' => $email, 'password' => $password));
-      $data = $user;
       $this->User->create();
-      $res = $this->User->save($data);
+      try {
+        $res = $this->User->saveAssociated($this->request->data);
+        $this->redirect("/pages/after_sign_up");
+      } catch(Exception $e) {
+        $this->Session->setFlash($e->getMessage());
+        $this->redirect("/sign_up");
+      }
+    } else {
+      throw new ForbiddenException();
+    }
+  }
+/**
+ * Activate user
+ *
+ * @param id
+ * @return void
+ * @throws NotFoundException When the view file could not be found
+ *  or MissingViewException in debug mode.
+ */
+  public function activate() {
+    $this->authenticate_user();
+    if($this->can('manage', 'User')) {
+      $id = $this->request->params['pass'][0];
+      $this->User->id = $id;
+      $data = array('activated' => 1);
+      $this->User->save($data);
+      $this->redirect($this->referer());
+      //$this->render("/layouts/debug");
+    } else {
+      throw new ForbiddenException();
+      
+    }
+  }
 
-      echo json_encode($res);
-      exit;
+/**
+ * Deactivate user
+ *
+ * @param id
+ * @return void
+ * @throws NotFoundException When the view file could not be found
+ *  or MissingViewException in debug mode.
+ */
+  public function deactivate() {
+    $this->authenticate_user();
+    if($this->can('manage', 'User')) {
+      $id = $this->request->params['pass'][0];
+      $this->User->id = $id;
+      $data = array('activated' => 0);
+      $this->User->save($data);
+      $this->redirect($this->referer());
+      //$this->render("/layouts/debug");
+    } else {
+      throw new ForbiddenException();
+      
     }
   }
 
@@ -157,14 +197,16 @@ class UsersController extends AppController {
     $this->authenticate_user();
     //get the id of the user to be edited
     $id = $this->request->params['pass'][0];
-    //var_dump($this->request->params); exit;
     //set the user id
     $this->User->id = $id;
     //check if a user with this id really exists
     if( $this->User->exists() ){
         if( $this->request->is( 'post' ) || $this->request->is( 'put' ) ){
-            //save user
-            if( $this->User->save( $this->request->data ) ){
+            //saveAssociated is important, this is to save associated model alse if data presented.
+            $this->request->data['User']['id'] = $id;
+            //$this->request->data['Profile']['user_id'] = $id;
+            //var_dump($this->request->data); exit;
+            if( $this->User->saveAssociated( $this->request->data ) ){
                 //set to user's screen
                 $this->Session->setFlash('User was edited.');
                 //redirect to user's list
@@ -175,6 +217,7 @@ class UsersController extends AppController {
         }else{
             //we will read the user data
             //so it will fill up our html form automatically
+            //$this->request->data = $this->User->findById($id);
             $this->request->data = $this->User->read();
         }
         
