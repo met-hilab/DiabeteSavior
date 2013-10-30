@@ -70,7 +70,7 @@ CREATE TABLE `diagnoses` (
   `patient_id` int(10) unsigned NOT NULL,
   `dxname` enum('Non-insulin-dependent diabetes mellitus') collate utf8_unicode_ci NOT NULL,
   `icd10code` enum('E11') collate utf8_unicode_ci NOT NULL,
-  `Icd9code` enum('250.00','250.02') collate utf8_unicode_ci NOT NULL,
+  `icd9code` enum('250.00','250.02') collate utf8_unicode_ci NOT NULL,
   PRIMARY KEY  (`id`),
   KEY `patient_id` (`patient_id`),
   CONSTRAINT `diagnoses_ibfk_1` FOREIGN KEY (`patient_id`) REFERENCES `patients` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
