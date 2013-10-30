@@ -28,29 +28,57 @@ App::uses('FormHelper', 'View/Helper');
  * @package       app.View.Helper
  */
 class BootstrapFormHelper extends FormHelper {
+
+  
+
+  protected $_myInputDefaults = array(
+    'class' => 'form-control',
+    'format' => array('div', 'label', 'input', 'error'),
+    'div' => array('class' => 'form-group'),
+    'label' => array('class' => 'control-label'),
+    'between' => '',
+    'after' => ''
+    //'error' => array('attributes' => array('wrap' => 'span', 'class' => 'help-inline')),
+  );
+  
+  private $_defaults = array(
+    'class' => 'form-horizontal',
+    //'inputDefaults' => BootstrapFormHelper::_inputDefaults
+  );
+
   public function create($model, $options = array()) {
-    $defaults = array(
-      'class' => 'form-horizontal',
-      'inputDefaults' => array(
-        'class' => 'form-control',
-        'format' => array('div', 'label', 'input', 'error'),
-        'div' => array('class' => 'form-group'),
-        'label' => array('class' => ''),
-        'between' => '',
-        'after' => ''
-        //'error' => array('attributes' => array('wrap' => 'span', 'class' => 'help-inline')),
-      )
-    );
+    $defaults = $this->_defaults;
     $options = Set::merge($defaults, $options);
     return parent::create($model, $options);
+  }
+
+  public function input($fieldName, $options = array()) {
+    $defaults = array(
+      'placeholder' => Inflector::humanize($fieldName)
+    );
+    $defaults = Set::merge($this->_myInputDefaults, $defaults);
+    $options = Set::merge($defaults, $options);
+    return parent::input($fieldName, $options);
   }
 
   public function submit($value = 'Save', $options = array()) {
     $defaults = array(
       'class' => 'btn btn-primary'
     );
-
     $options = Set::merge($defaults, $options);
     return parent::submit($value, $options);
+  }
+
+  public function date($fieldName, $options = array()) {
+    $defaults = $this->_myInputDefaults;
+    $options = Set::merge($defaults, $options);
+    return parent::date($fieldName, $options);
+  }
+
+  public function select($fieldName, $options = array(), $attributes = array()) {
+    $defaults = array('empty' => '-- SELECT --');
+    $defaults = Set::merge($this->_myInputDefaults, $defaults);
+    $attributes = Set::merge($defaults, $attributes);
+    return parent::select($fieldName, $options, $attributes);
   }
 }
