@@ -1,13 +1,9 @@
-<!--
-    <div class="container">
-      <div class="row row-offcanvas row-offcanvas-right">
-  ----Patient Information ----------------------------------------------------------------------------------------------------
-        <div class="col-xs-12 col-sm-9">
-          <p class="pull-right visible-xs">
-            <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
-          </p>
-                  -->
-            <h2 class="section-title" style="padding-bottom: 0;">View Patient</h2>
+				  
+		     
+            <h2 >Patient Information </h2>
+			
+			</br/>
+			
             <!-----Add Three Buttons------------------------------------------>
             <div style="padding-bottom:10px;">
            <a href="/visits/add" class="btn btn-primary" style="padding-left:5px;"><span class="glyphicon glyphicon-plus"></span> Add Visit</a>
@@ -16,250 +12,220 @@
 <!--           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
            <a href="/patients/delete" data-confirm="Do you want to delete this patient record?" data-method="delete" class="btn btn-primary" style="padding-left:5px;"><span class="glyphicon glyphicon-trash"></span> Delete Patient</a>
             </div>
-           <!--            <br> -->
-            <div class="jumbotron" style="padding-bottom:0;">  
-            <div class ="col-2">
-                
-                <!---First Column----------------------------------------->
-                <div class="row">
-                    <div class="col-6 col-sm-6 col-lg-6">
-                        <div class="row">
-                            <div class ="col-6 col-lg-6">
-                                <?php
-                                 echo "<h4>ID  :</h4>"
-                                ?>
-                            </div>
-                            <div class ="col-6 col-lg-6">
-                                <?php
-                                 echo $patient['Patient']['patient_number'];
-                                // echo "<h4>9527(TestID)</h4>"
-                                ?>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class ="col-6 col-lg-6">
-                                <?php
-                                 echo "<h4>Name  :</h4>"
-                                ?>
-                            </div>
-                            <div class ="col-6 col-lg-6">
-                                <?php
-                                 echo $patient['Patient']['patient_firstname']." ";
-                                 echo $patient['Patient']['patient_middlename']." ";
-                                 echo $patient['Patient']['patient_lastname'];
-                                // echo "<h4>Doris Lewis</h4>"
-                                ?>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class ="col-6 col-lg-6">
-                                <?php
-                                 echo "<h4>Birthdate  :</h4>"
-                                ?>
-                            </div>
-                            <div class ="col-6 col-lg-6">
-                                <?php
-                                 echo $patient['Patient']['dob'] ?: 'N/A';
-                                // echo "<h4>08/06/1990</h4>"
-                                ?>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class ="col-6 col-lg-6">
-                                <?php
-                                 echo "<h4>Occupation  :</h4>"
-                                ?>
-                            </div>
-                            <div class ="col-6 col-lg-6">
-                                <?php
-                                 echo $patient['Patient']['occupation'] ?: 'N/A';
-                                // echo "<h4>Student</h4>"
-                                ?>
-                            </div>
-                        </div>
-                         <div class="row">
-                            <div class ="col-6 col-lg-6">
-                                <?php
-                                 echo "<h4>Race  :</h4>"
-                                ?>
-                            </div>
-                            <div class ="col-6 col-lg-6">
-                                <?php
-                                 echo $patient['Patient']['race'] ?: 'N/A';
-                                // echo "<h4>Native American</h4>";
-                                ?>
-                            </div>
-                        </div>
-                    </div><!--/span-->
-                    
-                    
-                <!-----------Second Column--------------------->
-                <div class="col-6 col-sm-6 col-lg-6">
-                        <div class="row">
-                            <div class ="col-6 col-lg-6">
-                                <?php
-                                 echo "<h4>Gender  :</h4>"
-                                ?>
-                            </div>
-                            <div class ="col-6 col-lg-6">
-                                <?php
-                                 echo $patient['Patient']['gender'] ?: 'N/A';
-                                 //echo "<h4>Female</h4>";
-                                ?>
-                            </div>
-                        </div>
-                       <div class="row">
-                            <div class ="col-6 col-lg-6">
-                                <?php
-                                 echo "<h4>Street Address  :</h4>"
-                                ?>
-                            </div>
-                            <div class ="col-6 col-lg-6">
-                                <?php
-                                 echo $patient['Patient']['street'] ?: 'N/A';
-                                // echo "<h4>44 Cummington St</h4>";
-                                ?>
-                            </div>
-                        </div>
-                    
-                    <div class="row">
-                            <div class ="col-6 col-lg-6">
-                                <?php
-                                 echo "<h4>City  :</h4>"
-                                ?>
-                            </div>
-                            <div class ="col-6 col-lg-6">
-                                <?php
-                                 echo $patient['Patient']['city'] ?: 'N/A';
-                                // echo "<h4>Boston</h4>";
-                                ?>
-                            </div>
-                        </div>
-                    <div class="row">
-                            <div class ="col-6 col-lg-6">
-                                <?php
-                                 echo "<h4>State  :</h4>"
-                                ?>
-                            </div>
-                            <div class ="col-6 col-lg-6">
-                                <?php
-                                 echo $patient['Patient']['state'] ?: 'N/A';
-                                // echo "<h4>Massachusetts</h4>";
-                                ?>
-                            </div>
-                        </div>
-                    <div class="row">
-                            <div class ="col-6 col-lg-6">
-                                <?php
-                                 echo "<h4>Postal code  :</h4>"
-                                ?>
-                            </div>
-                            <div class ="col-6 col-lg-6">
-                                <?php
-                                 echo $patient['Patient']['postal_code'] ?: 'N/A';
-                               //  echo "<h4>02215</h4>";
-                                ?>
-                            </div>
-                        </div>
-                </div><!--/span-->
-         
-            
-          </div><!--/row-->
-      </div>
-            </div>
-            <br> 
-            
-     
-          <?php
-            ?>
-          </div>
           
- <!--------------------Save For Further Information like Allegic etc-------------------------------------------------------------------------->
-          <div class="row">
-            <div class="col-6 col-sm-6 col-lg-12">
-<!--                <div class="col-1 col-lg-1">
-                </div>-->
-                <div class ="col-6 col-lg-6">
-              <div class="row">
-                            <div class ="col-6 col-lg-6">
-                                <?php
-                                 echo "<h4>Allergies  :</h4>"
-                                ?>
-                            </div>
-                            <div class ="col-6 col-lg-6">
-                                <?php
-                                 echo '<h4>';
-                                 echo $patient['Patient']['Patient_Allergic'] ?: 'N/A';
-                                 echo '</h4>';
-//                                 echo "<h4>None</h4>";
-                                ?>
-                            </div>
-                        </div>
-                <div class="row">
-                            <div class ="col-6 col-lg-6">
-                                <?php
-                                 echo "<h4>Diagnosis  :</h4>"
-                                ?>
-                            </div>
-                            <div class ="col-6 col-lg-6">
-                                <?php
-                                 echo $patient['Patient']['Patient_Dignosis'];
-                                 echo "<h4>Diabetes</h4>";
-                                ?>
-                            </div>
-                        </div>
-                <div class="row">
-                            <div class ="col-6 col-lg-6">
-                                <?php
-                                 echo "<h4>Medication  :</h4>"
-                                ?>
-                            </div>
-                            <div class ="col-6 col-lg-6">
-                                <?php
-                                echo '<h4>';
-                                 echo $patient['Patient']['Patient_Medication'] ?: 'N/A';
-                                 echo '</h4>';
-//                                 echo "<h4>Medicine 1, 2,3</h4>";
-                                ?>
-                            </div>
-                        </div>
-            </div><!--/span-->
-            </div>
+		   
+		   
+		   
+		 <div class="col-md-6">
+		   
+		    <h3>Demographics</h3>  
+           			
+			<table  class="table table-condensed">
+			
+<tr>
+
+  <th>Patient Number: </th> 
+  <td> <?php echo $patient['Patient']['patient_number']; ?> </td>
+</tr>
+
+<tr> 
+  <th>First Name: </th>
+  <td><?php echo $patient['Patient']['patient_firstname']." ";
+                                 echo $patient['Patient']['patient_middlename']; ?></td>
+</tr>
+
+<tr> 
+  <th>Last Name: </th>
+  <td><?php echo $patient['Patient']['patient_lastname'] ?></td>
+</tr>
+
+<tr>
+  <th>DOB: </th>
+  <td><?php echo $patient['Patient']['dob']?></td>
+</tr>
+
+<tr>
+  <th>Gender: </th>
+  <td><?php echo $patient['Patient']['gender']?></td>
+</tr>
+
+<tr>
+  <th>Occupation: </th>
+  <td><?php echo $patient['Patient']['occupation']?></td>
+</tr>
+
+<tr>
+  <th>Race: </th>
+  <td><?php echo $patient['Patient']['race']?></td>
+</tr>
+
+</table>
+</div> 
+
+
+
+
+ <div class="col-md-6">
+
+        <h3>Contact information</h3> 
+<table  class="table table-condensed">
+			
+<tr>
+
+  <th>Street address: </th> 
+  <td> <?php echo $patient['Patient']['street']; ?> </td>
+</tr>
+
+<tr> 
+  <th>City: </th>
+  <td><?php echo $patient['Patient']['city']; ?></td>
+</tr>
+
+<tr> 
+  <th>State: </th>
+  <td><?php echo $patient['Patient']['state'] ?></td>
+</tr>
+
+<tr>
+  <th>Postal code: </th>
+  <td><?php echo $patient['Patient']['postal_code']?></td>
+</tr>
+
+</table>
+</div>
+
+
+<br clear="all">
+<hr>
+
+
+<div class="col-md-4">
+<h3>Drug Allergies </h3> 
+
+<table  class="table table-condensed">
+
+		
+
+<tr>
+
+  <th>Metformin:  </th> 
+  <td> <?php echo $patient['DrugAllergy']['met'] ?> </td>
+</tr>
+
+<tr> 
+  <th>Dipeptidyl peptidase 4 inhibitor: </th>
+  <td><?php echo $patient['DrugAllergy']['dpp_4i'] ?></td>
+</tr>
+
+<tr> 
+  <th>Glucagon-like peptide-1: </th>
+  <td><?php echo $patient['DrugAllergy']['glp_1ra'] ?></td>
+</tr>
+
+<tr>
+  <th>Thiazolidinedione: </th>
+  <td><?php echo $patient['DrugAllergy']['tzd'] ?></td>
+</tr>
+
+<tr>
+  <th>Alpha-glucosidase inhibitor: </th>
+  <td><?php echo $patient['DrugAllergy']['agi']?></td>
+</tr>
+
+
+<tr>
+
+  <th>Colsvl:  </th> 
+  <td> <?php echo $patient['DrugAllergy']['colsvl'] ?> </td>
+</tr>
+
+<tr> 
+  <th>Bcr_or: </th>
+  <td><?php echo $patient['DrugAllergy']['bcr_or'] ?></td>
+</tr>
+
+<tr> 
+  <th>Su_gln: </th>
+  <td><?php echo $patient['DrugAllergy']['su_gln'] ?></td>
+</tr>
+
+<tr>
+  <th>Insulin: </th>
+  <td><?php echo $patient['DrugAllergy']['insulin'] ?></td>
+</tr>
+
+<tr>
+  <th>Sodium-glucose co-transporter 2 (SGLT2) inhibitors: </th>
+  <td><?php echo $patient['DrugAllergy']['sglt_2']?></td>
+</tr>
+
+<tr>
+  <th>Praml: </th>
+  <td><?php echo $patient['DrugAllergy']['praml']?></td>
+</tr>
+
+</table>
+</div>
+
+
+
+
+
+<div class="col-md-4">
+<h3>Diagnoses </h3> 
+<table class="table table-condensed">
+<thead>
+    <tr>
+        <th>Dignosis</th>
+        <th>ICD-9</th>
+		<th>ICD-10</th>
+	</tr>
+</thead>
+
+<?php foreach($patient[ 'Diagnosis' ] as $diagnosis ) :?>
+<tbody>
+  <tr>
+     <td><?php echo $diagnosis['dxname']?>
+	 <td><?php echo $diagnosis['icd9code']?>
+	 <td><?php echo $diagnosis['icd10code']?>
+</tr>
+  </tbody>
+  <?php endforeach; ?>
+</table>
+</div>
+
+
+
+
+
+
+<div class="col-md-4">
+<h3>Visit history </h3> 
+
+<table class="table table-hover">
+
+<?php 
+if ($patient['Visit']==null)
+    echo 'This patient does not have visit history';
+foreach($patient[ 'Visit' ] as $visit ):?>
+<tbody>
+  <tr>
+    <td><?php echo $this->Html->link($date = date("F j, Y", strtotime($visit['created'])), array('controller' => 'visits', 'action' => 'show', $visit['id'])); ?>
+	
+	</td>
+  </tr>
+  </tbody>
+<?php endforeach;?> 
+ 
+</table>
+</div>
+
+
+
+
+
+						
             
-          </div><!--/row-->
-        <!--</div><!--/span-->
-        
-<!-------------------------side bar --appointment history------------------------------------------------------------------------------->
-<!--
-        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
-          <div class="well sidebar-nav">
-              <h4>Appointment History</h4>
-              <p>First</p>
-              <p>Second</p>
-              <p>Third</p>
-              <p>Fourth</p>
-              <p>Fifth</p>
-              <p>Sixth</p>
-              <p>Seventh</p>
-              <p>Eighth</p>
-              <p>Ninth</p>
-              <p>Tenth</p>
-             
-          </div><!--/.well -->
-        <!--</div><!--/span-->
-     <!-- </div><!--/row-->
-      
-
-<!--      <hr>-->
-
-   <!-- </div><!--/.container-->
-
-
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    
     
     
 

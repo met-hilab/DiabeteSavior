@@ -154,21 +154,9 @@ class Patient extends AppModel {
  * @var array
  */
 	public $hasMany = array(
+		
 		'Diagnosis' => array(
 			'className' => 'Diagnosis',
-			'foreignKey' => 'patient_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		),
-		'DrugAllergy' => array(
-			'className' => 'DrugAllergy',
 			'foreignKey' => 'patient_id',
 			'dependent' => false,
 			'conditions' => '',
@@ -194,6 +182,22 @@ class Patient extends AppModel {
 			'counterQuery' => ''
 		)
 	);
+	
+	public $hasOne = array(
+	    'DrugAllergy' => array(
+			'className' => 'DrugAllergy',
+			'foreignKey' => 'patient_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		)
+    );
 /**
  * generate the patient_number (imcompletely)
  */	

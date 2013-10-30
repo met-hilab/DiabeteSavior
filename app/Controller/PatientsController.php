@@ -272,9 +272,9 @@ public function index(){
  * @throws NotFoundException When the view file could not be found
  *  or MissingViewException in debug mode.
  */
-	public function show(){
+	public function show($id = null){
 		//this->authenticate_user();
-    $id = $this->Session->read('patient_id');
+    //$id = $this->Session->read('patient_id');
     //cakephp way
     //$this->Session->delete('patient_id');
 

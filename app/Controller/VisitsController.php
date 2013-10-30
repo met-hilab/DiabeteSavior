@@ -300,7 +300,26 @@ class VisitsController extends AppController {
 			throw new NotFoundException();
 		}
 	}
-
+/**
+ * Displays a view
+ *
+ * @param mixed What page to display
+ * @return void
+ * @throws NotFoundException When the view file could not be found
+ *  or MissingViewException in debug mode.
+ */
+	public function show($id = null){
+		    //$id = $this->Session->read('visit_id');
+    
+		try{
+			$visit = $this->Visit->findById($id);
+			$this->set('visit', $visit);
+      $this->Session->write('visit', $visit);
+      $this->Session->write('visit_id', $id);
+		}catch(NotFoundException $e){
+			throw $e;
+		}
+	}
 
 // Medicine list
 // "Metformin", "GLP_1RA", "DPP4_i", "AG_i", "SGLT_2","TZD", "SU_GLN",  "BasalInsulin", "Colesevelam",
