@@ -24,7 +24,7 @@
     <td><?php echo $p['Patient']['patient_firstname'];?></td>
     <td><?php echo $p['Patient']['patient_lastname'];?></td>
     <td><?php echo $p['Patient']['dob'];?></td>
-	<td><?php echo $p['Patient']['created'];?></td>
+	<td><?php echo $date = date("F j, Y", strtotime($p['Patient']['created']));?></td>
   </tr>
   </tbody>
 <?php endforeach; ?>
