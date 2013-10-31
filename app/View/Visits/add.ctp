@@ -24,6 +24,7 @@ $formDefaults = array(
 ?>
 <?php echo $this->Form->create('Visit', $formDefaults); ?>
 <h3>Vitals and Labs</h3>
+<?php echo $this->Form->bootstrapRadioYesNo('metric_system', array('Metric', 'Imperial')) ?>
 <?php echo $this->Form->input('weight', array('label' => array('class' => 'col-lg-1 control-label', 'text' => '<font color="red">* </font>Weight'))) ?>
 <?php echo $this->Form->input('height', array('label' => array('class' => 'col-lg-1 control-label', 'text' => '<font color="red">* </font>Height'))) ?>
 <?php echo $this->Form->input('A1c', array('label' => array('class' => 'col-lg-1 control-label', 'text' => '<font color="red">* </font>A1C'))) ?>

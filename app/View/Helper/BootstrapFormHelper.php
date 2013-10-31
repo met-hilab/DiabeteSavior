@@ -63,14 +63,21 @@ class BootstrapFormHelper extends FormHelper {
   }
 
   public function input($fieldName, $options = array()) {
+    $fieldNameShort = $fieldName;
+    if(strstr($fieldName, '.')) {
+      $fullName = explode('.', $fieldName);
+      $model = $fullName[0];
+      $fieldNameShort = end($fullName);
+    }
     $defaults = array(
-      'placeholder' => Inflector::humanize($fieldName)
+      'placeholder' => Inflector::humanize($fieldNameShort)
     );
     $options = Set::merge($defaults, $options);
     return parent::input($fieldName, $options);
   }
-
   public function bootstrapRadioYesNo($fieldName, $attributes = array()) {
+  }
+  public function bootstrapRadio($fieldName, $options, $attributes = array()) {
     $inputDefaults = $this->_inputDefaults;
     $optYesNo = array('Yes' => 'yes', 'No' => 'no');
     $optDefault = 'no';
@@ -116,6 +123,8 @@ class BootstrapFormHelper extends FormHelper {
     $options = Set::merge($defaults, $options);
     return parent::submit($value, $options);
   }
+
+  
 
   public function date($fieldName, $options = array()) {
     $defaults = $this->_myInputDefaults;
