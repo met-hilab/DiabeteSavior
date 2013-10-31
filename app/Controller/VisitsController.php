@@ -61,7 +61,8 @@ class VisitsController extends AppController {
 	public function add(){	
 		$this->Session->delete('visit_id');
 
- 		$p_id = $this->Session->read('patient_id');
+ 		//$p_id = $this->Session->read('patient_id');
+ 		$p_id = '01';
  		$patient = $this->Visit->Patient->findById($p_id);
  		$this->set('patient', $patient);
  	    $this->Session->write('patient', $patient);
@@ -90,7 +91,6 @@ class VisitsController extends AppController {
             	if ($height_units == "Inch" && $weight_units == "Lb"){
                 	$bmi = round((703*$weight/$height/$height),1);
             	};
-            	//pr($bmi); exit;
 				$bps = $vitals_labs['bps'];
 				$bpd = $vitals_labs['bpd'];
 				$A1c = $vitals_labs['A1c'];
@@ -174,10 +174,9 @@ class VisitsController extends AppController {
 					'praml' => $praml);
 				$this->Visit->Patient->DrugAllergy->create();
 				if($this->Visit->Patient->DrugAllergy->save($data)){
+					$this->Session->setFlash('Visit added successfully!');
 					$this->redirect(array('action'=>'current'));
 				};
-
-			/*diagnoses table*/
 		        
 			}else {
 				$this->Session->setFlash('Sorry, add visit failed.');
@@ -223,103 +222,63 @@ class VisitsController extends AppController {
 		}
 	}	
 
- // /**
- // * Displays a show visit
- // *
- // * @param mixed What page to display
- // * @return void
- // * @throws NotFoundException When the view file could not be found
- // *  or MissingViewException in debug mode.
- // */       	
-	// public function show(){
-	// 	$p_id = $this->Session->read('patient_id');
-	// 	try{
-	// 		$patient = $this->Visit->Patient->findById($p_id);
-	// 		$this->set('patient', $patient);
- //      		$this->Session->write('patient_id', $p_id);
-	// 	}catch(NotFoundException $e){
-	// 		throw $e;
-	// 	}
-
- //    	//$v_id = $this->Session->read('visit_id');
- //    	$v_id = 1;
-	// 	try{
-	// 		$vitals_labs = $this->Visit->VitalsLab->findById($v_id);
-	// 		$this->set('vitals_labs', $vitals_labs);
-
-	// 		$treatments = $this->Visit->Treatment->findById($v_id);
-	// 		$this->set('treatments', $treatments);
-
-	// 		$medhistory_complaints = $this->Visit->MedhistoryComplaint->findById($v_id);
-	// 		$this->set('medhistory_complaints', $medhistory_complaints);
-
-	// 		$drug_allergies = $this->Visit->Patient->DrugAllergy->findById($p_id);
-	// 		$this->set('drug_allergies', $drug_allergies);
-
- //      		$this->Session->write('visit_id', $v_id);
-	// 	}catch(NotFoundException $e){
-	// 		throw $e;
-	// 	}
-	// }	
-	
-/**
- * Displays a view
- *
- * @param mixed What page to display
- * @return void
- * @throws NotFoundException When the view file could not be found
- *	or MissingViewException in debug mode.
- */
-	public function display() {
-		$path = func_get_args();
-		$this->set('title', "Title");
-	
-		$count = count($path);
-		if (!$count) {
-			return $this->redirect('/');
-		}
-		$page = $subpage = $title_for_layout = null;
-	
-		if (!empty($path[0])) {
-			$page = $path[0];
-		}
-		if (!empty($path[1])) {
-			$subpage = $path[1];
-		}
-		if (!empty($path[$count - 1])) {
-			$title_for_layout = Inflector::humanize($path[$count - 1]);
-		}
-		$this->set(compact('page', 'subpage', 'title_for_layout'));
-	
-		try {
-			$this->render(implode('/', $path));
-		} catch (MissingViewException $e) {
-			if (Configure::read('debug')) {
-				throw $e;
-			} 
-			throw new NotFoundException();
-		}
-	}
-/**
- * Displays a view
+ /**
+ * Displays a show visit
  *
  * @param mixed What page to display
  * @return void
  * @throws NotFoundException When the view file could not be found
  *  or MissingViewException in debug mode.
- */
-	public function show($id = null){
-		    //$id = $this->Session->read('visit_id');
-    
+ */       	
+	public function show(){
+		$p_id = $this->Session->read('patient_id');
 		try{
-			$visit = $this->Visit->findById($id);
-			$this->set('visit', $visit);
-      $this->Session->write('visit', $visit);
-      $this->Session->write('visit_id', $id);
+			$patient = $this->Visit->Patient->findById($p_id);
+			$this->set('patient', $patient);
+      		$this->Session->write('patient_id', $p_id);
 		}catch(NotFoundException $e){
 			throw $e;
 		}
-	}
+
+    	$v_id = $this->Session->read('visit_id');
+		try{
+			$vitals_labs = $this->Visit->VitalsLab->findByVisit_id($v_id);
+			$this->set('vitals_labs', $vitals_labs);
+
+			$treatments = $this->Visit->Treatment->findByVisit_id($v_id);
+			$this->set('treatments', $treatments);
+
+			$medhistory_complaints = $this->Visit->MedhistoryComplaint->findByVisit_id($v_id);
+			$this->set('medhistory_complaints', $medhistory_complaints);
+
+			$drug_allergies = $this->Visit->Patient->DrugAllergy->findByPatient_id($p_id);
+			$this->set('drug_allergies', $drug_allergies);
+
+      		$this->Session->write('visit_id', $v_id);
+		}catch(NotFoundException $e){
+			throw $e;
+		}
+	}	
+	
+// /**
+//  * Displays a show visit
+//  *
+//  * @param mixed What page to display
+//  * @return void
+//  * @throws NotFoundException When the view file could not be found
+//  *  or MissingViewException in debug mode.
+//  */
+// 	public function show($id = null){
+// 		    //$id = $this->Session->read('visit_id');   
+// 		try{
+// 			$visit = $this->Visit->findById($id);
+// 			$this->set('visit', $visit);
+//       		$this->Session->write('visit', $visit);
+//    		    $this->Session->write('visit_id', $id);
+// 		}catch(NotFoundException $e){
+// 			throw $e;
+// 		}
+// 	}
 
 // Medicine list
 // "Metformin", "GLP_1RA", "DPP4_i", "AG_i", "SGLT_2","TZD", "SU_GLN",  "BasalInsulin", "Colesevelam",
@@ -333,7 +292,7 @@ class VisitsController extends AppController {
         echo $v_id;
     	$t_id = $this->Session->read('treatment_id');
     	//$t_id = 1;
-       // echo $t_id;
+        //echo $t_id;
 
     /* set A1C values */
         $vitals_labs = $this->Visit->VitalsLab->find('all', array(
@@ -341,9 +300,7 @@ class VisitsController extends AppController {
         	'fields' => 'VitalsLab.A1c',
         	'order' => 'VitalsLab.modified DESC'));
         $A1C = $vitals_labs[0]['VitalsLab']['A1c'];  //current a1c value
-        //pr($A1C); exit;
         $A1Clast = $vitals_labs[1]['VitalsLab']['A1c'];  // last a1c value
-        //pr($A1Clast); exit;
         $this->Algorithm->setA1C($A1C);
         $this->Algorithm->setA1Clast($A1Clast);
 
@@ -352,14 +309,12 @@ class VisitsController extends AppController {
         	'fields' => 'Treatment.a1c_goal',
         	'order' => 'Treatment.modified DESC'));
         $A1CTarget = $treatments[0]['Treatment']['a1c_goal'];  //current a1c_goal value
-        //pr($A1CTarget); exit;
         $this->Algorithm->setA1CTarget($A1CTarget);
 
         $this->Algorithm->setSymptoms(false);       // diabetes symptoms - only used for insulin therapy
 
     /* set allergies */
         $drug_allergies = $this->Visit->Patient->DrugAllergy->findById($p_id);  //current patient's drug allergies
-        //pr($drug_allergies); exit;
         $Metformin = $drug_allergies['DrugAllergy']['met'];
         $GLP_1RA = $drug_allergies['DrugAllergy']['glp_1ra'];
         $DPP4_i = $drug_allergies['DrugAllergy']['dpp_4i'];
@@ -425,7 +380,29 @@ class VisitsController extends AppController {
         $this->set('medicine1', $med1);
         $this->set('medicine2', $med2);
         $this->set('medicine3', $med3);
+
+        if ($this->request->is('post')) {
+			$data = array(
+				'treatment_id' => $t_id,
+				'medicine_name_one' => $med1,
+				'medicine_name_two' => $med2,
+				'medicine_name_three' => $med3,
+				'edited_by_user' => 'no');			
+			$this->Visit->Treatment->TreatmentRunAlgorithm->create();
+			if($this->Visit->Treatment->TreatmentRunAlgorithm->save($data)){
+				$this->Session->setFlash('Algorithm results accepted successfully!');
+                $this->redirect(array('action'=>'show'));
+            }else{
+                $this->Session->setFlash('Sorry, accept algorithm results failed.');
+            }
+        }
     }
+
+    public function edit(){
+
+
+    }
+
 
 }
 

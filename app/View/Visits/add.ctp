@@ -289,8 +289,6 @@
   </div>
 </div>
 
-<!-- diagnoses -->
-
 <div class="control-group">
   <label class="col-lg-1 control-label" for="singlebutton"></label>
   <div class="col-lg-4">
