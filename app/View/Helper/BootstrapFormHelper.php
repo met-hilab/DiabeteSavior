@@ -33,7 +33,7 @@ class BootstrapFormHelper extends FormHelper {
 
   protected $_myInputDefaults = array(
     'class' => 'form-control',
-    'format' => array('div', 'label', 'input', 'error'),
+    'format' => array('div', 'label', 'between', 'input', 'error', 'after'),
     'div' => array('class' => 'form-group'),
     'label' => array('class' => 'control-label'),
     'between' => '',
@@ -47,6 +47,7 @@ class BootstrapFormHelper extends FormHelper {
   );
 
   public function create($model, $options = array()) {
+    $this->_inputDefaults = $this->_myInputDefaults;
     $defaults = $this->_defaults;
     $options = Set::merge($defaults, $options);
     return parent::create($model, $options);

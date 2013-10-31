@@ -117,6 +117,7 @@ public function index(){
     if ($this->request->is('post')){
       $patient = $this->request->data;
       $patient['Patient']['user_id'] = $uid;
+      $patient['Patient']['dob'] = date("Y-m-d", strtotime($patient['Patient']['dob']));
       $this->Patient->create();
 
       if($this->Patient->save($patient)){
@@ -126,6 +127,8 @@ public function index(){
         $this->Session->setFlash('Patient was added. Please save the patient ID so you can search for the patient later');
         $this->redirect(array('action'=>'show'));
       }else{
+        $errors = $this->Patient->invalidFields(); 
+        var_dump($error);
         $this->Session->setFlash('Patient is not saved.');
       }
     } else {
@@ -191,6 +194,7 @@ public function index(){
     if($this->Patient->exists()){
       if($this->request->is('post') || $this->request->is('put')){
         $data = $this->request->data;
+        $data['Patient']['dob'] = date("Y-m-d", strtotime($data['Patient']['dob']));
         //save patient
         if($this->Patient->save($data)){
           $this->Session->setFlash('Patient was edited.');
