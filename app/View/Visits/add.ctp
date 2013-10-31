@@ -1,31 +1,41 @@
-<?php
-  $formAttributes = array(
-    'inputDefaults' => array(
-      'format' => array('div', 'label', 'between', 'input', 'after'),
-      'label' => array('class' => 'col-lg-1 control-label'),
-      'between' => '<div class="col-lg-4">',
-      'after' => '</div>'
-    ),
-    'radioDefaults' => array('legend' => false)
-  );
-  $radioAttributes = array(
-    'legend' => false,
-    'label' => true,
-    'separator' => '&nbsp;&nbsp;&nbsp;'
-  );
-  $textareaAttributes = array(
-    'class' => 'form-control',
-    'row' => 5
-  );
-
-?>
-<style>
-.radio-container {
-  padding-top: 7px;
-}
-</style>
 <h2>Add Visit</h2>
-<!-- Never, never, never load jquery here... -->
+<!-- Load jQuery and the validate plugin -->
+  <script src="//code.jquery.com/jquery-1.9.1.js"></script>
+  <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
+  
+  <!-- jQuery Form Validation code -->
+  <script type="text/javascript">
+  
+  // When the browser is ready...
+  $(function() {
+  
+    // Setup form validation on the #add_patient element
+    $("#add_visit").validate({
+    
+        // Specify the validation rules
+        rules: {
+            weight: "required",
+            height: "required",
+            
+            
+        },
+        
+        // Specify the validation error messages
+        messages: {
+            weight: "Please enter your weight",
+            height: "Please enter you height",
+            
+          
+        },
+        
+        submitHandler: function(form) {
+            form.submit();
+        }
+    });
+
+  });
+  
+  </script>
 <div>
 <?php
     echo "Patient ID: ".$patient['Patient']['patient_number']."<br>";
@@ -34,97 +44,8 @@
     echo "DOB: ".$patient['Patient']['dob']."<br>";
 ?>
 </div>
+                      
 <hr>
-<?php echo $this->Form->create('Visit', $formAttributes); ?>
-<?php echo $this->Form->hidden('id') ?>
-<!-- vitals_labs -->
-<h3>Vitals and Labs</h3>
-<?php echo $this->Form->hidden('VitalsLab.id') ?>
-<?php echo $this->Form->input('VitalsLab.weight') ?>
-<?php echo $this->Form->input('VitalsLab.height') ?>
-<?php echo $this->Form->input('VitalsLab.A1c') ?>
-<?php echo $this->Form->input('VitalsLab.bps') ?>
-<?php echo $this->Form->input('VitalsLab.bpd') ?>
-<?php echo $this->Form->input('VitalsLab.eGFR') ?>
-<div class="form-group">
-  <?php echo $this->Form->label('VitalsLabs.notes', null, $formAttributes['inputDefaults']['label']); ?>
-  <div class="col-lg-4">
-    <?php echo $this->Form->textarea('VitalsLabs.notes', $textareaAttributes); ?>
-  </div>
-</div>
-
-<!-- treatments -->
-<h3>Therapy Goals</h3>
-<?php echo $this->Form->hidden('Treatment.id') ?>
-<?php echo $this->Form->input('Treatment.a1c_goal') ?>
-<?php echo $this->Form->input('Treatment.weight_goal') ?>
-<hr>
-
-<!-- medhistory_complaints -->
-<h3>Medical History and Complaints</h3>
-<div class="form-group">
-  <?php echo $this->Form->label('MedhistoryComplaint.complaints', null, $formAttributes['inputDefaults']['label']); ?>
-  <div class="col-lg-4">
-    <?php echo $this->Form->textarea('MedhistoryComplaint.complaints', $textareaAttributes); ?>
-  </div>
-</div>
-
-<div class="form-group">
-  <label class="col-lg-1 control-label">Hypo</label>
-  <div class="col-lg-4 radio-container">
-    <?php echo $this->Form->radio('hypo', $this->Form->optionsYesNo, $radioAttributes); ?>
-  </div>
-</div>
-
-<!-- drug_allergies -->
-<h3>Drug Allergies</h3>
-
-<div class="form-group">
-  <label class="col-lg-1 control-label"></label>
-  <div class="col-lg-4">
-  <?php echo $this->Form->submit(); ?>
-  </div>
-</div>
-<?php echo $this->Form->end(); ?>
-<!-- jQuery Form Validation code -->
-<script type="text/javascript">
-
-// When the browser is ready...
-$(function() {
-
-  // Setup form validation on the #add_patient element
-  $("#add_visit").validate({
-  
-      // Specify the validation rules
-      rules: {
-          weight: "required",
-          height: "required",
-          
-          
-      },
-      
-      // Specify the validation error messages
-      messages: {
-          weight: "Please enter your weight",
-          height: "Please enter you height",
-          
-        
-      },
-      
-      submitHandler: function(form) {
-          form.submit();
-      }
-  });
-
-});
-
-</script>
-
-
-<!-- TODO: DELETE BELOW -->
-
-
-
 
 <form id="add_visit" class="form-horizontal" role="form" action="/visits/add" method="post">
 <?php
@@ -193,7 +114,21 @@ $(function() {
 
 <hr>
 
+<!-- treatments -->
+<h3>Therapy Goals</h3>
+<div class="form-group">
+  <label class="col-lg-1 control-label" for="a1c_goal"><font color="red">* </font>A1c Goal</label>
+  <div class="col-lg-4">
+    <input id="a1c_goal" name="a1c_goal" type="text" placeholder="a1c_goal" class="form-control">   
+  </div>
+</div>
 
+<div class="form-group">
+  <label class="col-lg-1 control-label" for="weight_goal"><font color="red">* </font>Weight Goal</label>
+  <div class="col-lg-4">
+    <input id="weight_goal" name="weight_goal" type="text" placeholder="weight_goales" class="form-control">   
+  </div>
+</div>
 
 <hr>
 
@@ -363,4 +298,5 @@ $(function() {
   </div>
 </div>
 </form>
-
+<br/>
+<br/>

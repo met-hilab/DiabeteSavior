@@ -1,1 +1,1 @@
-<?php echo $this->element('user_form'); ?>
+<?php echo $this->element('user_sign_up_form'); ?>
