@@ -40,6 +40,8 @@ class BootstrapFormHelper extends FormHelper {
     'after' => ''
     //'error' => array('attributes' => array('wrap' => 'span', 'class' => 'help-inline')),
   );
+
+  protected $_model = '';
   
   private $_defaults = array(
     'class' => 'form-horizontal',
@@ -56,6 +58,7 @@ class BootstrapFormHelper extends FormHelper {
       unset($options['inputDefaults']);
     }
     $options = Set::merge($defaults, $options);
+    $this->_model = $model;
     return parent::create($model, $options);
   }
 
@@ -67,6 +70,45 @@ class BootstrapFormHelper extends FormHelper {
     return parent::input($fieldName, $options);
   }
 
+  public function bootstrapRadioYesNo($fieldName, $attributes = array()) {
+    $inputDefaults = $this->_inputDefaults;
+    $optYesNo = array('Yes' => 'yes', 'No' => 'no');
+    $optDefault = 'no';
+    $separator = '&nbsp;&nbsp;&nbsp;';
+    $model = $this->_model;
+    $fieldNameShort = $fieldName;
+    if(strstr($fieldName, '.')) {
+      $fullName = explode('.', $fieldName);
+      $model = $fullName[0];
+      $fieldNameShort = end($fullName);
+    }
+
+    $attributes['label']['class'] = is_string($attributes['label']['class']) ? $attributes['label']['class'] : $inputDefaults['label']['class'];
+    $attributes['div']['class'] = is_string($attributes['div']['class']) ? $attributes['div']['class'] : $inputDefaults['div']['class'];
+    $attributes['label']['text'] = is_string($attributes['label']['text']) ? $attributes['label']['text'] : Inflector::humanize($fieldNameShort);
+    
+
+
+    $divOpen = '<div class="' . $attributes['div']['class'] . '">';
+    $divClose = '</div>';
+    $label = '<label class="' . $attributes['label']['class'] . '">' . $attributes['label']['text'] . '</label>';
+    $between .= $attributes['between'];
+
+    $out = '';
+    foreach($optYesNo as $k => $v) {
+      $name = $fieldNameShort;
+      $id = $model.$fieldNameShort.$v;
+      $checked = '';
+      if($v == $optDefault) {
+        $checked = 'checked="checked"';
+      }
+      $out .= '<label><input name="data['.$model.']['.$name.']" id="'.$id.'" type="radio" value="' . $v . '" ' . $checked . '>' . $k . '</label>';
+      $out .= $separator;
+    }
+    $after = $attributes['after'];
+    $out = $divOpen . $label . $between . $out . $after . $divClose;
+    return $out;
+  }
   public function submit($value = 'Save', $options = array()) {
     $defaults = array(
       'class' => 'btn btn-primary'

@@ -11,14 +11,15 @@
                       
 <hr>
 <?php
+$inputDefaults = array(
+  'format' => array('div', 'label', 'between', 'input', 'after'),
+  'div' => array('class' => 'form-group'),
+  'label' => array('class' => 'col-lg-1 control-label'),
+  'between' => '<div class="col-lg-4">',
+  'after' => '</div>'
+);
 $formDefaults = array(
-  'inputDefaults' => array(
-    'format' => array('div', 'label', 'between', 'input', 'after'),
-    'div' => array('class' => 'form-group'),
-    'label' => array('class' => 'col-lg-1 control-label'),
-    'between' => '<div class="col-lg-4">',
-    'after' => '</div>'
-  )
+  'inputDefaults' => $inputDefaults
 );
 ?>
 <?php echo $this->Form->create('Visit', $formDefaults); ?>
@@ -40,28 +41,28 @@ $formDefaults = array(
 <!-- medhistory_complaints -->
 <h3>Medical History and Complaints</h3>
 <?php echo $this->Form->input('MedhistoryComplaint.complaints', array('label' => array('class' => 'col-lg-1 control-label', 'text' => '<font color="red">* </font>Chef Complaint'))) ?>
-<?php echo $this->Form->input('MedhistoryComplaint.hypo') ?>
-<?php echo $this->Form->input('MedhistoryComplaint.weight_gain') ?>
-<?php echo $this->Form->input('MedhistoryComplaint.renal_gu') ?>
-<?php echo $this->Form->input('MedhistoryComplaint.gi_sx') ?>
-<?php echo $this->Form->input('MedhistoryComplaint.chf') ?>
-<?php echo $this->Form->input('MedhistoryComplaint.cvd') ?>
-<?php echo $this->Form->input('MedhistoryComplaint.bone') ?>
+<?php echo $this->Form->bootstrapRadioYesNo('MedhistoryComplaint.hypo', $inputDefaults) ?>
+<?php echo $this->Form->bootstrapRadioYesNo('MedhistoryComplaint.weight_gain', $inputDefaults) ?>
+<?php echo $this->Form->bootstrapRadioYesNo('MedhistoryComplaint.renal_gu', $inputDefaults) ?>
+<?php echo $this->Form->bootstrapRadioYesNo('MedhistoryComplaint.gi_sx', $inputDefaults) ?>
+<?php echo $this->Form->bootstrapRadioYesNo('MedhistoryComplaint.chf', $inputDefaults) ?>
+<?php echo $this->Form->bootstrapRadioYesNo('MedhistoryComplaint.cvd', $inputDefaults) ?>
+<?php echo $this->Form->bootstrapRadioYesNo('MedhistoryComplaint.bone', $inputDefaults) ?>
 
 <hr>
 <!-- drug_allergies -->
 <h3>Drug Allergies</h3>
-<?php echo $this->Form->input('DrugAllergie.met') ?>
-<?php echo $this->Form->input('DrugAllergie.dpp_4i') ?>
-<?php echo $this->Form->input('DrugAllergie.glp_1ra') ?>
-<?php echo $this->Form->input('DrugAllergie.tzd') ?>
-<?php echo $this->Form->input('DrugAllergie.agi') ?>
-<?php echo $this->Form->input('DrugAllergie.colsvl') ?>
-<?php echo $this->Form->input('DrugAllergie.bcr_or') ?>
-<?php echo $this->Form->input('DrugAllergie.su_gln') ?>
-<?php echo $this->Form->input('DrugAllergie.insulin') ?>
-<?php echo $this->Form->input('DrugAllergie.sglt_2') ?>
-<?php echo $this->Form->input('DrugAllergie.praml') ?>
+<?php echo $this->Form->bootstrapRadioYesNo('DrugAllergie.met', $inputDefaults) ?>
+<?php echo $this->Form->bootstrapRadioYesNo('DrugAllergie.dpp_4i', $inputDefaults) ?>
+<?php echo $this->Form->bootstrapRadioYesNo('DrugAllergie.glp_1ra', $inputDefaults) ?>
+<?php echo $this->Form->bootstrapRadioYesNo('DrugAllergie.tzd', $inputDefaults) ?>
+<?php echo $this->Form->bootstrapRadioYesNo('DrugAllergie.agi', $inputDefaults) ?>
+<?php echo $this->Form->bootstrapRadioYesNo('DrugAllergie.colsvl', $inputDefaults) ?>
+<?php echo $this->Form->bootstrapRadioYesNo('DrugAllergie.bcr_or', $inputDefaults) ?>
+<?php echo $this->Form->bootstrapRadioYesNo('DrugAllergie.su_gln', $inputDefaults) ?>
+<?php echo $this->Form->bootstrapRadioYesNo('DrugAllergie.insulin', $inputDefaults) ?>
+<?php echo $this->Form->bootstrapRadioYesNo('DrugAllergie.sglt_2', $inputDefaults) ?>
+<?php echo $this->Form->bootstrapRadioYesNo('DrugAllergie.praml', $inputDefaults) ?>
 
 <div class="form-group">
   <label class="col-lg-1 control-label" for="weight"></label>
