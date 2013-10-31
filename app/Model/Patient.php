@@ -153,7 +153,6 @@ class Patient extends AppModel {
  *
  * @var array
  */
-<<<<<<< HEAD
   public $hasMany = array(
     
     'Diagnosis' => array(
@@ -199,49 +198,6 @@ class Patient extends AppModel {
       'counterQuery' => ''
     )
     );
-=======
-	public $hasMany = array(
-		'Diagnosis' => array(
-			'className' => 'Diagnosis',
-			'foreignKey' => 'patient_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		),
-		'DrugAllergy' => array(
-			'className' => 'DrugAllergy',
-			'foreignKey' => 'patient_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		),
-		'Visit' => array(
-			'className' => 'Visit',
-			'foreignKey' => 'patient_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		)
-	);
->>>>>>> parent of 0a99518... Patient view page
 /**
  * generate the patient_number (imcompletely)
  */  
