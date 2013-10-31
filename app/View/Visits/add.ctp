@@ -1,41 +1,5 @@
-<h2>Add Visit</h2>
-<!-- Load jQuery and the validate plugin -->
-  <script src="//code.jquery.com/jquery-1.9.1.js"></script>
-  <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
+<h2>Add Visit</h2>  
   
-  <!-- jQuery Form Validation code -->
-  <script type="text/javascript">
-  
-  // When the browser is ready...
-  $(function() {
-  
-    // Setup form validation on the #add_patient element
-    $("#add_visit").validate({
-    
-        // Specify the validation rules
-        rules: {
-            weight: "required",
-            height: "required",
-            
-            
-        },
-        
-        // Specify the validation error messages
-        messages: {
-            weight: "Please enter your weight",
-            height: "Please enter you height",
-            
-          
-        },
-        
-        submitHandler: function(form) {
-            form.submit();
-        }
-    });
-
-  });
-  
-  </script>
 <div>
 <?php
     echo "Patient ID: ".$patient['Patient']['patient_number']."<br>";
@@ -46,6 +10,24 @@
 </div>
                       
 <hr>
+<?php
+$formDefaults = array(
+  'inputDefaults' => array(
+    'format' => array('div', 'label', 'between', 'input', 'after'),
+    'div' => array('class' => 'form-group'),
+    'label' => array('class' => 'col-lg-1 control-label'),
+    'between' => '<div class="col-lg-4">',
+    'after' => '</div>'
+  )
+);
+?>
+<?php echo $this->Form->create('Visit', $formDefaults); ?>
+<?php echo $this->Form->input('weight') ?>
+
+<?php echo $this->Form->submit('Save'); ?>
+<?php echo $this->Form->end(); ?>
+
+
 
 <form id="add_visit" class="form-horizontal" role="form" action="/visits/add" method="post">
 <?php
@@ -298,3 +280,39 @@
 </form>
 <br/>
 <br/>
+
+
+
+<!-- jQuery Form Validation code -->
+  <script type="text/javascript">
+  
+  // When the browser is ready...
+  $(function() {
+  
+    // Setup form validation on the #add_patient element
+    $("#add_visit").validate({
+    
+        // Specify the validation rules
+        rules: {
+            weight: "required",
+            height: "required",
+            
+            
+        },
+        
+        // Specify the validation error messages
+        messages: {
+            weight: "Please enter your weight",
+            height: "Please enter you height",
+            
+          
+        },
+        
+        submitHandler: function(form) {
+            form.submit();
+        }
+    });
+
+  });
+  
+  </script>

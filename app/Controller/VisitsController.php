@@ -72,7 +72,12 @@ class VisitsController extends AppController {
 			$data = array('patient_id' => $p_id);
 			$this->Visit->create();
 			
-			if($this->Visit->save($data)){
+			if($this->Visit->saveAssociated($this->request->data)) {
+
+      }
+
+
+      if(false) {
 				$v_id = $this->Visit->getLastInsertId();
         		//$visit = $this->Visit->findById($id);
         		//$this->Session->write('visit', $visit);
@@ -101,6 +106,7 @@ class VisitsController extends AppController {
 					'weight' => $weight,
 					'height' => $height,
 					'bps' => $bps,
+          'bpd' => $bpd,
 					'bmi' => $bmi,
 					'A1c' => $A1c,
 					'eGFR' => $eGFR,
@@ -222,7 +228,7 @@ class VisitsController extends AppController {
 		}
 	}	
 
-<<<<<<< HEAD
+
  /**
  * Displays a show visit
  *
@@ -280,91 +286,31 @@ class VisitsController extends AppController {
 // 			throw $e;
 // 		}
 // 	}
-=======
- // /**
- // * Displays a show visit
- // *
- // * @param mixed What page to display
- // * @return void
- // * @throws NotFoundException When the view file could not be found
- // *  or MissingViewException in debug mode.
- // */       	
-	// public function show(){
-	// 	$p_id = $this->Session->read('patient_id');
-	// 	try{
-	// 		$patient = $this->Visit->Patient->findById($p_id);
-	// 		$this->set('patient', $patient);
- //      		$this->Session->write('patient_id', $p_id);
-	// 	}catch(NotFoundException $e){
-	// 		throw $e;
-	// 	}
 
- //    	//$v_id = $this->Session->read('visit_id');
- //    	$v_id = 1;
-	// 	try{
-	// 		$vitals_labs = $this->Visit->VitalsLab->findById($v_id);
-	// 		$this->set('vitals_labs', $vitals_labs);
-
-	// 		$treatments = $this->Visit->Treatment->findById($v_id);
-	// 		$this->set('treatments', $treatments);
-
-	// 		$medhistory_complaints = $this->Visit->MedhistoryComplaint->findById($v_id);
-	// 		$this->set('medhistory_complaints', $medhistory_complaints);
-
-	// 		$drug_allergies = $this->Visit->Patient->DrugAllergy->findById($p_id);
-	// 		$this->set('drug_allergies', $drug_allergies);
-
- //      		$this->Session->write('visit_id', $v_id);
-	// 	}catch(NotFoundException $e){
-	// 		throw $e;
-	// 	}
-	// }	
-	
-/**
- * Displays a view
- *
- * @param mixed What page to display
- * @return void
- * @throws NotFoundException When the view file could not be found
- *	or MissingViewException in debug mode.
- */
-	public function display() {
-		$path = func_get_args();
-		$this->set('title', "Title");
-	
-		$count = count($path);
-		if (!$count) {
-			return $this->redirect('/');
-		}
-		$page = $subpage = $title_for_layout = null;
-	
-		if (!empty($path[0])) {
-			$page = $path[0];
-		}
-		if (!empty($path[1])) {
-			$subpage = $path[1];
-		}
-		if (!empty($path[$count - 1])) {
-			$title_for_layout = Inflector::humanize($path[$count - 1]);
-		}
-		$this->set(compact('page', 'subpage', 'title_for_layout'));
-	
-		try {
-			$this->render(implode('/', $path));
-		} catch (MissingViewException $e) {
-			if (Configure::read('debug')) {
-				throw $e;
-			} 
-			throw new NotFoundException();
-		}
-	}
-
->>>>>>> parent of 0a99518... Patient view page
 
 // Medicine list
 // "Metformin", "GLP_1RA", "DPP4_i", "AG_i", "SGLT_2","TZD", "SU_GLN",  "BasalInsulin", "Colesevelam",
 // "Bromocriptine-QR"
-    public function gcalgorithm(){        
+    public function gcalgorithm(){
+
+
+      $data = array('TreatmentRunAlgorithm' => array(
+        'treatment_id' => '',
+        'type' => '',
+        'recommendations' => '',
+        'medicine_name_one' => '',
+        'dose_one' => '',
+        'medicine_name_two' => '',
+        'dose_two' => '',
+        'medicine_name_three' => '',
+        'dose_three' => '',
+        'edited_by_user' => ''
+      ));
+      $this->request->data = $data;
+      return true;
+      
+
+
         $p_id = $this->Session->read('patient_id');
         echo $p_id;
         //$p_id = '01';
