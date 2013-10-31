@@ -25,8 +25,15 @@
 		"<strong>'{$url}'</strong>"
 	); ?>
 </p>
-<?php
-if (Configure::read('debug') > 0):
-	echo $this->element('exception_stack_trace');
-endif;
-?>
+
+
+<?php if ($error instanceof ForbiddenException) { ?>
+
+    <h4>Whoops! The page you attempted to access 
+        requires permissions that you don't have.</h4>  
+
+<?php } else { ?>
+
+    <h4>Whoops! We couldn't find the page <?php echo $url ?> you were looking for, sorry!</h4> 
+
+<?php } ?>

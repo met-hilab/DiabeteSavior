@@ -79,8 +79,10 @@ date_default_timezone_set("America/New_York");
 	Configure::write('Exception', array(
 		'handler' => 'ErrorHandler::handleException',
 		'renderer' => 'ExceptionRenderer',
+		//'renderer' => 'AppExceptionRenderer',
 		'log' => true
 	));
+
 
 /**
  * Application wide charset encoding
