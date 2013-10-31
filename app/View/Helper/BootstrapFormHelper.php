@@ -47,8 +47,15 @@ class BootstrapFormHelper extends FormHelper {
   );
 
   public function create($model, $options = array()) {
-    $this->_inputDefaults = $this->_myInputDefaults;
+    //$this->_inputDefaults = $this->_myInputDefaults;
     $defaults = $this->_defaults;
+    $defaults['inputDefaults'] = $this->_myInputDefaults;
+    if(is_array($options['inputDefaults'])) {
+      foreach($options['inputDefaults'] as $k => $v) {
+        $defaults['inputDefaults'][$k] = $v;
+      }
+      unset($options['inputDefaults']);
+    }
     $options = Set::merge($defaults, $options);
     return parent::create($model, $options);
   }
@@ -57,7 +64,7 @@ class BootstrapFormHelper extends FormHelper {
     $defaults = array(
       'placeholder' => Inflector::humanize($fieldName)
     );
-    $defaults = Set::merge($this->_myInputDefaults, $defaults);
+    //$defaults = Set::merge($this->_myInputDefaults, $defaults);
     $options = Set::merge($defaults, $options);
     return parent::input($fieldName, $options);
   }
