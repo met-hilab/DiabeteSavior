@@ -43,7 +43,6 @@ class BootstrapFormHelper extends FormHelper {
   
   private $_defaults = array(
     'class' => 'form-horizontal',
-    //'inputDefaults' => BootstrapFormHelper::_inputDefaults
   );
 
   public function create($model, $options = array()) {
@@ -64,7 +63,6 @@ class BootstrapFormHelper extends FormHelper {
     $defaults = array(
       'placeholder' => Inflector::humanize($fieldName)
     );
-    //$defaults = Set::merge($this->_myInputDefaults, $defaults);
     $options = Set::merge($defaults, $options);
     return parent::input($fieldName, $options);
   }
