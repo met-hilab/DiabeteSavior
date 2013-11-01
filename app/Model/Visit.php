@@ -47,8 +47,8 @@ class Visit extends AppModel {
 			),
 		),
 		'patient_id' => array(
-			'alphanumeric' => array(
-				'rule' => array('alphanumeric'),
+			'notempty' => array(
+				'rule' => array('notempty'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,

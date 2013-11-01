@@ -136,6 +136,26 @@ public function index(){
     }
   }
 
+  public function setPatientId() {
+    $res = new stdClass;
+    $res->status = false;
+    $id = $this->request->data['patient_id'];
+    $patient = $this->Patient->findById($id);
+    if($patient) {
+      $patient = $patient['Patient'];
+      $this->Session->write('patient', $patient);
+      $this->Session->write('patient_id', $id);
+      $res->status = true;
+    } else {
+      $this->Session->delete('patient');
+      $this->Session->delete('patient_id');
+      $res->status = false;
+    }
+    $this->autoRender = false;
+    echo json_encode($res);
+    exit;
+  }
+
 /**
  * Search a patient
  *
@@ -169,6 +189,7 @@ public function index(){
         $res->data = $patient;
         $id = $patient['id'];
         $this->Session->write('patient', $patient);
+        // Save patient id into session so we can read from session later.
         $this->Session->write('patient_id', $id);
         $this->set('patient', $patient);
         $this->redirect(array('action'=>'show'));
@@ -222,7 +243,7 @@ public function index(){
  */
   public function show($id = null){
     //this->authenticate_user();
-	$id = $this->Session->read('patient_id');
+    $id = $this->Session->read('patient_id');
     //$this->Session->delete('patient_id');
 
     // native php way.

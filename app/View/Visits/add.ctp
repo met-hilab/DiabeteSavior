@@ -23,24 +23,27 @@ $formDefaults = array(
 );
 ?>
 <?php echo $this->Form->create('Visit', $formDefaults); ?>
+<?php echo $this->Form->hidden('id') ?>
 <h3>Vitals and Labs</h3>
 <?php echo $this->Form->bootstrapRadioYesNo('metric_system', array('Metric', 'Imperial')) ?>
-<?php echo $this->Form->input('weight', array('label' => array('class' => 'col-lg-1 control-label', 'text' => '<font color="red">* </font>Weight'))) ?>
-<?php echo $this->Form->input('height', array('label' => array('class' => 'col-lg-1 control-label', 'text' => '<font color="red">* </font>Height'))) ?>
-<?php echo $this->Form->input('A1c', array('label' => array('class' => 'col-lg-1 control-label', 'text' => '<font color="red">* </font>A1C'))) ?>
-<?php echo $this->Form->input('bps', array('label' => array('class' => 'col-lg-1 control-label', 'text' => '<font color="red">* </font>BPS'))) ?>
-<?php echo $this->Form->input('eGFR') ?>
-<?php echo $this->Form->input('notes') ?>
+<?php echo $this->Form->input('VitalsLabs.weight', array('label' => array('class' => 'col-lg-1 control-label', 'text' => '<font color="red">* </font>Weight'))) ?>
+<?php echo $this->Form->input('VitalsLabs.height', array('label' => array('class' => 'col-lg-1 control-label', 'text' => '<font color="red">* </font>Height'))) ?>
+<?php echo $this->Form->input('VitalsLabs.A1c', array('label' => array('class' => 'col-lg-1 control-label', 'text' => '<font color="red">* </font>A1C'))) ?>
+<?php echo $this->Form->input('VitalsLabs.bps', array('label' => array('class' => 'col-lg-1 control-label', 'text' => '<font color="red">* </font>BPS'))) ?>
+<?php echo $this->Form->input('VitalsLabs.eGFR') ?>
+<?php echo $this->Form->input('VitalsLabs.notes') ?>
 
 <hr>
 <!-- treatments -->
 <h3>Therapy Goals</h3>
+<?php echo $this->Form->hidden('Treatment.id') ?>
 <?php echo $this->Form->input('Treatment.a1c_goal', array('label' => array('class' => 'col-lg-1 control-label', 'text' => '<font color="red">* </font>A1C Goal'))) ?>
 <?php echo $this->Form->input('Treatment.weight_goal', array('label' => array('class' => 'col-lg-1 control-label', 'text' => '<font color="red">* </font>Weight Goal'))) ?>
 
 <hr>
 <!-- medhistory_complaints -->
 <h3>Medical History and Complaints</h3>
+<?php echo $this->Form->hidden('MedhistoryComplaint.id') ?>
 <?php echo $this->Form->input('MedhistoryComplaint.complaints', array('label' => array('class' => 'col-lg-1 control-label', 'text' => '<font color="red">* </font>Chef Complaint'))) ?>
 <?php echo $this->Form->bootstrapRadioYesNo('MedhistoryComplaint.hypo', $inputDefaults) ?>
 <?php echo $this->Form->bootstrapRadioYesNo('MedhistoryComplaint.weight_gain', $inputDefaults) ?>
@@ -53,6 +56,7 @@ $formDefaults = array(
 <hr>
 <!-- drug_allergies -->
 <h3>Drug Allergies</h3>
+<?php echo $this->Form->hidden('DrugAllergie.id') ?>
 <?php echo $this->Form->bootstrapRadioYesNo('DrugAllergie.met', $inputDefaults) ?>
 <?php echo $this->Form->bootstrapRadioYesNo('DrugAllergie.dpp_4i', $inputDefaults) ?>
 <?php echo $this->Form->bootstrapRadioYesNo('DrugAllergie.glp_1ra', $inputDefaults) ?>

@@ -218,7 +218,8 @@ date_default_timezone_set("America/New_York");
  *
  */
 	Configure::write('Session', array(
-		'defaults' => 'php'
+		'defaults' => 'php',
+		'timeout' => '1440'
 	));
 
 /**

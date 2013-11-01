@@ -75,12 +75,16 @@ class BootstrapFormHelper extends FormHelper {
     $options = Set::merge($defaults, $options);
     return parent::input($fieldName, $options);
   }
+
   public function bootstrapRadioYesNo($fieldName, $attributes = array()) {
+    $optYesNo = array('Yes' => 'yes', 'No' => 'no');
+    $attributes['optDefault'] = 'no';
+    return $this->bootstrapRadio($fieldName, $optYesNo, $attributes);
   }
+
   public function bootstrapRadio($fieldName, $options, $attributes = array()) {
     $inputDefaults = $this->_inputDefaults;
-    $optYesNo = array('Yes' => 'yes', 'No' => 'no');
-    $optDefault = 'no';
+    
     $separator = '&nbsp;&nbsp;&nbsp;';
     $model = $this->_model;
     $fieldNameShort = $fieldName;
@@ -94,6 +98,7 @@ class BootstrapFormHelper extends FormHelper {
     $attributes['div']['class'] = is_string($attributes['div']['class']) ? $attributes['div']['class'] : $inputDefaults['div']['class'];
     $attributes['label']['text'] = is_string($attributes['label']['text']) ? $attributes['label']['text'] : Inflector::humanize($fieldNameShort);
     
+    $optDefault = is_string($attributes['optDefault'])?$attributes['optDefault']:'';
 
 
     $divOpen = '<div class="' . $attributes['div']['class'] . '">';
@@ -102,7 +107,7 @@ class BootstrapFormHelper extends FormHelper {
     $between .= $attributes['between'];
 
     $out = '';
-    foreach($optYesNo as $k => $v) {
+    foreach($options as $k => $v) {
       $name = $fieldNameShort;
       $id = $model.$fieldNameShort.$v;
       $checked = '';

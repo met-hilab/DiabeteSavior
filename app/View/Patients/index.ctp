@@ -21,7 +21,7 @@
 <?php foreach($patients as $p) :?>
 <tbody>
   <tr>
-    <td><?php echo $this->Html->link($p['Patient']['patient_number'], array('controller' => 'patients', 'action' => 'show', $p['Patient']['id'])); ?></td>
+    <td><?php echo $this->Html->link($p['Patient']['patient_number'], array('controller' => 'patients', 'action' => 'show')); ?></td>
     <td><?php echo $p['Patient']['patient_firstname'];?></td>
     <td><?php echo $p['Patient']['patient_lastname'];?></td>
     <td><?php echo $p['Patient']['dob'];?></td>
