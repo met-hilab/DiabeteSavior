@@ -33,9 +33,14 @@ class VisitsController extends AppController {
   
   public $uses = array();
 
-    public $components = array('Algorithm');
+  public $components = array('Algorithm');
 
-    /**
+  public function beforeFilter() {
+    parent::beforeFilter();
+    $this->authenticate_user();
+  }
+
+/**
  * Displays a view
  *
  * @param mixed What page to display
