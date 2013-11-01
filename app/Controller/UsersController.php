@@ -89,12 +89,18 @@ class UsersController extends AppController {
       $res->status = -1;
       $res->message = __d("login", "Login failed, wrong email/password");
       $res->data = $user;
+    } else if ($user['activated'] == 0) {
+      $res->status = 0;
+      $res->message = __d("login", "Login failed, account is not activated.");
+      $res->data = $user;
+      //$this->Session->write('user', $user);
     } else {
       $res->status = 1;
       $res->message = __d("login", "Login succeed");
       $res->data = $user;
       $this->Session->write('user', $user);
     }
+    $this->Session->setFlash($res->message);
     $this->set('user', $user);
     $this->autoRender = false;
     $this->redirect($this->referer());
