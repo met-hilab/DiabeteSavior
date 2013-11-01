@@ -111,6 +111,9 @@ class BootstrapFormHelper extends FormHelper {
       $name = $fieldNameShort;
       $id = $model.$fieldNameShort.$v;
       $checked = '';
+      
+      // Read current status from request->data obj
+      $optDefault = is_string($this->request->data[$model][$fieldNameShort])?$this->request->data[$model][$fieldNameShort]:$optDefault;
       if($v == $optDefault) {
         $checked = 'checked="checked"';
       }

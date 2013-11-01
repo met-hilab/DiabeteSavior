@@ -60,44 +60,48 @@ class VisitsController extends AppController {
  */
   public function add(){  
     $p_id = $this->Session->read('patient_id');
-    //$patient = $this->Visit->Patient->findById($p_id);
-    $patient = $this->Session->read('patient');
+    $this->Visit->Patient->id = $p_id;
+    $patient = $this->Visit->Patient->read();
     $this->set('patient', $patient);
     $this->request->data['Visit']['patient_id'] = $p_id;
-    $this->request->data['DrugAllergie']['patient_id'] = $p_id;
-    unset($this->request->data['Visit']['id']);
-    unset($this->request->data['Treatment']['id']);
-    unset($this->request->data['MedhistoryComplaint']['id']);
-    unset($this->request->data['DrugAllergie']['id']);
-
-    //var_dump($this->request->data); exit;
-
+    $this->request->data['DrugAllergy']['patient_id'] = $p_id;
+    
     if ($this->request->is('post')) {
       $this->_add();
+    } else {
+      $this->request->data['DrugAllergy'] = $patient['DrugAllergy']; 
     }
   }
 
  /**
  * The actual add action
- *
+ * @author Jason Lu
+ * @version 1.0, 2013-10-31
  */
 
  private function _add() {
+  // Uset IDs to make sure these are insert comments.
+  unset($this->request->data['Visit']['id']);
+  unset($this->request->data['Treatment']['id']);
+  unset($this->request->data['MedhistoryComplaint']['id']);
+  
+
   $this->Visit->create();
-  //echo '<pre>';var_dump($this->request->data); exit;
   if($this->Visit->saveAssociated($this->request->data)) {
-    $this->Visit->Patient->DrugAllergy->create();
-    //if($this->Visit->Patient->DrugAllergy->save($data)){
-    //  $this->Session->setFlash('Visit added successfully!');
-    //  $this->redirect(array('action'=>'current'));
-    //} else {
-    //  $errors = $this->Model->validationErrors;
-    //  var_dump($errors); exit;
-    //   //insert failed.
-    //}
+    $id = $this->Visit->id;
+
+    $drugAllergy = new DrugAllergy();
+    $drugAllergy->create();
+    if($drugAllergy->save($this->request->data)){
+      $this->Session->write('visit_id', $id);
+      $this->Session->setFlash('Visit added successfully!');
+      $this->redirect(array('action'=>'current'));
+    } else {
+      $errors = $this->Visit->Patient->validationErrors;
+      $this->Session->setFlash('Sorry, add allergy failed.');
+    }
   } else {
     $errors = $this->Visit->validationErrors;
-      var_dump($errors); exit;
     $this->Session->setFlash('Sorry, add visit failed.');
   }
  }
@@ -112,32 +116,15 @@ class VisitsController extends AppController {
  */         
   public function current(){
     $p_id = $this->Session->read('patient_id');
-    try{
-      $patient = $this->Visit->Patient->findById($p_id);
-      $this->set('patient', $patient);
-          $this->Session->write('patient_id', $p_id);
-    }catch(NotFoundException $e){
-      throw $e;
-    }
+    $v_id = $this->Session->read('visit_id');
+    
+    $this->Visit->id = $v_id;
+    $visit = $this->Visit->read();
+    $this->set('visit', $visit);
 
-      $v_id = $this->Session->read('visit_id');
-    try{
-      $vitals_labs = $this->Visit->VitalsLab->findByVisit_id($v_id);
-      $this->set('vitals_labs', $vitals_labs);
-
-      $treatments = $this->Visit->Treatment->findByVisit_id($v_id);
-      $this->set('treatments', $treatments);
-
-      $medhistory_complaints = $this->Visit->MedhistoryComplaint->findByVisit_id($v_id);
-      $this->set('medhistory_complaints', $medhistory_complaints);
-
-      $drug_allergies = $this->Visit->Patient->DrugAllergy->findByPatient_id($p_id);
-      $this->set('drug_allergies', $drug_allergies);
-
-          $this->Session->write('visit_id', $v_id);
-    }catch(NotFoundException $e){
-      throw $e;
-    }
+    $this->Visit->Patient->id = $p_id;
+    $patient = $this->Visit->Patient->read();
+    $this->set('patient', $patient);
   }  
 
 
@@ -155,173 +142,138 @@ class VisitsController extends AppController {
     try{
       $patient = $this->Visit->Patient->findById($p_id);
       $this->set('patient', $patient);
-          $this->Session->write('patient_id', $p_id);
+      $this->Session->write('patient_id', $p_id);
     }catch(NotFoundException $e){
       throw $e;
     }
-
-      $v_id = $this->Session->read('visit_id');
+    $v_id = $this->request->pass[0];
     try{
-      $vitals_labs = $this->Visit->VitalsLab->findByVisit_id($v_id);
-      $this->set('vitals_labs', $vitals_labs);
-
-      $treatments = $this->Visit->Treatment->findByVisit_id($v_id);
-      $this->set('treatments', $treatments);
-
-      $medhistory_complaints = $this->Visit->MedhistoryComplaint->findByVisit_id($v_id);
-      $this->set('medhistory_complaints', $medhistory_complaints);
-
-      $drug_allergies = $this->Visit->Patient->DrugAllergy->findByPatient_id($p_id);
-      $this->set('drug_allergies', $drug_allergies);
-
-          $this->Session->write('visit_id', $v_id);
-    }catch(NotFoundException $e){
+      $visit = $this->Visit->findById($v_id);
+      $this->set('visit', $visit);
+    } catch(NotFoundException $e){
       throw $e;
     }
-  }  
-  
-// /**
-//  * Displays a show visit
-//  *
-//  * @param mixed What page to display
-//  * @return void
-//  * @throws NotFoundException When the view file could not be found
-//  *  or MissingViewException in debug mode.
-//  */
-//   public function show($id = null){
-//         //$id = $this->Session->read('visit_id');   
-//     try{
-//       $visit = $this->Visit->findById($id);
-//       $this->set('visit', $visit);
-//           $this->Session->write('visit', $visit);
-//            $this->Session->write('visit_id', $id);
-//     }catch(NotFoundException $e){
-//       throw $e;
-//     }
-//   }
+  }
+
 
 
 // Medicine list
 // "Metformin", "GLP_1RA", "DPP4_i", "AG_i", "SGLT_2","TZD", "SU_GLN",  "BasalInsulin", "Colesevelam",
 // "Bromocriptine-QR"
-    public function gcalgorithm(){
+  public function gcalgorithm(){
+    $data = array('TreatmentRunAlgorithm' => array(
+      'treatment_id' => '',
+      'type' => '',
+      'recommendations' => '',
+      'medicine_name_one' => '',
+      'dose_one' => '',
+      'medicine_name_two' => '',
+      'dose_two' => '',
+      'medicine_name_three' => '',
+      'dose_three' => '',
+      'edited_by_user' => ''
+    ));
+    $this->request->data = $data;
+    //return true;
+    
 
 
-      $data = array('TreatmentRunAlgorithm' => array(
-        'treatment_id' => '',
-        'type' => '',
-        'recommendations' => '',
-        'medicine_name_one' => '',
-        'dose_one' => '',
-        'medicine_name_two' => '',
-        'dose_two' => '',
-        'medicine_name_three' => '',
-        'dose_three' => '',
-        'edited_by_user' => ''
-      ));
-      $this->request->data = $data;
-      return true;
-      
+    $p_id = $this->Session->read('patient_id');
+    echo $p_id;
 
-
-        $p_id = $this->Session->read('patient_id');
-        echo $p_id;
-        //$p_id = '01';
-        $v_id = $this->Session->read('visit_id');
-      //$v_id = 1;
-        echo $v_id;
-      $t_id = $this->Session->read('treatment_id');
-      //$t_id = 1;
-        //echo $t_id;
+    $v_id = $this->Session->read('visit_id');
+    echo $v_id;
+    $t_id = $this->Session->read('treatment_id');
+    echo $t_id;
 
     /* set A1C values */
-        $vitals_labs = $this->Visit->VitalsLab->find('all', array(
-          'conditions' => array('visit_id' => $v_id),
-          'fields' => 'VitalsLab.A1c',
-          'order' => 'VitalsLab.modified DESC'));
-        $A1C = $vitals_labs[0]['VitalsLab']['A1c'];  //current a1c value
-        $A1Clast = $vitals_labs[1]['VitalsLab']['A1c'];  // last a1c value
-        $this->Algorithm->setA1C($A1C);
-        $this->Algorithm->setA1Clast($A1Clast);
+    $vitals_labs = $this->Visit->VitalsLab->find('all', array(
+      'conditions' => array('visit_id' => $v_id),
+      'fields' => 'VitalsLab.A1c',
+      'order' => 'VitalsLab.modified DESC'));
+    $A1C = $vitals_labs[0]['VitalsLab']['A1c'];  //current a1c value
+    $A1Clast = $vitals_labs[1]['VitalsLab']['A1c'];  // last a1c value
+    $this->Algorithm->setA1C($A1C);
+    $this->Algorithm->setA1Clast($A1Clast);
 
-        $treatments = $this->Visit->Treatment->find('all', array(
-          'conditions' => array('visit_id' => $v_id),
-          'fields' => 'Treatment.a1c_goal',
-          'order' => 'Treatment.modified DESC'));
-        $A1CTarget = $treatments[0]['Treatment']['a1c_goal'];  //current a1c_goal value
-        $this->Algorithm->setA1CTarget($A1CTarget);
+    $treatments = $this->Visit->Treatment->find('all', array(
+      'conditions' => array('visit_id' => $v_id),
+      'fields' => 'Treatment.a1c_goal',
+      'order' => 'Treatment.modified DESC'));
+    $A1CTarget = $treatments[0]['Treatment']['a1c_goal'];  //current a1c_goal value
+    $this->Algorithm->setA1CTarget($A1CTarget);
 
-        $this->Algorithm->setSymptoms(false);       // diabetes symptoms - only used for insulin therapy
+    $this->Algorithm->setSymptoms(false);       // diabetes symptoms - only used for insulin therapy
 
     /* set allergies */
-        $drug_allergies = $this->Visit->Patient->DrugAllergy->findById($p_id);  //current patient's drug allergies
-        $Metformin = $drug_allergies['DrugAllergy']['met'];
-        $GLP_1RA = $drug_allergies['DrugAllergy']['glp_1ra'];
-        $DPP4_i = $drug_allergies['DrugAllergy']['dpp_4i'];
-        $AG_i = $drug_allergies['DrugAllergy']['agi'];
-        $SGLT_2 = $drug_allergies['DrugAllergy']['sglt_2'];
-        $TZD = $drug_allergies['DrugAllergy']['tzd'];
+    $drug_allergies = $this->Visit->Patient->DrugAllergy->findById($p_id);  //current patient's drug allergies
+    $Metformin = $drug_allergies['DrugAllergy']['met'];
+    $GLP_1RA = $drug_allergies['DrugAllergy']['glp_1ra'];
+    $DPP4_i = $drug_allergies['DrugAllergy']['dpp_4i'];
+    $AG_i = $drug_allergies['DrugAllergy']['agi'];
+    $SGLT_2 = $drug_allergies['DrugAllergy']['sglt_2'];
+    $TZD = $drug_allergies['DrugAllergy']['tzd'];
     $SU_GLN = $drug_allergies['DrugAllergy']['su_gln'];
-        $BasalInsulin = $drug_allergies['DrugAllergy']['insulin'];
-        $Colesevelam = $drug_allergies['DrugAllergy']['colsvl'];
+    $BasalInsulin = $drug_allergies['DrugAllergy']['insulin'];
+    $Colesevelam = $drug_allergies['DrugAllergy']['colsvl'];
 
-        $stack = array();
-        if ($Metformin)
-            array_push($stack,"Metformin");
-        if ($GLP_1RA)
-            array_push($stack, "GLP_1RA");
-        if ($DPP4_i)
-            array_push($stack, "DPP4_i");
-        if ($AG_i)
-            array_push($stack, "AG_i");
-        if ($SGLT_2)
-            array_push($stack, "SGLT_2");
-        if ($SGLT_2)
-            array_push($stack, "SGLT_2");
-        if ($TZD)
-            array_push($stack, "TZD");
-        if ($SU_GLN)
-            array_push($stack, "SU_GLN");
-        if ($BasalInsulin)
-            array_push($stack, "BasalInsulin");
-        if ($Colesevelam)
-            array_push($stack, "Colesevelam");
+    $stack = array();
+    if ($Metformin)
+        array_push($stack,"Metformin");
+    if ($GLP_1RA)
+        array_push($stack, "GLP_1RA");
+    if ($DPP4_i)
+        array_push($stack, "DPP4_i");
+    if ($AG_i)
+        array_push($stack, "AG_i");
+    if ($SGLT_2)
+        array_push($stack, "SGLT_2");
+    if ($SGLT_2)
+        array_push($stack, "SGLT_2");
+    if ($TZD)
+        array_push($stack, "TZD");
+    if ($SU_GLN)
+        array_push($stack, "SU_GLN");
+    if ($BasalInsulin)
+        array_push($stack, "BasalInsulin");
+    if ($Colesevelam)
+        array_push($stack, "Colesevelam");
 
-        $this->Algorithm->setAllergies($stack);
+    $this->Algorithm->setAllergies($stack);
 
     /* set current medicines */
-        $treatment_run_algorithms = $this->Visit->Treatment->TreatmentRunAlgorithm->findById($t_id); //current medicines
-      $Medicine1 = $treatment_run_algorithms['TreatmentRunAlgorithm']['medicine_name_one'];
+    $treatment_run_algorithms = $this->Visit->Treatment->TreatmentRunAlgorithm->findById($t_id); //current medicines
+    $Medicine1 = $treatment_run_algorithms['TreatmentRunAlgorithm']['medicine_name_one'];
     $Medicine2 = $treatment_run_algorithms['TreatmentRunAlgorithm']['medicine_name_two'];
     $Medicine3 = $treatment_run_algorithms['TreatmentRunAlgorithm']['medicine_name_three'];
-        if ($Medicine1 == null)
-            $Medicine1 = "none";
-        if ($Medicine2 == null)
-            $Medicine2 = "none";
-        if ($Medicine3 == null)
-            $Medicine3 = "none";
-        $this->Algorithm->setMedicine1($Medicine1);
-        $this->Algorithm->setMedicine2($Medicine2);
-        $this->Algorithm->setMedicine3($Medicine3);
+    if ($Medicine1 == null)
+        $Medicine1 = "none";
+    if ($Medicine2 == null)
+        $Medicine2 = "none";
+    if ($Medicine3 == null)
+        $Medicine3 = "none";
+    $this->Algorithm->setMedicine1($Medicine1);
+    $this->Algorithm->setMedicine2($Medicine2);
+    $this->Algorithm->setMedicine3($Medicine3);
     //pr($Medicine1); pr($Medicine2); pr($Medicine3); exit;
 
     /* run glcymic control algorithm */
-        $this->Algorithm->gcAlgorithm();
+    $this->Algorithm->gcAlgorithm();
 
     /* get algorithm results */
-        $decision = $this->Algorithm->getDecision();
-        $therapy = $this->Algorithm->getTherapy();
-        $med1 = $this->Algorithm->getMedicine1();
-        $med2 = $this->Algorithm->getMedicine2();
-        $med3 = $this->Algorithm->getMedicine3();
+    $decision = $this->Algorithm->getDecision();
+    $therapy = $this->Algorithm->getTherapy();
+    $med1 = $this->Algorithm->getMedicine1();
+    $med2 = $this->Algorithm->getMedicine2();
+    $med3 = $this->Algorithm->getMedicine3();
 
-        $this->set('decision', $decision);
-        $this->set('therapy', $therapy);
-        $this->set('medicine1', $med1);
-        $this->set('medicine2', $med2);
-        $this->set('medicine3', $med3);
+    $this->set('decision', $decision);
+    $this->set('therapy', $therapy);
+    $this->set('medicine1', $med1);
+    $this->set('medicine2', $med2);
+    $this->set('medicine3', $med3);
 
-        if ($this->request->is('post')) {
+    if ($this->request->is('post')) {
       $data = array(
         'treatment_id' => $t_id,
         'medicine_name_one' => $med1,
@@ -331,17 +283,17 @@ class VisitsController extends AppController {
       $this->Visit->Treatment->TreatmentRunAlgorithm->create();
       if($this->Visit->Treatment->TreatmentRunAlgorithm->save($data)){
         $this->Session->setFlash('Algorithm results accepted successfully!');
-                $this->redirect(array('action'=>'show'));
-            }else{
-                $this->Session->setFlash('Sorry, accept algorithm results failed.');
-            }
-        }
+        $this->redirect(array('action'=>'show'));
+      } else {
+        $this->Session->setFlash('Sorry, accept algorithm results failed.');
+      }
     }
+  }
 
-    public function edit(){
+  public function edit(){
 
 
-    }
+  }
 
 
 }

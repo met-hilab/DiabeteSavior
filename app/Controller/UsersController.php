@@ -193,10 +193,10 @@ class UsersController extends AppController {
  * @throws NotFoundException When the view file could not be found
  *  or MissingViewException in debug mode.
  */
-  public function edit() {
+  public function edit($paramId = null) {
     $this->authenticate_user();
     //get the id of the user to be edited
-    $id = $this->request->params['pass'][0];
+    $id = $paramId == null?$this->request->params['pass'][0]:$paramId;
     //set the user id
     $this->User->id = $id;
     //check if a user with this id really exists
@@ -229,6 +229,24 @@ class UsersController extends AppController {
         //it looks like this
         //throw new NotFoundException('The user you are trying to edit does not exist.');
     }
+  }
+
+
+/**
+ * Edit my profile
+ *
+ * @param email, password
+ * @return void
+ * @throws NotFoundException When the view file could not be found
+ *  or MissingViewException in debug mode.
+ */
+  public function profile() {
+    $this->edit($this->current_user['id']);
+  }
+
+  public function change_password() {
+    $this->edit($this->current_user['id']);
+    $this->render('password');
   }
  /**
  * Delete user

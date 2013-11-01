@@ -42,7 +42,10 @@ class PatientsController extends AppController {
     //parent::__construct();
     //$this->set('title', "Title");
   //}
-
+  public function beforeFilter() {
+    parent::beforeFilter();
+    $this->authenticate_user();
+  }
 /**
  * Displays a view
  *
@@ -83,7 +86,7 @@ class PatientsController extends AppController {
   }
 
 public function index(){
-  $this->authenticate_user();
+  //$this->authenticate_user();
   $uid = (int)$this->current_user['id'];
   $patients = $this->Patient->find('all', 
     ["conditions" =>
@@ -111,7 +114,7 @@ public function index(){
  *
  */
   public function add(){
-    $this->authenticate_user();
+    //$this->authenticate_user();
     $uid = (int)$this->current_user['id'];
     $this->Session->delete('patient_id');
     if ($this->request->is('post')){
@@ -136,10 +139,10 @@ public function index(){
     }
   }
 
-  public function setPatientId() {
+  public function set_patient_id() {
     $res = new stdClass;
     $res->status = false;
-    $id = $this->request->data['patient_id'];
+    $id = $this->request->data['id'];
     $patient = $this->Patient->findById($id);
     if($patient) {
       $patient = $patient['Patient'];
@@ -209,7 +212,7 @@ public function index(){
  *
  */
   public function edit(){
-    $this->authenticate_user();
+    //$this->authenticate_user();
     $id = $this->Session->read('patient_id');
     $this->Patient->id = $id;
     if($this->Patient->exists()){
@@ -242,21 +245,8 @@ public function index(){
  *  or MissingViewException in debug mode.
  */
   public function show($id = null){
-    //this->authenticate_user();
+    //$this->authenticate_user();
     $id = $this->Session->read('patient_id');
-    //$this->Session->delete('patient_id');
-
-    // native php way.
-    //start_session();
-    //$_SESSION['patient_id'] = null;
-    //unset($_SESSION['patient_id']);
-
-    //view all patients
-    //$patients = $this->Patient->find(all);
-    //$this->set('patients', $patients);
-
-    //view a patient
-    //$patient_number = $this->request->params['pass'][0];
     try{
       $patient = $this->Patient->findById($id);
       $this->set('patient', $patient);

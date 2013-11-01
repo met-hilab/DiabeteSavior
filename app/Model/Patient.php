@@ -16,46 +16,7 @@ class Patient extends AppModel {
  * @var array
  */
   public $validate = array(
-    'id' => array(
-      'notempty' => array(
-        'rule' => array('notempty'),
-        //'message' => 'Your custom message here',
-        //'allowEmpty' => false,
-        //'required' => false,
-        //'last' => false, // Stop validation after this rule
-        //'on' => 'create', // Limit validation to 'create' or 'update' operations
-      ),
-    ),
-    'created' => array(
-      'datetime' => array(
-        'rule' => array('datetime'),
-        //'message' => 'Your custom message here',
-        //'allowEmpty' => false,
-        //'required' => false,
-        //'last' => false, // Stop validation after this rule
-        //'on' => 'create', // Limit validation to 'create' or 'update' operations
-      ),
-    ),
-    'modified' => array(
-      'datetime' => array(
-        'rule' => array('datetime'),
-        //'message' => 'Your custom message here',
-        //'allowEmpty' => false,
-        //'required' => false,
-        //'last' => false, // Stop validation after this rule
-        //'on' => 'create', // Limit validation to 'create' or 'update' operations
-      ),
-    ),
-    'user_id' => array(
-      'numeric' => array(
-        'rule' => array('numeric'),
-        //'message' => 'Your custom message here',
-        //'allowEmpty' => false,
-        //'required' => false,
-        //'last' => false, // Stop validation after this rule
-        //'on' => 'create', // Limit validation to 'create' or 'update' operations
-      ),
-    ),
+    'user_id' => array('notempty', 'numeric'),
     'patient_number' => array(
       'alphanumeric' => array(
         'rule' => array('alphanumeric'),
@@ -209,5 +170,17 @@ class Patient extends AppModel {
        $this->data['Patient']['patient_number'] = strtolower($this->data['Patient']['patient_number']);
     }
     return true;
+  }
+
+  function afterFind($results, $primary = false) {
+    $results = parent::afterFind($results, $primary);
+    //var_dump($results);
+    foreach ($results as $key => $val) {
+        if (isset($val['Patient']['patient_number'])) {
+            $results[$key]['Patient']['patient_number'] = strtoupper($val['Patient']['patient_number']);
+        }
+    }
+    //$results['Patient']['patient_number'] = strtoupper($results['Patient']['patient_number']);
+    return $results;
   }
 }

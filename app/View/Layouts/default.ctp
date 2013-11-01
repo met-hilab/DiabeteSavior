@@ -107,7 +107,7 @@ $cakeDescription = __d('cake_dev', 'Diabetes Savior: Type II Diabetes Infomatic 
         <ul class="dropdown-menu">
           <li><a href="/patients/add">Add Patient</a></li>
           <li><a href="/patients/search">Search Patient</a></li>
-            <li><a href="/patients/index">List Patients</a></li>
+            <li><a href="/patients/">List Patients</a></li>
         </ul>
       </li>
       <?php endif; ?>
@@ -137,7 +137,7 @@ $cakeDescription = __d('cake_dev', 'Diabetes Savior: Type II Diabetes Infomatic 
 						  </div>
 						  <div class="checkbox">
 						    <label>
-						      <input type="checkbox"> Remember me
+						      <input type="checkbox" name="remember_me"> Remember me
 						    </label>
 						  </div>
 						  <button type="submit" class="btn btn-default">Submit</button>
@@ -158,8 +158,8 @@ $cakeDescription = __d('cake_dev', 'Diabetes Savior: Type II Diabetes Infomatic 
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Account <b class="caret"></b></a>
         <ul class="dropdown-menu">
-          <li><a href="#">Change password</a></li>
-          <li><a href="#">Update profile</a></li>
+          <li><a href="/my/change_password">Change password</a></li>
+          <li><a href="/my/profile">Update profile</a></li>
           <li><a href="/logout">Logout</a></li>
         </ul>
       </li>
