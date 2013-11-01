@@ -152,7 +152,7 @@ class UsersController extends AppController {
     if($this->can('manage', 'User')) {
       $id = $this->request->params['pass'][0];
       $this->User->id = $id;
-      $data = array('activated' => 1);
+      $data = array('User' => array('activated' => 1));
       $this->User->save($data);
       $this->redirect($this->referer());
       //$this->render("/layouts/debug");

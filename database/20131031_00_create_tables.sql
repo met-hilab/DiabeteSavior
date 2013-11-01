@@ -24,12 +24,15 @@ CREATE TABLE `users` (
   `username` varchar(45) collate utf8_unicode_ci default NULL,
   `openid` varchar(64) collate utf8_unicode_ci default NULL,
   `service` varchar(45) collate utf8_unicode_ci default NULL,
+  `activated` TINYINT NOT NULL default 0,
+  `role` INT default NULL,
   `created` datetime default NULL,
   `modified` datetime default NULL,
   PRIMARY KEY  (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   UNIQUE KEY `email_UNIQUE` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
 
 -- ----------------------------
 -- Table structure for patients
