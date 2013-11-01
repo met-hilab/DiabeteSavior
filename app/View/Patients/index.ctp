@@ -12,8 +12,9 @@
     <tr>
         <th>Patient Number</th>
         <th>First Name</th>
-    <th>Last Name</th>
-    <th>DOB</th>
+		<th>Last Name</th>
+		<th>DOB</th>
+
         <th>Registered</th>
     </tr>
 </thead>
@@ -24,10 +25,10 @@
     <td><?php echo $p['Patient']['patient_firstname'];?></td>
     <td><?php echo $p['Patient']['patient_lastname'];?></td>
     <td><?php echo $p['Patient']['dob'];?></td>
-  <td><?php echo $date = date("F j, Y", strtotime($p['Patient']['created']));?></td>
+
+	<td><?php echo $date = date("F j, Y", strtotime($p['Patient']['created']));?></td>
+
   </tr>
   </tbody>
 <?php endforeach; ?>
 </table>
-
-

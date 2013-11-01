@@ -229,6 +229,7 @@ class VisitsController extends AppController {
 	}	
 
 
+
  /**
  * Displays a show visit
  *

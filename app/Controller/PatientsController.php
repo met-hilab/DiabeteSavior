@@ -222,8 +222,7 @@ public function index(){
  */
   public function show($id = null){
     //this->authenticate_user();
-    $id = $this->Session->read('patient_id');
-    //cakephp way
+	$id = $this->Session->read('patient_id');
     //$this->Session->delete('patient_id');
 
     // native php way.

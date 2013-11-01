@@ -1,9 +1,11 @@
-          
-         
+
+				  
+		     
             <h2 >Patient Information </h2>
-      
-      </br/>
-      
+			
+			</br/>
+			
+
             <!-----Add Three Buttons------------------------------------------>
             <div style="padding-bottom:10px;">
            <a href="/visits/add" class="btn btn-primary" style="padding-left:5px;"><span class="glyphicon glyphicon-plus"></span> Add Visit</a>
@@ -12,16 +14,16 @@
 <!--           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
            <a href="/patients/delete" data-confirm="Do you want to delete this patient record?" data-method="delete" class="btn btn-primary" style="padding-left:5px;"><span class="glyphicon glyphicon-trash"></span> Delete Patient</a>
             </div>
-          
-       
-       
-       
-     <div class="col-md-6">
-       
-        <h3>Demographics</h3>  
-                
-      <table  class="table table-condensed">
-      
+
+		   
+		   
+		 <div class="col-md-6">
+		   
+		    <h3>Demographics</h3>  
+           			
+			<table  class="table table-condensed">
+			
+
 <tr>
 
   <th>Patient Number: </th> 
@@ -69,7 +71,6 @@
 
         <h3>Contact information</h3> 
 <table  class="table table-condensed">
-      
 <tr>
 
   <th>Street address: </th> 
@@ -103,8 +104,6 @@
 <h3>Drug Allergies </h3> 
 
 <table  class="table table-condensed">
-
-    
 
 <tr>
 
@@ -178,16 +177,17 @@
     <tr>
         <th>Dignosis</th>
         <th>ICD-9</th>
-    <th>ICD-10</th>
-  </tr>
+
+		<th>ICD-10</th>
+	</tr>
 </thead>
 
 <?php foreach($patient[ 'Diagnosis' ] as $diagnosis ) :?>
 <tbody>
   <tr>
      <td><?php echo $diagnosis['dxname']?>
-   <td><?php echo $diagnosis['icd9code']?>
-   <td><?php echo $diagnosis['icd10code']?>
+	 <td><?php echo $diagnosis['icd9code']?>
+	 <td><?php echo $diagnosis['icd10code']?>
 </tr>
   </tbody>
   <?php endforeach; ?>
@@ -211,8 +211,10 @@ foreach($patient[ 'Visit' ] as $visit ):?>
 <tbody>
   <tr>
     <td><?php echo $this->Html->link($date = date("F j, Y", strtotime($visit['created'])), array('controller' => 'visits', 'action' => 'show', $visit['id'])); ?>
-  
-  </td>
+
+	
+	</td>
+
   </tr>
   </tbody>
 <?php endforeach;?> 
@@ -221,10 +223,4 @@ foreach($patient[ 'Visit' ] as $visit ):?>
 </div>
 
 
-
-
-
-            
-            
-    
     
