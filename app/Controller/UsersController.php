@@ -154,8 +154,10 @@ class UsersController extends AppController {
       $this->User->id = $id;
       $data = array('User' => array('activated' => 1));
       $this->User->save($data);
+      $user = $this->User->read();
+      $fullname = $user['Profile']['fullname'];
+      $this->Session->setFlash('User ' . $fullname . ' activated!');
       $this->redirect($this->referer());
-      //$this->render("/layouts/debug");
     } else {
       throw new ForbiddenException();
       
@@ -174,9 +176,16 @@ class UsersController extends AppController {
     $this->authenticate_user();
     if($this->can('manage', 'User')) {
       $id = $this->request->params['pass'][0];
-      $this->User->id = $id;
-      $data = array('activated' => 0);
-      $this->User->save($data);
+      if($id == 1) {
+        //return;
+      } else {
+        $this->User->id = $id;
+        $data = array('activated' => 0);
+        $user = $this->User->save($data);
+        $user = $this->User->read();
+        $fullname = $user['Profile']['fullname'];
+        $this->Session->setFlash('User ' . $fullname . ' deactivated!');
+      }
       $this->redirect($this->referer());
       //$this->render("/layouts/debug");
     } else {

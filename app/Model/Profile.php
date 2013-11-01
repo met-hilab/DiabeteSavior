@@ -76,4 +76,16 @@ class Profile extends AppModel {
 			'order' => ''
 		)
 	);
+
+	function afterFind($results, $primary = false) {
+    $results = parent::afterFind($results, $primary);
+    //var_dump($results);
+    foreach ($results as $key => $val) {
+        $results[$key]['Profile']['fullname'] = $results[$key]['Profile']['firstname'] . ' ' . $results[$key]['Profile']['lastname'];
+    }
+    //$results['Patient']['patient_number'] = strtoupper($results['Patient']['patient_number']);
+    //var_dump($results);
+    return $results;
+  }
+	
 }
