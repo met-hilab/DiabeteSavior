@@ -100,6 +100,8 @@ function setUnitType() {
   weightInput.val(weight);
 
   setPlaceholders();
+
+  return false;
 }
 function mToFt(value) {
   inches = 0;

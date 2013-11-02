@@ -100,14 +100,17 @@ class VisitsController extends AppController {
   //var_dump($bmi); exit;
   $this->request->data['VitalsLab']['bmi'] = $bmi;
 
+
   $this->Visit->create();
   if($this->Visit->saveAssociated($this->request->data)) {
     $id = $this->Visit->id;
+    $t_id = $this->Visit->Treatment->id;
 
     $drugAllergy = new DrugAllergy();
     $drugAllergy->create();
     if($drugAllergy->save($this->request->data)){
       $this->Session->write('visit_id', $id);
+      $this->Session->write('treatment_id', $t_id);
       $this->Session->setFlash('Visit added successfully!');
       $this->redirect(array('action'=>'current'));
     } else {
@@ -141,8 +144,6 @@ class VisitsController extends AppController {
     $this->set('patient', $patient);
   }  
 
-
-
  /**
  * Displays a show visit
  *
@@ -169,58 +170,60 @@ class VisitsController extends AppController {
     }
   }
 
-
-
 // Medicine list
 // "Metformin", "GLP_1RA", "DPP4_i", "AG_i", "SGLT_2","TZD", "SU_GLN",  "BasalInsulin", "Colesevelam",
 // "Bromocriptine-QR"
   public function gcalgorithm(){
-    $data = array('TreatmentRunAlgorithm' => array(
-      'treatment_id' => '',
-      'type' => '',
-      'recommendations' => '',
-      'medicine_name_one' => '',
-      'dose_one' => '',
-      'medicine_name_two' => '',
-      'dose_two' => '',
-      'medicine_name_three' => '',
-      'dose_three' => '',
-      'edited_by_user' => ''
-    ));
-    $this->request->data = $data;
-    //return true;
-    
-
+    // $data = array('TreatmentRunAlgorithm' => array(
+    //   'treatment_id' => '',
+    //   'type' => '',
+    //   'recommendations' => '',
+    //   'medicine_name_one' => '',
+    //   'dose_one' => '',
+    //   'medicine_name_two' => '',
+    //   'dose_two' => '',
+    //   'medicine_name_three' => '',
+    //   'dose_three' => '',
+    //   'edited_by_user' => ''
+    // ));
+    // $this->request->data = $data;
 
     $p_id = $this->Session->read('patient_id');
     echo $p_id;
-
     $v_id = $this->Session->read('visit_id');
     echo $v_id;
     $t_id = $this->Session->read('treatment_id');
     echo $t_id;
 
     /* set A1C values */
-    $vitals_labs = $this->Visit->VitalsLab->find('all', array(
-      'conditions' => array('visit_id' => $v_id),
-      'fields' => 'VitalsLab.A1c',
-      'order' => 'VitalsLab.modified DESC'));
-    $A1C = $vitals_labs[0]['VitalsLab']['A1c'];  //current a1c value
-    $A1Clast = $vitals_labs[1]['VitalsLab']['A1c'];  // last a1c value
-    $this->Algorithm->setA1C($A1C);
-    $this->Algorithm->setA1Clast($A1Clast);
+    $visit = $this->Visit->find('all', array(
+      'conditions' => array('patient_id' => $p_id),
+      'fields' => 'Visit.id',
+      'order' => 'Visit.modified DESC'));
+    $v_current_id = $visit[0]['Visit']['id'];  //current visit id
+    $v_last_id = $visit[1]['Visit']['id'];  // last visit id
 
-    $treatments = $this->Visit->Treatment->find('all', array(
-      'conditions' => array('visit_id' => $v_id),
-      'fields' => 'Treatment.a1c_goal',
-      'order' => 'Treatment.modified DESC'));
-    $A1CTarget = $treatments[0]['Treatment']['a1c_goal'];  //current a1c_goal value
+    $this->Visit->VitalsLab->id = $v_current_id;
+    $current_visit = $this->Visit->VitalsLab->read();
+    $A1C = $current_visit['VitalsLab']['A1c'];  //current a1c value
+    $this->Algorithm->setA1C($A1C);
+
+    $this->Visit->VitalsLab->id = $v_last_id;
+    $last_visit = $this->Visit->VitalsLab->read();
+    $A1Clast = $last_visit['VitalsLab']['A1c'];  // last a1c value
+    $this->Algorithm->setA1Clast($A1Clast);
+    
+
+    $this->Visit->Treatment->id = $t_id;
+    $treatments = $this->Visit->Treatment->read();
+    $A1CTarget = $treatments['Treatment']['a1c_goal'];  //current a1c_goal value
     $this->Algorithm->setA1CTarget($A1CTarget);
 
-    $this->Algorithm->setSymptoms(false);       // diabetes symptoms - only used for insulin therapy
+    $this->Algorithm->setSymptoms(false);  // diabetes symptoms - only used for insulin therapy
 
     /* set allergies */
-    $drug_allergies = $this->Visit->Patient->DrugAllergy->findById($p_id);  //current patient's drug allergies
+    $this->Visit->Patient->DrugAllergy->id = $p_id;
+    $drug_allergies = $this->Visit->Patient->DrugAllergy->read();  //current patient's drug allergies
     $Metformin = $drug_allergies['DrugAllergy']['met'];
     $GLP_1RA = $drug_allergies['DrugAllergy']['glp_1ra'];
     $DPP4_i = $drug_allergies['DrugAllergy']['dpp_4i'];
@@ -256,7 +259,8 @@ class VisitsController extends AppController {
     $this->Algorithm->setAllergies($stack);
 
     /* set current medicines */
-    $treatment_run_algorithms = $this->Visit->Treatment->TreatmentRunAlgorithm->findById($t_id); //current medicines
+    $this->Visit->Treatment->TreatmentRunAlgorithm->id = $t_id;
+    $treatment_run_algorithms = $this->Visit->Treatment->TreatmentRunAlgorithm->read();  //current medicines
     $Medicine1 = $treatment_run_algorithms['TreatmentRunAlgorithm']['medicine_name_one'];
     $Medicine2 = $treatment_run_algorithms['TreatmentRunAlgorithm']['medicine_name_two'];
     $Medicine3 = $treatment_run_algorithms['TreatmentRunAlgorithm']['medicine_name_three'];
@@ -266,10 +270,10 @@ class VisitsController extends AppController {
         $Medicine2 = "none";
     if ($Medicine3 == null)
         $Medicine3 = "none";
+
     $this->Algorithm->setMedicine1($Medicine1);
     $this->Algorithm->setMedicine2($Medicine2);
     $this->Algorithm->setMedicine3($Medicine3);
-    //pr($Medicine1); pr($Medicine2); pr($Medicine3); exit;
 
     /* run glcymic control algorithm */
     $this->Algorithm->gcAlgorithm();
@@ -287,28 +291,51 @@ class VisitsController extends AppController {
     $this->set('medicine2', $med2);
     $this->set('medicine3', $med3);
 
+    /* accept algorithm results */
     if ($this->request->is('post')) {
       $data = array(
         'treatment_id' => $t_id,
+        'type' => $therapy,
         'medicine_name_one' => $med1,
         'medicine_name_two' => $med2,
         'medicine_name_three' => $med3,
-        'edited_by_user' => 'no');      
+        'edited_by_user' => 'no');    
       $this->Visit->Treatment->TreatmentRunAlgorithm->create();
       if($this->Visit->Treatment->TreatmentRunAlgorithm->save($data)){
         $this->Session->setFlash('Algorithm results accepted successfully!');
-        $this->redirect(array('action'=>'show'));
+        $this->redirect(array('action'=>'../patients/show'));
       } else {
         $this->Session->setFlash('Sorry, accept algorithm results failed.');
-      }
+      };
     }
   }
 
-  public function edit(){
+  public function edit(){    
+      $t_id = $this->Session->read('treatment_id');
+      if($this->request->is('post') || $this->request->is('put')){       
+        $data = $this->request->data;   
+        $data['TreatmentRunAlgorithm']['treatment_id'] = $t_id;    
+        $data['TreatmentRunAlgorithm']['edited_by_user'] = 'yes';
+                
+        // $data = array(
+        //   'treatment_id' => $t_id,
+        //   'type' => '1',
+        //   'medicine_name_one' => '11',
+        //   'medicine_name_two' => '12',
+        //   'medicine_name_three' => '13',
+        //   'edited_by_user' => 'yes');    
+        
+        //pr($data); exit;  
+        $this->Visit->Treatment->TreatmentRunAlgorithm->create();
 
-
+        if($this->Visit->Treatment->TreatmentRunAlgorithm->save($data)){
+          $this->Session->setFlash('Algorithm results edited successfully!');
+          $this->redirect(array('action'=>'../patients/show'));
+        } else {
+          $this->Session->setFlash('Sorry, edit algorithm results failed.');
+        }
+    }
   }
-
 
 }
 
