@@ -1,31 +1,43 @@
 <h2>Add Visit</h2>  
+
+       
+<h3>Demographics</h3>                  
+  <table  class="table table-condensed">      
+    <tr>
+      <th>Patient Number: </th> 
+      <td> <?php echo $patient['Patient']['patient_number']; ?> </td>
+    </tr>
+    <tr> 
+      <th>First Name: </th>
+      <td><?php echo $patient['Patient']['patient_firstname']." ";
+                echo $patient['Patient']['patient_middlename']; ?></td>
+    </tr>
+    <tr> 
+      <th>Last Name: </th>
+      <td><?php echo $patient['Patient']['patient_lastname'] ?></td>
+    </tr>
+    <tr>
+      <th>DOB: </th>
+      <td><?php echo $patient['Patient']['dob']?></td>
+    </tr>
+  </table> 
   
-<div>
-<?php
-    echo "Patient ID: ".$patient['Patient']['patient_number']."<br>";
-    echo "First Name: ".$patient['Patient']['patient_firstname']."<br>";
-    echo "Last Name: ".$patient['Patient']['patient_lastname']."<br>";
-    echo "DOB: ".$patient['Patient']['dob']."<br>";
-?>
-</div>
-                      
 <hr>
+<h3>Vitals and Labs</h3> 
 <?php
-$inputDefaults = array(
-  'format' => array('div', 'label', 'between', 'input', 'after'),
-  'div' => array('class' => 'form-group'),
-  'label' => array('class' => 'col-lg-1 control-label'),
-  'between' => '<div class="col-lg-4">',
-  'after' => '</div>'
-);
-$formDefaults = array(
-  'inputDefaults' => $inputDefaults
-);
+  $inputDefaults = array(
+    'format' => array('div', 'label', 'between', 'input', 'after'),
+    'div' => array('class' => 'form-group'),
+    'label' => array('class' => 'col-lg-1 control-label'),
+    'between' => '<div class="col-lg-4">',
+    'after' => '</div>'
+  );
+  $formDefaults = array(
+    'inputDefaults' => $inputDefaults
+  );
 ?>
 <?php echo $this->Form->bootstrapRadioYesNo('metric_system', array('Metric', 'Imperial')) ?>
 <?php echo $this->Form->create('Visit', $formDefaults); ?>
-
-<h3>Vitals and Labs</h3>
 
 <?php echo $this->Form->input('VitalsLab.weight', array('label' => array('class' => 'col-lg-1 control-label', 'text' => '<font color="red">* </font>Weight'))) ?>
 <?php echo $this->Form->input('VitalsLab.height', array('label' => array('class' => 'col-lg-1 control-label', 'text' => '<font color="red">* </font>Height'))) ?>
@@ -33,9 +45,9 @@ $formDefaults = array(
 <?php echo $this->Form->input('VitalsLab.bps', array('label' => array('class' => 'col-lg-1 control-label', 'text' => '<font color="red">* </font>BPS'))) ?>
 <?php echo $this->Form->input('VitalsLab.bpd', array('label' => array('class' => 'col-lg-1 control-label', 'text' => '<font color="red">* </font>BPD'))) ?>
 <?php echo $this->Form->input('VitalsLab.eGFR') ?>
-<?php echo $this->Form->input('VitalsLab.notes') ?>
+<?php echo $this->Form->input('VitalsLab.notes') ?>  
 
-<hr>
+<hr>   
 <!-- treatments -->
 <h3>Therapy Goals</h3>
 <?php echo $this->Form->hidden('Treatment.id') ?>
