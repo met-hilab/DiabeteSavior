@@ -89,7 +89,16 @@ class VisitsController extends AppController {
   unset($this->request->data['Visit']['id']);
   unset($this->request->data['Treatment']['id']);
   unset($this->request->data['MedhistoryComplaint']['id']);
-  
+  // BMI = ( Weight in Kilograms / ( Height in Meters x Height in Meters ) )
+  // Caculate BMI in Metric. kg / m^2
+  // Assume data are metric, more easier to caculate.
+  $weight = (float)$this->request->data['VitalsLab']['weight'];
+  //var_dump($weight);
+  $height = (float)$this->request->data['VitalsLab']['height'] * 0.01;
+  //var_dump($height);
+  $bmi = (float)($weight / $height^2);
+  //var_dump($bmi); exit;
+  $this->request->data['VitalsLab']['bmi'] = $bmi;
 
   $this->Visit->create();
   if($this->Visit->saveAssociated($this->request->data)) {

@@ -78,7 +78,7 @@ class BootstrapFormHelper extends FormHelper {
 
   public function bootstrapRadioYesNo($fieldName, $attributes = array()) {
     $optYesNo = array('Yes' => 'yes', 'No' => 'no');
-    $attributes['optDefault'] = 'no';
+    $attributes['default'] = 'no';
     return $this->bootstrapRadio($fieldName, $optYesNo, $attributes);
   }
 
@@ -98,7 +98,7 @@ class BootstrapFormHelper extends FormHelper {
     $attributes['div']['class'] = is_string($attributes['div']['class']) ? $attributes['div']['class'] : $inputDefaults['div']['class'];
     $attributes['label']['text'] = is_string($attributes['label']['text']) ? $attributes['label']['text'] : Inflector::humanize($fieldNameShort);
     
-    $optDefault = is_string($attributes['optDefault'])?$attributes['optDefault']:'';
+    $optDefault = is_string($attributes['default'])?$attributes['default']:'';
 
 
     $divOpen = '<div class="' . $attributes['div']['class'] . '">';
