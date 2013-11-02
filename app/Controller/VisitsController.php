@@ -174,19 +174,6 @@ class VisitsController extends AppController {
 // "Metformin", "GLP_1RA", "DPP4_i", "AG_i", "SGLT_2","TZD", "SU_GLN",  "BasalInsulin", "Colesevelam",
 // "Bromocriptine-QR"
   public function gcalgorithm(){
-    // $data = array('TreatmentRunAlgorithm' => array(
-    //   'treatment_id' => '',
-    //   'type' => '',
-    //   'recommendations' => '',
-    //   'medicine_name_one' => '',
-    //   'dose_one' => '',
-    //   'medicine_name_two' => '',
-    //   'dose_two' => '',
-    //   'medicine_name_three' => '',
-    //   'dose_three' => '',
-    //   'edited_by_user' => ''
-    // ));
-    // $this->request->data = $data;
 
     $p_id = $this->Session->read('patient_id');
     echo $p_id;
@@ -266,10 +253,13 @@ class VisitsController extends AppController {
     $Medicine3 = $treatment_run_algorithms['TreatmentRunAlgorithm']['medicine_name_three'];
     if ($Medicine1 == null)
         $Medicine1 = "none";
+        // $Medicine1 = "GLP_1RA";
     if ($Medicine2 == null)
         $Medicine2 = "none";
+        // $Medicine2 = "DPP4_i";
     if ($Medicine3 == null)
         $Medicine3 = "none";
+        // $Medicine3 = "SU_GLN";
 
     $this->Algorithm->setMedicine1($Medicine1);
     $this->Algorithm->setMedicine2($Medicine2);
@@ -287,19 +277,26 @@ class VisitsController extends AppController {
 
     $this->set('decision', $decision);
     $this->set('therapy', $therapy);
+    $this->Session->write('therapy', $therapy);
     $this->set('medicine1', $med1);
+    $this->Session->write('med1', $med1);
     $this->set('medicine2', $med2);
+    $this->Session->write('med2', $med2);
     $this->set('medicine3', $med3);
+    $this->Session->write('med3', $med3);
+
+    $data = array('TreatmentRunAlgorithm' =>array(
+      'treatment_id' => $t_id,
+      'type' => $therapy,
+      'medicine_name_one' => $med1,
+      'medicine_name_two' => $med2,
+      'medicine_name_three' => $med3,
+      'edited_by_user' => 'no'
+    )); 
+    //$this->request->data = $data;
 
     /* accept algorithm results */
-    if ($this->request->is('post')) {
-      $data = array(
-        'treatment_id' => $t_id,
-        'type' => $therapy,
-        'medicine_name_one' => $med1,
-        'medicine_name_two' => $med2,
-        'medicine_name_three' => $med3,
-        'edited_by_user' => 'no');    
+    if ($this->request->is('post')) {  
       $this->Visit->Treatment->TreatmentRunAlgorithm->create();
       if($this->Visit->Treatment->TreatmentRunAlgorithm->save($data)){
         $this->Session->setFlash('Algorithm results accepted successfully!');
@@ -312,20 +309,20 @@ class VisitsController extends AppController {
 
   public function edit(){    
       $t_id = $this->Session->read('treatment_id');
+      $type = $this->Session->read('therapy');
+      $med1 = $this->Session->read('med1');
+      $med2 = $this->Session->read('med2');
+      $med3 = $this->Session->read('med3');
+      $this->set('type', $type);
+      $this->set('med1', $med1);
+      $this->set('med2', $med2);
+      $this->set('med3', $med3);
+
       if($this->request->is('post') || $this->request->is('put')){       
         $data = $this->request->data;   
         $data['TreatmentRunAlgorithm']['treatment_id'] = $t_id;    
         $data['TreatmentRunAlgorithm']['edited_by_user'] = 'yes';
-                
-        // $data = array(
-        //   'treatment_id' => $t_id,
-        //   'type' => '1',
-        //   'medicine_name_one' => '11',
-        //   'medicine_name_two' => '12',
-        //   'medicine_name_three' => '13',
-        //   'edited_by_user' => 'yes');    
         
-        //pr($data); exit;  
         $this->Visit->Treatment->TreatmentRunAlgorithm->create();
 
         if($this->Visit->Treatment->TreatmentRunAlgorithm->save($data)){
