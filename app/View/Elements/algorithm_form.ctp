@@ -21,8 +21,11 @@
     <?php
     $medOptions = array(
         'none' => 'none',
+        'Metformin' => 'Metformin',                
         'GLP_1RA' => 'GLP_1RA',
         'DPP4_i' => 'DPP4_i',
+        'AG_i' => 'AG_i',
+        'SGLT_2' => 'SGLT_2',
         'TZD' => 'TZD',
         'SU_GLN' => 'SU_GLN',
         'BasalInsulin' => 'BasalInsulin',

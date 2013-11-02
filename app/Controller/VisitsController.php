@@ -212,6 +212,7 @@ class VisitsController extends AppController {
     $this->Visit->Patient->DrugAllergy->id = $p_id;
     $drug_allergies = $this->Visit->Patient->DrugAllergy->read();  //current patient's drug allergies
     $Metformin = $drug_allergies['DrugAllergy']['met'];
+    //pr($Metformin); eixt;
     $GLP_1RA = $drug_allergies['DrugAllergy']['glp_1ra'];
     $DPP4_i = $drug_allergies['DrugAllergy']['dpp_4i'];
     $AG_i = $drug_allergies['DrugAllergy']['agi'];
