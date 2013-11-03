@@ -206,7 +206,6 @@ class VisitsController extends AppController {
 
     /* set allergies */
     $drug_allergies = $this->Visit->Patient->DrugAllergy->findByPatient_id($p_id);  //current patient's drug allergies
-    print_r($drug_allergies);
     $Metformin = $drug_allergies['DrugAllergy']['met'];
     $GLP_1RA = $drug_allergies['DrugAllergy']['glp_1ra'];
     $DPP4_i = $drug_allergies['DrugAllergy']['dpp_4i'];
@@ -216,28 +215,29 @@ class VisitsController extends AppController {
     $SU_GLN = $drug_allergies['DrugAllergy']['su_gln'];
     $BasalInsulin = $drug_allergies['DrugAllergy']['insulin'];
     $Colesevelam = $drug_allergies['DrugAllergy']['colsvl'];
-
+    $Bromocriptine_QR = $drug_allergies['DrugAllergy']['bcr_or'];
+    
     $stack = array();
-    if ($Metformin == "yes")
-        array_push($stack,"Metformin");
-    if ($GLP_1RA == "yes")
-        array_push($stack, "GLP_1RA");
-    if ($DPP4_i == "yes")
-        array_push($stack, "DPP4_i");
-    if ($AG_i == "yes")
-        array_push($stack, "AG_i");
-    if ($SGLT_2 == "yes")
-        array_push($stack, "SGLT_2");
-    if ($SGLT_2 == "yes")
-        array_push($stack, "SGLT_2");
-    if ($TZD == "yes")
-        array_push($stack, "TZD");
-    if ($SU_GLN == "yes")
-        array_push($stack, "SU_GLN");
-    if ($BasalInsulin == "yes")
-        array_push($stack, "BasalInsulin");
-    if ($Colesevelam == "yes")
-        array_push($stack, "Colesevelam");
+    if ($Metformin === "yes")
+    	array_push($stack,"Metformin");
+    if ($GLP_1RA === "yes")
+    	array_push($stack, "GLP-1RA");
+    if ($DPP4_i === "yes")
+    	array_push($stack, "DPP4-i");
+    if ($AG_i === "yes")
+    	array_push($stack, "AG-i");
+    if ($SGLT_2 === "yes")
+    	array_push($stack, "SGLT-2");
+    if ($TZD === "yes")
+    	array_push($stack, "TZD");
+    if ($SU_GLN === "yes")
+    	array_push($stack, "SU/GLN");
+    if ($BasalInsulin === "yes")
+    	array_push($stack, "BasalInsulin");
+    if ($Colesevelam === "yes")
+    	array_push($stack, "Colesevelam");
+    if ($Bromocriptine_QR === "yes")
+    	array_push($stack, "Bromocriptine-QR");
 
     $this->Algorithm->setAllergies($stack);
 
