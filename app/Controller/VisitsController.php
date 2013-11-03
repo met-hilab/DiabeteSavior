@@ -190,30 +190,24 @@ class VisitsController extends AppController {
     $v_current_id = $visit[0]['Visit']['id'];  //current visit id
     $v_last_id = $visit[1]['Visit']['id'];  // last visit id
 
-    $this->Visit->VitalsLab->id = $v_current_id;
-    $current_visit = $this->Visit->VitalsLab->read();
+    $current_visit = $this->Visit->VitalsLab->findByVisit_id($v_current_id);
     $A1C = $current_visit['VitalsLab']['A1c'];  //current a1c value
     $this->Algorithm->setA1C($A1C);
 
-    $this->Visit->VitalsLab->id = $v_last_id;
-    $last_visit = $this->Visit->VitalsLab->read();
+    $last_visit = $this->Visit->VitalsLab->findByVisit_id($v_last_id);
     $A1Clast = $last_visit['VitalsLab']['A1c'];  // last a1c value
     $this->Algorithm->setA1Clast($A1Clast);
     
-
-    $this->Visit->Treatment->id = $t_id;
-    $treatments = $this->Visit->Treatment->read();
+    $treatments = $this->Visit->Treatment->findByVisit_id($v_id);
     $A1CTarget = $treatments['Treatment']['a1c_goal'];  //current a1c_goal value
     $this->Algorithm->setA1CTarget($A1CTarget);
 
     $this->Algorithm->setSymptoms(false);  // diabetes symptoms - only used for insulin therapy
 
     /* set allergies */
-    $this->Visit->Patient->DrugAllergy->id = $p_id;
-    $drug_allergies = $this->Visit->Patient->DrugAllergy->read();  //current patient's drug allergies
-print_r($drug_allergies);
+    $drug_allergies = $this->Visit->Patient->DrugAllergy->findByPatient_id($p_id);  //current patient's drug allergies
+    print_r($drug_allergies);
     $Metformin = $drug_allergies['DrugAllergy']['met'];
-    //pr($Metformin); eixt;
     $GLP_1RA = $drug_allergies['DrugAllergy']['glp_1ra'];
     $DPP4_i = $drug_allergies['DrugAllergy']['dpp_4i'];
     $AG_i = $drug_allergies['DrugAllergy']['agi'];
@@ -248,8 +242,7 @@ print_r($drug_allergies);
     $this->Algorithm->setAllergies($stack);
 
     /* set current medicines */
-    $this->Visit->Treatment->TreatmentRunAlgorithm->id = $t_id;
-    $treatment_run_algorithms = $this->Visit->Treatment->TreatmentRunAlgorithm->read();  //current medicines
+    $treatment_run_algorithms = $this->Visit->Treatment->TreatmentRunAlgorithm->findByTreatment_id($t_id);  //current medicines
     $Medicine1 = $treatment_run_algorithms['TreatmentRunAlgorithm']['medicine_name_one'];
     $Medicine2 = $treatment_run_algorithms['TreatmentRunAlgorithm']['medicine_name_two'];
     $Medicine3 = $treatment_run_algorithms['TreatmentRunAlgorithm']['medicine_name_three'];
