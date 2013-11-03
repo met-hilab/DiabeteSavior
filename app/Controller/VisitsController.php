@@ -176,11 +176,11 @@ class VisitsController extends AppController {
   public function gcalgorithm(){
 
     $p_id = $this->Session->read('patient_id');
-    echo $p_id;
+    //echo $p_id;
     $v_id = $this->Session->read('visit_id');
-    echo $v_id;
+    //echo $v_id;
     $t_id = $this->Session->read('treatment_id');
-    echo $t_id;
+    //echo $t_id;
 
     /* set A1C values */
     $visit = $this->Visit->find('all', array(
@@ -211,6 +211,7 @@ class VisitsController extends AppController {
     /* set allergies */
     $this->Visit->Patient->DrugAllergy->id = $p_id;
     $drug_allergies = $this->Visit->Patient->DrugAllergy->read();  //current patient's drug allergies
+print_r($drug_allergies);
     $Metformin = $drug_allergies['DrugAllergy']['met'];
     //pr($Metformin); eixt;
     $GLP_1RA = $drug_allergies['DrugAllergy']['glp_1ra'];
@@ -223,25 +224,25 @@ class VisitsController extends AppController {
     $Colesevelam = $drug_allergies['DrugAllergy']['colsvl'];
 
     $stack = array();
-    if ($Metformin)
+    if ($Metformin == "yes")
         array_push($stack,"Metformin");
-    if ($GLP_1RA)
+    if ($GLP_1RA == "yes")
         array_push($stack, "GLP_1RA");
-    if ($DPP4_i)
+    if ($DPP4_i == "yes")
         array_push($stack, "DPP4_i");
-    if ($AG_i)
+    if ($AG_i == "yes")
         array_push($stack, "AG_i");
-    if ($SGLT_2)
+    if ($SGLT_2 == "yes")
         array_push($stack, "SGLT_2");
-    if ($SGLT_2)
+    if ($SGLT_2 == "yes")
         array_push($stack, "SGLT_2");
-    if ($TZD)
+    if ($TZD == "yes")
         array_push($stack, "TZD");
-    if ($SU_GLN)
+    if ($SU_GLN == "yes")
         array_push($stack, "SU_GLN");
-    if ($BasalInsulin)
+    if ($BasalInsulin == "yes")
         array_push($stack, "BasalInsulin");
-    if ($Colesevelam)
+    if ($Colesevelam == "yes")
         array_push($stack, "Colesevelam");
 
     $this->Algorithm->setAllergies($stack);
