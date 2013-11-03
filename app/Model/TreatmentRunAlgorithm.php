@@ -64,8 +64,10 @@ class TreatmentRunAlgorithm extends AppModel {
 			),
 		),
 		'medicine_name_one' => array(
-			'alphanumeric' => array(
-				'rule' => array('alphanumeric'),
+			'notempty' => array(
+				'rule' => array('notempty'),
+			// 'alphanumeric' => array(
+			// 	'rule' => array('alphanumeric'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,
@@ -74,8 +76,10 @@ class TreatmentRunAlgorithm extends AppModel {
 			),
 		),
 		'medicine_name_two' => array(
-			'alphanumeric' => array(
-				'rule' => array('alphanumeric'),
+			'notempty' => array(
+				'rule' => array('notempty'),
+			// 'alphanumeric' => array(
+			// 	'rule' => array('alphanumeric'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,
@@ -84,8 +88,10 @@ class TreatmentRunAlgorithm extends AppModel {
 			),
 		),
 		'medicine_name_three' => array(
-			'alphanumeric' => array(
-				'rule' => array('alphanumeric'),
+			'notempty' => array(
+				'rule' => array('notempty'),
+			// 'alphanumeric' => array(
+			// 	'rule' => array('alphanumeric'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,

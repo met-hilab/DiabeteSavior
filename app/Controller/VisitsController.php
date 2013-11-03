@@ -248,13 +248,10 @@ class VisitsController extends AppController {
     $Medicine3 = $treatment_run_algorithms['TreatmentRunAlgorithm']['medicine_name_three'];
     if ($Medicine1 == null)
         $Medicine1 = "none";
-        // $Medicine1 = "GLP_1RA";
     if ($Medicine2 == null)
         $Medicine2 = "none";
-        // $Medicine2 = "DPP4_i";
     if ($Medicine3 == null)
         $Medicine3 = "none";
-        // $Medicine3 = "SU_GLN";
 
     $this->Algorithm->setMedicine1($Medicine1);
     $this->Algorithm->setMedicine2($Medicine2);
