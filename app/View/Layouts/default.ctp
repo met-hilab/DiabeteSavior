@@ -176,19 +176,23 @@ $cakeDescription = __d('cake_dev', 'Diabetes Savior: Type II Diabetes Infomatic 
 <!-- The main content from controller / view END -->
 
 		</div>
-		<footer id="footer" class="container navbar-fixed-bottom footer">
+		<footer id="footer" style ="padding: 75px 0px 20px 0px;">
                     <div class="row" style="height:75%;">
                       <div class="col-lg-offset-4 col-lg-4" style="display: inline-block; height:75%; text-align: center;">
                         <div class="container">
                           <img src="/img/bu-logo-small.gif"/>
                              <div style="display: inline-block; vertical-align: bottom;">
                                 
+								 <ul class="list-inline">
+                                  <li>								 
                                   <?php echo $this->Html->link(
-                                                     'Back to MET-HIlab',
+                                                     'MET HI Lab',
                                                      'http://sites.bu.edu/met-hilab/',
                                                      array('target' => '_blank', 'escape' => false)
                                              );
                                              ?>
+								  </li>
+                                  </ul>								  
                              
 <!--                               <ul class="bs-social-buttons">
                                 <li class="follow-btn" style="display: inline-block;">
