@@ -53,7 +53,11 @@
   <th>DOB: </th>
   <td><?php echo $date = date("F j, Y", strtotime($p['Patient']['dob']));?></td>
 </tr>
-
+<tr>
+             <th>Age: </th>
+        <td><?php $date = date("F j, Y", strtotime($p['Patient']['dob']));
+		         echo $age = calculateAge($date);?></td>
+</tr>
 <tr>
   <th>Gender: </th>
   <td><?php echo $patient['Patient']['gender']?></td>
