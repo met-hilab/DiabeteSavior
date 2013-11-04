@@ -200,7 +200,7 @@
 <br clear = "all">
 <hr>		
 		
-<!-- Vitals and Lab results -->
+<!-- Vitals and Lab Results -->
 <div class="col-md-4">
 
 <h3>Vitals and Lab Results</h3> 

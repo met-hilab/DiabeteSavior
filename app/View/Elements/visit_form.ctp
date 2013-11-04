@@ -51,7 +51,7 @@ $formDefaults = array(
 
 <hr>
 
-<!-- Vitals and Labs -->
+<!-- Vitals and Lab Results -->
 <h3>Vitals and Labs</h3>
 <?php echo $this->Form->input('VitalsLab.f_weight', array('label' => array('class' => 'col-lg-2 control-label', 'text' => '<font color="red">* </font>Weight:'), 'type' => 'text')) ?>
 <?php echo $this->Form->input('VitalsLab.f_height', array('label' => array('class' => 'col-lg-2 control-label', 'text' => '<font color="red">* </font>Height:'), 'type' => 'text')) ?>
