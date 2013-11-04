@@ -1,23 +1,218 @@
 
-				  
-		     
+<div class='row' style='padding: 5px 0 25px 0;'>
+                    <h2 class="section-title col-xs-12 col-sm-12 col-md-8" style="margin-bottom: 2px; margin-top:0; padding-bottom: 0;"><div style='font-family: sans-serif; color: darkgray; display: inline-block;'><?php
+                                         echo $patient['Patient']['patient_number'].' '; ?> </div>
+                                         <?php
+                                         echo $patient['Patient']['patient_lastname'].", ";
+                                         echo $patient['Patient']['patient_firstname']." ";
+                                         echo $patient['Patient']['patient_middlename'];
+                                        ?></h2>
+                           <h4 class="col-xs-12 col-sm-12 col-md-4" style="margin-bottom: 0; font-family: sans-serif; font-style: italic; text-align:right;"><?php
+                                         echo $patient['Patient']['gender'].',    Age ';
+                                         echo $age = calculateAge(date("F j, Y", strtotime($patient['Patient']['dob'])));;
+                                        ?></h4>
+<!--                         
+                            <h4 class="col-xs-6 col-sm-6 col-md-4" style="padding: 2px 0 2px 0; margin-top: 0; margin-bottom: 0; text-align: right;"><small><em>dob </em></small><?php
+                                         echo $date = date("F j, Y", strtotime($patient['Patient']['dob']));;
+                                        // echo "<h4>Doris Lewis</h4>"
+                                        ?></h4>-->
+                  </div>				  
+<!--		     
             <h1 >Patient Information </h1>
 			
-			</br/>
+			</br/>-->
 			
 
             <!-----Add Three Buttons------------------------------------------>
-            <div style="padding-bottom:10px;">
+<!--            <div style="padding-bottom:10px;">
            <a href="/visits/add" class="btn btn-primary" style="padding-left:5px;"><span class="glyphicon glyphicon-plus"></span> Add Visit</a>
-<!--           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
+           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
            <a href="/patients/edit" class="btn btn-primary" style="padding-left:5px;"><span class="glyphicon glyphicon-edit"></span> Update Patient</a>
-<!--           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
+           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
            <a href="/patients/delete" data-confirm="Do you want to delete this patient record?" data-method="delete" class="btn btn-primary" style="padding-left:5px;"><span class="glyphicon glyphicon-trash"></span> Delete Patient</a>
-            </div>
+            </div>-->
 
-		   
+<div class='patient-tabs'>
+              <ul class="nav nav-tabs">
+               <li id="patient-tab-information" class="active nav-tab" data-tab-index="information">
+                 <a href="#information" data-toggle="tab">Patient Information</a>
+               </li>
+               <li id="patient-tab-visit" class="nav-tab" data-tab-index="visit">
+                 <a href="#visit" data-toggle="tab">Visits</a>
+               </li>
+               <li id="patient-tab-algorithm" class="nav-tab" data-tab-index="algorithm">
+                 <a href="#algorithm" data-toggle="tab">Algorithm</a>
+               </li>
+             </ul>
+             <div id="patient-tab-content" class="tab-content" style="height:auto;overflow:visible;">
+                  <div id="information" class="tab-pane active">
+                    <a href="/patients/edit" class="btn btn-primary" style="padding:5px; float: right;"><span class="glyphicon glyphicon-edit"></span> Update Patient</a>
+                    <a href="/patients/delete" data-confirm="Do you want to delete this patient record?" data-method="delete" class="btn btn-primary" style="padding:5px; float: right;"><span class="glyphicon glyphicon-trash"></span> Delete Patient</a>
+                     
+                    <div class='col-md-8'>
+                    <div style="padding: 15px 15px 15px 0;"class="col-md-6">
+                      <div style="font-size: large; font-family: sans-serif; font-weight: bold;">DOB 
+                        <div style="display: inline-block; font-weight: normal; font-size: medium; font-family: sans-serif;"><?php echo $date = date("F j, Y", strtotime($patient['Patient']['dob']));; ?></div>
+                      </div>
+                      <div style="font-size: large; font-family: sans-serif; font-weight: bold;">Race 
+                        <div style="display: inline-block; font-weight: normal; font-size: medium; font-family: sans-serif;"><?php echo $patient['Patient']['race']?: 'N/A';?></div>
+                      </div>
+                       <?php if ($patient['Patient']['occupation']!=null) {?>
+                          <div style="font-size: large; font-family: sans-serif; font-weight: bold;">Occupation 
+                            <div style="display: inline-block; font-weight: normal; font-size: medium; font-family: sans-serif;"><?php echo $patient['Patient']['occupation']; ?></div>
+                          </div>
+                      <?php }?>
+                    </div>
+                     <?php if ($patient['Patient']['street']!=null && $patient['Patient']['city'] != null) {?>
+                        <div style="padding: 15px 15px 15px 0;"class="col-md-6">
+                          <div style="font-size: large; font-family: sans-serif; font-weight: bold;">Address</div>
+                          <div style="font-size: medium; font-family: sans-serif;">
+                            <?php echo $patient['Patient']['street'];?>
+                          </div>
+                          <div style="font-size: medium; font-family: sans-serif;">
+                            <?php echo $patient['Patient']['city'],", ";
+                                  echo $patient['Patient']['state']." ";
+                                  echo $patient['Patient']['postal_code'];?>
+                          </div>
+                       </div>
+                      <?php }?>
+                    </div>
+                   
+                    <!-- Patient Diagnoses -->
+<div class="col-md-8">
+<h3>Diagnosis </h3> 
+<table class="table table-condensed">
+ 
+<thead>
+    <tr>
+        <th>Diagnosis</th>
+        <th>ICD-9</th>
+
+		<th>ICD-10</th>
+	</tr>
+</thead>
+
+
+ <?php if ($patient[ 'Diagnosis' ] == null)
+  echo 'No Current Diagnosis';?>  
+<?php foreach($patient[ 'Diagnosis' ] as $diagnosis ) :?>
+<tbody>
+
+  <tr>
+    <td><?php echo $diagnosis['dxname']?>
+    <td><?php echo $diagnosis['icd9code']?>
+    <td><?php echo $diagnosis['icd10code']?>
+  </tr>
+ 
+ </tbody>
+   <?php endforeach; ?>
+</table>
+</div>
+
+<br clear="all">
+
+<!-- Patient Drug Allergies -->
+<div class="col-md-8">
+<h3>Drug Allergies or Contraindications</h3> 
+
+<table  class="table table-condensed">
+
+<tr>
+
+  <th>Metformin:  </th> 
+  <td> <?php echo $patient['DrugAllergy']['met'] ?: 'Unknown' ?> </td>
+</tr>
+
+<tr> 
+  <th>Dipeptidyl peptidase 4 inhibitors (DPP-4): </th>
+  <td><?php echo $patient['DrugAllergy']['dpp_4i']?: 'Unknown' ?></td>
+</tr>
+
+<tr> 
+  <th>Glucagon-like peptide-1 receptor agonists (GLP-1): </th>
+  <td><?php echo $patient['DrugAllergy']['glp_1ra']?: 'Unknown' ?></td>
+</tr>
+
+<tr>
+  <th>Thiazolidinediones (TZD): </th>
+  <td><?php echo $patient['DrugAllergy']['tzd']?: 'Unknown' ?></td>
+</tr>
+
+<tr>
+  <th>Alpha-glucosidase inhibitors (AGIs): </th>
+  <td><?php echo $patient['DrugAllergy']['agi']?: 'Unknown'?></td>
+</tr>
+
+
+<tr>
+
+  <th>Colesevelam:  </th> 
+  <td> <?php echo $patient['DrugAllergy']['colsvl']?: 'Unknown' ?> </td>
+</tr>
+
+<tr> 
+  <th>Bromocriptine Mesylate: </th>
+  <td><?php echo $patient['DrugAllergy']['bcr_or']?: 'Unknown' ?></td>
+</tr>
+
+<tr> 
+  <th>Sulfonylurea (SFU) and Glinides: </th>
+  <td><?php echo $patient['DrugAllergy']['su_gln']?: 'Unknown' ?></td>
+</tr>
+
+<tr>
+  <th>Insulin: </th>
+  <td><?php echo $patient['DrugAllergy']['insulin']?: 'Unknown' ?></td>
+</tr>
+
+<tr>
+  <th>Sodium-glucose co-transporter 2 inhibitors (SGLT2): </th>
+  <td><?php echo $patient['DrugAllergy']['sglt_2']?: 'Unknown'?></td>
+</tr>
+
+<tr>
+  <th>Pramlintide: </th>
+  <td><?php echo $patient['DrugAllergy']['praml']?: 'Unknown'?></td>
+</tr>
+
+</table>
+</div>
+                  
+                  </div>
+            
+                  <div id="visit" class="tab-pane">
+                    <a href="/visits/add" class="btn btn-primary" style="padding-left:5px; float: right;"><span class="glyphicon glyphicon-plus"></span> Add Visit</a>
+                    <div class="col-md-4">
+                      <h3>Visit history </h3> 
+
+                      <table class="table table-hover">
+
+                      <?php 
+                      if ($patient['Visit']==null)
+                          echo 'This patient does not have visit history';
+                      foreach($patient[ 'Visit' ] as $visit ):?>
+                      <tbody>
+                        <tr>
+                          <td><?php echo $this->Html->link($date = date("F j, Y", strtotime($visit['created'])), array('controller' => 'visits', 'action' => 'show', $visit['id'])); ?>
+
+
+                              </td>
+
+                        </tr>
+                        </tbody>
+                      <?php endforeach;?> 
+
+                      </table>
+                      </div>
+                  
+                  </div>
+                  <div id="algorithm" class="tab-pane">
+                    <h3>testing algorithm</h3>
+                  </div>
+             </div><!-- tab content -->
+           </div><!-- patient-tabs -->		   
 <!-- Patient Demographic Information -->		   
-		 <div class="col-md-4">
+<!--		 <div class="col-md-4">
 		   
 		    <h3>Demographics</h3>  
            			
@@ -36,7 +231,7 @@
 </tr>
 
 
-<!-- Does not show middle name field if the patient does not have one -->
+ Does not show middle name field if the patient does not have one 
 <?php if ($patient['Patient']['patient_middlename']!=null) {?>
 <tr> 
   <th>Middle Name: </th>
@@ -53,11 +248,7 @@
   <th>DOB: </th>
   <td><?php echo $date = date("F j, Y", strtotime($p['Patient']['dob']));?></td>
 </tr>
-<tr>
-             <th>Age: </th>
-        <td><?php $date = date("F j, Y", strtotime($p['Patient']['dob']));
-		         echo $age = calculateAge($date);?></td>
-</tr>
+
 <tr>
   <th>Gender: </th>
   <td><?php echo $patient['Patient']['gender']?></td>
@@ -79,7 +270,7 @@
 
 
 
-<!-- Patient Contact Information -->
+ Patient Contact Information 
 
  <div class="col-md-4">
 
@@ -111,7 +302,7 @@
 
 
 
-<!-- Patient Diagnoses -->
+ Patient Diagnoses 
 <div class="col-md-4">
 <h3>Diagnoses </h3> 
 <table class="table table-condensed">
@@ -141,7 +332,7 @@
 
 
 
-<!-- Patient Drug Allergies -->
+ Patient Drug Allergies 
 <div class="col-md-8">
 <h3>Drug Allergies or Contraindications</h3> 
 
@@ -211,7 +402,7 @@
 
 
 
-<!-- Patient Visit History -->
+ Patient Visit History 
 
 <div class="col-md-4">
 <h3>Visit history </h3> 
@@ -237,4 +428,4 @@ foreach($patient[ 'Visit' ] as $visit ):?>
 </div>
 
 <br clear="all">
-    
+    -->
