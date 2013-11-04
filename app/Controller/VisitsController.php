@@ -221,23 +221,23 @@ class VisitsController extends AppController {
     if ($Metformin === "yes")
     	array_push($stack,"Metformin");
     if ($GLP_1RA === "yes")
-    	array_push($stack, "GLP-1RA");
+    	array_push($stack, "GLP_1RA");
     if ($DPP4_i === "yes")
-    	array_push($stack, "DPP4-i");
+    	array_push($stack, "DPP4_i");
     if ($AG_i === "yes")
-    	array_push($stack, "AG-i");
+    	array_push($stack, "AG_i");
     if ($SGLT_2 === "yes")
-    	array_push($stack, "SGLT-2");
+    	array_push($stack, "SGLT_2");
     if ($TZD === "yes")
     	array_push($stack, "TZD");
     if ($SU_GLN === "yes")
-    	array_push($stack, "SU/GLN");
+    	array_push($stack, "SU_GLN");
     if ($BasalInsulin === "yes")
     	array_push($stack, "BasalInsulin");
     if ($Colesevelam === "yes")
     	array_push($stack, "Colesevelam");
     if ($Bromocriptine_QR === "yes")
-    	array_push($stack, "Bromocriptine-QR");
+    	array_push($stack, "Bromocriptine_QR");
 
     $this->Algorithm->setAllergies($stack);
 

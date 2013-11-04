@@ -1,6 +1,5 @@
 <?php
 /**
- * Created by JetBrains PhpStorm.
  * User: Jeff
  * Date: 10/21/13
  * Time: 2:08 PM
@@ -31,11 +30,11 @@ class AlgorithmComponent extends Component {
     var $therapy = "none";      // therapy description
 
     // therapy medicine tables
-    var $monotherapy = array("Metformin", "GLP-1RA", "DPP4-i", "AG-i", "SGLT-2","TZD", "SU/GLN");
-    var $dualtherapy = array("GLP-1RA", "DPP4-i", "TZD", "SGLT-2", "BasalInsulin", "Colesevelam",
-        "Bromocriptine-QR", "AG-i", "SU/GLN");
-    var $tripletherapy = array("GLP-1RA", "TZD","SGLT-2", "BasalInsulin", "DPP4-i", "Colesevelam",
-        "Bromocriptine-QR", "AG-i", "SU/GLN");
+    var $monotherapy = array("Metformin", "GLP_1RA", "DPP4_i", "AG_i", "SGLT_2","TZD", "SU_GLN");
+    var $dualtherapy = array("GLP_1RA", "DPP4_i", "TZD", "SGLT_2", "BasalInsulin", "Colesevelam",
+        "Bromocriptine_QR", "AG_i", "SU_GLN");
+    var $tripletherapy = array("GLP_1RA", "TZD","SGLT_2", "BasalInsulin", "DPP4_i", "Colesevelam",
+        "Bromocriptine_QR", "AG_i", "SU_GLN");
     var $decision ="";
 
     /**
@@ -60,7 +59,7 @@ class AlgorithmComponent extends Component {
         // pre-diabetic range 5.7 <= a1c < 6.5
         elseif (($this->a1c >= 5.7) && ($this->a1c < 6.5)&&$this->noTherapy())
         {
-            $this->therapy = "Lifestyle";
+            $this->therapy = "lifestyle modification";
             $this->decision = "Patient is at risk of diabetes.";
         }
 
@@ -118,7 +117,7 @@ class AlgorithmComponent extends Component {
         // insulin therapy: if a1c > 9 and symptoms
         elseif (($this->a1c > 9) && $this->noTherapy() && $this->symptoms)
         {
-            $this->therapy = "Lifestyle + Insulin";
+            $this->therapy = "lifestyle + insulin";
             $this->decision = "Start with Insulin.";
         }
 
@@ -178,20 +177,20 @@ class AlgorithmComponent extends Component {
         if ( ($therapyType == 1) && ($medicine != "none"))
         {
             $this->medicine1 = $medicine;
-            $this->therapy = "Lifestyle + Monotherapy";
+            $this->therapy = "lifestyle + monotherapy";
             return true;
         }
         elseif ( ($therapyType == 2) && ($medicine != "none"))
         {
             $this->medicine2 = $medicine;
-            $this->therapy = "Lifestyle + Dual Therapy";
+            $this->therapy = "lifestyle + dual therapy";
             return true;
 
         }
         elseif (($therapyType == 3) && ($medicine != "none"))
         {
             $this->medicine3 = $medicine;
-            $this->therapy = "Lifestyle + Triple Therapy";
+            $this->therapy = "lifestyle + triple therapy";
             return true;
         }
         else
