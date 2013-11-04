@@ -166,9 +166,19 @@ class AlgorithmComponent extends Component {
         $medCount = 0;
         while(($medicine =="none") && ($medCount < $nMeds))
         {
-            if (($medlist[$medCount] != $this->allergy[$medCount]) && ($medlist[$medCount] != $prevmed))
+            //if (($medlist[$medCount] != $this->allergy[$medCount]) && ($medlist[$medCount] != $prevmed))
+            if ($medlist[$medCount] != $prevmed)
             {
-                $medicine = $medlist[$medCount];
+            	$nAllergy = count($this->allergy);
+            	$noAllergy = true;
+            	for ( $i = 0; $i < $nAllergy; $i++)
+            	{
+            		if($medlist[$medCount] == $this->allergy[$i])
+                		$noAllergy = false;
+            	}
+            	if ($noAllergy)
+            		$medicine = $medlist[$medCount];
+            	 
             }
             $medCount += 1;
         } // while
