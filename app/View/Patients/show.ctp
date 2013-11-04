@@ -1,7 +1,7 @@
 
 				  
 		     
-            <h2 >Patient Information </h2>
+            <h1 >Patient Information </h1>
 			
 			</br/>
 			
@@ -16,8 +16,8 @@
             </div>
 
 		   
-		   
-		 <div class="col-md-6">
+<!-- Patient Demographic Information -->		   
+		 <div class="col-md-4">
 		   
 		    <h3>Demographics</h3>  
            			
@@ -32,9 +32,17 @@
 
 <tr> 
   <th>First Name: </th>
-  <td><?php echo $patient['Patient']['patient_firstname']." ";
-                                 echo $patient['Patient']['patient_middlename']; ?></td>
+  <td><?php echo $patient['Patient']['patient_firstname']; ?></td>
 </tr>
+
+
+<!-- Does not show middle name field if the patient does not have one -->
+<?php if ($patient['Patient']['patient_middlename']!=null) {?>
+<tr> 
+  <th>Middle Name: </th>
+  <td><?php echo $patient['Patient']['patient_middlename']; ?></td>
+</tr>
+<?php }?>
 
 <tr> 
   <th>Last Name: </th>
@@ -43,7 +51,7 @@
 
 <tr>
   <th>DOB: </th>
-  <td><?php echo $patient['Patient']['dob']?></td>
+  <td><?php echo $date = date("F j, Y", strtotime($p['Patient']['dob']));?></td>
 </tr>
 
 <tr>
@@ -67,7 +75,9 @@
 
 
 
- <div class="col-md-6">
+<!-- Patient Contact Information -->
+
+ <div class="col-md-4">
 
         <h3>Contact information</h3> 
 <table  class="table table-condensed">
@@ -96,86 +106,14 @@
 </div>
 
 
-<br clear="all">
-<hr>
 
-
-<div class="col-md-4">
-<h3>Drug Allergies </h3> 
-
-<table  class="table table-condensed">
-
-<tr>
-
-  <th>Metformin:  </th> 
-  <td> <?php echo $patient['DrugAllergy']['met'] ?> </td>
-</tr>
-
-<tr> 
-  <th>Dipeptidyl peptidase 4 inhibitor: </th>
-  <td><?php echo $patient['DrugAllergy']['dpp_4i'] ?></td>
-</tr>
-
-<tr> 
-  <th>Glucagon-like peptide-1: </th>
-  <td><?php echo $patient['DrugAllergy']['glp_1ra'] ?></td>
-</tr>
-
-<tr>
-  <th>Thiazolidinedione: </th>
-  <td><?php echo $patient['DrugAllergy']['tzd'] ?></td>
-</tr>
-
-<tr>
-  <th>Alpha-glucosidase inhibitor: </th>
-  <td><?php echo $patient['DrugAllergy']['agi']?></td>
-</tr>
-
-
-<tr>
-
-  <th>Colsvl:  </th> 
-  <td> <?php echo $patient['DrugAllergy']['colsvl'] ?> </td>
-</tr>
-
-<tr> 
-  <th>Bcr_or: </th>
-  <td><?php echo $patient['DrugAllergy']['bcr_or'] ?></td>
-</tr>
-
-<tr> 
-  <th>Su_gln: </th>
-  <td><?php echo $patient['DrugAllergy']['su_gln'] ?></td>
-</tr>
-
-<tr>
-  <th>Insulin: </th>
-  <td><?php echo $patient['DrugAllergy']['insulin'] ?></td>
-</tr>
-
-<tr>
-  <th>Sodium-glucose co-transporter 2 (SGLT2) inhibitors: </th>
-  <td><?php echo $patient['DrugAllergy']['sglt_2']?></td>
-</tr>
-
-<tr>
-  <th>Praml: </th>
-  <td><?php echo $patient['DrugAllergy']['praml']?></td>
-</tr>
-
-</table>
-</div>
-
-
-
-
-
+<!-- Patient Diagnoses -->
 <div class="col-md-4">
 <h3>Diagnoses </h3> 
 <table class="table table-condensed">
 <thead>
     <tr>
-        <th>Dignosis</th>
+        <th>Diagnosis</th>
         <th>ICD-9</th>
 
 		<th>ICD-10</th>
@@ -194,10 +132,82 @@
 </table>
 </div>
 
+<br clear="all">
+<hr>
+
+
+
+<!-- Patient Drug Allergies -->
+<div class="col-md-8">
+<h3>Drug Allergies or Contraindications</h3> 
+
+<table  class="table table-condensed">
+
+<tr>
+
+  <th>Metformin:  </th> 
+  <td> <?php echo $patient['DrugAllergy']['met'] ?: 'Unknown' ?> </td>
+</tr>
+
+<tr> 
+  <th>Dipeptidyl peptidase 4 inhibitors (DPP-4): </th>
+  <td><?php echo $patient['DrugAllergy']['dpp_4i']?: 'Unknown' ?></td>
+</tr>
+
+<tr> 
+  <th>Glucagon-like peptide-1 receptor agonists (GLP-1): </th>
+  <td><?php echo $patient['DrugAllergy']['glp_1ra']?: 'Unknown' ?></td>
+</tr>
+
+<tr>
+  <th>Thiazolidinediones (TZD): </th>
+  <td><?php echo $patient['DrugAllergy']['tzd']?: 'Unknown' ?></td>
+</tr>
+
+<tr>
+  <th>Alpha-glucosidase inhibitors (AGIs): </th>
+  <td><?php echo $patient['DrugAllergy']['agi']?: 'Unknown'?></td>
+</tr>
+
+
+<tr>
+
+  <th>Colesevelam:  </th> 
+  <td> <?php echo $patient['DrugAllergy']['colsvl']?: 'Unknown' ?> </td>
+</tr>
+
+<tr> 
+  <th>Bromocriptine Mesylate: </th>
+  <td><?php echo $patient['DrugAllergy']['bcr_or']?: 'Unknown' ?></td>
+</tr>
+
+<tr> 
+  <th>Sulfonylurea (SFU) and Glinides: </th>
+  <td><?php echo $patient['DrugAllergy']['su_gln']?: 'Unknown' ?></td>
+</tr>
+
+<tr>
+  <th>Insulin: </th>
+  <td><?php echo $patient['DrugAllergy']['insulin']?: 'Unknown' ?></td>
+</tr>
+
+<tr>
+  <th>Sodium-glucose co-transporter 2 inhibitors (SGLT2): </th>
+  <td><?php echo $patient['DrugAllergy']['sglt_2']?: 'Unknown'?></td>
+</tr>
+
+<tr>
+  <th>Pramlintide: </th>
+  <td><?php echo $patient['DrugAllergy']['praml']?: 'Unknown'?></td>
+</tr>
+
+</table>
+</div>
 
 
 
 
+<!-- Patient Visit History -->
 
 <div class="col-md-4">
 <h3>Visit history </h3> 
@@ -222,5 +232,5 @@ foreach($patient[ 'Visit' ] as $visit ):?>
 </table>
 </div>
 
-
+<br clear="all">
     
