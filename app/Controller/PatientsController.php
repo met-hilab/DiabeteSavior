@@ -283,7 +283,7 @@ public function index(){
             //set to screen
             $this->Session->setFlash('Patient deleted.');
             //redirect to users's list
-            $this->redirect(array('action'=>'search'));
+            $this->redirect(array('action'=>'index'));
         }else{  
              //if unable to delete
             $this->Session->setFlash('Unable to delete patient.');

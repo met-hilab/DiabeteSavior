@@ -114,7 +114,7 @@ CakeLog::config('error', array(
 	 post: return  int age
 	 */
       function calculateAge($date){
-           $birthDate = date("m/d/Y", strtotime($p['Patient']['dob']));
+           $birthDate = date("m/d/Y", strtotime($date));
 	       $birthDate = explode("/", $birthDate);
            return $age = (date("md", date("U", mktime(0, 0, 0, $birthDate[0], $birthDate[1], $birthDate[2]))) > date("md") ? ((date("Y")-$birthDate[2])-1):(date("Y")-$birthDate[2]));
         

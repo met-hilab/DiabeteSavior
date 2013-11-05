@@ -46,3 +46,9 @@ body{
 .section-title{
   padding-bottom: 25px;
 }
+
+.allergy-header{
+  font-family:sans-serif; 
+  color: dimgray; 
+  font-weight: normal;
+}
