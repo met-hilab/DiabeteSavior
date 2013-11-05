@@ -29,49 +29,33 @@ class MedicinesController extends AppController {
 
         if ($this->request->is('post')){
             $medicine = $this->request->data['Medicine'];
-/*            $medicine_name = $medicine['medicine_name'];
-            $min_dose = $medicine['min_dose'];
-            $max_dose = $medicine['max_dose'];
-            $metric = $medicine['metric'];
-            $hypo = $medicine['hypo'];
-            $weight = $medicine['weight'];
-            $renal_gu = $medicine['renal_gu'];
-            $gi_sx = $medicine['gi_sx'];
-            $chf = $medicine['chf'];
-            $cvd = $medicine['cvd'];
-            $bone= $medicine['bone'];
-
-            $data = $medicine;*/
             $this->Medicine->create();
-            //$res = $this->Patient->save($this->data);
-
             if($this->Medicine->save($this->data)){
-
-                //$this->Session->setFlash($_SESSION["patientnum"].' Patient is saved.');
-                //$patient_number = $_SESSION["patientnum"];
-                //$conditions = array("patient_number" => $patient_number);
-                //$conditions = array("patient_number" => "M0000001");
-                //$patient = $this->Patient->find('first', array('conditions' => $conditions));
-                //$patient = $patient['Patient'];
                 $id = $this->Medicine->getLastInsertId();
                 $medicine = $this->Medicine->findById($id);
                 $this->Session->write('medicine_id', $id);
                 $this->Session->write('medicine', $medicine);
-                //var_dump($_SESSION); exit;
-                //$this->set('patient', $patient);
-                //$_SERVER['patient_number'] = $patient_number;
-                //$this->redirect(array('action'=>'view',$patient_number));
                 $this->redirect(array('action'=>'show'));
 
             }else{
                 $this->Session->setFlash('medicine is not saved.');
-                //$this->redirect(array('action'=>'add'));
             }
 
         }
 
     }
 
+    public function index(){
+        $medicines = $this->Medicine->find('all');
+        $this->set('medicines',$medicines);
+        if ($this->request->is('post')){
+            $id = $this->request->data('medicine_id');
+            $medicine = $this->Medicine->findById($id);
+            $this->Session->write('medicine_id', $id);
+            $this->Session->write('medicine', $medicine);
+            $this->redirect(array('action'=>'show'));
+        }
+    }
 
 
     public function edit(){
