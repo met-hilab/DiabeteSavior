@@ -18,7 +18,7 @@ $formDefaults = array(
 <!-- medhistory_complaints -->
 <h3>Medical History and Complaints</h3>
 <?php echo $this->Form->hidden('MedhistoryComplaint.id') ?>
-<?php echo $this->Form->input('MedhistoryComplaint.complaints', array('label' => array('class' => 'col-lg-3 control-label', 'text' => '<font color="red">* </font>Chef Complaint'))) ?>
+<?php echo $this->Form->input('MedhistoryComplaint.complaints', array('label' => array('class' => 'col-lg-3 control-label', 'text' => '<font color="red">* </font>Chief Complaint'))) ?>
 <?php echo $this->Form->bootstrapRadioYesNo('MedhistoryComplaint.hypo',array('label' => array('class' => 'col-lg-3 control-label', 'text' => '<font color="red">* </font>Hypoglycemia:')) ) ?>
 <?php echo $this->Form->bootstrapRadioYesNo('MedhistoryComplaint.weight_gain', array('label' => array('class' => 'col-lg-3 control-label', 'text' => '<font color="red">* </font>Weight gain:'))) ?>
 <?php echo $this->Form->bootstrapRadioYesNo('MedhistoryComplaint.renal_gu', array('label' => array('class' => 'col-lg-3 control-label', 'text' => '<font color="red">* </font>Renal or Genitourinary symptoms:'))) ?>
@@ -70,17 +70,14 @@ $formDefaults = array(
 
 <hr>
 
-
 <!-- treatments -->
 <h3>Therapy Goals</h3>
 <?php echo $this->Form->hidden('Treatment.id') ?>
 <?php echo $this->Form->input('Treatment.a1c_goal', array('label' => array('class' => 'col-lg-2 control-label', 'text' => '<font color="red">* </font>Glycated hemoglobin (A1C) Goal:'))) ?>
 <?php echo $this->Form->input('Treatment.f_weight_goal', array('label' => array('class' => 'col-lg-2 control-label', 'text' => '<font color="red">* </font>Weight Goal:'))) ?>
 <?php echo $this->Form->hidden('Treatment.weight_goal') ?>
-<hr>
 
 <hr>
-
 
 <div class="form-group">
   <label class="col-lg-1 control-label"></label>
