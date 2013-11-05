@@ -207,12 +207,12 @@
 	<table  class="table table-condensed">
 	    <tr>
             <th>Weight: </th> 
-            <td> <?php echo $visit['VitalsLab']['weight'] ?> </td>
+            <td> <?php echo $visit['VitalsLab']['weight'] ?> kg</td>
         </tr>
 
         <tr> 
             <th>Height: </th>
-            <td><?php echo $visit['VitalsLab']['height']; ?></td>
+            <td><?php echo $visit['VitalsLab']['height']; ?> cm</td>
         </tr>
         <tr>  
             <th> BMI: </th>
@@ -247,7 +247,7 @@
         </tr>
         <tr> 
             <th>Weight Goal: </th>
-            <td><?php echo $visit['Treatment']['weight_goal'] ?></td>
+            <td><?php echo $visit['Treatment']['weight_goal'] ?> kg</td>
         </tr>        
 </table>
 </div> 

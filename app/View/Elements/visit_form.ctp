@@ -1,10 +1,4 @@
-<div class="form-group">
-  <label class="col-lg-2 control-label">Unit type</label>
-  <div class="btn-group">
-    <a href="#" class="btn btn-primary switch-unit" data-unit='imperial'>lbs / ft</a>
-    <a href="#" class="btn btn-default switch-unit" data-unit='metric'>kg / m</a>
-  </div>
-</div>
+
 
 <?php
 $inputDefaults = array(
@@ -53,6 +47,13 @@ $formDefaults = array(
 
 <!-- Vitals and Lab Results -->
 <h3>Vitals and Labs</h3>
+<div class="form-group">
+  <label class="col-lg-2 control-label">Unit type</label>
+  <div class="btn-group">
+    <a href="#" class="btn btn-primary switch-unit" data-unit='imperial'>lbs / ft</a>
+    <a href="#" class="btn btn-default switch-unit" data-unit='metric'>kg / cm</a>
+  </div>
+</div>
 <?php echo $this->Form->input('VitalsLab.f_weight', array('label' => array('class' => 'col-lg-2 control-label', 'text' => '<font color="red">* </font>Weight:'), 'type' => 'text')) ?>
 <?php echo $this->Form->input('VitalsLab.f_height', array('label' => array('class' => 'col-lg-2 control-label', 'text' => '<font color="red">* </font>Height:'), 'type' => 'text')) ?>
 <?php echo $this->Form->hidden('VitalsLab.weight') ?>

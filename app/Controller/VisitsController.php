@@ -96,9 +96,9 @@ class VisitsController extends AppController {
   //var_dump($weight);
   $height = (float)$this->request->data['VitalsLab']['height'] * 0.01;
   //var_dump($height);
-  $bmi = (float)($weight / $height^2);
+  $bmi = (float)($weight / pow($height,2));
   //var_dump($bmi); exit;
-  $this->request->data['VitalsLab']['bmi'] = $bmi;
+  $this->request->data['VitalsLab']['bmi'] = round($bmi,1);
 
 
   $this->Visit->create();
