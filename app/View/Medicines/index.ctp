@@ -46,20 +46,3 @@
 <?php endforeach; ?>
 </tbody>
 </table>
-
-<script>
-$(document).ready(function(){
-$('.link-to-patient').click(function(){
-  id = $(this).data('id');
-  $.post('/medicines/set_medicine_id', {'id':id}, function(res){
-    if(res.status) {
-      window.location.href = '/medicines/show';
-    } else {
-      alert('Wrong medicine id!');
-    }
-    
-  }, 'json');
-  return false;
-});
-});
-</script>
