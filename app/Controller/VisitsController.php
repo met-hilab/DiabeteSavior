@@ -70,7 +70,6 @@ class VisitsController extends AppController {
     $this->set('patient', $patient);
     $this->request->data['Visit']['patient_id'] = $p_id;
     $this->request->data['DrugAllergy']['patient_id'] = $p_id;
-	
     
     if ($this->request->is('post')) {
       $this->_add();
@@ -86,8 +85,7 @@ class VisitsController extends AppController {
  */
 
  private function _add() {
-  // Unset IDs to make sure these are insert comments.
-  unset($this->request->data['User']['email']);
+  // Uset IDs to make sure these are insert comments.
   unset($this->request->data['Visit']['id']);
   unset($this->request->data['Treatment']['id']);
   unset($this->request->data['MedhistoryComplaint']['id']);
@@ -102,15 +100,12 @@ class VisitsController extends AppController {
   //var_dump($bmi); exit;
   $this->request->data['VitalsLab']['bmi'] = round($bmi,1);
 
-	//unsolved add visit problem... 
-	//How to get the Session user id ?
-  $this->request->data['Treatment']['prescriber_username'] =  $this->Session->read('user');//('user')->data['User']['email'];
-   
-   
+
   $this->Visit->create();
   if($this->Visit->saveAssociated($this->request->data)) {
     $id = $this->Visit->id;
     $t_id = $this->Visit->Treatment->id;
+
     $drugAllergy = new DrugAllergy();
     $drugAllergy->create();
     if($drugAllergy->save($this->request->data)){
