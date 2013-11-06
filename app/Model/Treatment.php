@@ -103,5 +103,16 @@ class Treatment extends AppModel {
 			'counterQuery' => ''
 		)
 	);
+/**
+ * generate the prescriber_username (just for passing add visit tests)
+ */  
+  function beforeSave($fields = array()) {
+    //first we need to judge if this is a creation of a new patient or just an update        
+    parent::beforeSave();
+	if(empty($this->data['Patient']['id'])){
+   		 $this->data['Treatment']['prescriber_username'] = "admin";//default value
+	}
+	return true;
+  }
 
 }

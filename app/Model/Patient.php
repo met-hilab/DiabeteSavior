@@ -160,7 +160,7 @@ class Patient extends AppModel {
     )
     );
 /**
- * generate the patient_number (imcompletely)
+ * generate the patient_number 
  */  
   function beforeSave($options = array()) {
     //first we need to judge if this is a creation of a new patient or just an update        
