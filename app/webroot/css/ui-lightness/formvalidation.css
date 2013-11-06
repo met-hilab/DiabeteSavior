@@ -1,0 +1,10 @@
+label.valid {
+}
+label.error {
+  font-weight: 500;
+  color: #cc0000;
+  padding: 2px 8px;
+  margin-top: 2px;
+  
+}
+

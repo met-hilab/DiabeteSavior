@@ -2,19 +2,19 @@
 <div class="form-group">
   <?php echo $this->Form->label('patient_firstname', '<font color="red">* </font>Name', array('class' => 'col-lg-1 control-label')); ?>
   <div class="col-lg-2">
-    <?php echo $this->Form->input('patient_firstname', array('div' => false, 'label' => false)); ?>
+    <?php echo $this->Form->input('patient_firstname', array('div' => false, 'label' => false,'name'=>name)); ?>
   </div>
   <div class="col-lg-2">
     <?php echo $this->Form->input('patient_middlename', array('div' => false, 'label' => false)); ?>
   </div>
   <div class="col-lg-2">
-    <?php echo $this->Form->input('patient_lastname', array('div' => false, 'label' => false)); ?>
+    <?php echo $this->Form->input('patient_lastname', array('div' => false, 'label' => false,'name'=>name)); ?>
   </div>
 </div>
 <div class="form-group">
   <?php echo $this->Form->label('dob', '<font color="red">* </font>DOB', array('class' => 'col-lg-1 control-label')); ?>
   <div class="col-lg-4">
-    <?php echo $this->Form->date('dob', array('div' => false, 'label' => false, 'placeholder' => "YYYY-MM-DD", 'min' => "1900-01-01" )); ?>
+    <?php echo $this->Form->date('dob', array('div' => false, 'label' => false, 'placeholder' => "MM/DD/YYYY",  'name'=> date)); ?>
   </div>
 </div>
 
@@ -132,7 +132,7 @@
 <div class="form-group">
   <?php echo $this->Form->label('postal_code', 'ZIP', array('class' => 'col-lg-1 control-label')); ?>
   <div class="col-lg-4">
-    <?php echo $this->Form->input('postal_code', array('div' => false, 'label' => false, 'placeholder' => 'Zipcode')); ?>
+    <?php echo $this->Form->input('postal_code', array('div' => false, 'label' => false, 'placeholder' => 'Zipcode','name'=>ZIP)); ?>
   </div>
 </div>
 
