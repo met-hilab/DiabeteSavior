@@ -38,7 +38,7 @@
    <a href="#information" data-toggle="tab">Patient Information</a>
  </li>
  <li id="patient-tab-vitals" class="nav-tab" data-tab-index="vitals">
-   <a href="#vitals" data-toggle="tab">Vitals & Labs</a>
+   <a href="#vitals" data-toggle="tab">Visits</a>
  </li>
  <li id="patient-tab-allergies" class="nav-tab" data-tab-index="allergies">
    <a href="#allergies" data-toggle="tab">Drug Allergies</a>
@@ -102,7 +102,7 @@
 <div class="col-md-8">
 <h3>Diagnosis </h3> 
 <?php if ($patient[ 'Diagnosis' ] == null) {?>
-<div style='font-family: sans-serif; color: dimgray; font-style: italic;'>No Current Diagnosis</div>
+<div style='font-family: sans-serif; color: dimgray; font-style: italic;'>Type II Diabetes Mellitus</div>
 <?php } ?>
 
 <?php if ($patient[ 'Diagnosis' ] != null) {?>
