@@ -1,7 +1,7 @@
 @charset "UTF-8";
 /* CSS for form */
 
-#main{
+#a1cmain{
 	background-color:#FFFFFF;
 	padding-left:50px;
 	padding-right:0px;
@@ -11,7 +11,7 @@
 
 	}
 
-form {background-color:#808080;
+#a1cform {background-color:#808080;
 	padding:1em;	
 	height:250px;
 	width:530px;
@@ -20,14 +20,14 @@ form {background-color:#808080;
 	}
 	
 
-form p {
+#a1cform p {
     font-size:12px;
     margin:0 0 8px 0;
     line-height:18px;
     width:650px;
 }
 
-#user {
+#a1cuser {
 	border-style:dotted;
     border-width:1px;
     border-color:#000000;
@@ -42,7 +42,7 @@ form p {
     float:left;
 }
 
-#results {
+#a1cresults {
 	border-style:dotted;
     border-width:1px;
     border-color:#000000;
@@ -56,15 +56,10 @@ form p {
 	height:100px;
 }
 
-#message {
+#a1cmessage {
     float:left;
 }
 
-#methilablogo img{
-    position:absolute;
-    top:60px;
-    left:100px;
-}
 
 	
 	

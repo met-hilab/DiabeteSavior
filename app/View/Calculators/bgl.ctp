@@ -13,16 +13,16 @@ echo $this->Html->script('a1c');
     is a common target for diabetes patients.
 </p>
 <!--main div -->
-<div id="main">
+<div id="a1cmain">
 
     <p>&nbsp;</p>
     <h3>A1C to eAG Calculator</h3>
     <!-- A1C form -->
-    <form name = "a1cForm" method="post" action="" >
+    <form id="a1cform" name = "a1cForm" method="post" action="" >
         <p>Enter A1C or eAG value</p>
 
         <!-- user information -->
-        <div id="user" >
+        <div id="a1cuser" >
 
             <p>A1C</p>
 
@@ -34,7 +34,7 @@ echo $this->Html->script('a1c');
         </div> <!-- user -->
 
         <!-- calculator results -->
-        <div id="results" >
+        <div id="a1cresults" >
             <p>Estimated Average Glucose (eAG)</p>
 
             <p>
@@ -47,7 +47,7 @@ echo $this->Html->script('a1c');
 
 
         <!-- Message -->
-        <div id="message">
+        <div id="a1cmessage">
             <p>&nbsp;</p>
             <p>Message*</p>
             <p>
@@ -63,7 +63,7 @@ echo $this->Html->script('a1c');
     <p>eAG (mg/dL) = 28.7 x A1C - 46.7</p>
     <p>eAG (mmol/L) = 1.5944 x A1C - 2.5944</p>
     <p>&nbsp;</p>
-
+<!--
     <h3>A1C to eAG Conversion Table</h3>
     <div id="ac1table">
         <img src="/img/a1cchart.png"/>
@@ -82,9 +82,5 @@ echo $this->Html->script('a1c');
 
     <p>&nbsp;</p>
     <p>&nbsp;</p>
-
-    <div id="footer">
-        <span style="font-size:8pt;">Back To <a href="http://met-hilab.bu.edu" target="_blank">MET-HIlab</a></span>
-    </div>
-
+-->
 </div><!-- main -->
