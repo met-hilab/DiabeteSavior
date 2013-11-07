@@ -87,6 +87,8 @@ class PatientsController extends AppController {
 
 public function index(){
   //$this->authenticate_user();
+  $this->Session->delete('patient');
+  $this->Session->delete('patient_id');
   $uid = (int)$this->current_user['id'];
   $patients = $this->Patient->find('all', 
     ["conditions" =>
@@ -252,6 +254,26 @@ public function index(){
       $this->set('patient', $patient);
       $this->Session->write('patient', $patient);
       $this->Session->write('patient_id', $id);
+      
+     $lastVisit = $this->Patient->Visit->find('first', array(
+         'order' => array('Visit.created' => 'ASC'),
+         'conditions' => array('Visit.patient_id' => $id)
+         ));
+
+     $this->set('lastVisit', $lastVisit);
+     $this->Session->write('lastVisit', $lastVisit);
+     if($lastVisit){
+      $date = date("m/d/y", strtotime($lastVisit['Visit']['created']));
+      $this->set('lastVisitDate', $date);
+      $this->Session->write('lastVisitDate', $date);
+     }
+     
+     $lastTreatment = $this->Patient->Visit->Treatment->find('first', array('conditions'=>
+             array('Treatment.visit_id' => $lastVisit['Visit']['id'])));
+     $this->set('lastTreatment', $lastTreatment);
+     $this->Session->write('lastTreatment', $lastTreatment);
+     
+//     $lastRunAlg = $this->Patient->Visit->Treatment-> 
     }catch(NotFoundException $e){
       throw $e;
     }
