@@ -375,7 +375,6 @@
         </div>-->
       </form>
     </div>
-    </div>
     </div><!-- end medications tab -->
     
     

@@ -89,6 +89,8 @@ class VisitsController extends AppController {
   unset($this->request->data['Visit']['id']);
   unset($this->request->data['Treatment']['id']);
   unset($this->request->data['MedhistoryComplaint']['id']);
+  
+  $this->request->data['Treatment']['prescriber_username'] = "NO DATA";
   // BMI = ( Weight in Kilograms / ( Height in Meters x Height in Meters ) )
   // Caculate BMI in Metric. kg / m^2
   // Assume data are metric, more easier to caculate.
