@@ -141,21 +141,22 @@ class AlgorithmComponent extends Component {
             $medlist = $this->monotherapy;
             $nMeds = count($this->monotherapy);
             $medicine = $this->medicine1;
-            $prevmed = "na";
+            $prevmed1 = "na";
         }
         elseif ($therapyType == 2)
         {
             $medlist = $this->dualtherapy;
             $nMeds = count($this->dualtherapy);
             $medicine = $this->medicine2;
-            $prevmed = $this->medicine1;
+            $prevmed1 = $this->medicine1;
         }
         elseif ($therapyType == 3)
         {
             $medlist = $this->tripletherapy;
             $nMeds = count($this->tripletherapy);
             $medicine = $this->medicine3;
-            $prevmed = $this->medicine2;
+            $prevmed2 = $this->medicine2;
+            $prevmed1 = $this->medicine1;
         }
         else
         {
@@ -166,8 +167,7 @@ class AlgorithmComponent extends Component {
         $medCount = 0;
         while(($medicine =="none") && ($medCount < $nMeds))
         {
-            //if (($medlist[$medCount] != $this->allergy[$medCount]) && ($medlist[$medCount] != $prevmed))
-            if ($medlist[$medCount] != $prevmed)
+            if (($medlist[$medCount] != $prevmed1) && ($medlist[$medCount] != $prevmed2))
             {
             	$nAllergy = count($this->allergy);
             	$noAllergy = true;
@@ -366,7 +366,7 @@ class AlgorithmComponent extends Component {
      * @return bool - returns true if no medicines selected
      */
     private function noTherapy() {
-        return (($this->medicine1 == "none") && ($this->medicine2 == "none") && ($this->medicine3 == "none"));
+        return (($this->medicine1 === "none") && ($this->medicine2 === "none") && ($this->medicine3 === "none"));
     }
 
     /**
