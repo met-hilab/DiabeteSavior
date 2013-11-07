@@ -256,7 +256,7 @@ public function index(){
       $this->Session->write('patient_id', $id);
       
      $lastVisit = $this->Patient->Visit->find('first', array(
-         'order' => array('Visit.created' => 'ASC'),
+         'order' => array('Visit.created' => 'DESC'),
          'conditions' => array('Visit.patient_id' => $id)
          ));
 
