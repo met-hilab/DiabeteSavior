@@ -331,51 +331,48 @@
     
   <!-- start medications tab -->
     <div id="medications" class="tab-pane">
-       <div style="padding-bottom:10px;">
-<!--                       <a href="/visits/gcalgorithm" class="btn btn-primary" style="padding-left:5px;">
-         <span class=""></span>Run Algorithm</a>-->
-        <button class="btn btn-primary btn-run-algorithm">Run Algorithm</button
-       </div>
+      
+<!--       <div style="padding:5px; display: inline-block;">
+                       <a href="/visits/gcalgorithm" class="btn btn-primary" style="padding-left:5px;">
+         <span class=""></span>Run Algorithm</a>
+        <button class="btn btn-primary btn-run-algorithm col-md-offset-8" style="padding-left:5px; float: right;">Run Algorithm</button
+       </div>-->
       <div class="col-md-8">
-        <h3>Treatment <?php if ($lastVisit['Visit']!=null) { ?>as of last visit on <?php echo $lastVisitDate; }?></h3> 
+        <h3>Treatment <?php if ($lastTDate) { ?>as of decision on <?php echo $lastTDate; }?></h3> 
           <table  class="table table-condensed">
             <?php 
-            if ($lastVisit['Visit']==null){
-            echo 'This patient has not had any visits to determine treatment.';} 
+            if ($lastTDate == null){
+            echo 'Therapy and medications have not been recommended yet.';} 
             else{ ?>  
         
 <!--        <form id="algorithm_results" class="form-horizontal" role="form" action="/visits/gcalgorithm" method="post">-->
             
             <tr>
-              <th>Algorithm Decision: </th> 
-              <td> <?php echo $lastVisit['Treatment']['TreatmentRunAlgorithm']['type']; ?> </td>
-            </tr>
-            <tr>
               <th>Therapy: </th>
-              <td><?php echo $lastVisit['Treatment']['TreatmentRunAlgorithm']['recommendations']; ?></td>
+              <td><?php echo $lastTreatmentRunAlg['TreatmentRunAlgorithm']['recommendations']; ?></td>
             </tr>
             <tr> 
               <th>Medicine1: </th>
-              <td><?php echo $lastVisit['Treatment']['TreatmentRunAlgorithm']['medicine_name_one']; ?></td>
+              <td><?php echo $lastTreatmentRunAlg['TreatmentRunAlgorithm']['medicine_name_one']; ?></td>
             </tr>
             <tr> 
               <th>Medicine2: </th>
-              <td><?php echo $lastVisit['Treatment']['TreatmentRunAlgorithm']['medicine_name_two']; ?></td>
+              <td><?php echo $lastTreatmentRunAlg['TreatmentRunAlgorithm']['medicine_name_two']; ?></td>
             </tr>
             <tr> 
               <th>Medicine3: </th>
-              <td><?php echo $lastVisit['Treatment']['TreatmentRunAlgorithm']['medicine_name_three']; ?></td>
+              <td><?php echo $lastTreatmentRunAlg['TreatmentRunAlgorithm']['medicine_name_three']; ?></td>
             </tr>
             <?php } ?>
           </table>
-        <div class="control-group">
+<!--        <div class="control-group">
           <label class="" for="Accept"></label>
           <div class="">
             <button id="Accept" name="Accept" class="btn btn-primary">Accept</button>&nbsp;&nbsp;
             <a href="/visits/edit" class="btn btn-primary" style="padding-left:10px;">
                <span class="glyphicon glyphicon-edit"></span>Edit</a>
           </div>
-        </div>
+        </div>-->
       </form>
     </div>
     </div>

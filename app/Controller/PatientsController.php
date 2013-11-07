@@ -273,6 +273,20 @@ public function index(){
      $this->set('lastTreatment', $lastTreatment);
      $this->Session->write('lastTreatment', $lastTreatment);
      
+     $lastTreatmentRunAlg = $this->Patient->Visit->Treatment->TreatmentRunAlgorithm->find('first', array('conditions'=>
+         array('TreatmentRunAlgorithm.treatment_id' => $lastTreatment['Treatment']['id'])));
+     $this->set('lastTreatmentRunAlg', $lastTreatmentRunAlg);
+     $this->Session->write('lastTreatmentRunAlg', $lastTreatmentRunAlg);
+     
+     if($lastTreatmentRunAlg){
+       $tDate = date("m/d/y", strtotime($lastTreatmentRunAlg['TreatmentRunAlgorithm']['created']));
+       $this->set('lastTDate', $tDate);
+       $this->Session->write('lastTDate', $tDate);
+     }
+//     print $lastVisit['Visit']['id'];
+//     print $lastTreatment['Treatment']['id'];
+//     print $lastTreatmentRunAlg['TreatmentRunAlgorithm']['id'];
+     
 //     $lastRunAlg = $this->Patient->Visit->Treatment-> 
     }catch(NotFoundException $e){
       throw $e;
