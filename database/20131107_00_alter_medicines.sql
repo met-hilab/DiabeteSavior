@@ -9,6 +9,8 @@ Date: 2013/11/7 23:02:06
 USE `cs673`;
 
 SET FOREIGN_KEY_CHECKS=0;
+
+DROP TABLE IF EXISTS `medicines`;
 -- ----------------------------
 -- Table structure for medicines
 -- ----------------------------
