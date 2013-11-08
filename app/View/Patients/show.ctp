@@ -338,7 +338,7 @@
         <button class="btn btn-primary btn-run-algorithm col-md-offset-8" style="padding-left:5px; float: right;">Run Algorithm</button
        </div>-->
       <div class="col-md-8">
-        <h3>Treatment <?php if ($lastTDate) { ?>as of decision on <?php echo $lastTDate; }?></h3> 
+        <h3>Treatment <?php if ($lastTDate) { ?>from decision on <?php echo $lastTDate; }?></h3> 
           <table  class="table table-condensed">
             <?php 
             if ($lastTDate == null){
@@ -349,20 +349,26 @@
             
             <tr>
               <th>Therapy: </th>
-              <td><?php echo $lastTreatmentRunAlg['TreatmentRunAlgorithm']['recommendations']; ?></td>
+              <td><?php echo $lastTreatmentRunAlg['TreatmentRunAlgorithm']['type']; ?></td>
             </tr>
+            <?php if ($lastTreatmentRunAlg['TreatmentRunAlgorithm']['medicine_name_one'] != 'none') { ?>
             <tr> 
               <th>Medicine1: </th>
               <td><?php echo $lastTreatmentRunAlg['TreatmentRunAlgorithm']['medicine_name_one']; ?></td>
             </tr>
+            <?php }?>
+            <?php if ($lastTreatmentRunAlg['TreatmentRunAlgorithm']['medicine_name_two'] != 'none') { ?>
             <tr> 
               <th>Medicine2: </th>
               <td><?php echo $lastTreatmentRunAlg['TreatmentRunAlgorithm']['medicine_name_two']; ?></td>
             </tr>
+            <?php }?>
+            <?php if ($lastTreatmentRunAlg['TreatmentRunAlgorithm']['medicine_name_three'] != 'none') { ?>
             <tr> 
               <th>Medicine3: </th>
               <td><?php echo $lastTreatmentRunAlg['TreatmentRunAlgorithm']['medicine_name_three']; ?></td>
             </tr>
+            <?php }?>
             <?php } ?>
           </table>
 <!--        <div class="control-group">
