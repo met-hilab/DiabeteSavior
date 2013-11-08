@@ -18,7 +18,7 @@ $formDefaults = array(
 <!-- medhistory_complaints -->
 <h3>Medical History and Complaints</h3>
 <?php echo $this->Form->hidden('MedhistoryComplaint.id') ?>
-<?php echo $this->Form->input('MedhistoryComplaint.complaints', array('label' => array('class' => 'col-lg-3 control-label', 'text' => '<font color="red">* </font>Chief Complaint'))) ?>
+<?php echo $this->Form->input('MedhistoryComplaint.complaints', array('name'=> note,'label' => array('class' => 'col-lg-3 control-label', 'text' => '<font color="red">* </font>Chief Complaint'))) ?>
 <?php echo $this->Form->bootstrapRadioYesNo('MedhistoryComplaint.hypo',array('label' => array('class' => 'col-lg-3 control-label', 'text' => '<font color="red">* </font>Hypoglycemia:')) ) ?>
 <?php echo $this->Form->bootstrapRadioYesNo('MedhistoryComplaint.weight_gain', array('label' => array('class' => 'col-lg-3 control-label', 'text' => '<font color="red">* </font>Weight gain:'))) ?>
 <?php echo $this->Form->bootstrapRadioYesNo('MedhistoryComplaint.renal_gu', array('label' => array('class' => 'col-lg-3 control-label', 'text' => '<font color="red">* </font>Renal or Genitourinary symptoms:'))) ?>
@@ -54,13 +54,13 @@ $formDefaults = array(
     <a href="#" class="btn btn-default switch-unit" data-unit='metric'>kg / cm</a>
   </div>
 </div>
-<?php echo $this->Form->input('VitalsLab.f_weight', array('label' => array('class' => 'col-lg-2 control-label', 'text' => '<font color="red">* </font>Weight:'), 'type' => 'text')) ?>
-<?php echo $this->Form->input('VitalsLab.f_height', array('label' => array('class' => 'col-lg-2 control-label', 'text' => '<font color="red">* </font>Height:'), 'type' => 'text')) ?>
+<?php echo $this->Form->input('VitalsLab.f_weight', array('name'=>weight,'label' => array('class' => 'col-lg-2 control-label', 'text' => '<font color="red">* </font>Weight:'), 'type' => 'text')) ?>
+<?php echo $this->Form->input('VitalsLab.f_height', array('name'=>height,'label' => array('class' => 'col-lg-2 control-label', 'text' => '<font color="red">* </font>Height:'), 'type' => 'text')) ?>
 <?php echo $this->Form->hidden('VitalsLab.weight') ?>
 <?php echo $this->Form->hidden('VitalsLab.height') ?>
-<?php echo $this->Form->input('VitalsLab.A1c', array('label' => array('class' => 'col-lg-2 control-label', 'text' => '<font color="red">* </font>Glycated hemoglobin (A1C):'))) ?>
-<?php echo $this->Form->input('VitalsLab.bps', array('label' => array('class' => 'col-lg-2 control-label', 'text' => '<font color="red">* </font>Systolic Blood Pressure:'))) ?>
-<?php echo $this->Form->input('VitalsLab.bpd', array('label' => array('class' => 'col-lg-2 control-label', 'text' => '<font color="red">* </font>Diastolic Blood Pressure:'))) ?>
+<?php echo $this->Form->input('VitalsLab.A1c', array('name'=>A1c,'label' => array('class' => 'col-lg-2 control-label', 'text' => '<font color="red">* </font>Glycated hemoglobin (A1C):'))) ?>
+<?php echo $this->Form->input('VitalsLab.bps', array('name'=>bps,'label' => array('class' => 'col-lg-2 control-label', 'text' => '<font color="red">* </font>Systolic Blood Pressure:'))) ?>
+<?php echo $this->Form->input('VitalsLab.bpd', array('name'=>bpd,'label' => array('class' => 'col-lg-2 control-label', 'text' => '<font color="red">* </font>Diastolic Blood Pressure:'))) ?>
 
 <!--
 <?php echo $this->Form->input('VitalsLab.eGFR') ?>
@@ -73,8 +73,8 @@ $formDefaults = array(
 <!-- treatments -->
 <h3>Therapy Goals</h3>
 <?php echo $this->Form->hidden('Treatment.id') ?>
-<?php echo $this->Form->input('Treatment.a1c_goal', array('label' => array('class' => 'col-lg-2 control-label', 'text' => '<font color="red">* </font>Glycated hemoglobin (A1C) Goal:'))) ?>
-<?php echo $this->Form->input('Treatment.f_weight_goal', array('label' => array('class' => 'col-lg-2 control-label', 'text' => '<font color="red">* </font>Weight Goal:'))) ?>
+<?php echo $this->Form->input('Treatment.a1c_goal', array('name'=>A1c,'label' => array('class' => 'col-lg-2 control-label', 'text' => '<font color="red">* </font>Glycated hemoglobin (A1C) Goal:'))) ?>
+<?php echo $this->Form->input('Treatment.f_weight_goal', array('name'=>weight,'label' => array('class' => 'col-lg-2 control-label', 'text' => '<font color="red">* </font>Weight Goal:'))) ?>
 <?php echo $this->Form->hidden('Treatment.weight_goal') ?>
 
 <hr>
