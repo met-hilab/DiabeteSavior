@@ -105,11 +105,13 @@ class VisitsController extends AppController {
   $this->Visit->create();
   if($this->Visit->saveAssociated($this->request->data)) {
     $id = $this->Visit->id;
+    $t_id = $this->Visit->Treatment->id;
 
     $drugAllergy = new DrugAllergy();
     $drugAllergy->create();
     if($drugAllergy->save($this->request->data)){
       $this->Session->write('visit_id', $id);
+      $this->Session->write('treatment_id', $t_id);
       $this->Session->setFlash('Visit added successfully!');
       $this->redirect(array('action'=>'current'));
     } else {
@@ -178,6 +180,8 @@ class VisitsController extends AppController {
     //echo $p_id;
     $v_id = $this->Session->read('visit_id');
     //echo $v_id;
+    $t_id = $this->Session->read('treatment_id');
+    //echo $t_id;
 
     /* set A1C values */
     $visit = $this->Visit->find('all', array(
@@ -243,7 +247,7 @@ class VisitsController extends AppController {
     $Medicine1 = $last_visit_treatment['TreatmentRunAlgorithm'][0]['medicine_name_one'];
     $Medicine2 = $last_visit_treatment['TreatmentRunAlgorithm'][0]['medicine_name_two'];
     $Medicine3 = $last_visit_treatment['TreatmentRunAlgorithm'][0]['medicine_name_three'];
-    pr($Medicine1); pr($Medicine2); pr($Medicine3); exit;
+    //pr($Medicine1); pr($Medicine2); pr($Medicine3); exit;
     if ($Medicine1 == null)
         $Medicine1 = "none";
     if ($Medicine2 == null)
@@ -275,18 +279,18 @@ class VisitsController extends AppController {
     $this->set('medicine3', $med3);
     $this->Session->write('med3', $med3);
 
-    $data = array('TreatmentRunAlgorithm' =>array(
-      'treatment_id' => $t_id,
-      'type' => $therapy,
-      'medicine_name_one' => $med1,
-      'medicine_name_two' => $med2,
-      'medicine_name_three' => $med3,
-      'edited_by_user' => 'no'
-    )); 
     //$this->request->data = $data;
 
     /* accept algorithm results */
     if ($this->request->is('post')) {  
+      $data = array('TreatmentRunAlgorithm' =>array(
+        'treatment_id' => $t_id,
+        'type' => $therapy,
+        'medicine_name_one' => $med1,
+        'medicine_name_two' => $med2,
+        'medicine_name_three' => $med3,
+        'edited_by_user' => 'no'
+    )); 
       $this->Visit->Treatment->TreatmentRunAlgorithm->create();
       if($this->Visit->Treatment->TreatmentRunAlgorithm->save($data)){
         $this->Session->setFlash('Algorithm results accepted successfully!');
