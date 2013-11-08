@@ -102,17 +102,14 @@ class VisitsController extends AppController {
   //var_dump($bmi); exit;
   $this->request->data['VitalsLab']['bmi'] = round($bmi,1);
 
-
   $this->Visit->create();
   if($this->Visit->saveAssociated($this->request->data)) {
     $id = $this->Visit->id;
-    $t_id = $this->Visit->Treatment->id;
 
     $drugAllergy = new DrugAllergy();
     $drugAllergy->create();
     if($drugAllergy->save($this->request->data)){
       $this->Session->write('visit_id', $id);
-      $this->Session->write('treatment_id', $t_id);
       $this->Session->setFlash('Visit added successfully!');
       $this->redirect(array('action'=>'current'));
     } else {
@@ -181,8 +178,6 @@ class VisitsController extends AppController {
     //echo $p_id;
     $v_id = $this->Session->read('visit_id');
     //echo $v_id;
-    $t_id = $this->Session->read('treatment_id');
-    //echo $t_id;
 
     /* set A1C values */
     $visit = $this->Visit->find('all', array(
@@ -244,10 +239,11 @@ class VisitsController extends AppController {
     $this->Algorithm->setAllergies($stack);
 
     /* set current medicines */
-    $treatment_run_algorithms = $this->Visit->Treatment->TreatmentRunAlgorithm->findByTreatment_id($t_id);  //current medicines
-    $Medicine1 = $treatment_run_algorithms['TreatmentRunAlgorithm']['medicine_name_one'];
-    $Medicine2 = $treatment_run_algorithms['TreatmentRunAlgorithm']['medicine_name_two'];
-    $Medicine3 = $treatment_run_algorithms['TreatmentRunAlgorithm']['medicine_name_three'];
+    $last_visit_treatment = $this->Visit->Treatment->findByVisit_id($v_last_id);  //last treatment_run_algorithms data
+    $Medicine1 = $last_visit_treatment['TreatmentRunAlgorithm'][0]['medicine_name_one'];
+    $Medicine2 = $last_visit_treatment['TreatmentRunAlgorithm'][0]['medicine_name_two'];
+    $Medicine3 = $last_visit_treatment['TreatmentRunAlgorithm'][0]['medicine_name_three'];
+    pr($Medicine1); pr($Medicine2); pr($Medicine3); exit;
     if ($Medicine1 == null)
         $Medicine1 = "none";
     if ($Medicine2 == null)

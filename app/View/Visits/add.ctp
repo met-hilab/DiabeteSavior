@@ -25,7 +25,11 @@
             <td><?php echo $patient['Patient']['gender']?></td>
         </tr>
 </table>
+
 </div> 
+<div class="col-md-4">
+    <a href="../patients/show" class="btn btn-primary" style="padding-left:10px;"><span class=""></span>Go Back</a>
+</div>
 
 <br clear="all">
 <hr>
