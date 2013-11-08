@@ -33,8 +33,8 @@ class MedicineFixture extends CakeTestFixture {
 	public $records = array(
 		array(
 			'id' => 1,
-			'created' => '2013-10-19 14:03:51',
-			'modified' => '2013-10-19 14:03:51',
+			'created' => '2013-11-08 02:22:07',
+			'modified' => '2013-11-08 02:22:07',
 			'medicine_name' => 'Lorem ipsum dolor sit amet',
 			'min_dose' => 1,
 			'max_dose' => 1,
