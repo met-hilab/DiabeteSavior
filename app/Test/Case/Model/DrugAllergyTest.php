@@ -15,13 +15,10 @@ class DrugAllergyTest extends CakeTestCase {
 	public $fixtures = array(
 		'app.drug_allergy',
 		'app.patient',
-		'app.user',
-		'app.profile',
 		'app.diagnosis',
 		'app.visit',
 		'app.medhistory_complaint',
 		'app.treatment',
-		'app.treatment_run_algorithm',
 		'app.vitals_lab'
 	);
 

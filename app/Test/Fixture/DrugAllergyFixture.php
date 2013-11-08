@@ -11,7 +11,7 @@ class DrugAllergyFixture extends CakeTestFixture {
  * @var array
  */
 	public $fields = array(
-		'id' => array('type' => 'integer', 'null' => false, 'default' => null, 'length' => 10, 'key' => 'primary'),
+		'id' => array('type' => 'integer', 'null' => false, 'length' => 10, 'key' => 'primary'),
 		'created' => array('type' => 'datetime', 'null' => false),
 		'modified' => array('type' => 'datetime', 'null' => false),
 		'patient_id' => array('type' => 'string', 'null' => false, 'length' => 36, 'key' => 'index', 'collate' => 'utf8_unicode_ci', 'charset' => 'utf8'),
@@ -30,8 +30,8 @@ class DrugAllergyFixture extends CakeTestFixture {
 	public $records = array(
 		array(
 			'id' => 1,
-			'created' => '2013-11-08 02:25:14',
-			'modified' => '2013-11-08 02:25:14',
+			'created' => '2013-10-22 19:44:22',
+			'modified' => '2013-10-22 19:44:22',
 			'patient_id' => 'Lorem ipsum dolor sit amet'
 		),
 	);
