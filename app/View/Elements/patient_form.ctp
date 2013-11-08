@@ -2,19 +2,19 @@
 <div class="form-group">
   <?php echo $this->Form->label('patient_firstname', '<font color="red">* </font>Name', array('class' => 'col-lg-1 control-label')); ?>
   <div class="col-lg-2">
-    <?php echo $this->Form->input('patient_firstname', array('div' => false, 'label' => false,'name'=>name)); ?>
+    <?php echo $this->Form->input('patient_firstname', array('div' => false, 'label' => false)); ?>
   </div>
   <div class="col-lg-2">
     <?php echo $this->Form->input('patient_middlename', array('div' => false, 'label' => false)); ?>
   </div>
   <div class="col-lg-2">
-    <?php echo $this->Form->input('patient_lastname', array('div' => false, 'label' => false,'name'=>name)); ?>
+    <?php echo $this->Form->input('patient_lastname', array('div' => false, 'label' => false)); ?>
   </div>
 </div>
 <div class="form-group">
   <?php echo $this->Form->label('dob', '<font color="red">* </font>DOB', array('class' => 'col-lg-1 control-label')); ?>
   <div class="col-lg-4">
-    <?php echo $this->Form->date('dob', array('div' => false, 'label' => false, 'placeholder' => "YYYY-MM-DD",'name'=> date )); ?>
+    <?php echo $this->Form->date('dob', array('div' => false, 'label' => false, 'placeholder' => "YYYY-MM-DD", 'min' => "1900-01-01" )); ?>
   </div>
 </div>
 
@@ -132,7 +132,7 @@
 <div class="form-group">
   <?php echo $this->Form->label('postal_code', 'ZIP', array('class' => 'col-lg-1 control-label')); ?>
   <div class="col-lg-4">
-    <?php echo $this->Form->input('postal_code', array('div' => false, 'label' => false, 'placeholder' => 'Zipcode','name'=>ZIP)); ?>
+    <?php echo $this->Form->input('postal_code', array('div' => false, 'label' => false, 'placeholder' => 'Zipcode')); ?>
   </div>
 </div>
 
@@ -145,3 +145,47 @@
 
 <?php echo $this->Form->end(); ?>
 
+
+<!-- Load jQuery and the validate plugin -->
+
+
+
+  <!-- jQuery Form Validation code -->
+<!--
+  <script type="text/javascript">
+
+  // When the browser is ready...
+  $(function() {
+  
+    // Setup form validation on the #add_patient element
+    $("#add_patient").validate({
+    
+        // Specify the validation rules
+        rules: {
+            patient_firstname: "required",
+            patient_lastname: "required",
+            dob:"required",
+            gender: "required",
+            race: "required"
+            
+        },
+        
+        // Specify the validation error messages
+        messages: {
+            patient_firstname: "Please enter your first name",
+            patient_lastname: "Please enter you last name",
+            dob:"Please enter your birthdate",
+            gender: "Please specify your gender",
+            race: "Please specify your race"
+          
+        },
+        
+        submitHandler: function(form) {
+            form.submit();
+        }
+    });
+
+  });
+
+  </script>
+  -->
