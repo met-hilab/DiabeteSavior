@@ -58,6 +58,8 @@ class MedicinesController extends AppController {
     }
 
     public function index(){
+        $this->Session->delete('medicine');
+        $this->Session->delete('medicine_id');
         $medicines = $this->Medicine->find('all');
         $this->set('medicines',$medicines);
         if ($this->request->is('post')){
@@ -74,18 +76,20 @@ class MedicinesController extends AppController {
         $id = $this->Session->read('medicine_id');
         $this->Medicine->id = $id;
         if($this->Medicine->exists()){
-            if($this->request->is('post') || $this->request->is('put')){                
-                if($this->Medicine->save($this->request->data)){
+            if($this->request->is('post') || $this->request->is('put')){
+                $data = $this->request->data;
+                    //save medicine
+                if($this->Medicine->save($data)){
                     $this->Session->setFlash('Medicine was edited.');
                     $this->redirect(array('action'=>'show'));
-                }else{
+                } else {
                     $this->Session->setFlash('Unable to edit medicine. Please, try again.');
                 }
-            }else{
-                $medicine = $this->Medicine->read();
-        $this->set('medicine', $medicine);
+            } else {
+        // Patient exists and this is a get request => render the view, pass exsiting date.
+                $this->request->data = $this->Medicine->read();
             }
-        }else{
+        } else {
             $this->Session->setFlash('The medicine you are trying to edit does not exist.');
             $this->redirect(array('action' => 'show'));
         }

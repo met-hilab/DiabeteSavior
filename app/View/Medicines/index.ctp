@@ -5,6 +5,10 @@
 
 <h1> List of Medicines: </h1>
 <!-- DO NOT USE BR TO LAYOUT, USE CSS -->
+    <div style="padding:5px; display: inline-block;">
+      <a href="/medicines/add" class="btn btn-primary" style="padding-left:5px; float: right;"><span class="glyphicon glyphicon-plus"></span> Add Medicine</a>
+    </div>
+
 <table class="table table-hover" >
 <thead>
     <tr>
@@ -29,12 +33,12 @@
   <tr>
      <td><?php echo $counter; ?></td>
     <td><?php echo $this->Html->link($m['Medicine']['medicine_name'], array('controller' => 'medicines', 'action' => 'show'), array('data-id' => $m['Medicine']['id'], 'class' => 'btn btn-default link-to-medicine')); ?></td>
-	<td><?php echo $m['Medicine']['min_dose'];?></td>
+	  <td><?php echo $m['Medicine']['min_dose'];?></td>
     <td><?php echo $m['Medicine']['max_dose'];?></td>
     <td><?php echo $m['Medicine']['metric'];?></td>
     <td><?php echo $m['Medicine']['hypo'];?></td>
     <td><?php echo $m['Medicine']['weight'];?></td>
-	<td><?php echo $m['Medicine']['renal_gu'];?></td>
+	  <td><?php echo $m['Medicine']['renal_gu'];?></td>
     <td><?php echo $m['Medicine']['gi_sx'];?></td>
     <td><?php echo $m['Medicine']['chf'];?></td>
     <td><?php echo $m['Medicine']['cvd'];?></td>
