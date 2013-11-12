@@ -261,6 +261,7 @@ public function index(){
          ));
 
      $this->set('lastVisit', $lastVisit);
+     $this->set('visit', $lastVisit);  // use for medhistory_complaints_table
      $this->Session->write('lastVisit', $lastVisit);
      if($lastVisit){
       $date = date("m/d/y", strtotime($lastVisit['Visit']['created']));

@@ -176,31 +176,31 @@
                   else{ ?>
 	
 	    <tr>
-            <th class="allergy-header">Weight: </th> 
-            <td> <?php echo $lastVisit['VitalsLab']['weight']?: 'Unknown'; ?> kg</td>
+            <th class="dimgray-header">Weight: </th> 
+            <td> <?php echo $lastVisit['VitalsLab']['weight']?: 'unknown'; ?> kg</td>
         </tr>
 
         <tr> 
-            <th class="allergy-header">Height: </th>
-            <td><?php echo $lastVisit['VitalsLab']['height']?: 'Unknown'; ?> cm</td>
+            <th class="dimgray-header">Height: </th>
+            <td><?php echo $lastVisit['VitalsLab']['height']?: 'unknown'; ?> cm</td>
         </tr>
         <tr>  
-            <th class="allergy-header"> BMI: </th>
-            <td><?php echo $lastVisit['VitalsLab']['bmi']?: 'Unknown'; ?></td>
+            <th class="dimgray-header"> BMI: </th>
+            <td><?php echo $lastVisit['VitalsLab']['bmi']?: 'unknown'; ?></td>
         </tr>
         <tr> 
-            <th class="allergy-header">Glycated hemoglobin (A1C): </th>
-            <td><?php echo $lastVisit['VitalsLab']['A1c']?: 'Unknown'; ?> %</td>
+            <th class="dimgray-header">Glycated hemoglobin (A1C): </th>
+            <td><?php echo $lastVisit['VitalsLab']['A1c']?: 'unknown'; ?> %</td>
         </tr>
 
         <tr>
-             <th class="allergy-header">Systolic Blood Pressure: </th>
-        <td><?php echo $lastVisit['VitalsLab']['bps']?: 'Unknown';?>  mmHg</td>
+             <th class="dimgray-header">Systolic Blood Pressure: </th>
+        <td><?php echo $lastVisit['VitalsLab']['bps']?: 'unknown';?>  mmHg</td>
         </tr>
 
         <tr>
-            <th class="allergy-header">Diastolic Blood Pressure: </th>
-            <td><?php echo $lastVisit['VitalsLab']['bpd']?: 'Unknown';?> mmHg</td>
+            <th class="dimgray-header">Diastolic Blood Pressure: </th>
+            <td><?php echo $lastVisit['VitalsLab']['bpd']?: 'unknown';?> mmHg</td>
         </tr>
                   <?php } ?>
 		
@@ -215,68 +215,7 @@
       <!-- Patient Drug Allergies -->
       <div class="col-md-8">
       <h3>Drug Allergies or Contraindications</h3> 
-
-      <table  class="table table-condensed">
-
-      <tr>
-
-        <th class="allergy-header">Metformin:  </th> 
-        <td> <?php echo $patient['DrugAllergy']['met'] ?: 'Unknown' ?> </td>
-      </tr>
-
-      <tr> 
-        <th class="allergy-header">Dipeptidyl peptidase 4 inhibitors (DPP-4): </th>
-        <td><?php echo $patient['DrugAllergy']['dpp_4i']?: 'Unknown' ?></td>
-      </tr>
-
-      <tr> 
-        <th class="allergy-header">Glucagon-like peptide-1 receptor agonists (GLP-1): </th>
-        <td><?php echo $patient['DrugAllergy']['glp_1ra']?: 'Unknown' ?></td>
-      </tr>
-
-      <tr>
-        <th class="allergy-header">Thiazolidinediones (TZD): </th>
-        <td><?php echo $patient['DrugAllergy']['tzd']?: 'Unknown' ?></td>
-      </tr>
-
-      <tr>
-        <th class="allergy-header">Alpha-glucosidase inhibitors (AGIs): </th>
-        <td><?php echo $patient['DrugAllergy']['agi']?: 'Unknown'?></td>
-      </tr>
-
-
-      <tr>
-
-        <th class="allergy-header">Colesevelam:  </th> 
-        <td> <?php echo $patient['DrugAllergy']['colsvl']?: 'Unknown' ?> </td>
-      </tr>
-
-      <tr> 
-        <th class="allergy-header">Bromocriptine Mesylate: </th>
-        <td><?php echo $patient['DrugAllergy']['bcr_or']?: 'Unknown' ?></td>
-      </tr>
-
-      <tr> 
-        <th class="allergy-header">Sulfonylurea (SFU) and Glinides: </th>
-        <td><?php echo $patient['DrugAllergy']['su_gln']?: 'Unknown' ?></td>
-      </tr>
-
-      <tr>
-        <th class="allergy-header">Insulin: </th>
-        <td><?php echo $patient['DrugAllergy']['insulin']?: 'Unknown' ?></td>
-      </tr>
-
-      <tr>
-        <th class="allergy-header">Sodium-glucose co-transporter 2 inhibitors (SGLT2): </th>
-        <td><?php echo $patient['DrugAllergy']['sglt_2']?: 'Unknown'?></td>
-      </tr>
-
-      <tr>
-        <th class="allergy-header">Pramlintide: </th>
-        <td><?php echo $patient['DrugAllergy']['praml']?: 'Unknown'?></td>
-      </tr>
-
-      </table>
+        <?php echo $this->element('drug_allergies_table'); ?>
       </div>
      </div><!-- end allergies tab -->
   
@@ -287,44 +226,12 @@
       <!-- Medical History and Complaints -->
       <div class="col-md-8">
         <h3>Medical History and Complaints <?php if ($lastVisit['Visit']!=null) { ?>as of last visit on <?php echo $lastVisitDate; }?></h3> 
-                <table  class="table table-condensed">
-                  <?php 
+                <?php 
                   if ($lastVisit['Visit']==null){
                   echo 'This patient does not have any Medical History or Complaints recorded.';} 
-                  else{ ?>
-                <tr> 
-                    <th class="allergy-header">Hypoglycemia: </th>
-                    <td><?php echo $lastVisit['MedhistoryComplaint']['hypo']?: 'N/A'?></td>
-                </tr>
-                <tr> 
-                    <th class="allergy-header">Weight gain: </th>
-                    <td><?php echo $lastVisit['MedhistoryComplaint']['weight_gain']?: 'N/A' ?></td>
-                </tr>
-                <tr> 
-                    <th class="allergy-header">Renal or Genitourinary symptoms: </th>
-                    <td><?php echo $lastVisit['MedhistoryComplaint']['renal_gu']?: 'N/A'?> </td>
-                </tr>
-
-                <tr>
-                     <th class="allergy-header">Gastrointestinal symptoms:</th>
-                <td><?php echo $lastVisit['MedhistoryComplaint']['gi_sx']?: 'N/A'?>  </td>
-                </tr>
-
-                <tr>
-                    <th class="allergy-header">Coronary heart disease: </th>
-                    <td><?php echo $lastVisit['MedhistoryComplaint']['chf']?: 'N/A'?> </td>
-                </tr>
-                        <tr>
-                     <th class="allergy-header">Cardiovascular disease:</th>
-                <td><?php echo $lastVisit['MedhistoryComplaint']['cvd']?: 'N/A'?>  </td>
-                </tr>
-
-                <tr>
-                    <th class="allergy-header">Osteoporosis: </th>
-                    <td><?php echo $lastVisit['MedhistoryComplaint']['bone']?: 'N/A'?> </td>
-                </tr>
-                  <?php }?>
-        </table>
+                  else{ 
+                    echo $this->element('medhistory_complaints_table'); 
+                } ?>
       </div> 
     </div><!-- end med history tab -->
     
