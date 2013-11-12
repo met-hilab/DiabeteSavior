@@ -5,7 +5,7 @@
 <thead>
     <tr>
 	   <th>#</th>
-       <th>Patient Number</th>
+       <th>Patient ID</th> <!-- refers to patient_number field in database -->
        <th>First Name</th>
 	   <th>Middle Name</th>
 	   <th>Last Name</th>

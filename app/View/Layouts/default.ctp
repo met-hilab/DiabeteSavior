@@ -56,7 +56,7 @@ $cakeDescription = __d('cake_dev', 'Diabetes Savior: Type II Diabetes Infomatic 
 </head>
 <body>
 
-	<div id="container" class="container">
+	<div id="container" class="container" style="min-height: 100%;">
 
 		<header id="header" class="header">
 			<!--<h1><?php echo $this->Html->link($cakeDescription, '/'); ?></h1>-->
@@ -169,7 +169,7 @@ $cakeDescription = __d('cake_dev', 'Diabetes Savior: Type II Diabetes Infomatic 
   </div><!-- /.navbar-collapse -->
 </nav>
 <hr style="padding-top:0;"/>
-		<div id="content" style="padding-bottom:45px;">
+		<div id="content" style="padding-bottom:45px; min-height: 500px;">
 
 			<?php echo $this->Session->flash(); ?>
 <!-- The main content from controller / view START -->
@@ -177,6 +177,7 @@ $cakeDescription = __d('cake_dev', 'Diabetes Savior: Type II Diabetes Infomatic 
 <!-- The main content from controller / view END -->
 
 		</div>
+		
 		<footer id="footer" style ="padding: 75px 0px 20px 0px;">
                     <div class="row" style="height:75%;">
                       <div class="col-lg-offset-4 col-lg-4" style="display: inline-block; height:75%; text-align: center;">
@@ -212,6 +213,13 @@ $cakeDescription = __d('cake_dev', 'Diabetes Savior: Type II Diabetes Infomatic 
 <!--                     <div class="col-lg-offset-4 col-lg-4" style="text-align:center;">
                         <a href="http://www.bu.edu/" style="font-size:11px; color: gray;">Copyright © 2013 Boston University</a>
                      </div>	-->
+					 
+					 
+					 <!-- DISCLAIMER -->
+					 <div class="col-lg-offset-2 col-lg-8" style="text-align:center;">
+                        <p style="font-size:11px; color: gray; padding:10px 0 10px 0;">DISCLAIMER:The patient records in this system are simplified simulations of Electronic Health Records (EHRs) for research and teaching purpose only. They are different from EHRs and do not comply with HIPAA. All patient data are fictional and no actual patient data are used.</p>
+                     </div>
+					
 		</footer>
 	</div>
 	<?php // echo $this->element('sql_dump'); ?>
