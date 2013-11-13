@@ -1,20 +1,20 @@
 <?php
 /**
- * User: Jeff
- * Date: 10/21/13
- * Time: 2:08 PM
- *
- *  Component for Glycemic Control Algorithm.
+ * Class algorithm
+ * @author - Jeff Andre, (jandre@bu.edu)
+ * @version 2.0
+ * @date - 11/13/2013
+ * 
+ * This algorithm is used only for acedemic puruposes and is based on the Glycemic Control Algorithm section in the 
+ * American Association of Clinical Endocrinologists' Comprehensive Diabetes Management Algorithm 2013 Consensus Statement.
+ * AACE Comprehensive Diabetes Management, Endocr Pract. 2013;19(Suppl 2)
+ * 
+ * Note: Patient information and medical history must be set first, then run gcAlgorithm() provides 
+ * therapy results and alert messages for contraindications.
  */
-
 App::uses('Component', 'Controller');
 
-/*
-*
-* Note: Patient information fields must be set first, then run gcAlgorithm() provide therapy results.
-*/
 class AlgorithmComponent extends Component {
-
 
     // patient information
     var $a1c = 0.0;             // patient a1c
@@ -22,7 +22,10 @@ class AlgorithmComponent extends Component {
     var $a1cTarget = 0.0;       // patient targe a1c
     var $symptoms = false;      // patient diabetes symptoms present or not
     var $allergy = array("none", "none", "none", "none", "none", "none", "none", "none","none", "none","none");
-
+    // medical history or complaints
+    var $medhistory = array("hypo" => "no", "weight" => "no", "renal_gu" => "no", "gi_sx" => "no",
+    		"chf" => "no", "cvd" => "no", "bone" => "no" );
+    
     // algorithm therapy results
     var $medicine1 = "none";    // mono therapy medicine 1
     var $medicine2 = "none";    // dual therapy medicine 2
@@ -35,7 +38,34 @@ class AlgorithmComponent extends Component {
         "Bromocriptine_QR", "AG_i", "SU_GLN");
     var $tripletherapy = array("GLP_1RA", "TZD","SGLT_2", "BasalInsulin", "DPP4_i", "Colesevelam",
         "Bromocriptine_QR", "AG_i", "SU_GLN");
+       
+    // medicines
+    var $medicines = array (
+    		"Metformin" =>  array("hypo" =>"0", "weight" =>"1", "renul_gu" => "3", 
+    						"gi_sx" => "2", "chf" => "0", "cvd" => "1", "bone" => "0"),
+    		"GLP_1RA" =>  array("hypo" =>"0", "weight" =>"1", "renul_gu" => "3", 
+    						"gi_sx" => "2", "chf" => "0", "cvd" => "0", "bone" => "0"),
+        	"DPP4_i" =>  array("hypo" =>"0", "weight" =>"0", "renul_gu" => "0", 
+    						"gi_sx" => "0", "chf" => "0", "cvd" => "0", "bone" => "0"),
+        	"TZD" =>  array("hypo" =>"0", "weight" =>"3", "renul_gu" => "3", 
+    						"gi_sx" => "0", "chf" => "2", "cvd" => "0", "bone" => "2"),
+        	"AG_i" =>  array("hypo" =>"0", "weight" =>"0", "renul_gu" => "0", 
+    						"gi_sx" => "2", "chf" => "0", "cvd" => "0", "bone" => "0"),
+            "Colesevelam" =>  array("hypo" =>"0", "weight" =>"0", "renul_gu" => "0", 
+    						"gi_sx" => "2", "chf" => "0", "cvd" => "0", "bone" => "0"),
+            "Bromocriptine_QR" =>  array("hypo" =>"0", "weight" =>"0", "renul_gu" => "0", 
+    						"gi_sx" => "2", "chf" => "0", "cvd" => "1", "bone" => "0"),
+            "SU_GLN" =>  array("hypo" =>"2", "weight" =>"3", "renul_gu" => "3", 
+    						"gi_sx" => "0", "chf" => "0", "cvd" => "1", "bone" => "0"),
+            "BasalInsulin" =>  array("hypo" =>"3", "weight" =>"3", "renul_gu" => "3", 
+    						"gi_sx" => "0", "chf" => "0", "cvd" => "0", "bone" => "0"),
+            "SGLT_2" =>  array("hypo" =>"0", "weight" =>"1", "renul_gu" => "3", 
+    						"gi_sx" => "0", "chf" => "0", "cvd" => "0", "bone" => "2"),
+    );
+    
+    // algorithm decision & alert message for contraindications
     var $decision ="";
+    var $alertmessage = "";
 
     /**
      * Glycemic control algorithm provides therapy results based on patient A1c levels and allergies.
@@ -130,7 +160,7 @@ class AlgorithmComponent extends Component {
 
     /**
      * Selects first medicine from therapy table (mono, dual, or triple) that the patient is not allergic to.
-     * Also gets the therapy description.
+     * Also gets the therapy description and generates alerts for contraindications.
      * @param $therapyType - 1 for mono, 2 for dual, and 3 for triple
      * @return bool - Returns true if results are successful
      */
@@ -182,7 +212,45 @@ class AlgorithmComponent extends Component {
             }
             $medCount += 1;
         } // while
-
+        
+        // check patient contraindications for each medicine and generate alert message
+        $mh = $this->medhistory;
+        if ($mh["hypo"] === "yes")
+        {
+        	$pmessage = "hypoglycemia! ";
+        	$this->alertmessage .= $this->medMessage($medicine, $this->medicines[$medicine]["hypo"], $pmessage);
+        }
+        if ($mh["weight"] === "yes")
+        {
+        	$pmessage = "weight gain! ";
+        	$this->alertmessage .= $this->medMessage($medicine, $this->medicines[$medicine]["weight"], $pmessage);
+        }
+        if ($mh["renal_gu"] === "yes")
+        {
+        	$pmessage = "renul or genitourinary problems! ";
+        	$this->alertmessage .= $this->medMessage($medicine, $this->medicines[$medicine]["renul_gu"], $pmessage);
+        }
+        if ($mh["gi_sx"] === "yes")
+        {
+        	$pmessage = "gastrointestinal problems! ";
+        	$this->alertmessage .= $this->medMessage($medicine, $this->medicines[$medicine]["gi_sx"], $pmessage);
+        }
+        if ($mh["chf"] === "yes")
+        {
+        	$pmessage = "chronic heart failure! ";
+        	$this->alertmessage .= $this->medMessage($medicine, $this->medicines[$medicine]["chf"], $pmessage);
+        }
+        if ($mh["cvd"] === "yes")
+        {
+        	$pmessage = "cardiovascular disease! ";
+        	$this->alertmessage .= $this->medMessage($medicine, $this->medicines[$medicine]["cvd"], $pmessage);
+        }
+        if ($mh["bone"] === "yes")
+        {
+        	$pmessage = "bone fracture! ";
+        	$this->alertmessage .= $this->medMessage($medicine, $this->medicines[$medicine]["bone"], $pmessage);
+        }
+        
         // copy selected medicine into medicine 1, 2, or 3
         if ( ($therapyType == 1) && ($medicine != "none"))
         {
@@ -207,6 +275,24 @@ class AlgorithmComponent extends Component {
             return false;
     }
 
+    /**
+     * @param $med - medicine value
+     * @param $medrisk - medicine risk value
+     * @parm $pmessage - patient message
+     * @return - contraindication alert message
+     */
+    private function medMessage($med, $medrisk,$pmessage)
+    {
+    	$cmessage = "";
+    	if($medrisk == '1')
+    		$cmessage = $med. " has few adverse events or possible benefits with patients at risk of ". $pmessage. "<br>";
+    	elseif($medrisk == '2')
+    		$cmessage = "Use ". $med. " with caution with patients at risk of ". $pmessage. "<br>";
+    	elseif($medrisk == '3')
+    		$cmessage = $med. " has likelihood of adverse event with patients at risk of ". $pmessage. "<br>";
+    	return $cmessage;   	 
+    }
+   
     /**
      * @param $a1cval - sets a1c value
      */
@@ -279,7 +365,23 @@ class AlgorithmComponent extends Component {
     {
         return $this->allergy;
     }
-
+    public function setMedhistory($newMedhistory)
+    {
+    	$this->medhistory = $newMedhistory;
+    }
+    public function getMedhistory()
+    {
+    	return $this->medhistory;
+    }
+    public function setMedicines($newMedicines)
+    {
+    	$this->medicines = $newMedicines;
+    }
+    public function getMedicines()
+    {
+    	return $this->medicines;
+    }
+    
     public function setMonotherapy($newTherapy)
     {
         $this->monotherapy = $newTherapy;
@@ -388,6 +490,10 @@ class AlgorithmComponent extends Component {
         echo "Medicine3 = ";
         echo $this->medicine3;
         echo "<br>";
+        echo "<br>";
+        echo "Alert Message: ";
+        echo "<br>";
+        echo $this->alertmessage;
     }
 
     /**
