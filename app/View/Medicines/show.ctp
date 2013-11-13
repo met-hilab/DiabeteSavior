@@ -16,8 +16,8 @@
                 </tr>
 
                 <tr>
-                     <th class="allergy-header">Metric:</th>
-                <td><?php echo $medicine['Medicine']['metric']; ?>  </td>
+                     <th class="allergy-header">Units:</th>
+                <td><?php echo $medicine['Medicine']['units']; ?>  </td>
                 </tr>
 
                 <tr>

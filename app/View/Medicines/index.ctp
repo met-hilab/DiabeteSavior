@@ -16,7 +16,7 @@
        <th>Name</th>
        <th>min_dose</th>
 	   <th>max_dose</th>
-	   <th>metric</th>
+	   <th>units</th>
 	   <th>hypo</th>
        <th>weight</th>
 	   <th>renal_gu</th>
@@ -35,7 +35,7 @@
     <td><?php echo $this->Html->link($m['Medicine']['medicine_name'], array('controller' => 'medicines', 'action' => 'show'), array('data-id' => $m['Medicine']['id'], 'class' => 'btn btn-default link-to-medicine')); ?></td>
 	  <td><?php echo $m['Medicine']['min_dose'];?></td>
     <td><?php echo $m['Medicine']['max_dose'];?></td>
-    <td><?php echo $m['Medicine']['metric'];?></td>
+    <td><?php echo $m['Medicine']['units'];?></td>
     <td><?php echo $m['Medicine']['hypo'];?></td>
     <td><?php echo $m['Medicine']['weight'];?></td>
 	  <td><?php echo $m['Medicine']['renal_gu'];?></td>

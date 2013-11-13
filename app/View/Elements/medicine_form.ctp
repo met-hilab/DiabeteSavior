@@ -22,9 +22,9 @@
 </div>
 
 <div class="form-group">
-  <?php echo $this->Form->label('metric', '<font color="red">* </font>Metric', array('class' => 'col-lg-1 control-label')); ?>
+  <?php echo $this->Form->label('units', '<font color="red">* </font>Units', array('class' => 'col-lg-1 control-label')); ?>
   <div class="col-lg-4">
-    <?php echo $this->Form->input('metric', array('div' => false, 'label' => false)); ?>
+    <?php echo $this->Form->input('units', array('div' => false, 'label' => false)); ?>
   </div>
 </div>
 
@@ -33,10 +33,10 @@
   <div class="col-lg-4">
     <?php
       $hypoOptions = array(
+        '0' => '0',
         '1' => '1',
         '2' => '2',
         '3' => '3',
-        '4' => '4',
       )
     ?>
     <?php echo $this->Form->select('hypo', $hypoOptions, array('div' => false, 'label' => false)); ?>
@@ -48,10 +48,10 @@
   <div class="col-lg-4">
     <?php
       $weightOptions = array(
+        '0' => '0',
         '1' => '1',
         '2' => '2',
         '3' => '3',
-        '4' => '4',
       )
     ?>
     <?php echo $this->Form->select('weight', $weightOptions, array('div' => false, 'label' => false)); ?>
@@ -63,10 +63,10 @@
   <div class="col-lg-4">
     <?php
       $renal_guOptions = array(
+        '0' => '0',
         '1' => '1',
         '2' => '2',
         '3' => '3',
-        '4' => '4',
       )
     ?>
     <?php echo $this->Form->select('renal_gu', $renal_guOptions, array('div' => false, 'label' => false)); ?>
@@ -78,10 +78,10 @@
   <div class="col-lg-4">
     <?php
       $gi_sxOptions = array(
+        '0' => '0',
         '1' => '1',
         '2' => '2',
         '3' => '3',
-        '4' => '4',
       )
     ?>
     <?php echo $this->Form->select('gi_sx', $gi_sxOptions, array('div' => false, 'label' => false)); ?>
@@ -93,10 +93,10 @@
   <div class="col-lg-4">
     <?php
       $chfOptions = array(
+        '0' => '0',
         '1' => '1',
         '2' => '2',
         '3' => '3',
-        '4' => '4',
       )
     ?>
     <?php echo $this->Form->select('chf', $chfOptions, array('div' => false, 'label' => false)); ?>
@@ -108,10 +108,10 @@
   <div class="col-lg-4">
     <?php
       $cvdOptions = array(
+        '0' => '0',
         '1' => '1',
         '2' => '2',
         '3' => '3',
-        '4' => '4',
       )
     ?>
     <?php echo $this->Form->select('cvd', $cvdOptions, array('div' => false, 'label' => false)); ?>
@@ -123,10 +123,10 @@
   <div class="col-lg-4">
     <?php
       $boneOptions = array(
+        '0' => '0',
         '1' => '1',
         '2' => '2',
         '3' => '3',
-        '4' => '4',
       )
     ?>
     <?php echo $this->Form->select('bone', $boneOptions, array('div' => false, 'label' => false)); ?>
