@@ -280,7 +280,6 @@ class VisitsController extends AppController {
     $Medicine1 = $last_visit_treatment['TreatmentRunAlgorithm'][0]['medicine_name_one'];
     $Medicine2 = $last_visit_treatment['TreatmentRunAlgorithm'][0]['medicine_name_two'];
     $Medicine3 = $last_visit_treatment['TreatmentRunAlgorithm'][0]['medicine_name_three'];
-    //pr($Medicine1); pr($Medicine2); pr($Medicine3); exit;
     if ($Medicine1 == null)
         $Medicine1 = "none";
     if ($Medicine2 == null)
@@ -292,16 +291,32 @@ class VisitsController extends AppController {
     $this->Algorithm->setMedicine2($Medicine2);
     $this->Algorithm->setMedicine3($Medicine3);
 
+    // set medical history
+    $medhistory_complaints = $this->Visit->MedhistoryComplaint->findByVisit_id($v_current_id);
+    $hypo = $medhistory_complaints['MedhistoryComplaint']['hypo'];
+    $weight_gain = $medhistory_complaints['MedhistoryComplaint']['weight_gain'];
+    $renal_gu = $medhistory_complaints['MedhistoryComplaint']['renal_gu'];
+    $gi_sx = $medhistory_complaints['MedhistoryComplaint']['gi_sx'];
+    $chf = $medhistory_complaints['MedhistoryComplaint']['chf'];
+    $cvd = $medhistory_complaints['MedhistoryComplaint']['cvd'];
+    $bone = $medhistory_complaints['MedhistoryComplaint']['bone'];
+    
+    $medhistory = array("hypo" => $hypo, "weight" => $weight_gain, "renal_gu" => $renal_gu, "gi_sx" => $gi_sx,
+    		"chf" => $chf, "cvd" => $cvd, "bone" => $bone );
+    $this->Algorithm->setMedhistory($medhistory);
+    
     /* run glcymic control algorithm */
     $this->Algorithm->gcAlgorithm();
-
+	//echo $this->Algorithm->getAlert(). "<br>";
+	
     /* get algorithm results */
     $decision = $this->Algorithm->getDecision();
     $therapy = $this->Algorithm->getTherapy();
     $med1 = $this->Algorithm->getMedicine1();
     $med2 = $this->Algorithm->getMedicine2();
     $med3 = $this->Algorithm->getMedicine3();
-
+    $medalert = $this->Algorithm->getAlert();
+    
     $this->set('decision', $decision);
     $this->set('therapy', $therapy);
     $this->Session->write('therapy', $therapy);
@@ -311,7 +326,9 @@ class VisitsController extends AppController {
     $this->Session->write('med2', $med2);
     $this->set('medicine3', $med3);
     $this->Session->write('med3', $med3);
-
+    $this->set('medalert', $medalert);
+    $this->Session->write('medalert', $medalert);
+    
     //$this->request->data = $data;
 
     /* accept algorithm results */

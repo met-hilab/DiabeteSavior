@@ -442,7 +442,11 @@ class AlgorithmComponent extends Component {
     {
         return $this->decision;
     }
-
+    public function getAlert()
+    {
+    	return $this->alertmessage;
+    }
+    
     /**
      * @return bool - returns true if medicine 1 selected
      */
