@@ -188,6 +188,10 @@
             <th class="dimgray-header"> BMI: </th>
             <td><?php echo $lastVisit['VitalsLab']['bmi']?: 'unknown'; ?></td>
         </tr>
+        <tr>  
+            <th class="dimgray-header"> BMI Status: </th>
+            <td><?php echo $lastVisit['VitalsLab']['bmi_status']?: 'unknown'; ?></td>
+        </tr>
         <tr> 
             <th class="dimgray-header">Glycated hemoglobin (A1C): </th>
             <td><?php echo $lastVisit['VitalsLab']['A1c']?: 'unknown'; ?> %</td>

@@ -52,11 +52,10 @@ class VisitsController extends AppController {
 
         $visits = $this->Visit->find('all'); 
         $this->set('visits', $visits);
-        //pr($visits);
   }
   
 /**
- * Add a visit
+ * Add a visit 
  *
  * @param weight, height, bps, bpd, A1c, eGFR, notes, a1c_goal, weight_goal, drug_allergies
  * @return void
@@ -80,49 +79,83 @@ class VisitsController extends AppController {
 
  /**
  * The actual add action
- * @author Jason Lu
- * @version 1.0, 2013-10-31
+ * @author Jason Lu, Yingyuan Zhang
+ * @version 1.1, 2013-11-13
  */
+  private function _add() {
+    // Uset IDs to make sure these are insert comments.
+    unset($this->request->data['Visit']['id']);
+    unset($this->request->data['Treatment']['id']);
+    unset($this->request->data['MedhistoryComplaint']['id']);
+    
+    $this->request->data['Treatment']['prescriber_username'] = "NO DATA";
+    // BMI = ( Weight in Kilograms / ( Height in Meters x Height in Meters ) )
+    // Caculate BMI in Metric. kg / m^2
+    // Assume data are metric, more easier to caculate.
+    $weight = (float)$this->request->data['VitalsLab']['weight'];
+    $height = (float)$this->request->data['VitalsLab']['height'] * 0.01;
+    $bmi = (float)($weight / pow($height,2));
+    $this->request->data['VitalsLab']['bmi'] = round($bmi,1);
 
- private function _add() {
-  // Uset IDs to make sure these are insert comments.
-  unset($this->request->data['Visit']['id']);
-  unset($this->request->data['Treatment']['id']);
-  unset($this->request->data['MedhistoryComplaint']['id']);
-  
-  $this->request->data['Treatment']['prescriber_username'] = "NO DATA";
-  // BMI = ( Weight in Kilograms / ( Height in Meters x Height in Meters ) )
-  // Caculate BMI in Metric. kg / m^2
-  // Assume data are metric, more easier to caculate.
-  $weight = (float)$this->request->data['VitalsLab']['weight'];
-  //var_dump($weight);
-  $height = (float)$this->request->data['VitalsLab']['height'] * 0.01;
-  //var_dump($height);
-  $bmi = (float)($weight / pow($height,2));
-  //var_dump($bmi); exit;
-  $this->request->data['VitalsLab']['bmi'] = round($bmi,1);
+    $p_id = $this->Session->read('patient_id');
+    $patient = $this->Visit->Patient->findById($p_id);
+    $race = $patient['Patient']['race'];
 
-  $this->Visit->create();
-  if($this->Visit->saveAssociated($this->request->data)) {
-    $id = $this->Visit->id;
-    $t_id = $this->Visit->Treatment->id;
-
-    $drugAllergy = new DrugAllergy();
-    $drugAllergy->create();
-    if($drugAllergy->save($this->request->data)){
-      $this->Session->write('visit_id', $id);
-      $this->Session->write('treatment_id', $t_id);
-      $this->Session->setFlash('Visit added successfully!');
-      $this->redirect(array('action'=>'current'));
+    if ($race == 'Asian or Asian American'){
+      switch ($bmi) {
+        case ($bmi<18.5):
+          $bmi_status = 'Underweight';
+          break;
+        case ($bmi>=18.5 && $bmi<23.0):
+          $bmi_status = 'Normal range';
+          break;
+        case ($bmi>=23.0 && $bmi<=25.0):
+          $bmi_status = 'Overweight';
+          break;
+        case ($bmi>25.0):
+          $bmi_status = 'Obese';
+          break;
+      }
     } else {
-      $errors = $this->Visit->Patient->validationErrors;
-      $this->Session->setFlash('Sorry, add allergy failed.');
+      switch ($bmi) {
+        case ($bmi<18.5):
+          $bmi_status = 'Underweight';
+          break;
+        case ($bmi>=18.5 && $bmi<25.0):
+          $bmi_status = 'Normal range';
+          break;
+        case ($bmi>=25.0 && $bmi<=30.0):
+          $bmi_status = 'Overweight';
+          break;
+        case ($bmi>30.0):
+          $bmi_status = 'Obese';
+          break;
+      }
     }
-  } else {
-    $errors = $this->Visit->validationErrors;
-    $this->Session->setFlash('Sorry, add visit failed.');
+    //pr($bmi); pr($bmi_status); exit;
+    $this->request->data['VitalsLab']['bmi_status'] = $bmi_status;
+
+    $this->Visit->create();
+    if($this->Visit->saveAssociated($this->request->data)) {
+      $id = $this->Visit->id;
+      $t_id = $this->Visit->Treatment->id;
+
+      $drugAllergy = new DrugAllergy();
+      $drugAllergy->create();
+      if($drugAllergy->save($this->request->data)){
+        $this->Session->write('visit_id', $id);
+        $this->Session->write('treatment_id', $t_id);
+        $this->Session->setFlash('Visit added successfully!');
+        $this->redirect(array('action'=>'current'));
+      } else {
+        $errors = $this->Visit->Patient->validationErrors;
+        $this->Session->setFlash('Sorry, add allergy failed.');
+      }
+    } else {
+      $errors = $this->Visit->validationErrors;
+      $this->Session->setFlash('Sorry, add visit failed.');
+    }
   }
- }
 
  /**
  * Displays a current visit

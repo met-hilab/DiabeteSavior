@@ -117,6 +117,10 @@
             <th class="dimgray-header"> BMI: </th>
             <td><?php echo $visit['VitalsLab']['bmi'] ?></td>
         </tr>
+        <tr>  
+            <th class="dimgray-header"> BMI Status: </th>
+            <td><?php echo $visit['VitalsLab']['bmi_status'] ?></td>
+        </tr>
         <tr> 
             <th class="dimgray-header">Glycated hemoglobin (A1C): </th>
             <td><?php echo $visit['VitalsLab']['A1c'] ?> %</td>

@@ -70,38 +70,38 @@
         <tr> <th class="dimgray-header">Pramlintide: </th> <td><?php echo 'no' ?></td> </tr>
     <?php }?>
 
-    <?php if ($patient['DrugAllergy']['met'] == 'unknow' || $patient['DrugAllergy']['met'] == null) { ?>
-        <tr> <th class="dimgray-header">Metformin: </th> <td><?php echo 'unknow' ?></td> </tr>
+    <?php if ($patient['DrugAllergy']['met'] == 'unknown' || $patient['DrugAllergy']['met'] == null) { ?>
+        <tr> <th class="dimgray-header">Metformin: </th> <td><?php echo 'unknown' ?></td> </tr>
     <?php }?>
-    <?php if ($patient['DrugAllergy']['dpp_4i'] == 'unknow' || $patient['DrugAllergy']['dpp_4i'] == null) { ?>
-        <tr> <th class="dimgray-header">Dipeptidyl peptidase 4 inhibitors (DPP-4): </th> <td><?php echo 'unknow' ?></td> </tr>
+    <?php if ($patient['DrugAllergy']['dpp_4i'] == 'unknown' || $patient['DrugAllergy']['dpp_4i'] == null) { ?>
+        <tr> <th class="dimgray-header">Dipeptidyl peptidase 4 inhibitors (DPP-4): </th> <td><?php echo 'unknown' ?></td> </tr>
     <?php }?>
-    <?php if ($patient['DrugAllergy']['glp_1ra'] == 'unknow' || $patient['DrugAllergy']['glp_1ra'] == null) { ?>
-        <tr> <th class="dimgray-header">Glucagon-like peptide-1 receptor agonists (GLP-1): </th> <td><?php echo 'unknow' ?></td> </tr>
+    <?php if ($patient['DrugAllergy']['glp_1ra'] == 'unknown' || $patient['DrugAllergy']['glp_1ra'] == null) { ?>
+        <tr> <th class="dimgray-header">Glucagon-like peptide-1 receptor agonists (GLP-1): </th> <td><?php echo 'unknown' ?></td> </tr>
     <?php }?>
-    <?php if ($patient['DrugAllergy']['tzd'] == 'unknow' || $patient['DrugAllergy']['tzd'] == null) { ?>
-        <tr> <th class="dimgray-header">Thiazolidinediones (TZD): </th> <td><?php echo 'unknow' ?></td> </tr>
+    <?php if ($patient['DrugAllergy']['tzd'] == 'unknown' || $patient['DrugAllergy']['tzd'] == null) { ?>
+        <tr> <th class="dimgray-header">Thiazolidinediones (TZD): </th> <td><?php echo 'unknown' ?></td> </tr>
     <?php }?>
-    <?php if ($patient['DrugAllergy']['agi'] == 'unknow' || $patient['DrugAllergy']['agi'] == null) { ?>
-        <tr> <th class="dimgray-header">Alpha-glucosidase inhibitors (AGIs): </th> <td><?php echo 'unknow' ?></td> </tr>
+    <?php if ($patient['DrugAllergy']['agi'] == 'unknown' || $patient['DrugAllergy']['agi'] == null) { ?>
+        <tr> <th class="dimgray-header">Alpha-glucosidase inhibitors (AGIs): </th> <td><?php echo 'unknown' ?></td> </tr>
     <?php }?>
-    <?php if ($patient['DrugAllergy']['colsvl'] == 'unknow' || $patient['DrugAllergy']['colsvl'] == null) { ?>
-        <tr> <th class="dimgray-header">Colesevelam: </th> <td><?php echo 'unknow' ?></td> </tr>
+    <?php if ($patient['DrugAllergy']['colsvl'] == 'unknown' || $patient['DrugAllergy']['colsvl'] == null) { ?>
+        <tr> <th class="dimgray-header">Colesevelam: </th> <td><?php echo 'unknown' ?></td> </tr>
     <?php }?>
-    <?php if ($patient['DrugAllergy']['bcr_or'] == 'unknow' || $patient['DrugAllergy']['bcr_or'] == null) { ?>
-        <tr> <th class="dimgray-header">Bromocriptine Mesylate: </th> <td><?php echo 'unknow' ?></td> </tr>
+    <?php if ($patient['DrugAllergy']['bcr_or'] == 'unknown' || $patient['DrugAllergy']['bcr_or'] == null) { ?>
+        <tr> <th class="dimgray-header">Bromocriptine Mesylate: </th> <td><?php echo 'unknown' ?></td> </tr>
     <?php }?>
-    <?php if ($patient['DrugAllergy']['su_gln'] == 'unkonw' || $patient['DrugAllergy']['su_gln'] == null) { ?>
-        <tr> <th class="dimgray-header">Bromocriptine Mesylate: </th> <td><?php echo 'unknow' ?></td> </tr>
+    <?php if ($patient['DrugAllergy']['su_gln'] == 'unknown' || $patient['DrugAllergy']['su_gln'] == null) { ?>
+        <tr> <th class="dimgray-header">Bromocriptine Mesylate: </th> <td><?php echo 'unknown' ?></td> </tr>
     <?php }?>
-    <?php if ($patient['DrugAllergy']['insulin'] == 'unknow' || $patient['DrugAllergy']['insulin'] == null) { ?>
-        <tr> <th class="dimgray-header">Sulfonylurea (SFU) and Glinides: </th> <td><?php echo 'unknow' ?></td> </tr>
+    <?php if ($patient['DrugAllergy']['insulin'] == 'unknown' || $patient['DrugAllergy']['insulin'] == null) { ?>
+        <tr> <th class="dimgray-header">Sulfonylurea (SFU) and Glinides: </th> <td><?php echo 'unknown' ?></td> </tr>
     <?php }?>
-    <?php if ($patient['DrugAllergy']['sglt_2'] == 'unknow' || $patient['DrugAllergy']['sglt_2'] == null) { ?>
-        <tr> <th class="dimgray-header">Insulin: </th> <td><?php echo 'unknow' ?></td> </tr>
+    <?php if ($patient['DrugAllergy']['sglt_2'] == 'unknown' || $patient['DrugAllergy']['sglt_2'] == null) { ?>
+        <tr> <th class="dimgray-header">Insulin: </th> <td><?php echo 'unknown' ?></td> </tr>
     <?php }?>
-    <?php if ($patient['DrugAllergy']['praml'] == 'unknow' || $patient['DrugAllergy']['praml'] == null) { ?>
-        <tr> <th class="dimgray-header">Pramlintide: </th> <td><?php echo 'unknow' ?></td> </tr>
+    <?php if ($patient['DrugAllergy']['praml'] == 'unknown' || $patient['DrugAllergy']['praml'] == null) { ?>
+        <tr> <th class="dimgray-header">Pramlintide: </th> <td><?php echo 'unknown' ?></td> </tr>
     <?php }?>
 
 </table>

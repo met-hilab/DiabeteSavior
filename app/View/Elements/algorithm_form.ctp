@@ -51,9 +51,9 @@
 </div>
 
 <div class="form-group">
-  <?php echo $this->Form->label('justification', '<font color="red">* </font>Justification', array('class' => 'col-lg-2 control-label')); ?>
+  <?php echo $this->Form->label('edited_justification', '<font color="red">* </font>Justification', array('class' => 'col-lg-2 control-label')); ?>
   <div class="col-lg-4">
-    <?php echo $this->Form->input('justification', array('div' => false, 'label' => false)); ?>
+    <?php echo $this->Form->input('edited_justification', array('div' => false, 'label' => false)); ?>
   </div>
 </div
 
