@@ -1,6 +1,6 @@
 <h2>Glycemic Control Algorithm Results</h2>
 
-<div class="col-md-6">
+<div class="col-md-9">
 <form id="algorithm_results" class="form-horizontal" role="form" action="/visits/gcalgorithm" method="post">
  <table  class="table table-condensed">      
     <tr>
@@ -29,6 +29,10 @@
       <td><?php echo $medicine3; ?></td>
     </tr>
      <?php }?>
+    <tr> 
+      <th>Alert Message: </th>
+      <td><?php echo $medalert; ?></td>
+    </tr>
   </table>
 <div class="control-group">
   <label class="" for="Accept"></label>

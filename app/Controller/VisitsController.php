@@ -93,7 +93,7 @@ class VisitsController extends AppController {
     // Caculate BMI in Metric. kg / m^2
     // Assume data are metric, more easier to caculate.
     $weight = (float)$this->request->data['VitalsLab']['weight'];
-    $height = (float)$this->request->data['VitalsLab']['height'] * 0.01;
+    $height = (float)$this->request->data['VitalsLab']['height'] * 0.01;   
     $bmi = (float)($weight / pow($height,2));
     $this->request->data['VitalsLab']['bmi'] = round($bmi,1);
 
@@ -101,6 +101,7 @@ class VisitsController extends AppController {
     $patient = $this->Visit->Patient->findById($p_id);
     $race = $patient['Patient']['race'];
 
+    //Weight classification
     if ($race == 'Asian or Asian American'){
       switch ($bmi) {
         case ($bmi<18.5):
@@ -132,8 +133,38 @@ class VisitsController extends AppController {
           break;
       }
     }
-    //pr($bmi); pr($bmi_status); exit;
     $this->request->data['VitalsLab']['bmi_status'] = $bmi_status;
+
+    //Target weight suggestion    
+    if ($bmi_status != 'Normal range'){
+      $height_val = $height/0.01;
+      if ($race == 'Asian or Asian American'){
+        switch ($bmi_status) {
+          case 'Underweight':
+            $target_weight = 18.5*pow($height_val,2)/10000;
+            break;
+          case 'Overweight':
+            $target_weight = 22.9*pow($height_val,2)/10000;
+            break;
+          case 'Obese':
+            $target_weight = 24.9*pow($height_val,2)/10000;
+            break;
+        }
+      } else {
+        switch ($bmi_status) {
+          case 'Underweight':
+            $target_weight = 18.5*pow($height_val,2)/10000;
+            break;
+          case 'Overweight':
+            $target_weight = 24*pow($height_val,2)/10000;
+            break;
+          case 'Obese':
+            $target_weight = 29*pow($height_val,2)/10000;
+            break;
+        }
+      }
+    }
+    $this->request->data['VitalsLab']['notes'] = 'Target weight is '.round($target_weight,1).' kg.';
 
     $this->Visit->create();
     if($this->Visit->saveAssociated($this->request->data)) {
@@ -307,7 +338,6 @@ class VisitsController extends AppController {
     
     /* run glcymic control algorithm */
     $this->Algorithm->gcAlgorithm();
-	//echo $this->Algorithm->getAlert(). "<br>";
 	
     /* get algorithm results */
     $decision = $this->Algorithm->getDecision();
@@ -339,6 +369,7 @@ class VisitsController extends AppController {
         'medicine_name_one' => $med1,
         'medicine_name_two' => $med2,
         'medicine_name_three' => $med3,
+        'recommendations' => $medalert,
         'edited_by_user' => 'no'
     )); 
       $this->Visit->Treatment->TreatmentRunAlgorithm->create();
@@ -357,10 +388,12 @@ class VisitsController extends AppController {
       $med1 = $this->Session->read('med1');
       $med2 = $this->Session->read('med2');
       $med3 = $this->Session->read('med3');
+      $medalert = $this->Session->read('medalert');
       $this->set('type', $type);
       $this->set('med1', $med1);
       $this->set('med2', $med2);
       $this->set('med3', $med3);
+      $this->set('medalert', $medalert);
 
       if($this->request->is('post') || $this->request->is('put')){       
         $data = $this->request->data;   

@@ -232,7 +232,7 @@ CREATE TABLE `vitals_labs` (
   `bps` int(11) NOT NULL,
   `bpd` int(11) NOT NULL,
   `bmi` float default NULL,
-  `bmi_status` enum('Underweight','Normal range','Overweight',' Obese') collate utf8_unicode_ci default NULL,
+  `bmi_status` enum('Underweight','Normal range','Overweight','Obese') collate utf8_unicode_ci default NULL,
   `A1c` float NOT NULL,
   `eGFR` int(11) default NULL,
   `notes` text collate utf8_unicode_ci,
