@@ -16,23 +16,25 @@
       <th>Medicine1: </th>
       <td><?php echo $medicine1; ?></td>
     </tr>
-     <?php }?>
+    <?php }?>
     <?php if ($medicine2 != 'none') { ?>
     <tr> 
       <th>Medicine2: </th>
       <td><?php echo $medicine2; ?></td>
     </tr>
-     <?php }?>
+    <?php }?>
     <?php if ($medicine3 != 'none') { ?>
     <tr> 
       <th>Medicine3: </th>
       <td><?php echo $medicine3; ?></td>
     </tr>
-     <?php }?>
+    <?php }?>
+    <?php if ($medalert != '') { ?>
     <tr> 
-      <th>Alert Message: </th>
+      <th>Alert: </th>
       <td><?php echo $medalert; ?></td>
     </tr>
+    <?php }?>
   </table>
 <div class="control-group">
   <label class="" for="Accept"></label>

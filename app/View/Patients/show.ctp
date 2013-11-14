@@ -187,17 +187,17 @@
 			<td>  </td>
         </tr>
         <tr>  
-            <th class="dimgray-header"> BMI: </th>
+            <th class="dimgray-header">BMI: </th>
             <td><?php echo $lastVisit['VitalsLab']['bmi']?: 'unknown'; ?> kg/m<sup>2</sup> </td>
 			<td> (18.5 - 25.0 kg/m<sup>2</sup>) </td>
         </tr>
         <tr>  
-            <th class="dimgray-header"> BMI Status: </th>
+            <th class="dimgray-header">Weight Classification: </th>
             <td><?php echo $lastVisit['VitalsLab']['bmi_status']?: 'unknown'; ?></td>
 			<td>  </td>
         </tr>
         <tr> 
-            <th class="dimgray-header">Glycated hemoglobin (A1C): </th>
+            <th class="dimgray-header">Glycated Hemoglobin (A1C): </th>
             <td><?php echo $lastVisit['VitalsLab']['A1c']?: 'unknown'; ?> %</td>
 			<td> (4.5 - 5.7%) </td>
         </tr>
