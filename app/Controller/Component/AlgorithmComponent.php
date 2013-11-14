@@ -127,13 +127,6 @@ class AlgorithmComponent extends Component {
             $this->decision = "A1c greater than target, so adding third medicine for triple therapy.";
         }
 
-        // remain at triple therapy: select medicine 3 if at triple therapy and a1c <= target
-        elseif ( ($this->isTriple() && ($this->a1c <= $this->a1cTarget)) )
-        {
-            $this->selectMedicine(3);
-            $this->decision = "A1c less than or equal to target, so continue with triple therapy.";
-        }
-
         // start at triple therapy: select medicine 1 and 2 if a1c > 9 with no symptoms, and no medicine selected
         elseif (($this->a1c > 9) && $this->noTherapy() && !$this->symptoms)
         {
@@ -143,12 +136,19 @@ class AlgorithmComponent extends Component {
             $this->decision = "Start with triple therapy.";
 
         }
-
-        // insulin therapy: if a1c > 9 and symptoms
-        elseif (($this->a1c > 9) && $this->noTherapy() && $this->symptoms)
+        
+        // remain at triple therapy: select medicine 3 if at triple therapy and a1c <= target
+        elseif ( ($this->isTriple() && ($this->a1c <= $this->a1cTarget)) )
         {
-            $this->therapy = "lifestyle + insulin";
-            $this->decision = "Start with Insulin.";
+        	$this->selectMedicine(3);
+        	$this->decision = "A1c less than or equal to target, so continue with triple therapy.";
+        }
+                
+        // insulin therapy: if a1c > 9 and symptoms or at triple therapy and a1c > target
+        elseif ((($this->a1c > 9) && $this->noTherapy() && $this->symptoms) || ($this->isTriple() && ($this->a1c > $this->a1cTarget)))
+        {
+            $this->therapy = "lifestyle + triple therapy + insulin";
+            $this->decision = "Add or intensify insulin";
         }
 
         else
