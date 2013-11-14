@@ -10,6 +10,25 @@ echo $this->Form->input('confirm_password', array('type'=>'password', 'required'
 echo $this->Form->input('Profile.firstname');
 echo $this->Form->input('Profile.lastname');
 echo $this->Form->input('Profile.phone');
+?>
+<?php if($current_user['role'] > 0): ?>
+
+<div class="form-group">
+  <label class="control-label">Role</label>
+  <div class="checkbox">
+    <label><?php echo $this->Form->checkbox('role'); ?> Administrator</label>
+  </div>
+</div>
+<div class="form-group">
+  <label class="control-label">Status</label>
+  <div class="checkbox">
+    <label><?php echo $this->Form->checkbox('activated'); ?> Activated</label>
+  </div>
+</div>
+
+<?php endif; ?>
+
+<?php
 echo $this->Form->submit();
 echo $this->Form->end();
 

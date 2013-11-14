@@ -66,6 +66,23 @@ public function index(){
   }
 }
 
+public function admin(){
+  $this->authenticate_admin();
+  $this->Session->delete('patient');
+  $this->Session->delete('patient_id');
+  $uid = (int)$this->current_user['id'];
+  $patients = $this->Patient->find('all');
+  $this->set('patients',$patients);
+  if ($this->request->is('post')){
+    $id = $this->request->data('patient_id');
+    $patient = $this->Patient->findById($id);
+    $this->Session->write('patient_id', $id);
+    $this->Session->write('patient', $patient);
+    $this->redirect(array('action'=>'show'));
+  }
+  $this->render("index");
+}
+
 
 /**
  * Create new patient
@@ -266,7 +283,7 @@ public function index(){
  *  or MissingViewException in debug mode.
  */
   public function delete(){
-    this->authenticate_user();
+    $this->authenticate_user();
     $id = $this->Session->read('
 
       name');

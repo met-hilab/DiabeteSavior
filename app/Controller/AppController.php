@@ -52,6 +52,18 @@ class AppController extends Controller {
       return false;
     }
   }
+  public function authenticate_admin() {
+
+    $user = $this->Session->read('user');
+    //var_dump($user);
+    if($user['role'] > 0) {
+      return true;
+    } else {
+      throw new ForbiddenException();
+      return false;
+    }
+  }
+
 
   public function can($action, $modelName) {
     //$controller = $params['controller'];
