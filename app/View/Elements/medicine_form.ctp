@@ -22,9 +22,9 @@
 </div>
 
 <div class="form-group">
-  <?php echo $this->Form->label('units', '<font color="red">* </font>Units', array('class' => 'col-lg-1 control-label')); ?>
+  <?php echo $this->Form->label('unit', '<font color="red">* </font>Units', array('class' => 'col-lg-1 control-label')); ?>
   <div class="col-lg-4">
-    <?php echo $this->Form->input('units', array('div' => false, 'label' => false)); ?>
+    <?php echo $this->Form->input('unit', array('div' => false, 'label' => false)); ?>
   </div>
 </div>
 

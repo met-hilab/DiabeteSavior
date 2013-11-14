@@ -46,47 +46,9 @@ class PatientsController extends AppController {
     parent::beforeFilter();
     $this->authenticate_user();
   }
-/**
- * Displays a view
- *
- * @param mixed What page to display
- * @return void
- * @throws NotFoundException When the view file could not be found
- *  or MissingViewException in debug mode.
- */
-  public function display() {
-    $path = func_get_args();
-    $this->set('title', "Title");
-
-    $count = count($path);
-    if (!$count) {
-      return $this->redirect('/');
-    }
-    $page = $subpage = $title_for_layout = null;
-
-    if (!empty($path[0])) {
-      $page = $path[0];
-    }
-    if (!empty($path[1])) {
-      $subpage = $path[1];
-    }
-    if (!empty($path[$count - 1])) {
-      $title_for_layout = Inflector::humanize($path[$count - 1]);
-    }
-    $this->set(compact('page', 'subpage', 'title_for_layout'));
-
-    try {
-      $this->render(implode('/', $path));
-    } catch (MissingViewException $e) {
-      if (Configure::read('debug')) {
-        throw $e;
-      }
-      throw new NotFoundException();
-    }
-  }
 
 public function index(){
-  //$this->authenticate_user();
+  $this->authenticate_user();
   $this->Session->delete('patient');
   $this->Session->delete('patient_id');
   $uid = (int)$this->current_user['id'];
@@ -116,7 +78,7 @@ public function index(){
  *
  */
   public function add(){
-    //$this->authenticate_user();
+    $this->authenticate_user();
     $uid = (int)$this->current_user['id'];
     $this->Session->delete('patient_id');
     if ($this->request->is('post')){
@@ -170,6 +132,7 @@ public function index(){
  *  or MissingViewException in debug mode.
  */
   public function search(){
+    $this->authenticate_user();
     $this->Session->delete('patient_id');
     if($this->request->is('post')){
       // Please... team DO indent
@@ -214,7 +177,7 @@ public function index(){
  *
  */
   public function edit(){
-    //$this->authenticate_user();
+    $this->authenticate_user();
     $id = $this->Session->read('patient_id');
     $this->Patient->id = $id;
     if($this->Patient->exists()){
@@ -247,7 +210,7 @@ public function index(){
  *  or MissingViewException in debug mode.
  */
   public function show($id = null){
-    //$this->authenticate_user();
+    $this->authenticate_user();
     $id = $this->Session->read('patient_id');
     try{
       $patient = $this->Patient->findById($id);
@@ -303,8 +266,10 @@ public function index(){
  *  or MissingViewException in debug mode.
  */
   public function delete(){
-    //this->authenticate_user();
-    $id = $this->Session->read('patient_id');
+    this->authenticate_user();
+    $id = $this->Session->read('
+
+      name');
      $patient = $this->Patient->findById($id);
 
      if($this->request->is('get') ){
