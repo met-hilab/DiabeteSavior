@@ -77,7 +77,21 @@
   <?php endforeach; ?>
 </table>
 </div>
-</div>	
+
+
+<!-- Notes -->	
+	<div class="col-md-8">
+    <h3>Notes </h3>
+    <div class="dimgray-header">
+      <?php if ($visit['VitalsLab']['notes']==null){
+            echo "There are no notes on file for this patient.";
+          }
+          else{
+            echo $visit['VitalsLab']['notes'];
+          }
+      ?>
+    </div>		
+  </div>
 
 <br clear = "all">
 
@@ -100,47 +114,54 @@
 <hr>		
 		
 <!-- Vitals and Lab Results -->
-<div class="col-md-4">
+<div class="col-md-6">
 
 <h3>Vitals and Lab Results</h3> 
 	<table  class="table table-condensed">
 	    <tr>
             <th class="dimgray-header">Weight: </th> 
-            <td> <?php echo $visit['VitalsLab']['weight'] ?> kg</td>
+            <td> <?php echo $visit['VitalsLab']['weight'] ?> </td>
+			<td> </td>
         </tr>
 
         <tr> 
             <th class="dimgray-header">Height: </th>
-            <td><?php echo $visit['VitalsLab']['height'] ?> cm</td>
+            <td><?php echo $visit['VitalsLab']['height'] ?> </td>
+			<td> </td>
         </tr>
         <tr>  
             <th class="dimgray-header"> BMI: </th>
-            <td><?php echo $visit['VitalsLab']['bmi'] ?></td>
+            <td><?php echo $visit['VitalsLab']['bmi'] ?> kg/m<sup>2</sup> </td>
+			<td> (18.5 - 25.0 kg/m<sup>2</sup>) </td>
         </tr>
         <tr>  
             <th class="dimgray-header"> BMI Status: </th>
             <td><?php echo $visit['VitalsLab']['bmi_status'] ?></td>
+			<td> </td>
         </tr>
         <tr> 
             <th class="dimgray-header">Glycated hemoglobin (A1C): </th>
-            <td><?php echo $visit['VitalsLab']['A1c'] ?> %</td>
+            <td><?php echo $visit['VitalsLab']['A1c'] ?> % </td>
+			<td> (4.5 - 5.7%) </td>
         </tr>
 
         <tr>
              <th class="dimgray-header">Systolic Blood Pressure: </th>
-        <td><?php echo $visit['VitalsLab']['bps'] ?>  mmHg</td>
+             <td><?php echo $visit['VitalsLab']['bps'] ?>  mmHg</td>
+		     <td> (90 - 120 mmHg)</td>
         </tr>
 
         <tr>
             <th class="dimgray-header">Diastolic Blood Pressure: </th>
             <td><?php echo $visit['VitalsLab']['bpd'] ?> mmHg</td>
+			<td> (60 - 80 mmHg)</td>
         </tr>
 		
 </table>
 </div> 
 
 <!-- Therapy goals -->
-<div class="col-md-4">
+<div class="col-md-6">
 
 <h3>Therapy Goals</h3> 
 	<table  class="table table-condensed">
@@ -150,24 +171,12 @@
         </tr>
         <tr> 
             <th class="dimgray-header">Weight Goal: </th>
-            <td><?php echo $visit['Treatment']['weight_goal'] ?> kg</td>
+            <td><?php echo $visit['Treatment']['weight_goal'] ?> </td>
         </tr>        
 </table>
 </div> 
 
-<!-- Notes -->	
-	<div class="col-md-4">
-    <h3>Notes </h3>
-    <div class="dimgray-header">
-      <?php if ($visit['VitalsLab']['notes']==null){
-            echo "There are no notes on file for this patient.";
-          }
-          else{
-            echo $visit['VitalsLab']['notes'];
-          }
-      ?>
-    </div>		
-  </div>
+
 
 <br clear = "all">
 <hr>
