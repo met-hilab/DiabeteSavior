@@ -30,13 +30,9 @@ $cakeDescription = __d('cake_dev', 'Diabetes Savior: Type II Diabetes Infomatic 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <?php
     echo $this->Html->meta('icon');
-
-    
     echo $this->Html->css('bootstrap');
-    
     echo $this->Html->css('ui-lightness/jquery-ui-1.10.3.custom.min');
     echo $this->Html->css('main');
-
     echo $this->Html->script('jquery-1.10.2.min');
     echo $this->Html->script('jquery-ujs.js');
     echo $this->Html->script('jquery-ui-1.10.3.custom.min');
@@ -44,10 +40,6 @@ $cakeDescription = __d('cake_dev', 'Diabetes Savior: Type II Diabetes Infomatic 
     echo $this->Html->script('bootstrap');
     echo $this->Html->script('modernizr');
     echo $this->Html->script('main');
-
-
-
-    //echo $this->Html->css('cake.generic');
 
     echo $this->fetch('meta');
     echo $this->fetch('css');

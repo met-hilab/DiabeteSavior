@@ -47,15 +47,32 @@ class PatientsController extends AppController {
     $this->authenticate_user();
   }
 
+  public $components = array('Paginator');
+  public $paginate = array(
+    'limit' => 20,
+    'order' => array(
+        'Patient.patient_firstname' => 'asc',
+        'Patient.patient_lastname' => 'asc',
+        'Patient.dob' => 'asc'
+    )
+  );
+
 public function index(){
   $this->authenticate_user();
   $this->Session->delete('patient');
   $this->Session->delete('patient_id');
   $uid = (int)$this->current_user['id'];
-  $patients = $this->Patient->find('all', 
-    ["conditions" =>
-      ["user_id" => $uid]
-    ]);
+
+  $this->Paginator->settings = $this->paginate;
+  // similar to findAll(), but fetches paged results
+  $patients = $this->Paginator->paginate('Patient', ["user_id" => $uid]);
+
+  
+
+    
+
+
+
   $this->set('patients',$patients);
   if ($this->request->is('post')){
     $id = $this->request->data('patient_id');
@@ -70,16 +87,20 @@ public function admin(){
   $this->authenticate_admin();
   $this->Session->delete('patient');
   $this->Session->delete('patient_id');
-  $uid = (int)$this->current_user['id'];
-  $patients = $this->Patient->find('all');
-  $this->set('patients',$patients);
+
   if ($this->request->is('post')){
     $id = $this->request->data('patient_id');
     $patient = $this->Patient->findById($id);
     $this->Session->write('patient_id', $id);
     $this->Session->write('patient', $patient);
-    $this->redirect(array('action'=>'show'));
+    //$this->redirect(array('action'=>'show'));
   }
+
+  $this->Paginator->settings = $this->paginate;
+  // similar to findAll(), but fetches paged results
+  $patients = $this->Paginator->paginate('Patient');
+  $this->set('patients',$patients);
+
   $this->render("index");
 }
 
@@ -130,6 +151,7 @@ public function admin(){
       $this->Session->write('patient', $patient);
       $this->Session->write('patient_id', $id);
       $res->status = true;
+      $res->data = $patient;
     } else {
       $this->Session->delete('patient');
       $this->Session->delete('patient_id');

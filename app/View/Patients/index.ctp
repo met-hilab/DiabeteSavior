@@ -1,6 +1,7 @@
 
 <h1> List of Patients: </h1>
 <!-- DO NOT USE BR TO LAYOUT, USE CSS -->
+<?php echo $this->Paginator->numbers(array('first' => 2, 'last' => 2)); ?>
 <table class="table table-hover" >
 <thead>
     <tr>
@@ -32,6 +33,7 @@
 <?php endforeach; ?>
 </tbody>
 </table>
+<?php echo $this->Paginator->numbers(array('first' => 2, 'last' => 2)); ?>
 
 <script>
 $(document).ready(function(){
@@ -43,6 +45,7 @@ $('.link-to-patient').click(function(){
     } else {
       alert('Wrong patient id!');
     }
+    //console.log(res);
     
   }, 'json');
   return false;
