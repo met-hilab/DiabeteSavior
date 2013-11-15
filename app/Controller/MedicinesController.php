@@ -1,8 +1,8 @@
 <?php
 /**
- * Patient controller.
+ * Medicine controller.
  *
- * This file will render views from views/patients/
+ * This file will render views from views/medicines/
  *
  * PHP 5
  *
@@ -24,72 +24,44 @@ class MedicinesController extends AppController {
 
     public $uses = array();
 
-    /*public function index() {
-
-        $Medicines= $this->Medicine->find('all');
-
-        $this->set('Medicines',$Medicines);
-    }
-*/
-
     public function add() {
-      /*if($this->request->is('Post'))
-      $this->Medicine->save($this->request->data);
-      }
-    */
        $this->authenticate_user();
-       $this->Session->delete('medicine_id');
-
         if ($this->request->is('post')){
-            $medicine = $this->request->data['Medicine'];
             $this->Medicine->create();
             if($this->Medicine->save($this->data)){
                 $id = $this->Medicine->getLastInsertId();
-                $medicine = $this->Medicine->findById($id);
-                $this->Session->write('medicine_id', $id);
-                $this->Session->write('medicine', $medicine);
-                $this->redirect(array('action'=>'show'));
-
+                $this->redirect(array('action'=>'show', $id));
             }else{
                 $this->Session->setFlash('medicine is not saved.');
             }
-
         }
-
     }
+
 
     public function index(){
         $this->authenticate_user();
-        $this->Session->delete('medicine');
-        $this->Session->delete('medicine_id');
         $medicines = $this->Medicine->find('all');
         $this->set('medicines',$medicines);
-        if ($this->request->is('post')){
-            $id = $this->request->data('medicine_id');
-            $medicine = $this->Medicine->findById($id);
-            $this->Session->write('medicine_id', $id);
-            $this->Session->write('medicine', $medicine);
-            $this->redirect(array('action'=>'show'));
-        }
     }
 
 
     public function edit(){
         $this->authenticate_user();
-        $id = $this->Session->read('medicine_id');
+        $id = $this->request->params['pass'][0];
         $this->Medicine->id = $id;
         if($this->Medicine->exists()){
             if($this->request->is('post') || $this->request->is('put')){
                 $data = $this->request->data;
                     //save medicine
                 if($this->Medicine->save($data)){
+                    $id = $this->Medicine->id;
                     $this->Session->setFlash('Medicine was edited.');
-                    $this->redirect(array('action'=>'show'));
+                    $this->redirect(array('action'=>'show', $id));
                 } else {
                     $this->Session->setFlash('Unable to edit medicine. Please, try again.');
                 }
             } else {
-        // Patient exists and this is a get request => render the view, pass exsiting date.
+        // Medicine exists and this is a get request => render the view, pass exsiting date.
                 $this->request->data = $this->Medicine->read();
             }
         } else {
@@ -98,24 +70,22 @@ class MedicinesController extends AppController {
         }
     }
 
-    public function show(){
+     public function show(){
         $this->authenticate_user();
-        $id = $this->Session->read('medicine_id');
+        $id = $this->request->params['pass'][0];
         try{
             $medicine = $this->Medicine->findById($id);
             $this->set('medicine', $medicine);
-            $this->Session->write('medicine', $medicine);
-            $this->Session->write('medicine_id', $id);
         }catch(NotFoundException $e){
             throw $e;
         }
     }
 
+
     public function delete(){
         $this->authenticate_user();
-        $id = $this->Session->read('medicine_id');
+        $id = $this->request->params['pass'][0];
         $medicine = $this->Medicine->findById($id);
-
         if($this->request->is('get') ){
             $this->Session->setFlash('Delete method is not allowed.');
             $this->redirect(array('action' => 'show'));
@@ -127,9 +97,10 @@ class MedicinesController extends AppController {
                 if( $this->Medicine->delete( $id ) ){
                     $this->Session->setFlash('Medicine deleted.');
                     $this->redirect(array('action'=>'add'));
-                }else{  
+                }else{
+                    $id = $this->Medicine->id;  
                     $this->Session->setFlash('Unable to delete medicine.');
-                    $this->redirect(array('action' => 'show'));
+                    $this->redirect(array('action' => 'show', $id));
                 }
             }
         }

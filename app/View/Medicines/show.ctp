@@ -64,16 +64,3 @@
             <a href="/medicines/delete" data-confirm="Do you want to delete this medicine record?" data-method="delete" class="btn btn-primary" style="padding:5px;"><span class="glyphicon glyphicon-trash"></span> Delete Medicine</a>
       </div>        
     </div>
-
-    <script>
-  $('.btn-update-patient').click(function () {
-    window.location.href = '/patients/edit';
-    });//end .click
-    $('.btn-delete-patient').click(function () {
-      var result = confirm("Are you sure you want to delete this patient?");
-      if (result==true) {
-         
-          window.location.href = '/patients/delete';
-      }
-    });//end .click
-    </script>
