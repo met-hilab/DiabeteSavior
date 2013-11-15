@@ -105,19 +105,19 @@
 	<table  class="table table-condensed">
 	    <tr>
             <th class="dimgray-header">Weight: </th> 
-            <td> <?php echo $visit['VitalsLab']['weight'] ?> </td>
+            <td> <?php echo $visit['VitalsLab']['weight'] ?> kg </td>
 			<td> </td>
         </tr>
 
         <tr> 
             <th class="dimgray-header">Height: </th>
-            <td><?php echo $visit['VitalsLab']['height'] ?> </td>
+            <td><?php echo $visit['VitalsLab']['height'] ?>cm </td>
 			<td> </td>
         </tr>
         <tr>  
             <th class="dimgray-header">BMI: </th>
             <td><?php echo $visit['VitalsLab']['bmi'] ?> kg/m<sup>2</sup> </td>
-			<td> (18.5 - 25.0 kg/m<sup>2</sup>) </td>
+			<td> Normal: 18.5 - 25.0 kg/m<sup>2</sup> </td>
         </tr>
         <tr>  
             <th class="dimgray-header">Weight Classification: </th>
@@ -127,19 +127,19 @@
         <tr> 
             <th class="dimgray-header">Glycated Hemoglobin (A1C): </th>
             <td><?php echo $visit['VitalsLab']['A1c'] ?> % </td>
-			<td> (4.5 - 5.7%) </td>
+			<td> Normal: 4.5 - 5.7% </td>
         </tr>
 
         <tr>
              <th class="dimgray-header">Systolic Blood Pressure: </th>
              <td><?php echo $visit['VitalsLab']['bps'] ?>  mmHg</td>
-		     <td> (90 - 120 mmHg)</td>
+		     <td> Normal: 90 - 120 mmHg </td>
         </tr>
 
         <tr>
             <th class="dimgray-header">Diastolic Blood Pressure: </th>
             <td><?php echo $visit['VitalsLab']['bpd'] ?> mmHg</td>
-			<td> (60 - 80 mmHg)</td>
+			<td> Normal: 60 - 80 mmHg </td>
         </tr>
 		
 </table>
