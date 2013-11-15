@@ -12,8 +12,6 @@ echo $this->Html->script('a1c');
     converted to an estimated average glucose level (eAG) with the calculator below. An A1C level of less than 7%
     is a common target for diabetes patients.
 </p>
-<!--main div -->
-<div id="a1cmain">
 
     <p>&nbsp;</p>
     <h3>A1C to eAG Calculator</h3>
@@ -63,7 +61,7 @@ echo $this->Html->script('a1c');
     <p>eAG (mg/dL) = 28.7 x A1C - 46.7</p>
     <p>eAG (mmol/L) = 1.5944 x A1C - 2.5944</p>
     <p>&nbsp;</p>
-<!--
+
     <h3>A1C to eAG Conversion Table</h3>
     <div id="ac1table">
         <img src="/img/a1cchart.png"/>
@@ -82,5 +80,3 @@ echo $this->Html->script('a1c');
 
     <p>&nbsp;</p>
     <p>&nbsp;</p>
--->
-</div><!-- main -->
