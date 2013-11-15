@@ -70,7 +70,7 @@
         <span class="glyphicon glyphicon-trash"></span> 
         Delete Patient</button>-->
       <div style="padding:5px; display: inline-block;">
-            <a href="/patients/edit" class="btn btn-primary" style="padding:5px; float: right;"><span class="glyphicon glyphicon-trash"></span> Update Patient</a>
+            <a href="/patients/edit" class="btn btn-primary" style="padding:5px; float: right;"><span class="glyphicon glyphicon-edit"></span> Update Patient</a>
       </div>
       <div style="padding:5px; display: inline-block;">
             <a href="/patients/delete" data-confirm="Do you want to delete this patient record?" data-method="delete" class="btn btn-primary" style="padding:5px; float: right;"><span class="glyphicon glyphicon-trash"></span> Delete Patient</a>

@@ -52,7 +52,8 @@ class UsersController extends AppController {
  *  or MissingViewException in debug mode.
  */
   public function index() {
-    $this->authenticate_user();
+    //$this->authenticate_user();
+    $this->authenticate_admin();
     $users = $this->User->find('all');
     $this->set('users', $users);
   }
@@ -132,6 +133,7 @@ class UsersController extends AppController {
  */
   public function add() {
     //$this->authenticate_user();
+    //$this->authenticate_admin();
     if ($this->request->is('post')){
       $this->User->create();
       try {
@@ -154,7 +156,7 @@ class UsersController extends AppController {
  *  or MissingViewException in debug mode.
  */
   public function activate() {
-    $this->authenticate_user();
+    $this->authenticate_admin();
     if($this->can('manage', 'User')) {
       $id = $this->request->params['pass'][0];
       $this->User->id = $id;
@@ -179,7 +181,7 @@ class UsersController extends AppController {
  *  or MissingViewException in debug mode.
  */
   public function deactivate() {
-    $this->authenticate_user();
+    $this->authenticate_admin();
     if($this->can('manage', 'User')) {
       $id = $this->request->params['pass'][0];
       if($id == 1) {
@@ -272,6 +274,7 @@ class UsersController extends AppController {
  *  or MissingViewException in debug mode.
  */
   public function delete() {
+    $this->authenticate_admin();
     $id = $this->request->params['pass'][0];
     //the request must be a post request 
     //that's why we use postLink method on our view for deleting user

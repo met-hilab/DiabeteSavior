@@ -14,7 +14,7 @@
 <div class="form-group">
   <?php echo $this->Form->label('dob', '<font color="red">* </font>DOB', array('class' => 'col-lg-1 control-label')); ?>
   <div class="col-lg-4">
-    <?php echo $this->Form->date('dob', array('div' => false, 'label' => false, 'placeholder' => "YYYY-MM-DD", 'min' => "1900-01-01" )); ?>
+    <?php echo $this->Form->date('dob', array('div' => false, 'label' => false, 'placeholder' => "MM-DD-YYYY" )); ?>
   </div>
 </div>
 

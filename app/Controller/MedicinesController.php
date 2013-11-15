@@ -36,7 +36,8 @@ class MedicinesController extends AppController {
       /*if($this->request->is('Post'))
       $this->Medicine->save($this->request->data);
       }
-*/
+    */
+       $this->authenticate_user();
        $this->Session->delete('medicine_id');
 
         if ($this->request->is('post')){
@@ -58,6 +59,7 @@ class MedicinesController extends AppController {
     }
 
     public function index(){
+        $this->authenticate_user();
         $this->Session->delete('medicine');
         $this->Session->delete('medicine_id');
         $medicines = $this->Medicine->find('all');
@@ -73,6 +75,7 @@ class MedicinesController extends AppController {
 
 
     public function edit(){
+        $this->authenticate_user();
         $id = $this->Session->read('medicine_id');
         $this->Medicine->id = $id;
         if($this->Medicine->exists()){
@@ -96,6 +99,7 @@ class MedicinesController extends AppController {
     }
 
     public function show(){
+        $this->authenticate_user();
         $id = $this->Session->read('medicine_id');
         try{
             $medicine = $this->Medicine->findById($id);
@@ -108,7 +112,7 @@ class MedicinesController extends AppController {
     }
 
     public function delete(){
-        //this->authenticate_user();
+        $this->authenticate_user();
         $id = $this->Session->read('medicine_id');
         $medicine = $this->Medicine->findById($id);
 

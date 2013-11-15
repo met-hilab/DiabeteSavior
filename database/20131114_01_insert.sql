@@ -2,12 +2,15 @@
 -- Query: SELECT * FROM cs673.users
 LIMIT 0, 2000
 
--- Date: 2013-10-10 15:41
+-- Date: 2013-11-14 18:32
 */
 USE `cs673`;
 /*truncate users;*/
-INSERT INTO `users` (`email`,`password`,`reset_token`,`username`,`openid`,`service`,`created`,`modified`, `activated`) VALUES ('admin@diabetesavior.com','011c945f30ce2cbafc452f39840f025693339c42',NULL,NULL,NULL,NULL,'2013-09-24 20:05:00','2013-09-24 20:05:00', 1);
-UPDATE `users` SET `role`='255' WHERE `id`='1';
+INSERT INTO `users` (`id`,`email`,`password`,`reset_token`,`username`,`openid`,`service`,`activated`,`role`,`created`,`modified`) VALUES (1,'admin@diabetesavior.com','011c945f30ce2cbafc452f39840f025693339c42',NULL,NULL,NULL,NULL,1,255,'2013-09-24 20:05:00','2013-09-24 20:05:00');
+INSERT INTO `users` (`id`,`email`,`password`,`reset_token`,`username`,`openid`,`service`,`activated`,`role`,`created`,`modified`) VALUES (2,'lu.json@yahoo.com','011c945f30ce2cbafc452f39840f025693339c42',NULL,NULL,NULL,NULL,1,0,'2013-11-14 18:40:33','2013-11-14 18:44:15');
+INSERT INTO `profiles` (`id`,`user_id`,`title`,`firstname`,`lastname`,`phone`,`address`,`created`,`modified`) VALUES (1,1,NULL,'John','Smith','',NULL,'2013-11-14 18:40:33','2013-11-14 18:44:15');
+INSERT INTO `profiles` (`id`,`user_id`,`title`,`firstname`,`lastname`,`phone`,`address`,`created`,`modified`) VALUES (2,2,NULL,'Jason','Lu','852-272-4326',NULL,'2013-11-14 18:40:33','2013-11-14 18:44:15');
+
 
 
 INSERT INTO patients (

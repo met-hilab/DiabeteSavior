@@ -30,11 +30,11 @@
 
         <tr>
              <th>DOB: </th>
-        <td><?php echo $date = date("F j, Y", strtotime($p['Patient']['dob']));?></td>
+        <td><?php echo $date = date("F j, Y", strtotime($patient['Patient']['dob']));?></td>
         </tr>
 		<tr>
              <th>Age: </th>
-        <td><?php $date = date("F j, Y", strtotime($p['Patient']['dob']));
+        <td><?php $date = date("F j, Y", strtotime($patient['Patient']['dob']));
 		         echo $age = calculateAge($date);?></td>
         </tr>
 		<tr>
