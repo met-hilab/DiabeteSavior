@@ -36,6 +36,7 @@ $cakeDescription = __d('cake_dev', 'Diabetes Savior: Type II Diabetes Infomatic 
     
     echo $this->Html->css('ui-lightness/jquery-ui-1.10.3.custom.min');
     echo $this->Html->css('main');
+    echo $this->Html->css('ui-lightness/formvalidation');
 
     echo $this->Html->script('jquery-1.10.2.min');
     echo $this->Html->script('jquery-ujs.js');
@@ -44,7 +45,8 @@ $cakeDescription = __d('cake_dev', 'Diabetes Savior: Type II Diabetes Infomatic 
     echo $this->Html->script('bootstrap');
     echo $this->Html->script('modernizr');
     echo $this->Html->script('main');
-
+    echo $this->Html->script('jqBootstrapValidation'); 
+    echo $this->Html->script('FormValidation');
 
 
     //echo $this->Html->css('cake.generic');
