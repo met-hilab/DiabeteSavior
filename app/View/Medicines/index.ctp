@@ -32,7 +32,7 @@
 <?php foreach($medicines as $m) :?>
   <tr>
      <td><?php echo $counter; ?></td>
-    <td><?php echo $this->Html->link($m['Medicine']['medicine_name'], array('controller' => 'medicines', 'action' => 'show'), array('data-id' => $m['Medicine']['id'], 'class' => 'btn btn-default link-to-medicine')); ?></td>
+    <td><?php echo $this->Html->link($m['Medicine']['medicine_name'], array('controller' => 'medicines', 'action' => 'show', $m['Medicine']['id']), array('data-id' => $p['Medicine']['id'], 'class' => 'btn btn-default link-to-patient')); ?></td>
 	  <td><?php echo $m['Medicine']['min_dose'];?></td>
     <td><?php echo $m['Medicine']['max_dose'];?></td>
     <td><?php echo $m['Medicine']['unit'];?></td>
