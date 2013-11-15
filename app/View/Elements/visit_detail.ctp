@@ -169,7 +169,7 @@
             echo "There are no notes on file for this patient.";
           }
           else{
-            echo $visit['VitalsLab']['notes'];
+            echo nl2br($visit['VitalsLab']['notes']);
           }
       ?>
     </div>    

@@ -24,13 +24,13 @@
         <tr> <th class="dimgray-header">Bromocriptine Mesylate: </th> <td><?php echo 'yes' ?></td> </tr>
     <?php }?>
     <?php if ($patient['DrugAllergy']['su_gln'] == 'yes') { ?>
-        <tr> <th class="dimgray-header">Bromocriptine Mesylate: </th> <td><?php echo 'yes' ?></td> </tr>
-    <?php }?>
-    <?php if ($patient['DrugAllergy']['insulin'] == 'yes') { ?>
         <tr> <th class="dimgray-header">Sulfonylurea (SFU) and Glinides: </th> <td><?php echo 'yes' ?></td> </tr>
     <?php }?>
-    <?php if ($patient['DrugAllergy']['sglt_2'] == 'yes') { ?>
+    <?php if ($patient['DrugAllergy']['insulin'] == 'yes') { ?>
         <tr> <th class="dimgray-header">Insulin: </th> <td><?php echo 'yes' ?></td> </tr>
+    <?php }?>
+    <?php if ($patient['DrugAllergy']['sglt_2'] == 'yes') { ?>
+        <tr> <th class="dimgray-header">Sodium-glucose co-transporter 2 inhibitors (SGLT2):</th> <td><?php echo 'yes'?></td> </tr>
     <?php }?>
     <?php if ($patient['DrugAllergy']['praml'] == 'yes') { ?>
         <tr> <th class="dimgray-header">Pramlintide: </th> <td><?php echo 'yes' ?></td> </tr>
@@ -58,13 +58,13 @@
         <tr> <th class="dimgray-header">Bromocriptine Mesylate: </th> <td><?php echo 'no' ?></td> </tr>
     <?php }?>
     <?php if ($patient['DrugAllergy']['su_gln'] == 'no') { ?>
-        <tr> <th class="dimgray-header">Bromocriptine Mesylate: </th> <td><?php echo 'no' ?></td> </tr>
-    <?php }?>
-    <?php if ($patient['DrugAllergy']['insulin'] == 'no') { ?>
         <tr> <th class="dimgray-header">Sulfonylurea (SFU) and Glinides: </th> <td><?php echo 'no' ?></td> </tr>
     <?php }?>
-    <?php if ($patient['DrugAllergy']['sglt_2'] == 'no') { ?>
+    <?php if ($patient['DrugAllergy']['insulin'] == 'no') { ?>
         <tr> <th class="dimgray-header">Insulin: </th> <td><?php echo 'no' ?></td> </tr>
+    <?php }?>
+    <?php if ($patient['DrugAllergy']['sglt_2'] == 'no') { ?>
+        <tr> <th class="dimgray-header">Sodium-glucose co-transporter 2 inhibitors (SGLT2):</th> <td><?php echo 'no' ?></td> </tr>
     <?php }?>
     <?php if ($patient['DrugAllergy']['praml'] == 'no') { ?>
         <tr> <th class="dimgray-header">Pramlintide: </th> <td><?php echo 'no' ?></td> </tr>
@@ -92,13 +92,13 @@
         <tr> <th class="dimgray-header">Bromocriptine Mesylate: </th> <td><?php echo 'unknown' ?></td> </tr>
     <?php }?>
     <?php if ($patient['DrugAllergy']['su_gln'] == 'unknown' || $patient['DrugAllergy']['su_gln'] == null) { ?>
-        <tr> <th class="dimgray-header">Bromocriptine Mesylate: </th> <td><?php echo 'unknown' ?></td> </tr>
-    <?php }?>
-    <?php if ($patient['DrugAllergy']['insulin'] == 'unknown' || $patient['DrugAllergy']['insulin'] == null) { ?>
         <tr> <th class="dimgray-header">Sulfonylurea (SFU) and Glinides: </th> <td><?php echo 'unknown' ?></td> </tr>
     <?php }?>
-    <?php if ($patient['DrugAllergy']['sglt_2'] == 'unknown' || $patient['DrugAllergy']['sglt_2'] == null) { ?>
+    <?php if ($patient['DrugAllergy']['insulin'] == 'unknown' || $patient['DrugAllergy']['insulin'] == null) { ?>
         <tr> <th class="dimgray-header">Insulin: </th> <td><?php echo 'unknown' ?></td> </tr>
+    <?php }?>
+    <?php if ($patient['DrugAllergy']['sglt_2'] == 'unknown' || $patient['DrugAllergy']['sglt_2'] == null) { ?>
+        <tr> <th class="dimgray-header">Sodium-glucose co-transporter 2 inhibitors (SGLT2):</th> <td><?php echo 'unknown' ?></td> </tr>
     <?php }?>
     <?php if ($patient['DrugAllergy']['praml'] == 'unknown' || $patient['DrugAllergy']['praml'] == null) { ?>
         <tr> <th class="dimgray-header">Pramlintide: </th> <td><?php echo 'unknown' ?></td> </tr>

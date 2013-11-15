@@ -73,7 +73,9 @@ class VisitsController extends AppController {
     if ($this->request->is('post')) {
       $this->_add();
     } else {
-      $this->request->data['DrugAllergy'] = $patient['DrugAllergy']; 
+      $this->request->data['DrugAllergy'] = $patient['DrugAllergy'];
+      //$this->request->data['MedhistoryComplaint'] = $patient['MedhistoryComplaint'];
+     
     }
   }
 
@@ -104,32 +106,44 @@ class VisitsController extends AppController {
     //Weight classification
     if ($race == 'Asian or Asian American'){
       switch ($bmi) {
-        case ($bmi<18.5):
+        case ($bmi<16.0):
+          $bmi_status = 'Severely underweight';
+          break;
+        case ($bmi>=16.0 && $bmi<18.5):
           $bmi_status = 'Underweight';
           break;
         case ($bmi>=18.5 && $bmi<23.0):
           $bmi_status = 'Normal range';
           break;
-        case ($bmi>=23.0 && $bmi<=25.0):
+        case ($bmi>=23.0 && $bmi<25.0):
           $bmi_status = 'Overweight';
           break;
-        case ($bmi>25.0):
+        case ($bmi>=25.0 && $bmi<35.0):
           $bmi_status = 'Obese';
+          break;
+        case ($bmi>=35.0):
+          $bmi_status = 'Extremely obese';
           break;
       }
     } else {
       switch ($bmi) {
-        case ($bmi<18.5):
+        case ($bmi<16.0):
+          $bmi_status = 'Severely underweight';
+          break;
+        case ($bmi>=16.0 && $bmi<18.5):
           $bmi_status = 'Underweight';
           break;
         case ($bmi>=18.5 && $bmi<25.0):
           $bmi_status = 'Normal range';
           break;
-        case ($bmi>=25.0 && $bmi<=30.0):
+        case ($bmi>=25.0 && $bmi<30.0):
           $bmi_status = 'Overweight';
           break;
-        case ($bmi>30.0):
+        case ($bmi>=30.0 && $bmi<40.0):
           $bmi_status = 'Obese';
+          break;
+        case ($bmi>=40.0):
+          $bmi_status = 'Extremely obese';
           break;
       }
     }
@@ -140,6 +154,9 @@ class VisitsController extends AppController {
       $height_val = $height/0.01;
       if ($race == 'Asian or Asian American'){
         switch ($bmi_status) {
+          case 'Severely underweight':
+            $target_weight = 16.0*pow($height_val,2)/10000;
+            break;
           case 'Underweight':
             $target_weight = 18.5*pow($height_val,2)/10000;
             break;
@@ -149,22 +166,32 @@ class VisitsController extends AppController {
           case 'Obese':
             $target_weight = 24.9*pow($height_val,2)/10000;
             break;
+          case 'Extremely obese':
+            $target_weight = 34.9*pow($height_val,2)/10000;
+            break;
         }
       } else {
         switch ($bmi_status) {
+          case 'Severely underweight':
+            $target_weight = 16.0*pow($height_val,2)/10000;
+            break;
           case 'Underweight':
             $target_weight = 18.5*pow($height_val,2)/10000;
             break;
           case 'Overweight':
-            $target_weight = 24*pow($height_val,2)/10000;
+            $target_weight = 24.9*pow($height_val,2)/10000;
             break;
           case 'Obese':
-            $target_weight = 29*pow($height_val,2)/10000;
+            $target_weight = 29.9*pow($height_val,2)/10000;
+            break;
+          case 'Extremely obese':
+            $target_weight = 39.9*pow($height_val,2)/10000;
             break;
         }
       }
+      $notes = $this->request->data['VitalsLab']['notes'];
+      $this->request->data['VitalsLab']['notes'] = 'Target weight is '.round($target_weight,1).' kg.'."\n".$notes;
     }
-    $this->request->data['VitalsLab']['notes'] = 'Target weight is '.round($target_weight,1).' kg.';
 
     $this->Visit->create();
     if($this->Visit->saveAssociated($this->request->data)) {

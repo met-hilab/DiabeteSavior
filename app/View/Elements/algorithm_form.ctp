@@ -60,9 +60,9 @@
 <div class="form-group">
   <?php echo $this->Form->label('recommendations', 'Recommendations', array('class' => 'col-lg-2 control-label')); ?>
   <div class="col-lg-4">
-    <?php echo $this->Form->input('recommendations', array('div' => false, 'label' => false, 'value' => $medalert)); ?>
+    <?php echo $this->Form->input('recommendations', array('div' => false, 'label' => false, 'value' => nl2br($medalert))); ?>
     <br>
-    <?php echo $this->Form->submit('Done'); ?>
+    <?php echo $this->Form->submit('Done'); ?>ss
   </div>
 </div>
 
