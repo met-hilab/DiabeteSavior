@@ -68,14 +68,17 @@ class VisitsController extends AppController {
     $patient = $this->Visit->Patient->read();
     $this->set('patient', $patient);
     $this->request->data['Visit']['patient_id'] = $p_id;
-    $this->request->data['DrugAllergy']['patient_id'] = $p_id;
+    $this->request->data['DrugAllergy']['patient_id'] = $p_id;    
+    $visit = $this->Visit->find('first', array(
+      'conditions' => array('patient_id' => $p_id),
+      'order' => 'Visit.modified DESC'));
     
     if ($this->request->is('post')) {
       $this->_add();
     } else {
       $this->request->data['DrugAllergy'] = $patient['DrugAllergy'];
-      //$this->request->data['MedhistoryComplaint'] = $patient['MedhistoryComplaint'];
-     
+      $this->request->data['MedhistoryComplaint'] = $visit['MedhistoryComplaint'];  
+      $this->request->data['MedhistoryComplaint']['complaints'] = null;   
     }
   }
 
@@ -385,8 +388,6 @@ class VisitsController extends AppController {
     $this->Session->write('med3', $med3);
     $this->set('medalert', $medalert);
     $this->Session->write('medalert', $medalert);
-    
-    //$this->request->data = $data;
 
     /* accept algorithm results */
     if ($this->request->is('post')) {  
@@ -396,7 +397,7 @@ class VisitsController extends AppController {
         'medicine_name_one' => $med1,
         'medicine_name_two' => $med2,
         'medicine_name_three' => $med3,
-        'recommendations' => $medalert,
+        'recommendations' => str_replace('<br/>', "\n", $medalert),
         'edited_by_user' => 'no'
     )); 
       $this->Visit->Treatment->TreatmentRunAlgorithm->create();

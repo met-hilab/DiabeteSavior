@@ -285,11 +285,11 @@ class AlgorithmComponent extends Component {
     {
     	$cmessage = "";
     	if($medrisk == '1')
-    		$cmessage = $med. " has few adverse events or possible benefits with patients at risk of ". $pmessage. "<br>";
+    		$cmessage = $med. " has few adverse events or possible benefits with patients at risk of ". $pmessage. "<br/>";
     	elseif($medrisk == '2')
-    		$cmessage = "Use ". $med. " with caution with patients at risk of ". $pmessage. "<br>";
+    		$cmessage = "Use ". $med. " with caution with patients at risk of ". $pmessage. "<br/>";
     	elseif($medrisk == '3')
-    		$cmessage = $med. " has likelihood of adverse event with patients at risk of ". $pmessage. "<br>";
+    		$cmessage = $med. " has likelihood of adverse event with patients at risk of ". $pmessage. "<br/>";
     	return $cmessage;   	 
     }
    

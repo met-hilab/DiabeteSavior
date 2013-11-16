@@ -117,7 +117,11 @@
         <tr>  
             <th class="dimgray-header">BMI: </th>
             <td><?php echo $visit['VitalsLab']['bmi'] ?> kg/m<sup>2</sup> </td>
-			<td> Normal: 18.5 - 25.0 kg/m<sup>2</sup> </td>
+            <?php if ($patient['Patient']['race'] == 'Asian or Asian American') {?>
+			        <td> Normal: 18.5 - 23.0 kg/m<sup>2</sup> </td>
+            <?php } else {?>
+              <td> Normal: 18.5 - 25.0 kg/m<sup>2</sup> </td>
+            <?php } ?>
         </tr>
         <tr>  
             <th class="dimgray-header">Weight Classification: </th>
