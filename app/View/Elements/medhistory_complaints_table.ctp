@@ -1,7 +1,9 @@
 <!-- Medical History and Complaints -->
 
 <table  class="table table-condensed">
-	    
+	<?php if ($patient['Patient']['gender'] == 'Female' && $visit['MedhistoryComplaint']['current_pregnancy'] == 'yes') { ?>
+        <tr> <th class="dimgray-header">Pregnancy Status: </th> <td><?php echo 'yes' ?></td> </tr> 
+    <?php }?>    
     <?php if ($visit['MedhistoryComplaint']['hypo'] == 'yes') { ?>
         <tr> <th class="dimgray-header">Hypoglycemia: </th> <td><?php echo 'yes' ?></td> </tr>
     <?php }?>
@@ -24,6 +26,9 @@
         <tr> <th class="dimgray-header">Osteoporosis: </th> <td><?php echo 'yes' ?></td> </tr>
     <?php }?>
 
+    <?php if ($patient['Patient']['gender'] == 'Female' && $visit['MedhistoryComplaint']['current_pregnancy'] == 'no') { ?>
+        <tr> <th class="dimgray-header">Pregnancy Status: </th> <td><?php echo 'no' ?></td> </tr> 
+    <?php }?>   
     <?php if ($visit['MedhistoryComplaint']['hypo'] == 'no') { ?>
         <tr> <th class="dimgray-header">Hypoglycemia: </th> <td><?php echo 'no' ?></td> </tr>
     <?php }?>

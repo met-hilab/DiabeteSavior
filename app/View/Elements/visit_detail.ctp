@@ -111,7 +111,7 @@
 
         <tr> 
             <th class="dimgray-header">Height: </th>
-            <td><?php echo $visit['VitalsLab']['height'] ?>cm </td>
+            <td><?php echo $visit['VitalsLab']['height'] ?> cm </td>
 			<td> </td>
         </tr>
         <tr>  

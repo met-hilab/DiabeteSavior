@@ -19,6 +19,11 @@ $formDefaults = array(
 <h3>Medical History and Complaints</h3>
 <?php echo $this->Form->hidden('MedhistoryComplaint.id') ?>
 <?php echo $this->Form->input('MedhistoryComplaint.complaints', array('label' => array('class' => 'col-lg-3 control-label', 'text' => '<font color="red">* </font>Chief Complaint'))) ?>
+<?php 
+  if ($patient['Patient']['gender'] == 'Female') {
+    echo $this->Form->bootstrapRadioYesNo('MedhistoryComplaint.current_pregnancy',array('label' => array('class' => 'col-lg-3 control-label', 'text' => '<font color="red">* </font>Pregnancy Status')) ); 
+  } 
+?>
 <?php echo $this->Form->bootstrapRadioYesNo('MedhistoryComplaint.hypo',array('label' => array('class' => 'col-lg-3 control-label', 'text' => '<font color="red">* </font>Hypoglycemia')) ) ?>
 <?php echo $this->Form->bootstrapRadioYesNo('MedhistoryComplaint.weight_gain', array('label' => array('class' => 'col-lg-3 control-label', 'text' => '<font color="red">* </font>Weight gain'))) ?>
 <?php echo $this->Form->bootstrapRadioYesNo('MedhistoryComplaint.renal_gu', array('label' => array('class' => 'col-lg-3 control-label', 'text' => '<font color="red">* </font>Renal or Genitourinary symptoms'))) ?>
@@ -59,8 +64,10 @@ $formDefaults = array(
 <?php echo $this->Form->hidden('VitalsLab.weight') ?>
 <?php echo $this->Form->hidden('VitalsLab.height') ?>
 <?php echo $this->Form->input('VitalsLab.A1c', array('label' => array('class' => 'col-lg-2 control-label', 'text' => '<font color="red">* </font>Glycated hemoglobin (A1C)'))) ?>
+<!--
 <?php echo $this->Form->input('VitalsLab.bps', array('label' => array('class' => 'col-lg-2 control-label', 'text' => '<font color="red">* </font>Systolic Blood Pressure'))) ?>
 <?php echo $this->Form->input('VitalsLab.bpd', array('label' => array('class' => 'col-lg-2 control-label', 'text' => '<font color="red">* </font>Diastolic Blood Pressure'))) ?>
+-->
 
 <!--
 <?php echo $this->Form->input('VitalsLab.eGFR') ?>
