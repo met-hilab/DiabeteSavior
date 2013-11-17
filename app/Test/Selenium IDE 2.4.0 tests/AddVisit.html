@@ -1,0 +1,477 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://www.cs673.com/" />
+<title>AddVisit</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">AddVisit</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/patients/show</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Diabetes Savior: Type II Diabetes Infomatic System: Patients</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Visits</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Add Visit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Diabetes Savior: Type II Diabetes Infomatic System: Visits</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='content']/div/table/tbody/tr[4]/td</td>
+	<td>Male</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=MedhistoryComplaintComplaints</td>
+	<td>pain</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//form[@id='VisitAddForm']/div[3]/label</td>
+	<td>exact:* Hypoglycemia</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=MedhistoryComplainthypoyes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=MedhistoryComplainthypono</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//form[@id='VisitAddForm']/div[4]/label</td>
+	<td>exact:* Weight gain</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=MedhistoryComplaintweight_gainyes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=MedhistoryComplaintweight_gainno</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//form[@id='VisitAddForm']/div[5]/label</td>
+	<td>exact:* Renal or Genitourinary symptoms</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=MedhistoryComplaintrenal_guyes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=MedhistoryComplaintrenal_guno</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//form[@id='VisitAddForm']/div[6]/label</td>
+	<td>exact:* Gastrointestinal symptoms</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=MedhistoryComplaintgi_sxyes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=MedhistoryComplaintgi_sxno</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//form[@id='VisitAddForm']/div[7]/label</td>
+	<td>exact:* Coronary heart disease</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=MedhistoryComplaintchfyes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=MedhistoryComplaintchfno</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//form[@id='VisitAddForm']/div[8]/label</td>
+	<td>exact:* Cardiovascular disease</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=MedhistoryComplaintcvdyes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=MedhistoryComplaintcvdno</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=MedhistoryComplaintcvdyes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//form[@id='VisitAddForm']/div[9]/label</td>
+	<td>exact:* Osteoporosis</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=MedhistoryComplaintboneyes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=MedhistoryComplaintboneno</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//form[@id='VisitAddForm']/h3[2]</td>
+	<td>Drug Allergies and Contraindications</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//form[@id='VisitAddForm']/div[10]/label</td>
+	<td>exact:* Metformin</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=DrugAllergymetyes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=DrugAllergymetNkda</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=DrugAllergymetunknown</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=DrugAllergymetNkda</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//form[@id='VisitAddForm']/div[11]/label</td>
+	<td>exact:* Dipeptidyl peptidase 4 inhibitors (DPP-4)</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=DrugAllergydpp_4iyes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=DrugAllergydpp_4iNkda</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=DrugAllergydpp_4iunknown</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=DrugAllergydpp_4iyes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//form[@id='VisitAddForm']/div[12]/label</td>
+	<td>exact:* Glucagon-like peptide-1 receptor agonists (GLP-1)</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=DrugAllergyglp_1rayes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=DrugAllergyglp_1raNkda</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=DrugAllergyglp_1raunknown</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//form[@id='VisitAddForm']/div[13]/label</td>
+	<td>exact:* Thiazolidinediones (TZD)</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=DrugAllergytzdyes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=DrugAllergytzdNkda</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=DrugAllergytzdunknown</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//form[@id='VisitAddForm']/div[14]/label</td>
+	<td>exact:* Alpha-glucosidase inhibitors (AGIs)</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=DrugAllergyagiyes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=DrugAllergyagiNkda</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=DrugAllergyagiunknown</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//form[@id='VisitAddForm']/div[15]/label</td>
+	<td>exact:* Colesevelam</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=DrugAllergycolsvlyes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=DrugAllergycolsvlNkda</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=DrugAllergycolsvlunknown</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//form[@id='VisitAddForm']/div[16]/label</td>
+	<td>exact:* Bromocriptine Mesylate</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=DrugAllergybcr_oryes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=DrugAllergybcr_orNkda</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=DrugAllergybcr_orunknown</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//form[@id='VisitAddForm']/div[17]/label</td>
+	<td>exact:* Sulfonylurea (SFU) and Glinides</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=DrugAllergysu_glnyes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=DrugAllergysu_glnNkda</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=DrugAllergysu_glnunknown</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//form[@id='VisitAddForm']/div[18]/label</td>
+	<td>exact:* Insulin</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=DrugAllergyinsulinyes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=DrugAllergyinsulinNkda</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=DrugAllergyinsulinunknown</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//form[@id='VisitAddForm']/div[19]/label</td>
+	<td>exact:* Sodium-glucose co-transporter 2 inhibitors (SGLT2)</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=DrugAllergysglt_2yes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=DrugAllergysglt_2Nkda</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=DrugAllergysglt_2unknown</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//form[@id='VisitAddForm']/div[20]/label</td>
+	<td>exact:* Pramlintide</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=DrugAllergypramlyes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=DrugAllergypramlNkda</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=DrugAllergypramlunknown</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//form[@id='VisitAddForm']/h3[3]</td>
+	<td>Vitals and Labs</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=kg / cm</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=VitalsLabFWeight</td>
+	<td>78</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=VitalsLabFHeight</td>
+	<td>178</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=VitalsLabA1c</td>
+	<td>6.0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=VitalsLabNotes</td>
+	<td>n/a</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//form[@id='VisitAddForm']/h3[4]</td>
+	<td>Therapy Goals</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=TreatmentA1cGoal</td>
+	<td>6.0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=TreatmentFWeightGoal</td>
+	<td>174</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input.btn.btn-primary</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Diabetes Savior: Type II Diabetes Infomatic System: Visits</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=flashMessage</td>
+	<td>Visit added successfully!</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='content']/div[5]/table/tbody/tr/td</td>
+	<td>yes</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='content']/div[6]/table/tbody/tr[2]/td</td>
+	<td>NKDA</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='content']/div[7]/table/tbody/tr[5]/td[2]</td>
+	<td>exact:Normal: 4.5 - 5.7%</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='content']/div[8]/table/tbody/tr/th</td>
+	<td>Glycated Hemoglobin (A1C) Goal:</td>
+</tr>
+
+</tbody></table>
+</body>
+</html>
