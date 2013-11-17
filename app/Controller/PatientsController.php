@@ -306,9 +306,7 @@ public function admin(){
  */
   public function delete(){
     $this->authenticate_user();
-    $id = $this->Session->read('
-
-      name');
+    $id = $this->Session->read('patient_id');
      $patient = $this->Patient->findById($id);
 
      if($this->request->is('get') ){
