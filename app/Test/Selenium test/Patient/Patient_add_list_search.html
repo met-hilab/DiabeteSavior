@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost/" />
+<title>Test add, list, search Patient</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Test add, list, search Patient</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Login</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=button.btn.btn-default</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Patients</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=List Patients</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Patients</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Add Patient</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=PatientPatientFirstname</td>
+	<td>Mark</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=PatientPatientLastname</td>
+	<td>Twin</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=PatientDob</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=span.ui-icon.ui-icon-circle-triangle-w</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=PatientOccupation</td>
+	<td>Doctor</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=PatientGender</td>
+	<td>label=Male</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=PatientRace</td>
+	<td>label=African or African American</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=PatientStreet</td>
+	<td>18 Street</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=PatientCity</td>
+	<td>New York</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=PatientState</td>
+	<td>label=Maine</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=PatientState</td>
+	<td>label=Georgia</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=PatientPostalCode</td>
+	<td>13579</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input.btn.btn-primary</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Patients</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=List Patients</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=MMT03248</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Patients</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Search Patient</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=patient_number</td>
+	<td>MMT03248 </td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=Patient_Name</td>
+	<td>Mark</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=Patient_LastName</td>
+	<td>Twin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=patient_dob</td>
+	<td>2013-10-2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=button.btn.btn-primary</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Patients</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=List Patients</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Patients</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Search Patient</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=patient_number</td>
+	<td>MMT03248 </td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=Patient_Name</td>
+	<td>Mark</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=Patient_LastName</td>
+	<td>Twin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=patient_dob</td>
+	<td>2013-10-3</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=button.btn.btn-primary</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=My Account</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Logout</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>
