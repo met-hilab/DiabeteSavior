@@ -36,17 +36,17 @@ $formDefaults = array(
 <!-- drug_allergies -->
 <h3>Drug Allergies and Contraindications</h3>
 <?php echo $this->Form->hidden('DrugAllergy.id') ?>
-<?php echo $this->Form->bootstrapRadioYesNoUnknow('DrugAllergy.met', array('label' => array('class' => 'col-lg-3 control-label', 'text' => '<font color="red">* </font>Metformin'))) ?>
-<?php echo $this->Form->bootstrapRadioYesNoUnknow('DrugAllergy.dpp_4i', array('label' => array('class' => 'col-lg-3 control-label', 'text' => '<font color="red">* </font>Dipeptidyl peptidase 4 inhibitors (DPP-4)'))) ?>
-<?php echo $this->Form->bootstrapRadioYesNoUnknow('DrugAllergy.glp_1ra', array('label' => array('class' => 'col-lg-3 control-label', 'text' => '<font color="red">* </font>Glucagon-like peptide-1 receptor agonists (GLP-1)'))) ?>
-<?php echo $this->Form->bootstrapRadioYesNoUnknow('DrugAllergy.tzd', array('label' => array('class' => 'col-lg-3 control-label', 'text' => '<font color="red">* </font>Thiazolidinediones (TZD)'))) ?>
-<?php echo $this->Form->bootstrapRadioYesNoUnknow('DrugAllergy.agi', array('label' => array('class' => 'col-lg-3 control-label', 'text' => '<font color="red">* </font>Alpha-glucosidase inhibitors (AGIs)'))) ?>
-<?php echo $this->Form->bootstrapRadioYesNoUnknow('DrugAllergy.colsvl', array('label' => array('class' => 'col-lg-3 control-label', 'text' => '<font color="red">* </font>Colesevelam'))) ?>
-<?php echo $this->Form->bootstrapRadioYesNoUnknow('DrugAllergy.bcr_or', array('label' => array('class' => 'col-lg-3 control-label', 'text' => '<font color="red">* </font>Bromocriptine Mesylate'))) ?>
-<?php echo $this->Form->bootstrapRadioYesNoUnknow('DrugAllergy.su_gln', array('label' => array('class' => 'col-lg-3 control-label', 'text' => '<font color="red">* </font>Sulfonylurea (SFU) and Glinides'))) ?>
-<?php echo $this->Form->bootstrapRadioYesNoUnknow('DrugAllergy.insulin', array('label' => array('class' => 'col-lg-3 control-label', 'text' => '<font color="red">* </font>Insulin'))) ?>
-<?php echo $this->Form->bootstrapRadioYesNoUnknow('DrugAllergy.sglt_2', array('label' => array('class' => 'col-lg-3 control-label', 'text' => '<font color="red">* </font>Sodium-glucose co-transporter 2 inhibitors (SGLT2)'))) ?>
-<?php echo $this->Form->bootstrapRadioYesNoUnknow('DrugAllergy.praml', array('label' => array('class' => 'col-lg-3 control-label', 'text' => '<font color="red">* </font>Pramlintide'))) ?>
+<?php echo $this->Form->bootstrapRadioYesNkdaUnknown('DrugAllergy.met', array('label' => array('class' => 'col-lg-3 control-label', 'text' => '<font color="red">* </font>Metformin'))) ?>
+<?php echo $this->Form->bootstrapRadioYesNkdaUnknown('DrugAllergy.dpp_4i', array('label' => array('class' => 'col-lg-3 control-label', 'text' => '<font color="red">* </font>Dipeptidyl peptidase 4 inhibitors (DPP-4)'))) ?>
+<?php echo $this->Form->bootstrapRadioYesNkdaUnknown('DrugAllergy.glp_1ra', array('label' => array('class' => 'col-lg-3 control-label', 'text' => '<font color="red">* </font>Glucagon-like peptide-1 receptor agonists (GLP-1)'))) ?>
+<?php echo $this->Form->bootstrapRadioYesNkdaUnknown('DrugAllergy.tzd', array('label' => array('class' => 'col-lg-3 control-label', 'text' => '<font color="red">* </font>Thiazolidinediones (TZD)'))) ?>
+<?php echo $this->Form->bootstrapRadioYesNkdaUnknown('DrugAllergy.agi', array('label' => array('class' => 'col-lg-3 control-label', 'text' => '<font color="red">* </font>Alpha-glucosidase inhibitors (AGIs)'))) ?>
+<?php echo $this->Form->bootstrapRadioYesNkdaUnknown('DrugAllergy.colsvl', array('label' => array('class' => 'col-lg-3 control-label', 'text' => '<font color="red">* </font>Colesevelam'))) ?>
+<?php echo $this->Form->bootstrapRadioYesNkdaUnknown('DrugAllergy.bcr_or', array('label' => array('class' => 'col-lg-3 control-label', 'text' => '<font color="red">* </font>Bromocriptine Mesylate'))) ?>
+<?php echo $this->Form->bootstrapRadioYesNkdaUnknown('DrugAllergy.su_gln', array('label' => array('class' => 'col-lg-3 control-label', 'text' => '<font color="red">* </font>Sulfonylurea (SFU) and Glinides'))) ?>
+<?php echo $this->Form->bootstrapRadioYesNkdaUnknown('DrugAllergy.insulin', array('label' => array('class' => 'col-lg-3 control-label', 'text' => '<font color="red">* </font>Insulin'))) ?>
+<?php echo $this->Form->bootstrapRadioYesNkdaUnknown('DrugAllergy.sglt_2', array('label' => array('class' => 'col-lg-3 control-label', 'text' => '<font color="red">* </font>Sodium-glucose co-transporter 2 inhibitors (SGLT2)'))) ?>
+<?php echo $this->Form->bootstrapRadioYesNkdaUnknown('DrugAllergy.praml', array('label' => array('class' => 'col-lg-3 control-label', 'text' => '<font color="red">* </font>Pramlintide'))) ?>
 
 <hr>
 

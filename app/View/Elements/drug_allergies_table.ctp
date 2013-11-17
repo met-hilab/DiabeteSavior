@@ -36,38 +36,38 @@
         <tr> <th class="dimgray-header">Pramlintide: </th> <td><?php echo 'yes' ?></td> </tr>
     <?php }?>
 
-    <?php if ($patient['DrugAllergy']['met'] == 'no') { ?>
-        <tr> <th class="dimgray-header">Metformin: </th> <td><?php echo 'no' ?></td> </tr>
+    <?php if ($patient['DrugAllergy']['met'] == 'NKDA') { ?>
+        <tr> <th class="dimgray-header">Metformin: </th> <td><?php echo 'NKDA' ?></td> </tr>
     <?php }?>
-    <?php if ($patient['DrugAllergy']['dpp_4i'] == 'no') { ?>
-        <tr> <th class="dimgray-header">Dipeptidyl peptidase 4 inhibitors (DPP-4): </th> <td><?php echo 'no' ?></td> </tr>
+    <?php if ($patient['DrugAllergy']['dpp_4i'] == 'NKDA') { ?>
+        <tr> <th class="dimgray-header">Dipeptidyl peptidase 4 inhibitors (DPP-4): </th> <td><?php echo 'NKDA' ?></td> </tr>
     <?php }?>
-    <?php if ($patient['DrugAllergy']['glp_1ra'] == 'no') { ?>
-        <tr> <th class="dimgray-header">Glucagon-like peptide-1 receptor agonists (GLP-1): </th> <td><?php echo 'no' ?></td> </tr>
+    <?php if ($patient['DrugAllergy']['glp_1ra'] == 'NKDA') { ?>
+        <tr> <th class="dimgray-header">Glucagon-like peptide-1 receptor agonists (GLP-1): </th> <td><?php echo 'NKDA' ?></td> </tr>
     <?php }?>
-    <?php if ($patient['DrugAllergy']['tzd'] == 'no') { ?>
-        <tr> <th class="dimgray-header">Thiazolidinediones (TZD): </th> <td><?php echo 'no' ?></td> </tr>
+    <?php if ($patient['DrugAllergy']['tzd'] == 'NKDA') { ?>
+        <tr> <th class="dimgray-header">Thiazolidinediones (TZD): </th> <td><?php echo 'NKDA' ?></td> </tr>
     <?php }?>
-    <?php if ($patient['DrugAllergy']['agi'] == 'no') { ?>
-        <tr> <th class="dimgray-header">Alpha-glucosidase inhibitors (AGIs): </th> <td><?php echo 'no' ?></td> </tr>
+    <?php if ($patient['DrugAllergy']['agi'] == 'NKDA') { ?>
+        <tr> <th class="dimgray-header">Alpha-glucosidase inhibitors (AGIs): </th> <td><?php echo 'NKDA' ?></td> </tr>
     <?php }?>
-    <?php if ($patient['DrugAllergy']['colsvl'] == 'no') { ?>
-        <tr> <th class="dimgray-header">Colesevelam: </th> <td><?php echo 'no' ?></td> </tr>
+    <?php if ($patient['DrugAllergy']['colsvl'] == 'NKDA') { ?>
+        <tr> <th class="dimgray-header">Colesevelam: </th> <td><?php echo 'NKDA' ?></td> </tr>
     <?php }?>
-    <?php if ($patient['DrugAllergy']['bcr_or'] == 'no') { ?>
-        <tr> <th class="dimgray-header">Bromocriptine Mesylate: </th> <td><?php echo 'no' ?></td> </tr>
+    <?php if ($patient['DrugAllergy']['bcr_or'] == 'NKDA') { ?>
+        <tr> <th class="dimgray-header">Bromocriptine Mesylate: </th> <td><?php echo 'NKDA' ?></td> </tr>
     <?php }?>
-    <?php if ($patient['DrugAllergy']['su_gln'] == 'no') { ?>
-        <tr> <th class="dimgray-header">Sulfonylurea (SFU) and Glinides: </th> <td><?php echo 'no' ?></td> </tr>
+    <?php if ($patient['DrugAllergy']['su_gln'] == 'NKDA') { ?>
+        <tr> <th class="dimgray-header">Sulfonylurea (SFU) and Glinides: </th> <td><?php echo 'NKDA' ?></td> </tr>
     <?php }?>
-    <?php if ($patient['DrugAllergy']['insulin'] == 'no') { ?>
-        <tr> <th class="dimgray-header">Insulin: </th> <td><?php echo 'no' ?></td> </tr>
+    <?php if ($patient['DrugAllergy']['insulin'] == 'NKDA') { ?>
+        <tr> <th class="dimgray-header">Insulin: </th> <td><?php echo 'NKDA' ?></td> </tr>
     <?php }?>
-    <?php if ($patient['DrugAllergy']['sglt_2'] == 'no') { ?>
-        <tr> <th class="dimgray-header">Sodium-glucose co-transporter 2 inhibitors (SGLT2):</th> <td><?php echo 'no' ?></td> </tr>
+    <?php if ($patient['DrugAllergy']['sglt_2'] == 'NKDA') { ?>
+        <tr> <th class="dimgray-header">Sodium-glucose co-transporter 2 inhibitors (SGLT2):</th> <td><?php echo 'NKDA' ?></td> </tr>
     <?php }?>
-    <?php if ($patient['DrugAllergy']['praml'] == 'no') { ?>
-        <tr> <th class="dimgray-header">Pramlintide: </th> <td><?php echo 'no' ?></td> </tr>
+    <?php if ($patient['DrugAllergy']['praml'] == 'NKDA') { ?>
+        <tr> <th class="dimgray-header">Pramlintide: </th> <td><?php echo 'NKDA' ?></td> </tr>
     <?php }?>
 
     <?php if ($patient['DrugAllergy']['met'] == 'unknown' || $patient['DrugAllergy']['met'] == null) { ?>
@@ -105,3 +105,4 @@
     <?php }?>
 
 </table>
+ <p> NKDA – abbreviation for No Known Drug Allergies	</p>

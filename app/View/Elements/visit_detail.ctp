@@ -1,7 +1,7 @@
 
 <!-- Demograpfics -->
 
-<div class="col-md-4">
+<div class="col-md-6">
 
 <h3>Demographics</h3> 
 	<table  class="table table-condensed">
@@ -45,8 +45,8 @@
 </div> 
 
 <!-- Chief Complaints -->
-<div class="col-md-8">
-    <h3>Chief Complaint</h3>
+<div class="col-md-6">
+    <h3>Chief Complaints</h3>
       <div class="dimgray-header">
          <?php echo $visit['MedhistoryComplaint']['complaints'] ?> 
       </div>
@@ -55,37 +55,51 @@
 
 
 <!-- Diagnosis -->
-<div class="col-md-8">
-   <h3>Diagnoses</h3>
+<div class="col-md-6">
+
+  <h3>Diagnoses</h3> 
+   <p>Type II Diabetes Mellitus </p>
+   
+   
+   
+<!-- Commented code: can be used in case of multiple diagnoses   
          <table class="table table-condensed">
 <thead>
     <tr>
       <th>Diagnosis</th>
-      <th>ICD-9</th>
+	      
+	   
+          <th>ICD-9</th>
 		  <th>ICD-10</th>
+		 
 	</tr>
 </thead>
 
 <?php foreach($patient[ 'Diagnosis' ] as $diagnosis ) :?>
 <tbody>
-  <tr>
+  <tr>    	  
      <td class="dimgray-header"><?php echo $diagnosis['dxname']?>
 	 <td class="dimgray-header"><?php echo $diagnosis['icd9code']?>
 	 <td class="dimgray-header"><?php echo $diagnosis['icd10code']?>
-</tr>
+  </tr>
   </tbody>
   <?php endforeach; ?>
 </table>
+ -->
+
 </div>
 
 <br clear = "all">
 
 <hr>
+
+
 <!-- Medical History and Complaints -->
 <div class="col-md-6">
 
 <h3>Medical History and Complaints</h3> 
 	<?php echo $this->element('medhistory_complaints_table'); ?>
+
 </div> 
 
 <!-- Patient Drug Allergies -->
@@ -93,6 +107,7 @@
 
 <h3>Drug Allergies or Contraindications</h3> 
   <?php echo $this->element('drug_allergies_table'); ?>
+ 
 </div>
 
 <br clear = "all">
@@ -134,6 +149,7 @@
 			<td> Normal: 4.5 - 5.7% </td>
         </tr>
 
+		<!-- Commented: blood pressure
         <tr>
              <th class="dimgray-header">Systolic Blood Pressure: </th>
              <td><?php echo $visit['VitalsLab']['bps'] ?>  mmHg</td>
@@ -145,6 +161,7 @@
             <td><?php echo $visit['VitalsLab']['bpd'] ?> mmHg</td>
 			<td> Normal: 60 - 80 mmHg </td>
         </tr>
+		-->
 		
 </table>
 </div> 
@@ -160,7 +177,7 @@
         </tr>
         <tr> 
             <th class="dimgray-header">Weight Goal: </th>
-            <td><?php echo $visit['Treatment']['weight_goal'] ?> </td>
+            <td><?php echo $visit['Treatment']['weight_goal'] ?> kg</td>
         </tr>        
 </table>
 </div> 

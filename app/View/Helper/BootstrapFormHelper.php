@@ -82,8 +82,8 @@ class BootstrapFormHelper extends FormHelper {
     return $this->bootstrapRadio($fieldName, $optYesNo, $attributes);
   }
 
-  public function bootstrapRadioYesNoUnknow($fieldName, $attributes = array()) {
-    $optYesNo = array('Yes' => 'yes', 'NKDA' => 'no', 'Unknown' => 'unknown');
+  public function bootstrapRadioYesNkdaUnknown($fieldName, $attributes = array()) {
+    $optYesNo = array('Yes' => 'yes', 'NKDA' => 'nkda', 'Unknown' => 'unknown');
     $attributes['default'] = 'unknown';
     return $this->bootstrapRadio($fieldName, $optYesNo, $attributes);
   }

@@ -110,6 +110,9 @@
                                     
         <div class="col-md-8">
           <h3>Diagnosis </h3> 
+		   <p style='font-family: sans-serif; color: dimgray;'>Type II Diabetes Mellitus</p>
+		   
+		  <!-- Commented code: can be used in case of multiple diagnoses
           <?php if ($patient[ 'Diagnosis' ] == null) {?>
           <div style='font-family: sans-serif; color: dimgray;'>Type II Diabetes Mellitus</div>
           <?php } ?>
@@ -133,6 +136,8 @@
               <?php endforeach; ?>
           </table>
           <?php } ?>
+		  -->
+		  
         </div>
         <br clear="all">               
   </div><!-- end patient diagnosis tab -->
@@ -202,6 +207,8 @@
 			<td> Normal: 4.5 - 5.7% </td>
         </tr>
 
+		
+		<!-- Commented blood pressure
         <tr>
              <th class="dimgray-header">Systolic Blood Pressure: </th>
              <td><?php echo $lastVisit['VitalsLab']['bps']?: 'unknown';?>  mmHg</td>
@@ -213,6 +220,7 @@
             <td><?php echo $lastVisit['VitalsLab']['bpd']?: 'unknown';?> mmHg</td>
 			<td> Normal: 60 - 80 mmHg</td>
         </tr>
+		-->
                   <?php } ?>
 		
 </table>
