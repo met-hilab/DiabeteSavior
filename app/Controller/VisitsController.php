@@ -213,15 +213,15 @@ class VisitsController extends AppController {
       if($drugAllergy->save($this->request->data)){
         $this->Session->write('visit_id', $id);
         $this->Session->write('treatment_id', $t_id);
-        $this->Session->setFlash('Visit added successfully!');
+        $this->Session->setFlash('Visit added successfully!', 'default', array('class' => 'alert alert-success'));
         $this->redirect(array('action'=>'current'));
       } else {
         $errors = $this->Visit->Patient->validationErrors;
-        $this->Session->setFlash('Sorry, add allergy failed.');
+        $this->Session->setFlash('Sorry, add allergy failed.', 'default', array('class' => 'alert alert-danger'));
       }
     } else {
       $errors = $this->Visit->validationErrors;
-      $this->Session->setFlash('Sorry, add visit failed.');
+      $this->Session->setFlash('Sorry, add visit failed.', 'default', array('class' => 'alert alert-danger'));
     }
   }
 
@@ -293,7 +293,7 @@ class VisitsController extends AppController {
     $current_pregnancy = $medhistory_complaints['MedhistoryComplaint']['current_pregnancy'];
 
     if ($current_pregnancy == 'yes'){
-      $this->Session->setFlash('Sorry, this algorithm does not apply to diabetes patients during pregnancy.');
+      $this->Session->setFlash('Sorry, this algorithm does not apply to diabetes patients during pregnancy.', 'default', array('class' => 'alert alert-danger'));
       $this->redirect(array('action'=>'current'));
     } 
     else {
@@ -414,10 +414,10 @@ class VisitsController extends AppController {
       )); 
         $this->Visit->Treatment->TreatmentRunAlgorithm->create();
         if($this->Visit->Treatment->TreatmentRunAlgorithm->save($data)){
-          $this->Session->setFlash('Algorithm results accepted successfully!');
+          $this->Session->setFlash('Algorithm results accepted successfully!', 'default', array('class' => 'alert alert-success'));
           $this->redirect(array('action'=>'../patients/show'));
         } else {
-          $this->Session->setFlash('Sorry, accept algorithm results failed.');
+          $this->Session->setFlash('Sorry, accept algorithm results failed.', 'default', array('class' => 'alert alert-danger'));
         };
       }
 
@@ -445,10 +445,10 @@ class VisitsController extends AppController {
         $this->Visit->Treatment->TreatmentRunAlgorithm->create();
 
         if($this->Visit->Treatment->TreatmentRunAlgorithm->save($data)){
-          $this->Session->setFlash('Algorithm results edited successfully!');
+          $this->Session->setFlash('Algorithm results edited successfully!', 'default', array('class' => 'alert alert-success'));
           $this->redirect(array('action'=>'../patients/show'));
         } else {
-          $this->Session->setFlash('Sorry, edit algorithm results failed.');
+          $this->Session->setFlash('Sorry, edit algorithm results failed.', 'default', array('class' => 'alert alert-danger'));
         }
     }
   }

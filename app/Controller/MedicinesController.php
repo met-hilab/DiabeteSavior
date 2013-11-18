@@ -32,7 +32,7 @@ class MedicinesController extends AppController {
                 $id = $this->Medicine->getLastInsertId();
                 $this->redirect(array('action'=>'show', $id));
             }else{
-                $this->Session->setFlash('medicine is not saved.');
+                $this->Session->setFlash('Medicine is not saved.', 'default', array('class' => 'alert alert-danger'));
             }
         }
     }
@@ -55,17 +55,17 @@ class MedicinesController extends AppController {
                     //save medicine
                 if($this->Medicine->save($data)){
                     $id = $this->Medicine->id;
-                    $this->Session->setFlash('Medicine was edited.');
+                    $this->Session->setFlash('Medicine was edited.', 'default', array('class' => 'alert alert-success'));
                     $this->redirect(array('action'=>'show', $id));
                 } else {
-                    $this->Session->setFlash('Unable to edit medicine. Please, try again.');
+                    $this->Session->setFlash('Unable to edit medicine. Please, try again.', 'default', array('class' => 'alert alert-danger'));
                 }
             } else {
         // Medicine exists and this is a get request => render the view, pass exsiting date.
                 $this->request->data = $this->Medicine->read();
             }
         } else {
-            $this->Session->setFlash('The medicine you are trying to edit does not exist.');
+            $this->Session->setFlash('The medicine you are trying to edit does not exist.', 'default', array('class' => 'alert alert-danger'));
             $this->redirect(array('action' => 'show'));
         }
     }
@@ -87,19 +87,19 @@ class MedicinesController extends AppController {
         $id = $this->request->params['pass'][0];
         $medicine = $this->Medicine->findById($id);
         if($this->request->is('get') ){
-            $this->Session->setFlash('Delete method is not allowed.');
+            $this->Session->setFlash('Delete method is not allowed.', 'default', array('class' => 'alert alert-danger'));
             $this->redirect(array('action' => 'show'));
         } else {
             if(!$id) {
-                $this->Session->setFlash('Invalid id for medicine');
+                $this->Session->setFlash('Invalid id for medicine', 'default', array('class' => 'alert alert-danger'));
                 $this->redirect(array('action'=>'show'));
             }else{
                 if( $this->Medicine->delete( $id ) ){
-                    $this->Session->setFlash('Medicine deleted.');
+                    $this->Session->setFlash('Medicine deleted.', 'default', array('class' => 'alert alert-success'));
                     $this->redirect(array('action'=>'add'));
                 }else{
                     $id = $this->Medicine->id;  
-                    $this->Session->setFlash('Unable to delete medicine.');
+                    $this->Session->setFlash('Unable to delete medicine.', 'default', array('class' => 'alert alert-danger'));
                     $this->redirect(array('action' => 'show', $id));
                 }
             }

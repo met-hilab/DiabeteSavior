@@ -129,12 +129,12 @@ public function admin(){
         $patient = $this->Patient->read();
         $this->Session->write('patient_id', $patient['Patient']['id']);
         $this->Session->write('patient', $patient);
-        $this->Session->setFlash('Patient was added. Please save the patient ID so you can search for the patient later');
+        $this->Session->setFlash('Patient was added. Please save the patient ID so you can search for the patient later', 'default', array('class' => 'alert alert-success'));
         $this->redirect(array('action'=>'show'));
       }else{
         $errors = $this->Patient->invalidFields(); 
         var_dump($error);
-        $this->Session->setFlash('Patient is not saved.');
+        $this->Session->setFlash('Patient is not saved.', 'default', array('class' => 'alert alert-danger'));
       }
     } else {
       // Render view.
@@ -225,17 +225,17 @@ public function admin(){
         $data['Patient']['dob'] = date("Y-m-d", strtotime($data['Patient']['dob']));
         //save patient
         if($this->Patient->save($data)){
-          $this->Session->setFlash('Patient was edited.');
+          $this->Session->setFlash('Patient record successfully updated.', 'default', array('class' => 'alert alert-success'));
           $this->redirect(array('action'=>'show'));
         } else {
-          $this->Session->setFlash('Unable to edit patient. Please, try again.');
+          $this->Session->setFlash('Unable to edit patient. Please, try again.', 'default', array('class' => 'alert alert-danger'));
         }
       } else {
         // Patient exists and this is a get request => render the view, pass exsiting date.
         $this->request->data = $this->Patient->read();
       }
     } else {
-      $this->Session->setFlash('The patient you are trying to edit does not exist.');
+      $this->Session->setFlash('The patient you are trying to edit does not exist.', 'default', array('class' => 'alert alert-danger'));
       $this->redirect(array('action' => 'show'));
     }
   }  
@@ -310,22 +310,22 @@ public function admin(){
      $patient = $this->Patient->findById($id);
 
      if($this->request->is('get') ){
-      $this->Session->setFlash('Delete method is not allowed.');
+      $this->Session->setFlash('Delete method is not allowed.', 'default', array('class' => 'alert alert-danger'));
       $this->redirect(array('action' => 'show'));
     } else {
        if(!$id) {
-        $this->Session->setFlash('Invalid id for patient');
+        $this->Session->setFlash('Invalid id for patient', 'default', array('class' => 'alert alert-danger'));
         $this->redirect(array('action'=>'show'));
       }else{
         //delete patient
         if( $this->Patient->delete( $id ) ){
             //set to screen
-            $this->Session->setFlash('Patient deleted.');
+            $this->Session->setFlash('Patient record successfully deleted.', 'default', array('class' => 'alert alert-success'));
             //redirect to users's list
             $this->redirect(array('action'=>'index'));
         }else{  
              //if unable to delete
-            $this->Session->setFlash('Unable to delete patient.');
+            $this->Session->setFlash('Unable to delete patient.', 'default', array('class' => 'alert alert-danger'));
             $this->redirect(array('action' => 'show'));
         }
       }
