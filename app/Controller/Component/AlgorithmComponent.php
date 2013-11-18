@@ -77,14 +77,14 @@ class AlgorithmComponent extends Component {
     						"GLP_1RA" => '-High likelyhood of adverse effects related to renal or genitourinary problems.<br>
     									-Use with caution: risk of gastrointestinal side effects.<br>
     									-Possible bennefits related to weight loss.',					
-    						"DPP4_i" => '',					
-    						"TZD" => 	'-High likelyhood of adverse effects related to weith gain, and renal or genitourinary problems.<br>
+    						"DPP4_i" => '-nuetral',					
+    						"TZD" => 	'-High likelyhood of adverse effects related to weight gain, and renal or genitourinary problems.<br>
     									-Use with caution: risk of chronic heart failure and bone fracture.',
     						"AG_i" =>   '-Use with caution: risk of gastrointestinal side effects.',
     						"Colesevelam" => '-Use with caution: risk of gastrointestinal side effects.',					
     						"Bromocriptine_QR" =>  '-Use with caution: risk of gastrointestinal side effects.<br>
     									-Possible bennefits related to cardiovascular disease.',					
-    						"SU_GLN" => '-High likelyhood of adverse effects related to weith gain and renal or genitourinary problems.<br>
+    						"SU_GLN" => '-High likelyhood of adverse effects related to weight gain and renal or genitourinary problems.<br>
     									-Use with caution: risk of hypoglycemia and cardiovascular disease.',
     						"BasalInsulin" => '-High likelyhood of adverse effects related to hypoglycemia, weight gain, 
     												and renal or genitourinary problems.',
@@ -153,7 +153,8 @@ class AlgorithmComponent extends Component {
         elseif ( ($this->isDual() && ($this->a1c <= $this->a1cTarget))
         		|| ($this->isDual() && ($this->a1c > $this->a1cTarget) && $this->a1cDecrease())){
             //$this->selectMedicine(2);
-            $this->decision = "A1c less than or equal to target or A1c greater than target and decreasing, so continue with dual therapy.";
+            $this->therapy = "lifestyle + dual therapy";
+        	$this->decision = "A1c less than or equal to target or A1c greater than target and decreasing, so continue with dual therapy.";
         }
 
         // dual to triple therapy: add medicine 3 if at dual therapy and a1c > target and a1c not decreasing
@@ -179,6 +180,7 @@ class AlgorithmComponent extends Component {
         		|| ($this->isTriple() && ($this->a1c > $this->a1cTarget) && $this->a1cDecrease()) )
         {
         	//$this->selectMedicine(3);
+            $this->therapy = "lifestyle + triple therapy";
         	$this->decision = "A1c less than or equal to target or A1c is decreasing, so continue with triple therapy.";
         }
                 

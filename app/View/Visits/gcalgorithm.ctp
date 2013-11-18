@@ -31,11 +31,14 @@
     <?php }?>
     <?php if ($medalert != '') { ?>
     <tr> 
-      <th>Alert: </th>
-      <td><?php echo $medalert; ?></td>
+      <th>Alert * </th>
+      <td><?php echo $medalert; ?></td>      
     </tr>
     <?php }?>
-  </table>
+    </table>
+       <p>*See further details on medicine side effects at: <a href= "https://www.aace.com/files/consensus-statement.pdf" 
+      target="_blank">AACE Comprehensive Diabetes Management, Endocr Pract. 2013;19(Suppl 2)</a></p>	  
+    
 <div class="control-group">
   <label class="" for="Accept"></label>
   <div class="">
