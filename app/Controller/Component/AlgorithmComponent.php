@@ -538,7 +538,7 @@ class AlgorithmComponent extends Component {
     {
     	return $this->medeffects;
     }
-	public function getAlerts()
+	public function getAlert()
 	{
 		return $this->alert;
 	}    
