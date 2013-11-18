@@ -2,8 +2,8 @@
 /**
  * Class algorithm
  * @author - Jeff Andre, (jandre@bu.edu)
- * @version 2.0
- * @date - 11/13/2013
+ * @version 2.1
+ * @date - 11/17/2013
  * 
  * This algorithm is used only for acedemic puruposes and is based on the Glycemic Control Algorithm section in the 
  * American Association of Clinical Endocrinologists' Comprehensive Diabetes Management Algorithm 2013 Consensus Statement.
@@ -15,7 +15,8 @@
 App::uses('Component', 'Controller');
 
 class AlgorithmComponent extends Component {
-
+//class algorithm {
+	
     // patient information
     var $a1c = 0.0;             // patient a1c
     var $a1clast = 0.0;         // patient last a1c
@@ -30,8 +31,14 @@ class AlgorithmComponent extends Component {
     var $medicine1 = "none";    // mono therapy medicine 1
     var $medicine2 = "none";    // dual therapy medicine 2
     var $medicine3 = "none";    // triple therpay medicne 3
+    var $medicine4 = "none";	// insulin
     var $therapy = "none";      // therapy description
 
+    // algorithm decision, side effects message for medicines, and alert message for patient contraindications,
+    var $decision ="";
+    var $medeffects = 'Reported medicine side effects:<br>';
+    var $alert = "";
+    
     // therapy medicine tables
     var $monotherapy = array("Metformin", "GLP_1RA", "DPP4_i", "AG_i", "SGLT_2","TZD", "SU_GLN");
     var $dualtherapy = array("GLP_1RA", "DPP4_i", "TZD", "SGLT_2", "BasalInsulin", "Colesevelam",
@@ -63,9 +70,32 @@ class AlgorithmComponent extends Component {
     						"gi_sx" => "0", "chf" => "0", "cvd" => "0", "bone" => "2"),
     );
     
-    // algorithm decision & alert message for contraindications
-    var $decision ="";
-    var $alertmessage = "";
+    // medicine side effects
+    var $effects = array(	"Metformin" => '-High likelyhood of adverse effects related to renal or genitourinary problems.<br>
+    									-Use with caution: risk of gastrointestinal side effects.<br>
+    									-Possible bennefits related to weight loss and cardiovascular disease.',
+    						"GLP_1RA" => '-High likelyhood of adverse effects related to renal or genitourinary problems.<br>
+    									-Use with caution: risk of gastrointestinal side effects.<br>
+    									-Possible bennefits related to weight loss.',					
+    						"DPP4_i" => '',					
+    						"TZD" => 	'-High likelyhood of adverse effects related to weith gain, and renal or genitourinary problems.<br>
+    									-Use with caution: risk of chronic heart failure and bone fracture.',
+    						"AG_i" =>   '-Use with caution: risk of gastrointestinal side effects.',
+    						"Colesevelam" => '-Use with caution: risk of gastrointestinal side effects.',					
+    						"Bromocriptine_QR" =>  '-Use with caution: risk of gastrointestinal side effects.<br>
+    									-Possible bennefits related to cardiovascular disease.',					
+    						"SU_GLN" => '-High likelyhood of adverse effects related to weith gain and renal or genitourinary problems.<br>
+    									-Use with caution: risk of hypoglycemia and cardiovascular disease.',
+    						"BasalInsulin" => '-High likelyhood of adverse effects related to hypoglycemia, weight gain, 
+    												and renal or genitourinary problems.',
+    						"SGLT_2" => '-High likelyhood of adverse effects related to renal or genitourinary problems.<br>
+    									-Use with caution: risk of bone fracture.<br>
+    									-Possible bennefits related to weight loss.',					
+    						"Insulin" => '-High likelyhood of adverse effects related to hypoglycemia, weight gain, 
+    												and renal or genitourinary problems.'
+    								
+    );
+    
 
     /**
      * Glycemic control algorithm provides therapy results based on patient A1c levels and allergies.
@@ -93,17 +123,21 @@ class AlgorithmComponent extends Component {
             $this->decision = "Patient is at risk of diabetes.";
         }
 
-        // start or remain at mono therapy: select medicine 1 if no therapy or if a1c <= target
-        elseif ((($this->a1c >= 6.5)&&($this->a1c < 7.5)&&($this->noTherapy() )) || ($this->isMono() && ($this->a1c <= $this->a1cTarget)) )
+        // start or remain at mono therapy: select medicine 1 if no therapy or if a1c <= target 
+        // or if a1c > target and a1c is decreasing
+        elseif ((($this->a1c >= 6.5)&&($this->a1c < 7.5)&&($this->noTherapy() )) 
+        		|| ($this->isMono() && ($this->a1c <= $this->a1cTarget)) 
+        		|| ($this->isMono() && ($this->a1c > $this->a1cTarget) && $this->a1cDecrease()) )
         {
-            $this->selectMedicine(1);
+        	if ($this->noTherapy())
+            	$this->selectMedicine(1);
             $this->decision = "Start or continue with mono therapy.";
         }
 
-        // mono to dual therapy: add medicine 2 if at mono therapy and a1c > target
-        elseif ( $this->isMono() && ($this->a1c > $this->a1cTarget) ){
+        // mono to dual therapy: add medicine 2 if at mono therapy and a1c > target and a1c is not decreasing
+        elseif ( $this->isMono() && ($this->a1c > $this->a1cTarget) && !$this->a1cDecrease()){
             $this->selectMedicine(2);
-            $this->decision = "A1c greater than target, so adding second medicine for dual therapy.";
+            $this->decision = "A1c greater than target and A1c not decreasing, so adding second medicine for dual therapy.";
         }
 
         // start at dual therapy: select medicine 1 & 2 if 7.5 <= a1c < 9 and no medicine selected
@@ -114,17 +148,19 @@ class AlgorithmComponent extends Component {
             $this->decision = "Starting with dual therapy.";
         }
 
-        // remain at dual therapy: select medicine 2 if at dual therapy and a1c <= target
-        elseif ( ($this->isDual() && ($this->a1c <= $this->a1cTarget))){
-            $this->selectMedicine(2);
-            $this->decision = "A1c less than or equal to target, so continue with dual therapy.";
+        // remain at dual therapy if at dual therapy and a1c <= target 
+        // or if a1c > target and a1c is decreasing
+        elseif ( ($this->isDual() && ($this->a1c <= $this->a1cTarget))
+        		|| ($this->isDual() && ($this->a1c > $this->a1cTarget) && $this->a1cDecrease())){
+            //$this->selectMedicine(2);
+            $this->decision = "A1c less than or equal to target or A1c greater than target and decreasing, so continue with dual therapy.";
         }
 
-        // dual to triple therapy: add medicine 3 if at dual therapy and a1c > target
-        elseif ( ($this->isDual() && ($this->a1c > $this->a1cTarget)) )
+        // dual to triple therapy: add medicine 3 if at dual therapy and a1c > target and a1c not decreasing
+        elseif ( ($this->isDual() && ($this->a1c > $this->a1cTarget)) && !$this->a1cDecrease() )
         {
             $this->selectMedicine(3);
-            $this->decision = "A1c greater than target, so adding third medicine for triple therapy.";
+            $this->decision = "A1c greater than target and A1C not decreasing, so adding third medicine for triple therapy.";
         }
 
         // start at triple therapy: select medicine 1 and 2 if a1c > 9 with no symptoms, and no medicine selected
@@ -137,30 +173,140 @@ class AlgorithmComponent extends Component {
 
         }
         
-        // remain at triple therapy: select medicine 3 if at triple therapy and a1c <= target
-        elseif ( ($this->isTriple() && ($this->a1c <= $this->a1cTarget)) )
+        // remain at triple therapy if at triple therapy and a1c <= target
+        // or if a1c > target and a1c is decreasing
+        elseif ( ($this->isTriple() && ($this->a1c <= $this->a1cTarget)) 
+        		|| ($this->isTriple() && ($this->a1c > $this->a1cTarget) && $this->a1cDecrease()) )
         {
-        	$this->selectMedicine(3);
-        	$this->decision = "A1c less than or equal to target, so continue with triple therapy.";
+        	//$this->selectMedicine(3);
+        	$this->decision = "A1c less than or equal to target or A1c is decreasing, so continue with triple therapy.";
         }
                 
-        // insulin therapy: if a1c > 9 and symptoms or at triple therapy and a1c > target
-        elseif ((($this->a1c > 9) && $this->noTherapy() && $this->symptoms) || ($this->isTriple() && ($this->a1c > $this->a1cTarget)))
+        // insulin therapy: at triple therapy and a1c > target and a1c not decreasing
+        elseif (($this->isTriple() && ($this->a1c > $this->a1cTarget)&& !$this->a1cDecrease()))
         {
             $this->therapy = "lifestyle + triple therapy + insulin";
             $this->decision = "Add or intensify insulin";
+            $this->medicine4 = "Insulin";
         }
-
+        
+        // insulin therapy: if a1c > 9 and symptoms 
+        elseif ((($this->a1c > 9) && $this->noTherapy() && $this->symptoms))
+        {
+        	$this->therapy = "lifestyle + insulin";
+        	$this->decision = "Start with insulin";
+            $this->medicine4 = "Insulin";
+        }
+        
         else
         {
             $this->therapy = "No therapy";
             $this->decision = "No therapy selected.";
         }
+        
+        // generate side effects message for each selected medicine
+        $this->genEffects();
+
+        // generate alert message for side effects related to patient problems for each medicine
+        $this->genAlert();
+        $this->alert .= "<br>". $this->medeffects;	// append medicine side effects
+        
+    }
+    
+    /**
+     * Generates side effects message for used medicines
+     */
+    private function genEffects() {
+    	if ($this->medicine1 != "none")
+    		$this->medeffects .= $this->medicine1. ":<br>". $this->effects[$this->medicine1]. "<br>";
+    	if ($this->medicine2 != "none")
+    		$this->medeffects .= $this->medicine2. ":<br>". $this->effects[$this->medicine2]. "<br>";
+    	if ($this->medicine3 != "none")
+    		$this->medeffects .= $this->medicine3. ":<br>". $this->effects[$this->medicine3]. "<br>";
+    	if ($this->medicine4 != "none")
+    		$this->medeffects .= $this->medicine4. ":<br>". $this->effects[$this->medicine4]. "<br>";  	 
     }
 
     /**
+     * Generates alert message for medicine side effects related to patient problems
+     */
+    private function genAlert() {
+    	    	
+    	if ($this->medicine1 !== "none"){
+    		$peffects = $this->patientEffects($this->medicine1);
+    		if ($peffects !== ""){
+    			$this->alert = "Patient is at higher risk of side effects due to contraindications with following medications:<br>". 
+    						   $this->medicine1. ": ". $peffects. "<br>";	
+    		}
+    	}
+    	if ($this->medicine2 !== "none"){
+    		if ($this->patientEffects($this->medicine2) !== "")
+    			$this->alert .= $this->medicine2. ": ". $this->patientEffects($this->medicine2). "<br>";
+    	}
+    	if ($this->medicine3 !== "none"){
+    		if ($this->patientEffects($this->medicine3) !== "")
+    			$this->alert .= $this->medicine3. ": ". $this->patientEffects($this->medicine3). "<br>";
+    	}
+    }
+    
+    /**
+     * @param - medicine 
+     * @return - returns side effects for a given medicine related to patient problems,
+     * 			 or returns empty string "" if no side effects.
+     */
+    private function patientEffects($medicine) {
+    	
+    	$mh = $this->medhistory;
+    	$problems = "";
+    	 
+    	if (($mh["hypo"] === "yes") && ($this->medicines[$medicine]["hypo"] > 0) )
+    	{
+    		$problems = "hypoglycemia";
+    	}
+    	if ($mh["weight"] === "yes" && ($this->medicines[$medicine]["weight"] > 0))
+    	{
+    		if ($problems !== "")
+    			$problems .= ",";
+    		$problems .= " weight gain";
+    	}
+    	if ($mh["renal_gu"] === "yes" && ($this->medicines[$medicine]["renal_gu"] > 0))
+    	{
+    		if ($problems !== "")
+    			$problems .= ",";
+    		$problems .= " renul or genitourinary failure";
+    	}
+    	if ($mh["gi_sx"] === "yes" && ($this->medicines[$medicine]["gi_sx"] > 0))
+    	{
+    		if ($problems !== "")
+    			$problems .= ",";
+    		$problems .= " gastrointestinal effects";
+    	}
+    	if ($mh["chf"] === "yes" && ($this->medicines[$medicine]["chf"] > 0))
+    	{
+    		if ($problems !== "")
+    			$problems .= ",";
+    		$problems .= " chronic heart failure";
+    	}
+    	if ($mh["cvd"] === "yes" && ($this->medicines[$medicine]["cvd"] > 0))
+    	{
+    		if ($problems !== "")
+    			$problems .= ",";
+    		$problems = " cardiovascular disease";
+    	}
+    	if ($mh["bone"] === "yes" && ($this->medicines[$medicine]["bone"] > 0))
+    	{
+    		if ($problems !== "")
+    			$problems .= ",";
+    		$problems = " bone fracture";
+    	}
+    	    	    	
+    	return $problems;
+    }
+    
+    
+    /**
      * Selects first medicine from therapy table (mono, dual, or triple) that the patient is not allergic to.
-     * Also gets the therapy description and generates alerts for contraindications.
+     * Also gets the therapy description and generates messages for side medeffects.
      * @param $therapyType - 1 for mono, 2 for dual, and 3 for triple
      * @return bool - Returns true if results are successful
      */
@@ -172,6 +318,7 @@ class AlgorithmComponent extends Component {
             $nMeds = count($this->monotherapy);
             $medicine = $this->medicine1;
             $prevmed1 = "na";
+            
         }
         elseif ($therapyType == 2)
         {
@@ -212,44 +359,7 @@ class AlgorithmComponent extends Component {
             }
             $medCount += 1;
         } // while
-        
-        // check patient contraindications for each medicine and generate alert message
-        $mh = $this->medhistory;
-        if ($mh["hypo"] === "yes")
-        {
-        	$pmessage = "hypoglycemia! ";
-        	$this->alertmessage .= $this->medMessage($medicine, $this->medicines[$medicine]["hypo"], $pmessage);
-        }
-        if ($mh["weight"] === "yes")
-        {
-        	$pmessage = "weight gain! ";
-        	$this->alertmessage .= $this->medMessage($medicine, $this->medicines[$medicine]["weight"], $pmessage);
-        }
-        if ($mh["renal_gu"] === "yes")
-        {
-        	$pmessage = "renul or genitourinary problems! ";
-        	$this->alertmessage .= $this->medMessage($medicine, $this->medicines[$medicine]["renul_gu"], $pmessage);
-        }
-        if ($mh["gi_sx"] === "yes")
-        {
-        	$pmessage = "gastrointestinal problems! ";
-        	$this->alertmessage .= $this->medMessage($medicine, $this->medicines[$medicine]["gi_sx"], $pmessage);
-        }
-        if ($mh["chf"] === "yes")
-        {
-        	$pmessage = "chronic heart failure! ";
-        	$this->alertmessage .= $this->medMessage($medicine, $this->medicines[$medicine]["chf"], $pmessage);
-        }
-        if ($mh["cvd"] === "yes")
-        {
-        	$pmessage = "cardiovascular disease! ";
-        	$this->alertmessage .= $this->medMessage($medicine, $this->medicines[$medicine]["cvd"], $pmessage);
-        }
-        if ($mh["bone"] === "yes")
-        {
-        	$pmessage = "bone fracture! ";
-        	$this->alertmessage .= $this->medMessage($medicine, $this->medicines[$medicine]["bone"], $pmessage);
-        }
+
         
         // copy selected medicine into medicine 1, 2, or 3
         if ( ($therapyType == 1) && ($medicine != "none"))
@@ -274,25 +384,7 @@ class AlgorithmComponent extends Component {
         else
             return false;
     }
-
-    /**
-     * @param $med - medicine value
-     * @param $medrisk - medicine risk value
-     * @parm $pmessage - patient message
-     * @return - contraindication alert message
-     */
-    private function medMessage($med, $medrisk,$pmessage)
-    {
-    	$cmessage = "";
-    	if($medrisk == '1')
-    		$cmessage = $med. " has few adverse events or possible benefits with patients at risk of ". $pmessage. "<br/>";
-    	elseif($medrisk == '2')
-    		$cmessage = "Use ". $med. " with caution with patients at risk of ". $pmessage. "<br/>";
-    	elseif($medrisk == '3')
-    		$cmessage = $med. " has likelihood of adverse event with patients at risk of ". $pmessage. "<br/>";
-    	return $cmessage;   	 
-    }
-   
+    
     /**
      * @param $a1cval - sets a1c value
      */
@@ -442,11 +534,15 @@ class AlgorithmComponent extends Component {
     {
         return $this->decision;
     }
-    public function getAlert()
+    public function getEffects()
     {
-    	return $this->alertmessage;
+    	return $this->medeffects;
     }
-    
+	public function getAlerts()
+	{
+		return $this->alert;
+	}    
+	
     /**
      * @return bool - returns true if medicine 1 selected
      */
@@ -474,6 +570,13 @@ class AlgorithmComponent extends Component {
     private function noTherapy() {
         return (($this->medicine1 === "none") && ($this->medicine2 === "none") && ($this->medicine3 === "none"));
     }
+    
+    /**
+     * @return bool - true if a1c is decreasing
+     */
+    private function a1cDecrease() {
+    	return (($this->a1c - $this->a1clast) < 0);
+    }
 
     /**
      * Print algorithm results
@@ -495,9 +598,8 @@ class AlgorithmComponent extends Component {
         echo $this->medicine3;
         echo "<br>";
         echo "<br>";
-        echo "Alert Message: ";
+        echo $this->alert;
         echo "<br>";
-        echo $this->alertmessage;
     }
 
     /**
