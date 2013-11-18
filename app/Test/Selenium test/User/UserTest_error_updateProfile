@@ -1,0 +1,34 @@
+<?php
+
+require_once 'Testing/Selenium.php';
+
+class Example extends PHPUnit_Framework_TestCase
+{
+  protected function setUp()
+  {
+    $this = new Testing_Selenium("*chrome", "http://localhost/")
+    $this->open("/");
+    $this->click("link=sign up");
+    $this->waitForPageToLoad("30000");
+    $this->type("id=UserEmail", "user1@diabetesavior.com");
+    $this->type("id=UserPassword", "2222");
+    $this->type("id=UserPasswordConfirmation", "2222");
+    $this->type("id=ProfileFirstname", "Hello");
+    $this->type("id=ProfileLastname", "Kitty");
+    $this->type("id=ProfilePhone", "123321123");
+    $this->click("css=input.btn.btn-primary");
+    $this->waitForPageToLoad("30000");
+    $this->click("link=Login");
+    $this->click("css=button.btn.btn-default");
+    $this->waitForPageToLoad("30000");
+    $this->click("link=My Account");
+    $this->click("link=Update profile");
+    $this->waitForPageToLoad("30000");
+    $this->type("id=ProfileFirstname", "Ad");
+    $this->type("id=ProfileLastname", "min");
+    $this->type("id=ProfilePhone", "000000000");
+    $this->click("css=input.btn.btn-primary");
+    $this->waitForPageToLoad("30000");
+  }
+}
+?>
