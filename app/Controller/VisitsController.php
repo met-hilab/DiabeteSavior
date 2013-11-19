@@ -409,7 +409,7 @@ class VisitsController extends AppController {
           'medicine_name_one' => $med1,
           'medicine_name_two' => $med2,
           'medicine_name_three' => $med3,
-          'recommendations' => str_replace('<br/>', "\n", $medalert),
+          'recommendations' => str_replace('<br>', "\n", $medalert),
           'edited_by_user' => 'no'
       )); 
         $this->Visit->Treatment->TreatmentRunAlgorithm->create();

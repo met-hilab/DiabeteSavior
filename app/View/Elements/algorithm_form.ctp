@@ -63,7 +63,7 @@
     <?php echo $this->Form->input('recommendations', array(
       'div' => false, 
       'label' => false, 
-      'value' => str_replace('<br/>', "\n", $medalert))); ?>
+      'value' => str_replace('<br>', "\n", $medalert))); ?>
     <br>
     <?php echo $this->Form->submit('Done'); ?>
   </div>

@@ -105,4 +105,4 @@
     <?php }?>
 
 </table>
- <p> NKDA – abbreviation for No Known Drug Allergies	</p>
+ <p> NKDA – abbreviation for No Known Drug Allergies </p>

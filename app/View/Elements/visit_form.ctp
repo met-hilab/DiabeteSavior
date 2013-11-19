@@ -35,6 +35,7 @@ $formDefaults = array(
 <hr>
 <!-- drug_allergies -->
 <h3>Drug Allergies and Contraindications</h3>
+<p> NKDA – abbreviation for No Known Drug Allergies </p>
 <?php echo $this->Form->hidden('DrugAllergy.id') ?>
 <?php echo $this->Form->bootstrapRadioYesNkdaUnknown('DrugAllergy.met', array('label' => array('class' => 'col-lg-3 control-label', 'text' => '<font color="red">* </font>Metformin'))) ?>
 <?php echo $this->Form->bootstrapRadioYesNkdaUnknown('DrugAllergy.dpp_4i', array('label' => array('class' => 'col-lg-3 control-label', 'text' => '<font color="red">* </font>Dipeptidyl peptidase 4 inhibitors (DPP-4)'))) ?>
