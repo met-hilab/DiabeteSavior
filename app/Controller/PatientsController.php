@@ -260,8 +260,27 @@ public function admin(){
      $lastVisit = $this->Patient->Visit->find('first', array(
          'order' => array('Visit.created' => 'DESC'),
          'conditions' => array('Visit.patient_id' => $id)
-         ));
-
+        ));
+     
+     
+     //trying to get a1c for all visits //
+     $allVisits = $this->Patient->Visit->find('all', array(
+         'order' => array('Visit.created' => 'ASC'),
+         'conditions' =>array('Visit.patient_id' => $id)
+        ));
+     $a1c = array();
+     
+      foreach ($allVisits as &$value) {
+        $temp_a1c = $this->Patient->Visit->VitalsLab->find('first', array(
+            'conditions' => array('VitalsLab.id' => '$value')
+        ));
+        array_push($a1c,$temp_a1c);
+      }
+      $this->set('a1c', $a1c);
+      $this->Session->write('a1c', $a1c);
+     // end trying to get all a1c //
+      
+      
      $this->set('lastVisit', $lastVisit);
      $this->set('visit', $lastVisit);  // use for medhistory_complaints_table
      $this->Session->write('lastVisit', $lastVisit);
@@ -295,7 +314,17 @@ public function admin(){
       throw $e;
     }
   }
-
+public function get_a1c_history(){
+  
+   $this->authenticate_user();
+   $id = $this->Session->read('patient_id');
+   console.log($id);
+   
+   //$patient = $this->Patient->findById($id);
+   $a1cHistory = $this->Patient->query("select vitals_labs.A1c, visits.created from vitals_labs inner join visits on vitals_labs.visit_id = visits.id where visits.patient_id = '$id'");
+   
+   echo json_encode($a1cHistory); exit;
+}
  /**
  * Delete patient
  *

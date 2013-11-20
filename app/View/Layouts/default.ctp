@@ -33,7 +33,7 @@ $cakeDescription = __d('cake_dev', 'Diabetes Savior: Type II Diabetes Infomatic 
     echo $this->Html->css('bootstrap');
     echo $this->Html->css('ui-lightness/jquery-ui-1.10.3.custom.min');
     echo $this->Html->css('main');
-
+    echo $this->Html->css('font-awesome');
     echo $this->Html->css('ui-lightness/formvalidation');
 
 
@@ -41,7 +41,9 @@ $cakeDescription = __d('cake_dev', 'Diabetes Savior: Type II Diabetes Infomatic 
     echo $this->Html->script('jquery-ujs.js');
     echo $this->Html->script('jquery-ui-1.10.3.custom.min');
     echo $this->Html->script('jquery.validate.min');
-    echo $this->Html->script('bootstrap');
+    echo $this->Html->script('flot/jquery.flot');
+    echo $this->Html->script('flot/jquery.flot.time');
+		echo $this->Html->script('bootstrap');
     echo $this->Html->script('modernizr');
     echo $this->Html->script('main');
 
@@ -206,7 +208,12 @@ $cakeDescription = __d('cake_dev', 'Diabetes Savior: Type II Diabetes Infomatic 
 -->           
       <!-- DISCLAIMER -->
       <div class="col-lg-offset-2 col-lg-8" style="text-align:center;">
-        <p style="font-size:11px; color: gray; padding:10px 0 10px 0;">DISCLAIMER:The patient records in this system are simplified simulations of Electronic Health Records (EHRs) for research and teaching purpose only. They are different from EHRs and do not comply with HIPAA. All patient data are fictional and no actual patient data are used.</p>
+        <p style="font-size:11px; color: gray; padding:10px 0 10px 0;"> 
+	DISCLAIMER:The patient records in this system are simplified simulations of 
+        Electronic Health Records (EHRs) for research and teaching purpose only. They
+	are different from EHRs and do not comply with HIPAA. All patient data are 
+	fictional and no actual patient data are used.
+	</p>      
       </div>
     </footer>
   </div>

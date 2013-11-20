@@ -52,3 +52,32 @@ body{
   color: dimgray; 
   font-weight: normal;
 }
+.vital-group:last-child {
+  border-bottom: #ccc 1px solid;
+}
+
+.vital-toggle {
+  display: block;
+  padding: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+  background: #D6EBFF;
+}
+.vital-name {
+  font-weight: bold !important;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+
+.vital-name:before {
+  font-family: FontAwesome;
+  font-weight: normal;
+  content: "\f147";
+}
+
+.collapsed .vital-name:before {
+  font-family: FontAwesome;
+  font-weight: normal;
+  content: "\f196";
+}
