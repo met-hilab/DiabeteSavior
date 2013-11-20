@@ -3,7 +3,7 @@
  * Class algorithm
  * @author - Jeff Andre, (jandre@bu.edu)
  * @version 2.1
- * @date - 11/17/2013
+ * @date - 11/20/2013
  * 
  * This algorithm is used only for acedemic puruposes and is based on the Glycemic Control Algorithm section in the 
  * American Association of Clinical Endocrinologists' Comprehensive Diabetes Management Algorithm 2013 Consensus Statement.
@@ -131,12 +131,14 @@ class AlgorithmComponent extends Component {
         {
         	if ($this->noTherapy())
             	$this->selectMedicine(1);
-            $this->decision = "Start or continue with mono therapy.";
+            $this->therapy = "lifestyle + monotherapy";
+        	$this->decision = "Start or continue with mono therapy.";
         }
 
         // mono to dual therapy: add medicine 2 if at mono therapy and a1c > target and a1c is not decreasing
         elseif ( $this->isMono() && ($this->a1c > $this->a1cTarget) && !$this->a1cDecrease()){
             $this->selectMedicine(2);
+            $this->therapy = "lifestyle + dual therapy";
             $this->decision = "A1c greater than target and A1c not decreasing, so adding second medicine for dual therapy.";
         }
 
@@ -145,6 +147,7 @@ class AlgorithmComponent extends Component {
         {
             $this->selectMedicine(1);
             $this->selectMedicine(2);
+            $this->therapy = "lifestyle + dual therapy";
             $this->decision = "Starting with dual therapy.";
         }
 
@@ -161,6 +164,7 @@ class AlgorithmComponent extends Component {
         elseif ( ($this->isDual() && ($this->a1c > $this->a1cTarget)) && !$this->a1cDecrease() )
         {
             $this->selectMedicine(3);
+            $this->therapy = "lifestyle + triple therapy";
             $this->decision = "A1c greater than target and A1C not decreasing, so adding third medicine for triple therapy.";
         }
 
@@ -170,6 +174,7 @@ class AlgorithmComponent extends Component {
             $this->selectMedicine(1);
             $this->selectMedicine(2);
             $this->selectMedicine(3);
+            $this->therapy = "lifestyle + triple therapy";
             $this->decision = "Start with triple therapy.";
 
         }
