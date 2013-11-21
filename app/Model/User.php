@@ -107,7 +107,7 @@ public $validate = array(
       'className' => 'Patient',
       //'conditions' => array('Recipe.approved' => '1'),
       'conditions' => '',
-      'order' => 'patients.patient_lastname DESC, patients.patient_firstname DESC',
+      'order' => 'patient_lastname DESC, patient_firstname DESC',
       'dependent' => true
     )
   );
