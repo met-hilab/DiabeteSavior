@@ -1,4 +1,7 @@
 <!--<h2 class="text-center"><img src="/img/hilab-logo.png">HIlab Medical Algorithm Repository</h2>-->
+
+<img src="/img/diabete-gestazionale_1.jpg" style="width:100%">
+
 <h2 class="text-center">HI Lab Medical Algorithm Repository</h2>
 <p>
 A medical algorithm describes any formula, statistical survey, graph, or look-up table that provides useful information in some aspect of health care. The purpose of medical algorithms is to improve and standardize decisions made in the delivery of medical care. Medical algorithms therefore play a prominent role in medical informatics, as well as control and operation of medical instrumentation. They are particularly useful in diagnosis, prognosis, selection of medical tests, and determining therapies.
@@ -12,6 +15,7 @@ American Association of Clinical Endocrinologists' Comprehensive Diabetes Manage
 This algorithm is used for research and teaching purposes only.</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
+
 
 <p>References</p>
 <p>1. <a href= "https://www.aace.com/files/consensus-statement.pdf" target="_blank">AACE Comprehensive Diabetes Management, Endocr Pract. 2013;19(Suppl 2)</a>
