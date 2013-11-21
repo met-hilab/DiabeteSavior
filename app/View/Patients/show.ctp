@@ -197,7 +197,7 @@
 			<td> Normal: 18.5 - 25.0 kg/m<sup>2</sup> </td>
         </tr>
         <tr>  
-            <th class="dimgray-header">Weight Classification: </th>
+            <th class="dimgray-header"><a href=" /pages/weightclassification" target="_blank"> Weight Classification:</a>  </th>
             <td><?php echo $lastVisit['VitalsLab']['bmi_status']?: 'unknown'; ?></td>
 			<td>  </td>
         </tr>
