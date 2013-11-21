@@ -96,7 +96,7 @@ class MedicinesController extends AppController {
             }else{
                 if( $this->Medicine->delete( $id ) ){
                     $this->Session->setFlash('Medicine deleted.', 'default', array('class' => 'alert alert-success'));
-                    $this->redirect(array('action'=>'add'));
+                    $this->redirect(array('action'=>'index'));
                 }else{
                     $id = $this->Medicine->id;  
                     $this->Session->setFlash('Unable to delete medicine.', 'default', array('class' => 'alert alert-danger'));
