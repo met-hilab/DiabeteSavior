@@ -58,9 +58,9 @@
         </table>
         
        <div style="padding:5px; display: inline-block;">
-            <a href="/medicines/edit" class="btn btn-primary" style="padding:5px;"><span class="glyphicon glyphicon-edit"></span> Update Medicine</a>
+            <a href="/medicines/edit/<?php echo $medicine['Medicine']['id'] ?>" class="btn btn-primary" style="padding:5px;"><span class="glyphicon glyphicon-edit"></span> Update Medicine</a>
       </div>
       <div style="padding:5px; display: inline-block;">
-            <a href="/medicines/delete" data-confirm="Do you want to delete this medicine record?" data-method="delete" class="btn btn-primary" style="padding:5px;"><span class="glyphicon glyphicon-trash"></span> Delete Medicine</a>
-      </div>        
+            <a href="/medicines/delete/<?php echo $medicine['Medicine']['id'] ?>" data-confirm="Do you want to delete this medicine record?" data-method="delete" class="btn btn-primary" style="padding:5px;"><span class="glyphicon glyphicon-trash"></span> Delete Medicine</a>
+      </div>       
     </div>

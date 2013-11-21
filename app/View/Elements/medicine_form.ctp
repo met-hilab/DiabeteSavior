@@ -1,3 +1,4 @@
+<?php $medicine_options = array(0,1,2,3); ?>
 <?php echo $this->Form->create('Medicine'); ?>
 
 <div class="form-group">
@@ -31,105 +32,50 @@
 <div class="form-group">
   <?php echo $this->Form->label('hypo', '<font color="red">* </font>Hypo', array('class' => 'col-lg-1 control-label')); ?>
   <div class="col-lg-4">
-    <?php
-      $hypoOptions = array(
-        '1' => '0',
-        '2' => '1',
-        '3' => '2',
-        '4' => '3',
-      )
-    ?>
-    <?php echo $this->Form->select('hypo', $hypoOptions, array('div' => false, 'label' => false)); ?>
+
+    <?php echo $this->Form->select('hypo', $medicine_options, array('div' => false, 'label' => false)); ?>
   </div>
 </div>
 
 <div class="form-group">
   <?php echo $this->Form->label('weight', '<font color="red">* </font>Weight', array('class' => 'col-lg-1 control-label')); ?>
   <div class="col-lg-4">
-    <?php
-      $weightOptions = array(
-        '1' => '0',
-        '2' => '1',
-        '3' => '2',
-        '4' => '3',
-      )
-    ?>
-    <?php echo $this->Form->select('weight', $weightOptions, array('div' => false, 'label' => false)); ?>
+    <?php echo $this->Form->select('weight', $medicine_options, array('div' => false, 'label' => false)); ?>
   </div>
 </div>
 
 <div class="form-group">
   <?php echo $this->Form->label('renal_gu', '<font color="red">* </font>Renal_gu', array('class' => 'col-lg-1 control-label')); ?>
   <div class="col-lg-4">
-    <?php
-      $renal_guOptions = array(
-        '1' => '0',
-        '2' => '1',
-        '3' => '2',
-        '4' => '3',
-      )
-    ?>
-    <?php echo $this->Form->select('renal_gu', $renal_guOptions, array('div' => false, 'label' => false)); ?>
+    <?php echo $this->Form->select('renal_gu', $medicine_options, array('div' => false, 'label' => false)); ?>
   </div>
 </div>
 
 <div class="form-group">
   <?php echo $this->Form->label('gi_sx', '<font color="red">* </font>Gi_sx', array('class' => 'col-lg-1 control-label')); ?>
   <div class="col-lg-4">
-    <?php
-      $gi_sxOptions = array(
-        '1' => '0',
-        '2' => '1',
-        '3' => '2',
-        '4' => '3',
-      )
-    ?>
-    <?php echo $this->Form->select('gi_sx', $gi_sxOptions, array('div' => false, 'label' => false)); ?>
+    <?php echo $this->Form->select('gi_sx', $medicine_options, array('div' => false, 'label' => false)); ?>
   </div>
 </div>
 
 <div class="form-group">
   <?php echo $this->Form->label('chf', '<font color="red">* </font>Chf', array('class' => 'col-lg-1 control-label')); ?>
   <div class="col-lg-4">
-    <?php
-      $chfOptions = array(
-        '1' => '0',
-        '2' => '1',
-        '3' => '2',
-        '4' => '3',
-      )
-    ?>
-    <?php echo $this->Form->select('chf', $chfOptions, array('div' => false, 'label' => false)); ?>
+    <?php echo $this->Form->select('chf', $medicine_options, array('div' => false, 'label' => false)); ?>
   </div>
 </div>
 
 <div class="form-group">
   <?php echo $this->Form->label('cvd', '<font color="red">* </font>Cvd', array('class' => 'col-lg-1 control-label')); ?>
   <div class="col-lg-4">
-    <?php
-      $cvdOptions = array(
-        '1' => '0',
-        '2' => '1',
-        '3' => '2',
-        '4' => '3',
-      )
-    ?>
-    <?php echo $this->Form->select('cvd', $cvdOptions, array('div' => false, 'label' => false)); ?>
+    <?php echo $this->Form->select('cvd', $medicine_options, array('div' => false, 'label' => false)); ?>
   </div>
 </div>
 
 <div class="form-group">
   <?php echo $this->Form->label('bone', '<font color="red">* </font>Bone', array('class' => 'col-lg-1 control-label')); ?>
   <div class="col-lg-4">
-    <?php
-      $boneOptions = array(
-        '1' => '0',
-        '2' => '1',
-        '3' => '2',
-        '4' => '3',
-      )
-    ?>
-    <?php echo $this->Form->select('bone', $boneOptions, array('div' => false, 'label' => false)); ?>
+    <?php echo $this->Form->select('bone', $medicine_options, array('div' => false, 'label' => false)); ?>
   </div>
 </div>
 

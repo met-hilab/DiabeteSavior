@@ -25,7 +25,7 @@ class MedicinesController extends AppController {
     public $uses = array();
 
     public function add() {
-       $this->authenticate_user();
+       $this->authenticate_admin();
         if ($this->request->is('post')){
             $this->Medicine->create();
             if($this->Medicine->save($this->data)){
@@ -39,14 +39,14 @@ class MedicinesController extends AppController {
 
 
     public function index(){
-        $this->authenticate_user();
+        //$this->authenticate_admin();
         $medicines = $this->Medicine->find('all');
         $this->set('medicines',$medicines);
     }
 
 
     public function edit(){
-        $this->authenticate_user();
+        $this->authenticate_admin();
         $id = $this->request->params['pass'][0];
         $this->Medicine->id = $id;
         if($this->Medicine->exists()){
@@ -83,7 +83,7 @@ class MedicinesController extends AppController {
 
 
     public function delete(){
-        $this->authenticate_user();
+        $this->authenticate_admin();
         $id = $this->request->params['pass'][0];
         $medicine = $this->Medicine->findById($id);
         if($this->request->is('get') ){
