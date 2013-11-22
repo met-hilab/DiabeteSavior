@@ -36,7 +36,7 @@ class AlgorithmComponent extends Component {
 
     // algorithm decision, side effects message for medicines, and alert message for patient contraindications,
     var $decision ="";
-    var $medeffects = 'Reported medicine side effects:<br>';
+    var $medeffects = '<b>Reported medicine side effects:</b><br>';
     var $alert = "";
     
     // therapy medicine tables
@@ -73,24 +73,24 @@ class AlgorithmComponent extends Component {
     // medicine side effects
     var $effects = array(	"Metformin" => '-High likelyhood of adverse effects related to renal or genitourinary problems.<br>
     									-Use with caution: risk of gastrointestinal side effects.<br>
-    									-Possible bennefits related to weight loss and cardiovascular disease.',
+    									-Possible benefits related to weight loss and cardiovascular disease.',
     						"GLP_1RA" => '-High likelyhood of adverse effects related to renal or genitourinary problems.<br>
     									-Use with caution: risk of gastrointestinal side effects.<br>
-    									-Possible bennefits related to weight loss.',					
+    									-Possible benefits related to weight loss.',					
     						"DPP4_i" => '-nuetral',					
     						"TZD" => 	'-High likelyhood of adverse effects related to weight gain, and renal or genitourinary problems.<br>
     									-Use with caution: risk of chronic heart failure and bone fracture.',
     						"AG_i" =>   '-Use with caution: risk of gastrointestinal side effects.',
     						"Colesevelam" => '-Use with caution: risk of gastrointestinal side effects.',					
     						"Bromocriptine_QR" =>  '-Use with caution: risk of gastrointestinal side effects.<br>
-    									-Possible bennefits related to cardiovascular disease.',					
+    									-Possible benefits related to cardiovascular disease.',					
     						"SU_GLN" => '-High likelyhood of adverse effects related to weight gain and renal or genitourinary problems.<br>
     									-Use with caution: risk of hypoglycemia and cardiovascular disease.',
     						"BasalInsulin" => '-High likelyhood of adverse effects related to hypoglycemia, weight gain, 
     												and renal or genitourinary problems.',
     						"SGLT_2" => '-High likelyhood of adverse effects related to renal or genitourinary problems.<br>
     									-Use with caution: risk of bone fracture.<br>
-    									-Possible bennefits related to weight loss.',					
+    									-Possible benefits related to weight loss.',					
     						"Insulin" => '-High likelyhood of adverse effects related to hypoglycemia, weight gain, 
     												and renal or genitourinary problems.'
     								
@@ -242,21 +242,21 @@ class AlgorithmComponent extends Component {
     	if ($this->medicine1 !== "none"){
     		$peffects = $this->patientEffects($this->medicine1);
     		if ($peffects !== ""){
-    			$this->alert = "Patient is at higher risk of side effects due to contraindications with following medications:<br>". 
+    			$this->alert = "<b>Patient is at higher risk of side effects due to contraindications with following medications:</b><br>". 
     						   $this->medicine1. ": ". $peffects. "<br>";	
     		}
     	}
     	if ($this->medicine2 !== "none"){
     		if ($this->patientEffects($this->medicine2) !== ""){
     			if ($this->alert === "")
-    				$this->alert = "Patient is at higher risk of side effects due to contraindications with following medications:<br>";   			 
+    				$this->alert = "<b>Patient is at higher risk of side effects due to contraindications with following medications:<b><br>";   			 
     			$this->alert .= $this->medicine2. ": ". $this->patientEffects($this->medicine2). "<br>";
     		}
     	}
     	if ($this->medicine3 !== "none"){
     		if ($this->patientEffects($this->medicine3) !== ""){
     			if ($this->alert === "")
-    				$this->alert = "Patient is at higher risk of side effects due to contraindications with following medications:<br>";   			 
+    				$this->alert = "<b>Patient is at higher risk of side effects due to contraindications with following medications:<b><br>";   			 
     			$this->alert .= $this->medicine3. ": ". $this->patientEffects($this->medicine3). "<br>";
     		}
     	}
