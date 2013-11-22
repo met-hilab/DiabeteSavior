@@ -48,7 +48,7 @@ function copyHeight() {
     value = ftToM(value);
   }
   mHeightInput.val(value);
-  console.log('hidden input height: ' + mHeightInput.val());
+  //console.log('hidden input height: ' + mHeightInput.val());
 }
 function copyWeight(){
   value = $(this).val();
@@ -56,7 +56,7 @@ function copyWeight(){
     value = lbToKg(value);
   }
   mWeightInput.val(value);
-  console.log('hidden input weight: ' + mWeightInput.val());
+  //console.log('hidden input weight: ' + mWeightInput.val());
 }
 function copyWeightGoal(){
   value = $(this).val();
@@ -64,7 +64,7 @@ function copyWeightGoal(){
     value = lbToKg(value);
   }
   mWeightGoalInput.val(value);
-  console.log('hidden input weight goal: ' + mWeightGoalInput.val());
+  //console.log('hidden input weight goal: ' + mWeightGoalInput.val());
 }
 function setUnitType() {
   unitType = $(this).data('unit');
@@ -100,7 +100,11 @@ function setUnitType() {
   weightInput.val(weight);
 
   setPlaceholders();
-
+  var date = new Date();
+  date.setMonth(date.getMonth() + 3);
+  var expires = "; expires="+date.toGMTString();
+  cookieName = 'unitType';
+  document.cookie = cookieName + "=" + unitType + expires + "; path=/";
   return false;
 }
 function mToFt(value) {

@@ -38,6 +38,7 @@ class VisitsController extends AppController {
   public function beforeFilter() {
     parent::beforeFilter();
     $this->authenticate_user();
+    $this->set('unitType', $_COOKIE['unitType']);
   }
 
 /**
@@ -200,7 +201,7 @@ class VisitsController extends AppController {
       if ( $weight_goal < $target_weight ){
         $target_weight = $weight_goal;
       }
-      $this->request->data['VitalsLab']['notes'] = 'Target weight is '.round($target_weight,1).' kg.'."\n".$notes;
+      $this->request->data['VitalsLab']['notes'] = 'Target weight is '.round($target_weight,1).' kg / ' . round($target_weight * 2.20462). ' lb.'."\n".$notes;
     }
 
     $this->Visit->create();

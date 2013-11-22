@@ -89,19 +89,26 @@ class UsersController extends AppController {
     if (!$user) {
       $res->status = -1;
       $res->message = __d("login", "Login failed, wrong email/password");
+      $res->class = "alert alert-danger";
       $res->data = $user;
     } else if ($user['activated'] == 0) {
       $res->status = 0;
       $res->message = __d("login", "Login failed, account is not activated.");
+      $res->class = "alert alert-danger";
       $res->data = $user;
       //$this->Session->write('user', $user);
     } else {
       $res->status = 1;
       $res->message = __d("login", "Login succeed");
+      $res->class = "alert alert-success";
       $res->data = $user;
       $this->Session->write('user', $user);
     }
-    $this->Session->setFlash($res->message);
+    //$this->Session->setFlash('Visit added successfully!', 'default', );
+    $this->Session->setFlash($res->message, 'default', array('class' => $res->class));
+    /*
+    <div id="flashMessage" class="alert alert-success">Algorithm results accepted successfully!</div>
+    */
     $this->set('user', $user);
     $this->autoRender = false;
     $this->redirect($this->referer());
@@ -314,7 +321,13 @@ class UsersController extends AppController {
  *  or MissingViewException in debug mode.
  */
   public function sign_up() {
+    //$this->authenticate_admin();
+    if($this->user_session()) {
+      $this->redirect("/");
+      exit;
+    } else {
 
+    }
   }
 
 

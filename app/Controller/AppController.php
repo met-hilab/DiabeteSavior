@@ -32,16 +32,24 @@ App::uses('Controller', 'Controller');
  * @link		http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
-  public $components = array('DebugKit.Toolbar', 'Session');
+  //public $components = array('DebugKit.Toolbar', 'Session');
+  public $components = array('Session', 'Cookie');
   public $current_user = array();
   public $helpers = array('Form' => array('className' => 'BootstrapForm'));
-  //public $components = array('Session');
+  
 
   
   public function beforeFilter() {
     parent::beforeFilter();
     $this->set('current_user', $this->Session->read('user'));
     $this->current_user = $this->Session->read('user');
+    //$unitType = $this->Cookie->read('unitType');
+    $unitType = $_COOKIE['unitType'];
+    if(empty($unitType)) {
+      setcookie("unitType", 'imperial', time() + 86400 * 90);  /* expire in 30 days */
+
+      //$this->Cookie->write('unitType', 'imperial', false, '3 months');
+    }
   }
 
   public function authenticate_user() {
@@ -52,6 +60,16 @@ class AppController extends Controller {
       return false;
     }
   }
+
+  public function user_session() {
+    $user = $this->Session->read('user');
+    if(!empty($user)) {
+      return $user;
+    } else {
+      return false;
+    }
+  }
+
   public function authenticate_admin() {
 
     $user = $this->Session->read('user');

@@ -1,5 +1,6 @@
 
 <!-- Demograpfics -->
+<?php //var_dump($visit['VitalsLab']); exit;?>
 
 <div class="col-md-6">
 
@@ -120,14 +121,33 @@
 	<table  class="table table-condensed">
 	    <tr>
             <th class="dimgray-header">Weight: </th> 
-            <td> <?php echo $visit['VitalsLab']['weight'] ?> kg </td>
-			<td> </td>
+            <td>
+              <?php if($unitType == 'metric'): ?>
+                <?php echo $visit['VitalsLab']['weight'] ?> kg
+              <?php else: ?>
+                <?php echo round($visit['VitalsLab']['weight'] * 2.20462); ?> lb
+              <?php endif; ?>
+            </td>
+			      <td> </td>
         </tr>
 
         <tr> 
             <th class="dimgray-header">Height: </th>
-            <td><?php echo $visit['VitalsLab']['height'] ?> cm </td>
-			<td> </td>
+            <td>
+              <?php if($unitType == 'metric'): ?>
+                <?php echo $visit['VitalsLab']['height'] ?> cm 
+              <?php else: ?>
+                <?php
+                $inches = 0;
+                $inches = $visit['VitalsLab']['height'] * 0.3937008;
+                $feets = floor($inches / 12);
+                $inches = ($inches % 12);
+                $value = $feets . ("'") . $inches . ('"');
+                ?>
+                <?php echo $value ?> inch 
+              <?php endif; ?>
+            </td>
+			      <td> </td>
         </tr>
         <tr>  
             <th class="dimgray-header">BMI: </th>
@@ -177,7 +197,13 @@
         </tr>
         <tr> 
             <th class="dimgray-header">Weight Goal: </th>
-            <td><?php echo $visit['Treatment']['weight_goal'] ?> kg</td>
+            <td>
+              <?php if($unitType == 'metric'): ?>
+                <?php echo $visit['Treatment']['weight_goal'] ?> kg
+              <?php else: ?>
+                <?php echo round($visit['Treatment']['weight_goal'] * 2.20462); ?> lb
+              <?php endif; ?>
+            </td>
         </tr>        
 </table>
 </div> 
