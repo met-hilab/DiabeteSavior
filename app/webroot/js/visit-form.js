@@ -89,9 +89,9 @@ function setUnitType() {
     match = height.match(regx);
     //console.log('value: ' + height);
     //console.log("regexmatch: " + match);
-    if(height > 0) {
+    //if(height > 0) {
       height = ftToM(height);
-    }
+    //}
     if(weight > 0) {
       weight = lbToKg(weight);
     }
@@ -111,7 +111,7 @@ function mToFt(value) {
   inches = 0;
   inches = value * 0.3937008;
   feets = Math.floor(inches / 12);
-  inches = (inches % 12).toFixed(1);
+  inches = Math.round(inches % 12);//.toFixed(1);
   value = feets + ("'") + inches + ('"');
   return value;
 }
