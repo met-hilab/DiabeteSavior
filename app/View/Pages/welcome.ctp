@@ -1,6 +1,7 @@
-<!--<h2 class="text-center"><img src="/img/hilab-logo.png">HIlab Medical Algorithm Repository</h2>-->
+<!--<h2 class="text-center"><img src="/img/hilab-logo.png">HIlab Medical Algorithm Repository</h2>
 
 <img src="/img/diabete-gestazionale_1.jpg" style="width:100%">
+-->
 
 <h2 class="text-center">HI Lab Medical Algorithm Repository</h2>
 <p>
