@@ -269,15 +269,22 @@ public function admin(){
          'conditions' =>array('Visit.patient_id' => $id)
         ));
      $a1c = array();
+     $bmi = array();
      
       foreach ($allVisits as &$value) {
         $temp_a1c = $this->Patient->Visit->VitalsLab->find('first', array(
             'conditions' => array('VitalsLab.id' => '$value')
         ));
         array_push($a1c,$temp_a1c);
+        $temp_bmi = $this->Patient->Visit->VitalsLab->find('first', array(
+            'conditions' => array('VitalsLab.id' => '$value')
+        ));
+        array_push($bmi, $temp_bmi);
       }
       $this->set('a1c', $a1c);
       $this->Session->write('a1c', $a1c);
+      $this->set('bmi', $bmi);
+      $this->Session->write('bmi', $bmi);
      // end trying to get all a1c //
       
       
@@ -314,17 +321,26 @@ public function admin(){
       throw $e;
     }
   }
+/** Get A1C Values */
 public function get_a1c_history(){
   
    $this->authenticate_user();
    $id = $this->Session->read('patient_id');
-   console.log($id);
-   
-   //$patient = $this->Patient->findById($id);
    $a1cHistory = $this->Patient->query("select vitals_labs.A1c, visits.created from vitals_labs inner join visits on vitals_labs.visit_id = visits.id where visits.patient_id = '$id'");
-   
+
    echo json_encode($a1cHistory); exit;
 }
+
+/** Get BMI Values */
+public function get_bmi_history(){
+  
+   $this->authenticate_user();
+   $id = $this->Session->read('patient_id');
+   $bmiHistory = $this->Patient->query("select vitals_labs.bmi, visits.created from vitals_labs inner join visits on vitals_labs.visit_id = visits.id where visits.patient_id = '$id'");
+   echo json_encode($bmiHistory); exit;
+}
+
+
  /**
  * Delete patient
  *

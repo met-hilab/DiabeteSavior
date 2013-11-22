@@ -348,110 +348,212 @@
   
   $(document).ready(function(){
     a1cHistory = Array();
+    bmiHistory = Array();
         $.get("/patients/get_a1c_history", function(res){
-      count = 0;
-      min = null;
-      max = null;
-      for(index in res) {
-       
-        dateString = res[index].visits.created.substring(0, 10);
-        console.log(dateString);
-        
-        visitTime = (new Date(dateString)).getTime();
-        dataPair = Array(visitTime, parseFloat(res[index].vitals_labs.A1c));
-        a1cHistory.push(dataPair);
-        
-        if(0 == count){min = visitTime-432000000;}
-        max = (visitTime+432000000);
-        console.log('min = ' + min);
-        console.log('max = ' + max);
-        count++;
-      }
-      chartObject = {
-        "label": "A1C history",
-        "data": a1cHistory
-      };
-      options = {
-        yaxis:{
-          min: 1,
-          max: 15
-        },
-        points:{
-          show: true
-        },
-        lines:{
-          show: true
-        },
-        font:{
-          size: 11,
-          lineHeight: 13,
-          style: "italic",
-          weight: "bold",
-          family: "sans-serif",
-          variant: "small-caps",
-          color: "#545454"
-          },
-          grid: {
-//            color: color
-//            backgroundColor: color/gradient or null
-//            margin: number or margin object
-//            labelMargin: number
-//            axisMargin: number
-//            markings: array of markings or (fn: axes -> array of markings)
-//            borderWidth: number or object with "top", "right", "bottom" and "left" properties with different widths
-//            borderColor: color or null or object with "top", "right", "bottom" and "left" properties with different colors
-//            minBorderMargin: number or null
-//            clickable: boolean
-            hoverable: true
-//            autoHighlight: boolean
-//            mouseActiveRadius: number
-        },
-        xaxis: {
-          max: max,
-          min: min,
-          mode: "time",
-          timeformat: "%m.%d.%y"
-       }};
-      console.log(chartObject["data"]);
-     
-        $.plot("#a1c-chart", [chartObject["data"]], options);
-      
-    }, 'json');
-    
-    
-    var previousPoint = null;
-    var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
- 
+            count = 0;
+            min = null;
+            max = null;
+            for(index in res) {
 
-    $("#a1c-chart").bind("plothover", function (event, pos, item) {                         
-        if (item) {
-            if (previousPoint != item.dataIndex) {
-                previousPoint = item.dataIndex;
-                 
-                $("#tooltip").remove();
-                var date = new Date(item.datapoint[0]);
-                var year = date.getFullYear();
-                var month = date.getMonth();
-                var day = date.getDate()+1;
-                var hours = date.getHours();
-                var minutes = date.getMinutes();
-                
-                
-                
-                var x = item.datapoint[0];
-                var y = item.datapoint[1];                
- 
-                console.log(x+","+y)
- 
-                showTooltip(item.pageX, item.pageY,
-                    "<strong>" + months[month] + " " + day + ", " + year + "<br/>A1C: " + y + "</strong>");
+              dateString = res[index].visits.created.substring(0, 10);
+              console.log(dateString);
+
+              visitTime = (new Date(dateString)).getTime();
+              dataPair = Array(visitTime, parseFloat(res[index].vitals_labs.A1c));
+              a1cHistory.push(dataPair);
+
+              if(0 == count){min = visitTime-432000000;}
+              max = (visitTime+432000000);
+              console.log('min = ' + min);
+              console.log('max = ' + max);
+              count++;
             }
-        }
-        else {
-            $("#tooltip").remove();
-            previousPoint = null;
-        }
-    });
+            a1cChartObject = {
+              "label": "A1C history",
+              "data": a1cHistory
+            };
+            a1cOptions = {
+              yaxis:{
+                min: 1,
+                max: 15
+              },
+              points:{
+                show: true
+              },
+              lines:{
+                show: true
+              },
+              font:{
+                size: 11,
+                lineHeight: 13,
+                style: "italic",
+                weight: "bold",
+                family: "sans-serif",
+                variant: "small-caps",
+                color: "#545454"
+                },
+                grid: {
+      //            color: color
+      //            backgroundColor: color/gradient or null
+      //            margin: number or margin object
+      //            labelMargin: number
+//                  axisMargin: 10,
+      //            markings: array of markings or (fn: axes -> array of markings)
+      //            borderWidth: number or object with "top", "right", "bottom" and "left" properties with different widths
+      //            borderColor: color or null or object with "top", "right", "bottom" and "left" properties with different colors
+      //            minBorderMargin: number or null
+      //            clickable: boolean
+                  hoverable: true
+      //            autoHighlight: boolean
+      //            mouseActiveRadius: number
+              },
+              xaxis: {
+                max: max,
+                min: min,
+                mode: "time",
+                timeformat: "%m.%d.%y"
+             }};
+//            console.log(chartObject["data"]);
+
+            
+
+          }, 'json');
+    
+    
+   /**get bmi history */
+        $.get("/patients/get_bmi_history", function(res){
+           bmiCount = 0;
+           bmiMin = null;
+           bmiMax = null;
+           console.log('result bmi = '+ res);
+           for(index in res) {
+
+             bmiDateString = res[index].visits.created.substring(0, 10);
+             console.log(bmiDateString);
+
+             bmiVisitTime = (new Date(bmiDateString)).getTime();
+             bmiDataPair = Array(bmiVisitTime, parseFloat(res[index].vitals_labs.bmi));
+             bmiHistory.push(bmiDataPair);
+
+             if(0 == bmiCount){bmiMin = bmiVisitTime-432000000;}
+             bmiMax = (bmiVisitTime+432000000);
+             console.log('min = ' + bmiMin);
+             console.log('max = ' + bmiMax);
+             bmiCount++;
+           };
+           bmiChartObject = {
+             "label": "BMI history",
+             "data": bmiHistory
+           };
+           bmiOptions = {
+             yaxis:{
+               min: 5,
+               max: 70
+             },
+             points:{
+               show: true
+             },
+             lines:{
+               show: true
+             },
+             font:{
+               size: 11,
+               lineHeight: 13,
+               style: "italic",
+               weight: "bold",
+               family: "sans-serif",
+               variant: "small-caps",
+               color: "#545454"
+               },
+               grid: {
+     //            color: color
+     //            backgroundColor: color/gradient or null
+     //            margin: number or margin object
+     //            labelMargin: number
+     //            axisMargin: number
+     //            markings: array of markings or (fn: axes -> array of markings)
+     //            borderWidth: number or object with "top", "right", "bottom" and "left" properties with different widths
+     //            borderColor: color or null or object with "top", "right", "bottom" and "left" properties with different colors
+     //            minBorderMargin: number or null
+     //            clickable: boolean
+                 hoverable: true
+     //            autoHighlight: boolean
+     //            mouseActiveRadius: number
+             },
+             xaxis: {
+               max: bmiMax,
+               min: bmiMin,
+               mode: "time",
+               timeformat: "%m.%d.%y"
+            }};
+//            console.log(chartObject["data"]);
+
+//             $.plot("#bmi-chart", [chartObject["data"]], options);
+
+         }, 'json');
+
+   var previousPoint = null;
+   var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+   $("#a1c-chart").bind("plothover", function (event, pos, item) {                         
+       if (item) {
+           if (previousPoint != item.dataIndex) {
+               previousPoint = item.dataIndex;
+
+               $("#tooltip").remove();
+               var date = new Date(item.datapoint[0]);
+               var year = date.getFullYear();
+               var month = date.getMonth();
+               var day = date.getDate()+1;
+               var hours = date.getHours();
+               var minutes = date.getMinutes();
+
+
+
+               var x = item.datapoint[0];
+               var y = item.datapoint[1];                
+
+               console.log(x+","+y)
+
+               showTooltip(item.pageX, item.pageY,
+                   "<strong>" + months[month] + " " + day + ", " + year + "<br/>A1C: " + y + "</strong>");
+           }
+       }
+       else {
+           $("#tooltip").remove();
+           previousPoint = null;
+       }
+   });
+
+       $("#bmi-chart").bind("plothover", function (event, pos, item) {                         
+       if (item) {
+           if (previousPoint != item.dataIndex) {
+               previousPoint = item.dataIndex;
+
+               $("#tooltip").remove();
+               var date = new Date(item.datapoint[0]);
+               var year = date.getFullYear();
+               var month = date.getMonth();
+               var day = date.getDate()+1;
+               var hours = date.getHours();
+               var minutes = date.getMinutes();
+
+
+
+               var x = item.datapoint[0];
+               var y = item.datapoint[1];                
+
+               console.log(x+","+y)
+
+               showTooltip(item.pageX, item.pageY,
+                   "<strong>" + months[month] + " " + day + ", " + year + "<br/>BMI: " + y + "</strong>");
+           }
+       }
+       else {
+           $("#tooltip").remove();
+           previousPoint = null;
+       }
+   });
 
  
          
@@ -473,8 +575,14 @@ function showTooltip(x, y, contents) {
     
   });
   
-  
-  
+$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+    if ($(e.target).attr('href') == "#charts")
+    {
+         $.plot("#a1c-chart", [a1cChartObject["data"]], a1cOptions);
+          $.plot("#bmi-chart", [bmiChartObject["data"]], bmiOptions);
+    }
+});
+
 //  $("#run_a1c").click(function(){
 //    $.get("/patients/get_a1c_history", function(res){
 //      console.log(res);

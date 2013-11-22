@@ -43,6 +43,7 @@ $cakeDescription = __d('cake_dev', 'Diabetes Savior: Type II Diabetes Infomatic 
     echo $this->Html->script('jquery.validate.min');
     echo $this->Html->script('flot/jquery.flot');
     echo $this->Html->script('flot/jquery.flot.time');
+    echo $this->Html->script('flot/jquery.flot.navigate');
 		echo $this->Html->script('bootstrap');
     echo $this->Html->script('modernizr');
     echo $this->Html->script('main');
