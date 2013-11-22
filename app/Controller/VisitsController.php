@@ -50,7 +50,7 @@ class VisitsController extends AppController {
  *  or MissingViewException in debug mode.
  */  
   public function index(){      
-
+ 
         $visits = $this->Visit->find('all'); 
         $this->set('visits', $visits);
   }
@@ -381,6 +381,23 @@ class VisitsController extends AppController {
       $medhistory = array("hypo" => $hypo, "weight" => $weight_gain, "renal_gu" => $renal_gu, "gi_sx" => $gi_sx,
       		"chf" => $chf, "cvd" => $cvd, "bone" => $bone );
       $this->Algorithm->setMedhistory($medhistory);
+      
+      /* get all medicines */    
+      $this->loadModel('Medicine');  // Load other model      
+      $med = $this->Medicine->find('all');
+      $med_amount = $this->Medicine->find('count');
+      for ($i=0; $i<$med_amount; $i++){
+        $medicines[$i] = array(
+          $med[$i]['Medicine']['medicine_name'] => array(
+            "hypo" => $med[$i]['Medicine']['hypo'], 
+            "weight" => $med[$i]['Medicine']['weight'], 
+            "renal_gu" => $med[$i]['Medicine']['renal_gu'], 
+            "gi_sx" => $med[$i]['Medicine']['gi_sx'], 
+            "chf" => $med[$i]['Medicine']['chf'], 
+            "cvd" => $med[$i]['Medicine']['cvd'], 
+            "bone" => $med[$i]['Medicine']['bone']));
+      }        
+      pr($medicines);exit;
       
       /* run glcymic control algorithm */
       $this->Algorithm->gcAlgorithm();

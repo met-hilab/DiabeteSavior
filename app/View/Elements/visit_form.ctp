@@ -64,7 +64,7 @@ $formDefaults = array(
 <?php echo $this->Form->input('VitalsLab.f_height', array('label' => array('class' => 'col-lg-2 control-label', 'text' => '<font color="red">* </font>Height'), 'type' => 'text')) ?>
 <?php echo $this->Form->hidden('VitalsLab.weight') ?>
 <?php echo $this->Form->hidden('VitalsLab.height') ?>
-<?php echo $this->Form->input('VitalsLab.A1c', array('label' => array('class' => 'col-lg-2 control-label', 'text' => '<font color="red">* </font>Glycated hemoglobin (A1C)'))) ?>
+<?php echo $this->Form->input('VitalsLab.A1c', array('placeholder' => '%', 'label' => array('class' => 'col-lg-2 control-label', 'text' => '<font color="red">* </font>Glycated hemoglobin (A1C)'))) ?>
 <!--
 <?php echo $this->Form->input('VitalsLab.bps', array('label' => array('class' => 'col-lg-2 control-label', 'text' => '<font color="red">* </font>Systolic Blood Pressure'))) ?>
 <?php echo $this->Form->input('VitalsLab.bpd', array('label' => array('class' => 'col-lg-2 control-label', 'text' => '<font color="red">* </font>Diastolic Blood Pressure'))) ?>
@@ -81,7 +81,7 @@ $formDefaults = array(
 <!-- treatments -->
 <h3>Therapy Goals</h3>
 <?php echo $this->Form->hidden('Treatment.id') ?>
-<?php echo $this->Form->input('Treatment.a1c_goal', array('label' => array('class' => 'col-lg-2 control-label', 'text' => '<font color="red">* </font>Glycated hemoglobin (A1C) Goal'))) ?>
+<?php echo $this->Form->input('Treatment.a1c_goal', array('placeholder' => '%', 'label' => array('class' => 'col-lg-2 control-label', 'text' => '<font color="red">* </font>Glycated hemoglobin (A1C) Goal'))) ?>
 <?php echo $this->Form->input('Treatment.f_weight_goal', array('label' => array('class' => 'col-lg-2 control-label', 'text' => '<font color="red">* </font>Weight Goal'))) ?>
 <?php echo $this->Form->hidden('Treatment.weight_goal') ?>
 
