@@ -51,8 +51,9 @@
     select: {    
       required: true
     },
-    ZIP:{
-      regex:'^(\d{5}-\d{4}|\d{5}|\d{9})$|^([a-zA-Z]\d[a-zA-Z]( )?\d[a-zA-Z]\d)$'
+   "data[Patient][postal_code]":{
+         minlength: 5,
+         digits: true
     },
     
     note:{
@@ -118,14 +119,15 @@
         
         regex:'Height must be a number bigger than 0'
       },
-      ZIP:{
-          regex: 'Please enter a validate USA zipcode'
+      "data[Patient][postal_code]":{
+          minlength: 'Please enter a validate USA zipcode',
+          digits: 'Please enter a validate USA zipcode'
       },
       
-      "data[VitalsLab][A1c]":'A1c must a number between 3 to 20. If not in the range, go to the doctor now.',
-      "data[VitalsLab][bps]":'Blood pressure must between 30 to 250.If not in the range, go to the doctor now.',
-      "data[VitalsLab][bpd]":'Blood pressure must between 30 to 250.If not in the range, go to the doctor now.',
-      "data[Treatment][a1c_goal]":'A1c must a number between 3 to 20. If not in the range'
+      "data[VitalsLab][A1c]":'A1c must a number between 3 to 20. ',
+      "data[VitalsLab][bps]":'Blood pressure must between 30 to 250.',
+      "data[VitalsLab][bpd]":'Blood pressure must between 30 to 250.',
+      "data[Treatment][a1c_goal]":'A1c must a number between 3 to 20.'
   },
  
   highlight: function(element) {
