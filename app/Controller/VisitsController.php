@@ -397,7 +397,7 @@ class VisitsController extends AppController {
             "cvd" => $med[$i]['Medicine']['cvd'], 
             "bone" => $med[$i]['Medicine']['bone']));
       }        
-      pr($medicines);exit;
+      //pr($medicines);exit;
       
       /* run glcymic control algorithm */
       $this->Algorithm->gcAlgorithm();

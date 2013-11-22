@@ -247,12 +247,18 @@ class AlgorithmComponent extends Component {
     		}
     	}
     	if ($this->medicine2 !== "none"){
-    		if ($this->patientEffects($this->medicine2) !== "")
+    		if ($this->patientEffects($this->medicine2) !== ""){
+    			if ($this->alert === "")
+    				$this->alert = "Patient is at higher risk of side effects due to contraindications with following medications:<br>";   			 
     			$this->alert .= $this->medicine2. ": ". $this->patientEffects($this->medicine2). "<br>";
+    		}
     	}
     	if ($this->medicine3 !== "none"){
-    		if ($this->patientEffects($this->medicine3) !== "")
+    		if ($this->patientEffects($this->medicine3) !== ""){
+    			if ($this->alert === "")
+    				$this->alert = "Patient is at higher risk of side effects due to contraindications with following medications:<br>";   			 
     			$this->alert .= $this->medicine3. ": ". $this->patientEffects($this->medicine3). "<br>";
+    		}
     	}
     }
     
