@@ -38,7 +38,7 @@ class VisitsController extends AppController {
   public function beforeFilter() {
     parent::beforeFilter();
     $this->authenticate_user();
-    $this->set('unitType', $_COOKIE['unitType']);
+    //$this->set('unitType', $_COOKIE['unitType']);
   }
 
 /**

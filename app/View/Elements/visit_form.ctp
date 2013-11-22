@@ -56,8 +56,14 @@ $formDefaults = array(
 <div class="form-group">
   <label class="col-lg-2 control-label">Unit type</label>
   <div class="btn-group">
+    <?php if($unitType == 'imperial'): ?>
     <a href="#" class="btn btn-primary switch-unit" data-unit='imperial'>lbs / ft</a>
     <a href="#" class="btn btn-default switch-unit" data-unit='metric'>kg / cm</a>
+    <?php else: ?>
+    <a href="#" class="btn btn-default switch-unit" data-unit='imperial'>lbs / ft</a>
+    <a href="#" class="btn btn-primary switch-unit" data-unit='metric'>kg / cm</a>
+    <?php endif; ?>
+    
   </div>
 </div>
 <?php echo $this->Form->input('VitalsLab.f_weight', array('label' => array('class' => 'col-lg-2 control-label', 'text' => '<font color="red">* </font>Weight'), 'type' => 'text')) ?>

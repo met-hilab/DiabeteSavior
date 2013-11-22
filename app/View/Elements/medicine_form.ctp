@@ -1,5 +1,16 @@
 <?php $medicine_options = array(0,1,2,3); ?>
-<?php echo $this->Form->create('Medicine'); ?>
+<?php echo $this->Form->create('Medicine',  
+  array(
+    'inputDefaults' =>
+      array(
+        'format' => array('div', 'label', 'between', 'input',  'after', 'error'),
+        'error' => array('attributes' => [
+          'style' => 'position: absolute;right: 15px;top: 0px;',
+          'class' => 'label label-danger'
+        ])
+      )
+  )
+); ?>
 
 <div class="form-group">
   <?php echo $this->Form->label('medicine_name', '<font color="red">* </font>Name', array('class' => 'col-lg-1 control-label')); ?>

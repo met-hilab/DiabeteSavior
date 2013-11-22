@@ -37,8 +37,8 @@ class BootstrapFormHelper extends FormHelper {
     'div' => array('class' => 'form-group'),
     'label' => array('class' => 'control-label'),
     'between' => '',
-    'after' => ''
-    //'error' => array('attributes' => array('wrap' => 'span', 'class' => 'help-inline')),
+    'after' => '',
+    'error' => array('attributes' => array('wrap' => 'span', 'class' => 'alert alert-danger')),
   );
 
   protected $_model = '';

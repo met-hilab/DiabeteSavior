@@ -50,6 +50,7 @@ class AppController extends Controller {
 
       //$this->Cookie->write('unitType', 'imperial', false, '3 months');
     }
+    $this->set('unitType', $unitType);
   }
 
   public function authenticate_user() {

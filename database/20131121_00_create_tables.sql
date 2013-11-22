@@ -105,7 +105,7 @@ CREATE TABLE `medicines` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL,
-  `medicine_class` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `medicine_class` varchar(255) COLLATE utf8_unicode_ci NULL,
   `medicine_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `min_dose` float NOT NULL,
   `max_dose` float NOT NULL,
@@ -121,6 +121,7 @@ CREATE TABLE `medicines` (
   UNIQUE KEY `medicine_name` (`medicine_name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+ALTER TABLE `cs673`.`medicines` 
 
 --
 -- Table structure for table `patients`
