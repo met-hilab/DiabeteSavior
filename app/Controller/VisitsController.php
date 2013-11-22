@@ -259,6 +259,9 @@ class VisitsController extends AppController {
     $p_id = $this->Session->read('patient_id');
     try{
       $patient = $this->Visit->Patient->findById($p_id);
+      if($this->current_user['id'] != $patient['Patient']['user_id'] && $this->current_user['role'] < 1) {
+        throw new ForbiddenException;
+      }
       $this->set('patient', $patient);
       $this->Session->write('patient_id', $p_id);
     }catch(NotFoundException $e){

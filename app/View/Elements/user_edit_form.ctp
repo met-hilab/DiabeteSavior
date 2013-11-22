@@ -12,17 +12,24 @@ echo $this->Form->input('Profile.lastname');
 echo $this->Form->input('Profile.phone');
 ?>
 <?php if($current_user['role'] > 0): ?>
+<?php
+  if($this->request->data['User']['id'] == 1){
+    $disabledArray = array('disabled' => 'disabled');
+  } else {
+    $disabledArray = array();
+  }
+?>
 
 <div class="form-group">
   <label class="control-label">Role</label>
   <div class="checkbox">
-    <label><?php echo $this->Form->checkbox('role'); ?> Administrator</label>
+    <label><?php echo $this->Form->checkbox('role', $disabledArray); ?> Administrator</label>
   </div>
 </div>
 <div class="form-group">
   <label class="control-label">Status</label>
   <div class="checkbox">
-    <label><?php echo $this->Form->checkbox('activated'); ?> Activated</label>
+    <label><?php echo $this->Form->checkbox('activated', $disabledArray); ?> Activated</label>
   </div>
 </div>
 
