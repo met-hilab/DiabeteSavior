@@ -63,7 +63,7 @@ class AlgorithmComponent extends Component {
             "Bromocriptine_QR" =>  array("hypo" =>"0", "weight" =>"0", "renal_gu" => "0", 
     						"gi_sx" => "2", "chf" => "0", "cvd" => "1", "bone" => "0"),
             "SU_GLN" =>  array("hypo" =>"2", "weight" =>"3", "renal_gu" => "3", 
-    						"gi_sx" => "0", "chf" => "0", "cvd" => "1", "bone" => "0"),
+    						"gi_sx" => "0", "chf" => "0", "cvd" => "2", "bone" => "0"),
             "BasalInsulin" =>  array("hypo" =>"3", "weight" =>"3", "renal_gu" => "3", 
     						"gi_sx" => "0", "chf" => "0", "cvd" => "0", "bone" => "0"),
             "SGLT_2" =>  array("hypo" =>"0", "weight" =>"1", "renal_gu" => "3", 
@@ -249,14 +249,14 @@ class AlgorithmComponent extends Component {
     	if ($this->medicine2 !== "none"){
     		if ($this->patientEffects($this->medicine2) !== ""){
     			if ($this->alert === "")
-    				$this->alert = "<b>Patient is at higher risk of side effects due to contraindications with following medications:<b><br>";   			 
+    				$this->alert = "<b>Patient is at higher risk of side effects due to contraindications with following medications:</b><br>";   			 
     			$this->alert .= $this->medicine2. ": ". $this->patientEffects($this->medicine2). "<br>";
     		}
     	}
     	if ($this->medicine3 !== "none"){
     		if ($this->patientEffects($this->medicine3) !== ""){
     			if ($this->alert === "")
-    				$this->alert = "<b>Patient is at higher risk of side effects due to contraindications with following medications:<b><br>";   			 
+    				$this->alert = "<b>Patient is at higher risk of side effects due to contraindications with following medications:</b><br>";   			 
     			$this->alert .= $this->medicine3. ": ". $this->patientEffects($this->medicine3). "<br>";
     		}
     	}

@@ -393,18 +393,22 @@ class VisitsController extends AppController {
       $this->loadModel('Medicine');  // Load other model      
       $med = $this->Medicine->find('all');
       $med_amount = $this->Medicine->find('count');
+      $meds = array(array());
       for ($i=0; $i<$med_amount; $i++){
-        $medicines[$i] = array(
-          $med[$i]['Medicine']['medicine_name'] => array(
-            "hypo" => $med[$i]['Medicine']['hypo'], 
+      	$mname = $med[$i]['Medicine']['medicine_name'];
+        $meds[$mname] = array(
+          	"hypo" => $med[$i]['Medicine']['hypo'], 
             "weight" => $med[$i]['Medicine']['weight'], 
             "renal_gu" => $med[$i]['Medicine']['renal_gu'], 
             "gi_sx" => $med[$i]['Medicine']['gi_sx'], 
             "chf" => $med[$i]['Medicine']['chf'], 
             "cvd" => $med[$i]['Medicine']['cvd'], 
-            "bone" => $med[$i]['Medicine']['bone']));
+            "bone" => $med[$i]['Medicine']['bone']);
       }        
-      //pr($medicines);exit;
+      //pr($meds);exit;
+      
+      /* set medicines in algorithm */
+      $this->Algorithm->setMedicines($meds);
       
       /* run glcymic control algorithm */
       $this->Algorithm->gcAlgorithm();
