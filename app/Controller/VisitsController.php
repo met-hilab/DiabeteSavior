@@ -271,6 +271,13 @@ class VisitsController extends AppController {
     try{
       $visit = $this->Visit->findById($v_id);
       $this->set('visit', $visit);
+      $treatment = $this->Visit->Treatment->find('first', array(
+        'conditions' => array('visit_id' => $v_id)));
+      $t_id = $treatment['Treatment']['id'];
+      $algorithm_results = $this->Visit->Treatment->TreatmentRunAlgorithm->find('first', array(
+        'conditions' => array('treatment_id' => $t_id)));
+            //pr($algorithm_results);exit;
+      $this->set('algorithm_results', $algorithm_results);
     } catch(NotFoundException $e){
       throw $e;
     }

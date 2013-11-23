@@ -65,7 +65,16 @@
       'label' => false, 
       'value' => str_replace('<br>', "\n", $medalert))); ?>
     <br>
-    <?php echo $this->Form->submit('Done'); ?>
+
+<div class="control-group">
+  <div style="padding:5px; display: inline-block;">
+    <button id="done" name="done" class="btn btn-primary">Done</button>
+  </div>
+  <div style="padding:5px; display: inline-block;">
+    <a href="/visits/gcalgorithm" class="btn btn-primary">Cancel</a>
+  </div>
+</div>
+
   </div>
 </div>
 
