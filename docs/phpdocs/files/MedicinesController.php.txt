@@ -1,0 +1,111 @@
+<?php
+/**
+ * Medicine controller.
+ *
+ * This file will render views from views/medicines/
+ *
+ * PHP 5
+ *
+ * Copyright (c) Wenjie Shi (wjshi@bu.edu) 
+ *
+ * Licensed under The MIT License
+ * For full copyright and license information, please see the LICENSE.txt
+ * Redistributions of files must retain the above copyright notice.
+ *
+ * @copyright     Copyright (c) Wenjie Shi(wjshi@bu.edu)
+ * @link          http://github.com/bumetcs/cs673
+ * @package       app.Controller
+ * @since         CakePHP(tm) v 0.2.9
+ * @license       http://www.opensource.org/licenses/mit-license.php MIT License
+ */
+App::uses('AppController', 'Controller');
+
+class MedicinesController extends AppController {
+
+    public $uses = array();
+
+    public function add() {
+       $this->authenticate_admin();
+        if ($this->request->is('post')){
+            $this->Medicine->create();
+            if($this->Medicine->save($this->data)){
+                $id = $this->Medicine->getLastInsertId();
+                $this->redirect(array('action'=>'show', $id));
+            }else{
+                $this->Session->setFlash('Medicine is not saved.', 'default', array('class' => 'alert alert-danger'));
+            }
+        }
+    }
+
+
+    public function index(){
+        //$this->authenticate_admin();
+        $medicines = $this->Medicine->find('all');
+        $this->set('medicines',$medicines);
+    }
+
+
+    public function edit(){
+        $this->authenticate_admin();
+        $id = $this->request->params['pass'][0];
+        $this->Medicine->id = $id;
+        if($this->Medicine->exists()){
+            if($this->request->is('post') || $this->request->is('put')){
+                $data = $this->request->data;
+                    //save medicine
+                if($this->Medicine->save($data)){
+                    $id = $this->Medicine->id;
+                    $this->Session->setFlash('Medicine was edited.', 'default', array('class' => 'alert alert-success'));
+                    $this->redirect(array('action'=>'show', $id));
+                } else {
+                    $this->Session->setFlash('Unable to edit medicine. Please, try again.', 'default', array('class' => 'alert alert-danger'));
+                }
+            } else {
+        // Medicine exists and this is a get request => render the view, pass exsiting date.
+                $this->request->data = $this->Medicine->read();
+            }
+        } else {
+            $this->Session->setFlash('The medicine you are trying to edit does not exist.', 'default', array('class' => 'alert alert-danger'));
+            $this->redirect(array('action' => 'show'));
+        }
+    }
+
+     public function show(){
+        $this->authenticate_user();
+        $id = $this->request->params['pass'][0];
+        try{
+            $medicine = $this->Medicine->findById($id);
+            $this->set('medicine', $medicine);
+        }catch(NotFoundException $e){
+            throw $e;
+        }
+    }
+
+
+    public function delete(){
+        $this->authenticate_admin();
+        $id = $this->request->params['pass'][0];
+        $medicine = $this->Medicine->findById($id);
+        if($this->request->is('get') ){
+            $this->Session->setFlash('Delete method is not allowed.', 'default', array('class' => 'alert alert-danger'));
+            $this->redirect(array('action' => 'show'));
+        } else {
+            if(!$id) {
+                $this->Session->setFlash('Invalid id for medicine', 'default', array('class' => 'alert alert-danger'));
+                $this->redirect(array('action'=>'show'));
+            }else{
+                if( $this->Medicine->delete( $id ) ){
+                    $this->Session->setFlash('Medicine deleted.', 'default', array('class' => 'alert alert-success'));
+                    $this->redirect(array('action'=>'index'));
+                }else{
+                    $id = $this->Medicine->id;  
+                    $this->Session->setFlash('Unable to delete medicine.', 'default', array('class' => 'alert alert-danger'));
+                    $this->redirect(array('action' => 'show', $id));
+                }
+            }
+        }
+    }
+
+}
+
+?>
