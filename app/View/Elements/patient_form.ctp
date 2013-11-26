@@ -57,7 +57,7 @@
 <div class="form-group">
   <?php echo $this->Form->label('street', 'Address', array('class' => 'col-lg-1 control-label')); ?>
   <div class="col-lg-4">
-    <?php echo $this->Form->input('street', array('div' => false, 'label' => false)); ?>
+    <?php echo $this->Form->input('Address', array('div' => false, 'label' => false)); ?>
   </div>
 </div>
 
