@@ -181,18 +181,66 @@ class algtest extends PHPUnit_Framework_TestCase {
 		
 	}
 
+	function test1_gcalgorithm(){
+	
+		// Turn off all error reporting
+		//error_reporting(0);
+	
+		// Report all errors except E_NOTICE
+		// This is the default value set in php.ini
+		error_reporting(E_ALL ^ E_NOTICE);
+	
+		// Medicine list
+		// "Metformin", "GLP_1RA", "DPP4_i", "AG_i", "SGLT_2","TZD", "SU_GLN",  "BasalInsulin", "Colesevelam",
+		// "Bromocriptine_QR"
+	
+		// patient medical history
+		$medhistory = array("hypo" => "yes", "weight" => "yes", "renal_gu" => "yes", "gi_sx" => "yes",
+				"chf" => "yes", "yes" => "yes", "bone" => "yes" );
+
+
+		// start at dual therapy ac1 > 9 and no symptoms
+		$testAllergy = array("none");
+		$result= $this->algTest(1, 8.2, 6.4, 6.0, false, $testAllergy, "none", "none", "none", $medhistory);
+		$this->checkResults($result,"Starting with dual therapy.",
+				"lifestyle + dual therapy",
+				"Metformin", "GLP_1RA","none");
+		
+		// start at tiple therapy ac1 > 9 and no symptoms
+		$testAllergy = array("none");
+		$result= $this->algTest(2, 9.1, 6.4, 6.0, false, $testAllergy, "none", "none", "none", $medhistory);
+		$this->checkResults($result,"Start with triple therapy.",
+				"lifestyle + triple therapy",
+				"Metformin", "GLP_1RA","TZD");
+
+		// start at tiple therapy ac1 > 9 and symptoms
+		$testAllergy = array("none");
+		$result= $this->algTest(3, 9.1, 6.4, 6.0, true, $testAllergy, "none", "none", "none", $medhistory);
+		$this->checkResults($result,"Start with insulin",
+				"lifestyle + insulin",
+				"none", "none","none");
+		
+		// start at tiple therapy ac1 > 9 and no symptoms
+		$testAllergy = array("Metformin", "GLP_1RA","DPP4_i","AG_i","TZD");
+		$result= $this->algTest(4, 9.1, 6.4, 6.0, false, $testAllergy, "none", "none", "none", $medhistory);
+		$this->checkResults($result,"Start with triple therapy.",
+				"lifestyle + triple therapy",
+				"SGLT_2", "BasalInsulin","Colesevelam");
+		
+	}
+	
 	function checkResults($result, $rdecision, $ther, $med1, $med2, $med3){
 		$decision = $result->getDecision();
 		$therapy = $result->getTherapy();
-		$med1 = $result->getMedicine1();
-		$med2 = $result->getMedicine2();
-		$med3 = $result->getMedicine3();
+		$medicine1 = $result->getMedicine1();
+		$medicine2 = $result->getMedicine2();
+		$medicine3 = $result->getMedicine3();
 		
 		$this->assertEquals($decision, $rdecision);
 		$this->assertEquals($therapy, $ther);
-		$this->assertEquals($med1, $med1);
-		$this->assertEquals($med2, $med2);
-		$this->assertEquals($med3, $med3);
+		$this->assertEquals($medicine1, $med1);
+		$this->assertEquals($medicine2, $med2);
+		$this->assertEquals($medicine3, $med3);
 		
 	}
 
