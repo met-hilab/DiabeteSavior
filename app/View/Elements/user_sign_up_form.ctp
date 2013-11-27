@@ -2,8 +2,8 @@
 
 <?php echo $this->Form->input('email'); ?>
 
-<?php echo $this->Form->input('password'); ?>
-<?php echo $this->Form->input('password_confirmation'); ?>
+<?php echo $this->Form->input('password', array('type'=>'password', 'required' => 'true')); ?>
+<?php echo $this->Form->input('password_confirmation', array('type'=>'password', 'required' => 'true')); ?>
 
 <?php echo $this->Form->input('Profile.firstname'); ?>
 
