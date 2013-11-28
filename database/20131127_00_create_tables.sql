@@ -1,3 +1,4 @@
+DROP DATABASE `cs673`;
 CREATE DATABASE  IF NOT EXISTS `cs673` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci */;
 USE `cs673`;
 /*
@@ -144,12 +145,11 @@ CREATE TABLE `profiles` (
 -- Table structure for treatment_run_algorithms
 -- ----------------------------
 CREATE TABLE `treatment_run_algorithms` (
-  `id` int(10) unsigned NOT NULL,
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL,
   `treatment_id` int(10) unsigned NOT NULL,
-  `type` enum('lifestyle modification','monotherapy','dual_therapy','triple_therapy') collate utf8_unicode_ci NOT NULL,
-  `recommendations` text collate utf8_unicode_ci,
+  `type` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,  `recommendations` text collate utf8_unicode_ci,
   `medicine_name_one` varchar(255) collate utf8_unicode_ci default NULL,
   `dose_one` float default NULL,
   `medicine_name_two` varchar(255) collate utf8_unicode_ci default NULL,
