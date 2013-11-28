@@ -66,7 +66,7 @@ $formDefaults = array(
   </div>
 </div>
 <?php echo $this->Form->input('VitalsLab.f_weight', array('label' => array('class' => 'col-lg-2 control-label', 'text' => '<font color="red">* </font>Weight'), 'type' => 'text')) ?>
-<?php echo $this->Form->input('VitalsLab.f_height', array('label' => array('class' => 'col-lg-2 control-label', 'text' => '<font color="red">* </font>Height'), 'type' => 'text')) ?>
+<?php echo $this->Form->input('VitalsLab.f_height', array('label' => array('class' => 'col-lg-2 control-label', 'text' => '<font color="red">* </font>Height'), 'type' => 'text', 'value' => $p_height)) ?>
 <?php echo $this->Form->hidden('VitalsLab.weight') ?>
 <?php echo $this->Form->hidden('VitalsLab.height') ?>
 <?php echo $this->Form->input('VitalsLab.A1c', array('placeholder' => '%', 'label' => array('class' => 'col-lg-2 control-label', 'text' => '<font color="red">* </font>Glycated hemoglobin (A1C)'))) ?>

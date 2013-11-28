@@ -67,7 +67,7 @@ class VisitsController extends AppController {
     $p_id = $this->Session->read('patient_id');
     $this->Visit->Patient->id = $p_id;
     $patient = $this->Visit->Patient->read();
-    $this->set('patient', $patient);
+    $this->set('patient', $patient);    
     $this->request->data['Visit']['patient_id'] = $p_id;
     $this->request->data['DrugAllergy']['patient_id'] = $p_id;    
     $visit = $this->Visit->find('first', array(
@@ -78,7 +78,9 @@ class VisitsController extends AppController {
       $this->_add();
     } else {
       $this->request->data['DrugAllergy'] = $patient['DrugAllergy'];
-      $this->request->data['MedhistoryComplaint'] = $visit['MedhistoryComplaint'];  
+      $this->request->data['MedhistoryComplaint'] = $visit['MedhistoryComplaint'];
+      $p_height = $visit['VitalsLab']['height'];
+      $this->set('p_height', $p_height);
       $this->request->data['MedhistoryComplaint']['complaints'] = null;   
     }
   }
