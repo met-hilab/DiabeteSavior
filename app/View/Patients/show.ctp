@@ -182,14 +182,35 @@
 	
 	    <tr>
             <th class="dimgray-header">Weight: </th> 
-            <td> <?php echo $lastVisit['VitalsLab']['weight']?: 'unknown'; ?> kg</td>
-			<td>  </td>
+<!--            <td> <?php echo $lastVisit['VitalsLab']['weight']?: 'unknown'; ?> kg</td> -->
+            <td>
+              <?php if($unitType == 'metric'): ?>
+                <?php echo $lastVisit['VitalsLab']['weight'] ?> kg
+              <?php else: ?>
+                <?php echo round($lastVisit['VitalsLab']['weight'] * 2.20462); ?> lb
+              <?php endif; ?>
+            </td>
+            <td>  </td>
         </tr>
 
         <tr> 
             <th class="dimgray-header">Height: </th>
-            <td><?php echo $lastVisit['VitalsLab']['height']?: 'unknown'; ?> cm</td>
-			<td>  </td>
+<!--            <td><?php echo $lastVisit['VitalsLab']['height']?: 'unknown'; ?> cm</td> -->
+            <td>
+              <?php if($unitType == 'metric'): ?>
+                <?php echo $lastVisit['VitalsLab']['height'] ?> cm 
+              <?php else: ?>
+                <?php
+                $inches = 0;
+                $inches = $lastVisit['VitalsLab']['height'] * 0.3937008;
+                $feets = floor($inches / 12);
+                $inches = ($inches % 12);
+                $value = $feets . ("'") . $inches . ('"');
+                ?>
+                <?php echo $value ?> inch 
+              <?php endif; ?>
+            </td>
+                        <td>  </td>
         </tr>
         <tr>  
             <th class="dimgray-header">BMI: </th>
