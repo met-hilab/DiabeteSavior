@@ -124,10 +124,10 @@
           digits: 'Please enter a validate USA zipcode'
       },
       
-      "data[VitalsLab][A1c]":'A1c must a number between 3 to 20. ',
-      "data[VitalsLab][bps]":'Blood pressure must between 30 to 250.',
-      "data[VitalsLab][bpd]":'Blood pressure must between 30 to 250.',
-      "data[Treatment][a1c_goal]":'A1c must a number between 3 to 20.'
+      "data[VitalsLab][A1c]":'A1c must be a number between 3 to 20. ',
+      "data[VitalsLab][bps]":'Blood pressure must be between 30 to 250.',
+      "data[VitalsLab][bpd]":'Blood pressure must be between 30 to 250.',
+      "data[Treatment][a1c_goal]":'A1c must be a number between 3 to 20.'
   },
  
   highlight: function(element) {
