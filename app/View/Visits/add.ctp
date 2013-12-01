@@ -1,4 +1,4 @@
-<h1> Add Encounter for <?php echo $patient['Patient']['patient_firstname']; ?>  <?php echo $patient['Patient']['patient_lastname'] ?></h1> 
+<h1> Add Visit for <?php echo $patient['Patient']['patient_firstname']; ?>  <?php echo $patient['Patient']['patient_lastname'] ?></h1> 
 
        
 <!-- Demograpfics -->
