@@ -79,7 +79,12 @@ class VisitsController extends AppController {
     } else {
       $this->request->data['DrugAllergy'] = $patient['DrugAllergy'];
       $this->request->data['MedhistoryComplaint'] = $visit['MedhistoryComplaint'];
-      $p_height = $visit['VitalsLab']['height'];
+      $cm_height = $visit['VitalsLab']['height'];
+      $inches = 0;
+      $inches = $cm_height * 0.3937008;
+      $feet = floor($inches / 12);
+      $inches = ($inches % 12);
+      $p_height = $feet . ("'") . $inches . ('"');
       $this->set('p_height', $p_height);
       $this->request->data['MedhistoryComplaint']['complaints'] = null;   
     }
