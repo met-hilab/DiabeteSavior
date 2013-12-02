@@ -14,21 +14,23 @@ SET FOREIGN_KEY_CHECKS=0;
 -- Table structure for users
 -- ----------------------------
 CREATE TABLE `users` (
-  `id` int(10) unsigned NOT NULL auto_increment,
-  `email` varchar(128) collate utf8_unicode_ci NOT NULL,
-  `password` char(64) collate utf8_unicode_ci NOT NULL,
-  `reset_token` char(64) collate utf8_unicode_ci default NULL,
-  `username` varchar(45) collate utf8_unicode_ci default NULL,
-  `openid` varchar(64) collate utf8_unicode_ci default NULL,
-  `service` varchar(45) collate utf8_unicode_ci default NULL,
-  `activated` TINYINT NOT NULL default 0,
-  `role` INT default NULL,
-  `created` datetime default NULL,
-  `modified` datetime default NULL,
-  PRIMARY KEY  (`id`),
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `reset_token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `auto_login_token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `username` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `openid` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `service` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `activated` tinyint(4) NOT NULL DEFAULT '0',
+  `role` int(11) DEFAULT NULL,
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   UNIQUE KEY `email_UNIQUE` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
 
 
 -- ----------------------------
