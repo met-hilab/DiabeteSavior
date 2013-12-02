@@ -232,11 +232,14 @@ class UsersController extends AppController {
             //var_dump($this->request->data); exit;
             if( $this->User->saveAssociated( $this->request->data ) ){
                 //set to user's screen
-                $this->Session->setFlash('User was edited.');
+                //$this->Session->setFlash('User was edited.');
+          		$this->Session->setFlash('User updated successfully!', 'default', array('class' => 'alert alert-success'));
                 //redirect to user's list
-                $this->redirect(array('action' => 'index'));
+                //$this->redirect(array('action' => 'index'));
+                $this->redirect(array('action' => '../'));
             }else{
-                $this->Session->setFlash('Unable to edit user. Please, try again.');
+                //$this->Session->setFlash('Unable to edit user. Please, try again.');
+          		$this->Session->setFlash('Unable to edit user. Please, try again.', 'default', array('class' => 'alert alert-danger'));
             }
         }else{
             //we will read the user data
@@ -247,8 +250,9 @@ class UsersController extends AppController {
         
     }else{
         //if not found, we will tell the user that user does not exist
-        $this->Session->setFlash('The user you are trying to edit does not exist.');
-        $this->redirect(array('action' => 'index'));
+        //$this->Session->setFlash('The user you are trying to edit does not exist.');
+        $this->Session->setFlash('The user you are trying to edit does not exist.', 'default', array('class' => 'alert alert-danger'));
+        $this->redirect(array('action' => '../'));
         //or, since it we are using php5, we can throw an exception
         //it looks like this
         //throw new NotFoundException('The user you are trying to edit does not exist.');
