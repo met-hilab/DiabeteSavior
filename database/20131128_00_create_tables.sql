@@ -2248,9 +2248,9 @@ INSERT INTO `patients` VALUES ('a995f81c-904c-486c-8211-7166aca11c73', '2013-11-
 INSERT INTO `patients` VALUES ('a998e2b4-1139-4957-b3a6-2b123cca22df', '2013-11-14 20:09:44', '2013-11-14 20:09:44', '1', 'fRF-111', 'Rachael', 'Fitch', null, '1941-07-01', null, 'Social psychologist', 'Female', 'African or African American', '4781 Fieldcrest Road', '11743', 'Huntington', 'New York');
 INSERT INTO `patients` VALUES ('a9b067c9-f6b0-4427-891f-c189759553cd', '2013-11-14 20:09:46', '2013-11-14 20:09:46', '1', 'fME1215', 'Maria', 'Escobar', null, '1980-03-12', null, 'Trader', 'Female', 'African or African American', '231 Patterson Street', '77002', 'Houston', 'Texas');
 INSERT INTO `patients` VALUES ('a9cdfa4e-38e0-4a46-a9b5-7751395d81dd', '2013-11-14 20:09:45', '2013-11-14 20:09:45', '1', 'mLB-710', 'Lamont', 'Boehmer', null, '1930-01-07', null, 'High school teacher', 'Male', 'African or African American', '4663 Findley Avenue', '58203', 'Grand Forks', 'North Dakota');
-INSERT INTO `profiles` VALUES ('1', '1', null, 'John', 'Smith', '', null, '2013-11-14 18:40:33', '2013-11-14 18:44:15');
-INSERT INTO `profiles` VALUES ('2', '2', null, 'Jason', 'Lu', '852-272-4326', null, '2013-11-14 18:40:33', '2013-11-14 18:44:15');
-INSERT INTO `profiles` VALUES ('3', '3', null, 'a', 'b', 'c', null, '2013-11-27 01:30:46', '2013-11-27 01:30:46');
 INSERT INTO `users` VALUES ('1', 'admin@diabetesavior.com', '011c945f30ce2cbafc452f39840f025693339c42', null, null, null, null, null, '1', '255', '2013-09-24 20:05:00', '2013-09-24 20:05:00');
 INSERT INTO `users` VALUES ('2', 'lu.json@yahoo.com', '011c945f30ce2cbafc452f39840f025693339c42', null, null, null, null, null, '1', '0', '2013-11-14 18:40:33', '2013-11-14 18:44:15');
 INSERT INTO `users` VALUES ('3', 'abc@diabetesavior.com', '011c945f30ce2cbafc452f39840f025693339c42', null, null, null, null, null, '0', null, '2013-11-27 01:30:46', '2013-11-27 01:30:46');
+INSERT INTO `profiles` VALUES ('1', '1', null, 'John', 'Smith', '', null, '2013-11-14 18:40:33', '2013-11-14 18:44:15');
+INSERT INTO `profiles` VALUES ('2', '2', null, 'Jason', 'Lu', '852-272-4326', null, '2013-11-14 18:40:33', '2013-11-14 18:44:15');
+INSERT INTO `profiles` VALUES ('3', '3', null, 'a', 'b', 'c', null, '2013-11-27 01:30:46', '2013-11-27 01:30:46');

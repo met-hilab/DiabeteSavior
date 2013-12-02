@@ -126,16 +126,16 @@ $cakeDescription = __d('cake_dev', 'Diabetes Savior: Type II Diabetes Infomatic 
               <li>
                 <form role="form" class="login-form" action="/do_login" method="post">
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Email address</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email" name="email">
+                    <label for="email">Email address</label>
+                    <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
                   </div>
                   <div class="form-group">
-                    <label for="exampleInputPassword1">Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" placeholder="Password" name="password">
                   </div>
                   <div class="checkbox">
                     <label>
-                      <input type="checkbox" name="remember_me"> Remember me
+                      <input type="checkbox" name="remember_me" value="yes"> Remember me for 90 days
                     </label>
                   </div>
                   <button type="submit" class="btn btn-default">Submit</button>

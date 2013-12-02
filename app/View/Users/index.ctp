@@ -49,4 +49,4 @@
 
 <hr>
 
-<a type="button" class="btn btn-primary" href="/sign_up">New User</a>
+<a type="button" class="btn btn-primary" href="/users/new_user">New User</a>

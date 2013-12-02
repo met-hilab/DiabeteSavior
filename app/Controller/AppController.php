@@ -41,16 +41,27 @@ class AppController extends Controller {
   
   public function beforeFilter() {
     parent::beforeFilter();
-    $this->set('current_user', $this->Session->read('user'));
-    $this->current_user = $this->Session->read('user');
+    
     //$unitType = $this->Cookie->read('unitType');
     $unitType = $_COOKIE['unitType'];
     if(empty($unitType)) {
       setcookie("unitType", 'imperial', time() + 86400 * 90);  /* expire in 30 days */
-
       //$this->Cookie->write('unitType', 'imperial', false, '3 months');
     }
     $this->set('unitType', $unitType);
+
+    $user = $this->Session->read('user');
+    $auto_login_token = $_COOKIE['auto_login'];
+    if(empty($user) && $auto_login_token) {
+      //echo "try auto login";// exit;
+      $User = ClassRegistry::init('User');
+      //$User->find(...);
+      $user = $User->find('first', ['conditions' => ['auto_login_token' => $auto_login_token]]);
+      $this->Session->write('user', $user['User']);
+      //var_dump($user); exit;
+    }
+    $this->set('current_user', $this->Session->read('user'));
+    $this->current_user = $this->Session->read('user');
   }
 
   public function authenticate_user() {

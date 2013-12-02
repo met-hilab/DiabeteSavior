@@ -79,6 +79,8 @@ class UsersController extends AppController {
 
     $email = $this->request->data('email');
     $password = $this->request->data('password');
+    $remember_me = $this->request->data('remember_me');
+    // var_dump($this->request->data);
     $conditions = array("email" => $email, "password" => $password);
     $user = $this->User->find('first', array('conditions' => $conditions));
     $user = $user['User'];
@@ -103,6 +105,13 @@ class UsersController extends AppController {
       $res->class = "alert alert-success";
       $res->data = $user;
       $this->Session->write('user', $user);
+      if($remember_me == 'yes') {
+        $auto_login_token = sha1(time() . $password);
+        $data = array('id' => $user['id'], 'auto_login_token' => $auto_login_token);
+        //$this->User->set('auto_login_token', $auto_login_token);
+        $this->User->save($data);
+        setcookie("auto_login", $auto_login_token, time() + 86400 * 90, "/");  /* expire in 90 days */
+      }
     }
     //$this->Session->setFlash('Visit added successfully!', 'default', );
     $this->Session->setFlash($res->message, 'default', array('class' => $res->class));
@@ -112,7 +121,7 @@ class UsersController extends AppController {
     $this->set('user', $user);
     $this->autoRender = false;
     $this->redirect($this->referer());
-    //echo json_encode($res);
+    echo json_encode($res);
     exit;
   }
 
@@ -125,7 +134,12 @@ class UsersController extends AppController {
  *  or MissingViewException in debug mode.
  */
   public function logout() {
+    $user = $this->Session->read('user');
+    $data = array('id' => $user['id'], 'auto_login_token' => null);
+    $this->User->save($data);
+
     $this->Session->delete('user');
+    setcookie('auto_login', null, -1, '/');
     $this->redirect("/");
     exit;
   }
@@ -333,6 +347,21 @@ class UsersController extends AppController {
 
     }
   }
+
+/**
+ * New user page
+ * @author Jason Lu 
+ * @return void
+ * @throws NotFoundException When the view file could not be found
+ *  or MissingViewException in debug mode.
+ */
+  public function new_user() {
+    $this->authenticate_admin();
+    if( $this->request->is( 'post' ) || $this->request->is( 'put' ) ){
+      $this->add();
+    }
+  }
+
 
 
 /**
