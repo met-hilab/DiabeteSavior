@@ -81,3 +81,9 @@ body{
   font-weight: normal;
   content: "\f196";
 }
+
+
+/* Form validator */
+label.error.valid {
+  display: none !important;
+}

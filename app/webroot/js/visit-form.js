@@ -28,18 +28,34 @@ function setPlaceholders() {
   heightInput.attr('placeholder', unitFormat.heightFormat);
 }
 function init() {
-  weight = mWeightInput.val();
+  // mWeightInput => m: Matric, real value in db.
+  // Get current value from page.
+  weight = mWeightInput.val()
   height = mHeightInput.val();
+
+  // Read cookie
+  var c_value = document.cookie;
+  var c_start = c_value.indexOf(" unitType=");
+  c_start = c_value.indexOf("=", c_start) + 1;
+  var c_end = c_value.indexOf(";", c_start);
+  if (c_end == -1) {
+    c_end = c_value.length;
+  }
+  c_value = unescape(c_value.substring(c_start,c_end));
+  unitType = c_value;
+  unitFormat = unit[unitType];
+
   if(unitType == 'imperial') {
     height = mToFt(height);
+    //console.log(height);
     weight = kgToLb(weight);
   } 
   if(weight > 0 ) {
     weightInput.val(weight);  
   }
-  if(height > 0) {
-   heightInput.val(height);
-  }
+  //if(height > 0) {
+    heightInput.val(height);
+  //}
   setPlaceholders();
 }
 function copyHeight() {
