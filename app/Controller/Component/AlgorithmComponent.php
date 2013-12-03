@@ -37,6 +37,7 @@ class AlgorithmComponent extends Component {
     // algorithm decision, side effects message for medicines, and alert message for patient contraindications,
     var $decision ="";
     var $medeffects = '<b>Reported medicine side effects:</b><br>';
+    var $patientAlert = '<b><font color="red">Patient is at higher risk of side effects due to contraindications with following medications:</font></b><br>';
     var $alert = "";
     
     // therapy medicine tables
@@ -242,21 +243,21 @@ class AlgorithmComponent extends Component {
     	if ($this->medicine1 !== "none"){
     		$peffects = $this->patientEffects($this->medicine1);
     		if ($peffects !== ""){
-    			$this->alert = "<b>Patient is at higher risk of side effects due to contraindications with following medications:</b><br>". 
+    			$this->alert = $this->patientAlert. 
     						   $this->medicine1. ": ". $peffects. "<br>";	
     		}
     	}
     	if ($this->medicine2 !== "none"){
     		if ($this->patientEffects($this->medicine2) !== ""){
     			if ($this->alert === "")
-    				$this->alert = "<b>Patient is at higher risk of side effects due to contraindications with following medications:</b><br>";   			 
+    				$this->alert = $this->patientAlert;   			 
     			$this->alert .= $this->medicine2. ": ". $this->patientEffects($this->medicine2). "<br>";
     		}
     	}
     	if ($this->medicine3 !== "none"){
     		if ($this->patientEffects($this->medicine3) !== ""){
     			if ($this->alert === "")
-    				$this->alert = "<b>Patient is at higher risk of side effects due to contraindications with following medications:</b><br>";   			 
+    				$this->alert = $this->patientAlert;   			 
     			$this->alert .= $this->medicine3. ": ". $this->patientEffects($this->medicine3). "<br>";
     		}
     	}
