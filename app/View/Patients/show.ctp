@@ -378,7 +378,7 @@
               console.log('min = ' + min);
               console.log('max = ' + max);
               count++;
-            }
+            };
             a1cChartObject = {
               "label": "A1C history",
               "data": a1cHistory
@@ -386,13 +386,21 @@
             a1cOptions = {
               yaxis:{
                 min: 1,
-                max: 15
+                max: 15,
+                zoomRange: [2,2],
+                panRange: [1,15]
               },
               points:{
                 show: true
               },
               lines:{
                 show: true
+              },
+              zoom:{
+                interactive: true
+              },
+              pan:{
+                interactive: true
               },
               font:{
                 size: 11,
@@ -422,7 +430,9 @@
                 max: max,
                 min: min,
                 mode: "time",
-                timeformat: "%m.%d.%y"
+                timeformat: "%m.%d.%y",
+                zoomRange: [1000000, 3600000000000],
+                panRange: [min, max]
              }};
 //            console.log(chartObject["data"]);
 
@@ -499,9 +509,15 @@
             }};
 //            console.log(chartObject["data"]);
 
-//             $.plot("#bmi-chart", [chartObject["data"]], options);
-
          }, 'json');
+//    $.plot("#bmi-chart", [bmiChartObject["data"]], bmiOptions);
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+      if ($(e.target).attr('href') == "#charts")
+        {
+         plot = $.plot("#a1c-chart", [a1cChartObject["data"]], a1cOptions);
+         $.plot("#bmi-chart", [bmiChartObject["data"]], bmiOptions);
+        }
+    }); 
 
    var previousPoint = null;
    var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -586,14 +602,26 @@ function showTooltip(x, y, contents) {
     
   });
   
-$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-    if ($(e.target).attr('href') == "#charts")
-    {
-         $.plot("#a1c-chart", [a1cChartObject["data"]], a1cOptions);
-          $.plot("#bmi-chart", [bmiChartObject["data"]], bmiOptions);
-    }
-});
 
+//$('#a1c-chart').bind('plotzoom', function (event, plot) {
+//legends();
+//});
+//$('#a1c-chart').bind('plotpan', function (event, plot) {
+//legends();
+//});
+//
+//	// zoom default amount in on the pixel ( 10, 20 )
+//	plot.zoom({ center: { left: 10, top: 20 } });
+//
+//	// zoom out again
+//	plot.zoomOut({ center: { left: 10, top: 20 } });
+//
+//	// zoom 200% in on the pixel (10, 20)
+//	plot.zoom({ amount: 2, center: { left: 10, top: 20 } });
+//
+//	// pan 100 pixels to the left and 20 down
+//	plot.pan({ left: -100, top: 20 })
+  
 //  $("#run_a1c").click(function(){
 //    $.get("/patients/get_a1c_history", function(res){
 //      console.log(res);
