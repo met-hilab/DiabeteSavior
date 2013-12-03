@@ -18,15 +18,18 @@
  */
 ?>
 <h2><?php echo $name; ?></h2>
-<p class="error">
+<p class="alert alert-danger">
 	<strong><?php echo __d('cake', 'Error'); ?>: </strong>
+  You don't have permissions to access this page.
+  <!--
 	<?php printf(
 		__d('cake', 'The requested address %s was not found on this server.'),
 		"<strong>'{$url}'</strong>"
 	); ?>
+-->
 </p>
 <?php
 if (Configure::read('debug') > 0):
-	echo $this->element('exception_stack_trace');
+	//echo $this->element('exception_stack_trace');
 endif;
 ?>
