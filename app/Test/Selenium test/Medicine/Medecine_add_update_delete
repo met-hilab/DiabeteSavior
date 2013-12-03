@@ -1,0 +1,47 @@
+<?php
+class Example extends PHPUnit_Extensions_SeleniumTestCase
+{
+  protected function setUp()
+  {
+    $this->setBrowser("*chrome");
+    $this->setBrowserUrl("http://localhost/");
+  }
+
+  public function testMyTestCase()
+  {
+    $this->open("/");
+    $this->click("link=Login");
+    $this->click("css=button.btn.btn-default");
+    $this->waitForPageToLoad("30000");
+    $this->click("link=Admin");
+    $this->click("link=List Medicines");
+    $this->waitForPageToLoad("30000");
+    $this->click("link=Add Medicine");
+    $this->waitForPageToLoad("30000");
+    $this->type("id=MedicineMedicineName", "Elixior");
+    $this->type("id=MedicineMinDose", "1");
+    $this->type("id=MedicineMaxDose", "2");
+    $this->type("id=MedicineUnit", "tablet");
+    $this->type("id=MedicineUnit", "mg");
+    $this->select("id=MedicineHypo", "label=0");
+    $this->select("id=MedicineWeight", "label=1");
+    $this->select("id=MedicineRenalGu", "label=1");
+    $this->select("id=MedicineGiSx", "label=2");
+    $this->select("id=MedicineChf", "label=3");
+    $this->select("id=MedicineCvd", "label=0");
+    $this->select("id=MedicineBone", "label=2");
+    $this->click("css=input.btn.btn-primary");
+    $this->waitForPageToLoad("30000");
+    $this->click("link=Update Medicine");
+    $this->waitForPageToLoad("30000");
+    $this->type("id=MedicineMaxDose", "20");
+    $this->click("css=input.btn.btn-primary");
+    $this->waitForPageToLoad("30000");
+    $this->click("link=Delete Medicine");
+    $this->assertTrue((bool)preg_match('/^Do you want to delete this medicine record[\s\S]$/',$this->getConfirmation()));
+    $this->click("link=My Account");
+    $this->click("link=Logout");
+    $this->waitForPageToLoad("30000");
+  }
+}
+?>
