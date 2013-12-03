@@ -2,8 +2,8 @@
 /**
  * Class algorithm
  * @author - Jeff Andre, (jandre@bu.edu)
- * @version 2.1
- * @date - 11/20/2013
+ * @version 2.2
+ * @date - 12/2/2013
  * 
  * This algorithm is used only for acedemic puruposes and is based on the Glycemic Control Algorithm section in the 
  * American Association of Clinical Endocrinologists' Comprehensive Diabetes Management Algorithm 2013 Consensus Statement.
@@ -304,13 +304,13 @@ class AlgorithmComponent extends Component {
     	{
     		if ($problems !== "")
     			$problems .= ",";
-    		$problems = " cardiovascular disease";
+    		$problems .= " cardiovascular disease";
     	}
     	if ($mh["bone"] === "yes" && ($this->medicines[$medicine]["bone"] > 0))
     	{
     		if ($problems !== "")
     			$problems .= ",";
-    		$problems = " bone fracture";
+    		$problems .= " bone fracture";
     	}
     	    	    	
     	return $problems;
