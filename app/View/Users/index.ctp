@@ -1,3 +1,4 @@
+<!--
 <div class="row">
   <div class="col-lg-6 pull-right">
     <div class="input-group">
@@ -5,11 +6,12 @@
       <span class="input-group-btn">
         <button class="btn btn-default" type="button">Search</button>
       </span>
-    </div><!-- /input-group -->
-  </div><!-- /.col-lg-6 -->
-</div><!-- /.row -->
-
+    </div>-- /input-group ->
+  </div>-- /.col-lg-6 ->
+</div>-- /.row ->
 <hr>
+-->
+
 <style>
 .user-table td.actions, .user-table th.actions {
   width: 300px;

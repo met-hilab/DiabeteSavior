@@ -5,8 +5,8 @@ echo $this->Form->input('id', array('type' => 'hidden'));
 echo $this->Form->input('Profile.id', array('type' => 'hidden'));
 
 echo $this->Form->input('email', array('autocomplete' => 'off'));
-//echo $this->Form->input('password', array('type'=>'password', 'required' => 'false'));
-//echo $this->Form->input('confirm_password', array('type'=>'password', 'required' => 'false'));
+echo $this->Form->input('password', array('type'=>'password', 'required' => 'false'));
+echo $this->Form->input('confirm_password', array('type'=>'password', 'required' => 'false'));
 echo $this->Form->input('Profile.firstname');
 echo $this->Form->input('Profile.lastname');
 echo $this->Form->input('Profile.phone');

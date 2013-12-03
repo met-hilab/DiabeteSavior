@@ -36,26 +36,27 @@ function init() {
   // Read cookie
   var c_value = document.cookie;
   var c_start = c_value.indexOf(" unitType=");
-  c_start = c_value.indexOf("=", c_start) + 1;
-  var c_end = c_value.indexOf(";", c_start);
-  if (c_end == -1) {
-    c_end = c_value.length;
+  if(c_start == -1) {
+    unitType = 'imperial';
+  } else {
+    c_start = c_value.indexOf("=", c_start) + 1;
+    var c_end = c_value.indexOf(";", c_start);
+    if (c_end == -1) {
+      c_end = c_value.length;
+    }
+    c_value = unescape(c_value.substring(c_start,c_end));
+    unitType = c_value;
   }
-  c_value = unescape(c_value.substring(c_start,c_end));
-  unitType = c_value;
   unitFormat = unit[unitType];
 
   if(unitType == 'imperial') {
     height = mToFt(height);
-    //console.log(height);
     weight = kgToLb(weight);
   } 
   if(weight > 0 ) {
     weightInput.val(weight);  
   }
-  //if(height > 0) {
-    heightInput.val(height);
-  //}
+  heightInput.val(height);
   setPlaceholders();
 }
 function copyHeight() {

@@ -1,1 +1,1 @@
-<?php echo $this->element('user_edit_form'); ?>
+<?php echo $this->element('user_add_form'); ?>

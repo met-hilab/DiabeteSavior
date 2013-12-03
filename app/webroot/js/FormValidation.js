@@ -1,28 +1,28 @@
 
 //$(function () { $("input,select,textarea").not("[type=submit]").jqBootstrapValidation(); } );
 
-    $.validator.addMethod('regex', function(value, element, param) {
-        return this.optional(element) ||
-            value.match(typeof param == 'string' ? new RegExp(param) : param);
-    },
-    'Please enter in a correct format');
+$.validator.addMethod('regex', function(value, element, param) {
+    return this.optional(element) ||
+        value.match(typeof param == 'string' ? new RegExp(param) : param);
+},
+'Please enter in a correct format');
     
     
 //new date method rang year from 1900
-   $.validator.addMethod("maxDate", function(value, element) {
-    var curDate = new Date();
-    var startDate = '01/01/1900';
-    var inputDate = new Date(value);
-    if((inputDate < curDate))
-        return true;
+$.validator.addMethod("maxDate", function(value, element) {
+  var curDate = new Date();
+  var startDate = '01/01/1900';
+  var inputDate = new Date(value);
+  if((inputDate < curDate)) {
+      return true;
+  } else {
     return false;
+  }
 }, "");
 
- $(document).ready(function(){
- 
- $('Form').validate(
- {
- 
+$(document).ready(function(){
+ $('#UserAddForm').validate();
+ $('form').validate({
   rules: {
     "data[Patient][patient_firstname]": {
       minlength: 2,
@@ -36,14 +36,12 @@
       regex:'^[A-Za-z.\']+$'
     },
     "data[Patient][dob]":{
-      
       date:true,   
       maxDate:true,
       required:true
      //regex:'^([0]\d|[1][0-2])\/([0-2]\d|[3][0-1])\/([2][01]|[1][6-9])\d{2}(\s([0-1]\d|[2][0-3])(\:[0-5]\d){1,2})?$'
-        
     },
-    
+    /*
     email: {
       required: true,
       email: true
@@ -51,14 +49,14 @@
     select: {    
       required: true
     },
-   "data[Patient][postal_code]":{
-         minlength: 5,
-         digits: true
-    },
-    
     note:{
         required:true
     },
+    */
+   "data[Patient][postal_code]":{
+         minlength: 5,
+         digits: true
+    }, 
     "data[VitalsLab][f_weight]":{
        range:[0,500.0000], 
        required:true,
@@ -94,8 +92,23 @@
      "data[VitalsLab][bpd]":{
         required:true,
         range:[30.0,250.0]
+    },
+    "data[User][email]": {
+      required:true,
+      email: true
+    },
+    "data[User][password]": {
+      required:true
+    },
+    "data[User][password_confirmation]": {
+      required:true
+    },
+    "data[User][firstname]": {
+      required:true
+    },
+    "data[User][lastname]": {
+      required:true
     }
-    
   },
   messages:{
       "data[Patient][patient_firstname]":{
