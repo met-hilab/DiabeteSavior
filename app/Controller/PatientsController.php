@@ -6,7 +6,7 @@
  *
  * PHP 5
  *
- * Copyright (c) Wenjie Shi (wjshi@bu.edu) 
+ * Copyright (c) Wenjie Shi (wjshi@bu.edu)
  *
  * Licensed under The MIT License
  * For full copyright and license information, please see the LICENSE.txt
@@ -67,9 +67,9 @@ public function index(){
   // similar to findAll(), but fetches paged results
   $patients = $this->Paginator->paginate('Patient', ["user_id" => $uid]);
 
-  
 
-    
+
+
 
 
 
@@ -132,7 +132,7 @@ public function admin(){
         $this->Session->setFlash('Patient was added. Please save the patient ID so you can search for the patient later', 'default', array('class' => 'alert alert-success'));
         $this->redirect(array('action'=>'show'));
       }else{
-        $errors = $this->Patient->invalidFields(); 
+        $errors = $this->Patient->invalidFields();
         var_dump($error);
         $this->Session->setFlash('Patient is not saved.', 'default', array('class' => 'alert alert-danger'));
       }
@@ -238,7 +238,7 @@ public function admin(){
       $this->Session->setFlash('The patient you are trying to edit does not exist.', 'default', array('class' => 'alert alert-danger'));
       $this->redirect(array('action' => 'show'));
     }
-  }  
+  }
 
 /**
  * Displays a view
@@ -256,13 +256,13 @@ public function admin(){
       $this->set('patient', $patient);
       $this->Session->write('patient', $patient);
       $this->Session->write('patient_id', $id);
-      
+
      $lastVisit = $this->Patient->Visit->find('first', array(
          'order' => array('Visit.created' => 'DESC'),
          'conditions' => array('Visit.patient_id' => $id)
         ));
-     
-     
+
+
      //trying to get a1c for all visits //
      $allVisits = $this->Patient->Visit->find('all', array(
          'order' => array('Visit.created' => 'ASC'),
@@ -270,7 +270,7 @@ public function admin(){
         ));
      $a1c = array();
      $bmi = array();
-     
+
       foreach ($allVisits as &$value) {
         $temp_a1c = $this->Patient->Visit->VitalsLab->find('first', array(
             'conditions' => array('VitalsLab.id' => '$value')
@@ -286,8 +286,8 @@ public function admin(){
       $this->set('bmi', $bmi);
       $this->Session->write('bmi', $bmi);
      // end trying to get all a1c //
-      
-      
+
+
      $this->set('lastVisit', $lastVisit);
      $this->set('visit', $lastVisit);  // use for medhistory_complaints_table
      $this->Session->write('lastVisit', $lastVisit);
@@ -296,17 +296,17 @@ public function admin(){
       $this->set('lastVisitDate', $date);
       $this->Session->write('lastVisitDate', $date);
      }
-     
+
      $lastTreatment = $this->Patient->Visit->Treatment->find('first', array('conditions'=>
              array('Treatment.visit_id' => $lastVisit['Visit']['id'])));
      $this->set('lastTreatment', $lastTreatment);
      $this->Session->write('lastTreatment', $lastTreatment);
-     
+
      $lastTreatmentRunAlg = $this->Patient->Visit->Treatment->TreatmentRunAlgorithm->find('first', array('conditions'=>
          array('TreatmentRunAlgorithm.treatment_id' => $lastTreatment['Treatment']['id'])));
      $this->set('lastTreatmentRunAlg', $lastTreatmentRunAlg);
      $this->Session->write('lastTreatmentRunAlg', $lastTreatmentRunAlg);
-     
+
      if($lastTreatmentRunAlg){
        $tDate = date("m/d/y", strtotime($lastTreatmentRunAlg['TreatmentRunAlgorithm']['created']));
        $this->set('lastTDate', $tDate);
@@ -315,15 +315,15 @@ public function admin(){
 //     print $lastVisit['Visit']['id'];
 //     print $lastTreatment['Treatment']['id'];
 //     print $lastTreatmentRunAlg['TreatmentRunAlgorithm']['id'];
-     
-//     $lastRunAlg = $this->Patient->Visit->Treatment-> 
+
+//     $lastRunAlg = $this->Patient->Visit->Treatment->
     }catch(NotFoundException $e){
       throw $e;
     }
   }
 /** Get A1C Values */
 public function get_a1c_history(){
-  
+
    $this->authenticate_user();
    $id = $this->Session->read('patient_id');
    $a1cHistory = $this->Patient->query("select vitals_labs.A1c, visits.created from vitals_labs inner join visits on vitals_labs.visit_id = visits.id where visits.patient_id = '$id'");
@@ -333,7 +333,7 @@ public function get_a1c_history(){
 
 /** Get BMI Values */
 public function get_bmi_history(){
-  
+
    $this->authenticate_user();
    $id = $this->Session->read('patient_id');
    $bmiHistory = $this->Patient->query("select vitals_labs.bmi, visits.created from vitals_labs inner join visits on vitals_labs.visit_id = visits.id where visits.patient_id = '$id'");
@@ -368,7 +368,7 @@ public function get_bmi_history(){
             $this->Session->setFlash('Patient record successfully deleted.', 'default', array('class' => 'alert alert-success'));
             //redirect to users's list
             $this->redirect(array('action'=>'index'));
-        }else{  
+        }else{
              //if unable to delete
             $this->Session->setFlash('Unable to delete patient.', 'default', array('class' => 'alert alert-danger'));
             $this->redirect(array('action' => 'show'));

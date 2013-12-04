@@ -44,11 +44,12 @@ $cakeDescription = __d('cake_dev', 'Diabetes Savior: Type II Diabetes Infomatic 
     echo $this->Html->script('flot/jquery.flot');
     echo $this->Html->script('flot/jquery.flot.time');
     echo $this->Html->script('flot/jquery.flot.navigate');
+    echo $this->Html->script('moment.min');
 		echo $this->Html->script('bootstrap');
     echo $this->Html->script('modernizr');
     echo $this->Html->script('main');
 
-    echo $this->Html->script('jqBootstrapValidation'); 
+    echo $this->Html->script('jqBootstrapValidation');
     echo $this->Html->script('FormValidation');
 
 
@@ -65,7 +66,7 @@ $cakeDescription = __d('cake_dev', 'Diabetes Savior: Type II Diabetes Infomatic 
     <nav class="navbar navbar-default" role="navigation" style="padding-top: 15px; border:none; background-color: #FFFFFF;">
   <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse" 
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse"
           <span class="sr-only">Toggle navigation</span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
@@ -118,7 +119,7 @@ $cakeDescription = __d('cake_dev', 'Diabetes Savior: Type II Diabetes Infomatic 
               <li><a href="/calculators/bgl">Blood Glucose Level</a></li>
             </ul>
           </li>
-      
+
           <?php if(!isset($current_user)): ?>
           <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="/login">Login <b class="caret"></b></a>
@@ -175,7 +176,7 @@ $cakeDescription = __d('cake_dev', 'Diabetes Savior: Type II Diabetes Infomatic 
       <?php echo $this->fetch('content'); ?>
       <!-- The main content from controller / view END -->
     </div>
-    
+
     <footer id="footer" style ="padding: 75px 0px 20px 0px;">
       <div class="row" style="height:75%;">
         <div class="col-lg-offset-4 col-lg-4" style="display: inline-block; height:75%; text-align: center;">
@@ -186,8 +187,8 @@ $cakeDescription = __d('cake_dev', 'Diabetes Savior: Type II Diabetes Infomatic 
                     <li>
                       <a href="http://sites.bu.edu/met-hilab/" target="_blank">MET HI Lab</a>
                     </li>
-                  </ul>                  
-               
+                  </ul>
+
 <!--                               <ul class="bs-social-buttons">
                   <li class="follow-btn" style="display: inline-block;">
                      <a href="https://twitter.com/BU_Tweets" class="twitter-follow-button" data-show-count="false" data-show-screen-name="false">Follow @BU_Tweets</a>
@@ -206,15 +207,15 @@ $cakeDescription = __d('cake_dev', 'Diabetes Savior: Type II Diabetes Infomatic 
       <div class="col-lg-offset-4 col-lg-4" style="text-align:center;">
         <a href="http://www.bu.edu/" style="font-size:11px; color: gray;">Copyright © 2013 Boston University</a>
       </div>
--->           
+-->
       <!-- DISCLAIMER -->
       <div class="col-lg-offset-2 col-lg-8" style="text-align:center;">
-        <p style="font-size:11px; color: gray; padding:10px 0 10px 0;"> 
-	DISCLAIMER:The patient records in this system are simplified simulations of 
+        <p style="font-size:11px; color: gray; padding:10px 0 10px 0;">
+	DISCLAIMER:The patient records in this system are simplified simulations of
         Electronic Health Records (EHRs) for research and teaching purpose only. They
-	are different from EHRs and do not comply with HIPAA. All patient data are 
+	are different from EHRs and do not comply with HIPAA. All patient data are
 	fictional and no actual patient data are used.
-	</p>      
+	</p>
       </div>
     </footer>
   </div>

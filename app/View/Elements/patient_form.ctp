@@ -57,7 +57,7 @@
 <div class="form-group">
   <?php echo $this->Form->label('street', 'Address', array('class' => 'col-lg-1 control-label')); ?>
   <div class="col-lg-4">
-    <?php echo $this->Form->input('Address', array('div' => false, 'label' => false)); ?>
+    <?php echo $this->Form->input('street', array('div' => false, 'label' => false)); ?>
   </div>
 </div>
 
@@ -156,10 +156,10 @@
 
   // When the browser is ready...
   $(function() {
-  
+
     // Setup form validation on the #add_patient element
     $("#add_patient").validate({
-    
+
         // Specify the validation rules
         rules: {
             patient_firstname: "required",
@@ -167,9 +167,9 @@
             dob:"required",
             gender: "required",
             race: "required"
-            
+
         },
-        
+
         // Specify the validation error messages
         messages: {
             patient_firstname: "Please enter your first name",
@@ -177,9 +177,9 @@
             dob:"Please enter your birthdate",
             gender: "Please specify your gender",
             race: "Please specify your race"
-          
+
         },
-        
+
         submitHandler: function(form) {
             form.submit();
         }
