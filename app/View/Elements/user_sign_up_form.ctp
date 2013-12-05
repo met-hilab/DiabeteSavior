@@ -23,7 +23,7 @@ $formDefaults = array(
 
 <?php echo $this->Form->input('Profile.lastname'); ?>
 
-<?php echo $this->Form->input('Profile.phone'); ?>
+<?php //echo $this->Form->input('Profile.phone'); ?>
 
 <?php echo $this->Form->submit("Sign up"); ?>
 

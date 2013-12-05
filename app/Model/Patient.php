@@ -165,7 +165,8 @@ class Patient extends AppModel {
   function beforeSave($options = array()) {
     //first we need to judge if this is a creation of a new patient or just an update        
     parent::beforeSave();
-    if(empty($this->data['Patient']['id'])){
+    
+    if(empty($this->id)){
        $this->data['Patient']['patient_number'] = substr($this->data['Patient']['gender'], 0, 1) . substr($this->data['Patient']['patient_firstname'], 0, 1) . substr($this->data['Patient']['patient_lastname'], 0, 1) . substr($this->data['Patient']['dob'], 8, 2) . date('B');
        $this->data['Patient']['patient_number'] = strtolower($this->data['Patient']['patient_number']);
     }
