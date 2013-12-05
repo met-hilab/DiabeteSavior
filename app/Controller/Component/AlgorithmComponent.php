@@ -2,8 +2,8 @@
 /**
  * Class algorithm
  * @author - Jeff Andre, (jandre@bu.edu)
- * @version 2.2
- * @date - 12/2/2013
+ * @version 2.3
+ * @date - 12/5/2013
  * 
  * This algorithm is used only for acedemic puruposes and is based on the Glycemic Control Algorithm section in the 
  * American Association of Clinical Endocrinologists' Comprehensive Diabetes Management Algorithm 2013 Consensus Statement.
@@ -138,7 +138,8 @@ class AlgorithmComponent extends Component {
 
         // mono to dual therapy: add medicine 2 if at mono therapy and a1c > target and a1c is not decreasing
         elseif ( $this->isMono() && ($this->a1c > $this->a1cTarget) && !$this->a1cDecrease()){
-            $this->selectMedicine(2);
+        	$this->selectMedicine(1);
+        	$this->selectMedicine(2);
             $this->therapy = "lifestyle + dual therapy";
             $this->decision = "A1c greater than target and A1c not decreasing, so adding second medicine for dual therapy.";
         }
@@ -156,7 +157,8 @@ class AlgorithmComponent extends Component {
         // or if a1c > target and a1c is decreasing
         elseif ( ($this->isDual() && ($this->a1c <= $this->a1cTarget))
         		|| ($this->isDual() && ($this->a1c > $this->a1cTarget) && $this->a1cDecrease())){
-            //$this->selectMedicine(2);
+            $this->selectMedicine(1);	
+        	$this->selectMedicine(2);
             $this->therapy = "lifestyle + dual therapy";
         	$this->decision = "A1c less than or equal to target or A1c greater than target and decreasing, so continue with dual therapy.";
         }
@@ -164,6 +166,8 @@ class AlgorithmComponent extends Component {
         // dual to triple therapy: add medicine 3 if at dual therapy and a1c > target and a1c not decreasing
         elseif ( ($this->isDual() && ($this->a1c > $this->a1cTarget)) && !$this->a1cDecrease() )
         {
+            $this->selectMedicine(1);
+        	$this->selectMedicine(2);
             $this->selectMedicine(3);
             $this->therapy = "lifestyle + triple therapy";
             $this->decision = "A1c greater than target and A1C not decreasing, so adding third medicine for triple therapy.";
@@ -185,14 +189,19 @@ class AlgorithmComponent extends Component {
         elseif ( ($this->isTriple() && ($this->a1c <= $this->a1cTarget)) 
         		|| ($this->isTriple() && ($this->a1c > $this->a1cTarget) && $this->a1cDecrease()) )
         {
-        	//$this->selectMedicine(3);
-            $this->therapy = "lifestyle + triple therapy";
+            $this->selectMedicine(1);
+        	$this->selectMedicine(2);
+            $this->selectMedicine(3);
+        	$this->therapy = "lifestyle + triple therapy";
         	$this->decision = "A1c less than or equal to target or A1c is decreasing, so continue with triple therapy.";
         }
                 
         // insulin therapy: at triple therapy and a1c > target and a1c not decreasing
         elseif (($this->isTriple() && ($this->a1c > $this->a1cTarget)&& !$this->a1cDecrease()))
         {
+            $this->selectMedicine(1);
+            $this->selectMedicine(2);
+            $this->selectMedicine(3);
             $this->therapy = "lifestyle + triple therapy + insulin";
             $this->decision = "Add or intensify insulin";
             $this->medicine4 = "Insulin";
@@ -330,7 +339,8 @@ class AlgorithmComponent extends Component {
         {
             $medlist = $this->monotherapy;
             $nMeds = count($this->monotherapy);
-            $medicine = $this->medicine1;
+            //$medicine = $this->medicine1;
+            $medicine = "none";
             $prevmed1 = "na";
             
         }
@@ -338,14 +348,16 @@ class AlgorithmComponent extends Component {
         {
             $medlist = $this->dualtherapy;
             $nMeds = count($this->dualtherapy);
-            $medicine = $this->medicine2;
+            //$medicine = $this->medicine2;
+            $medicine = "none";
             $prevmed1 = $this->medicine1;
         }
         elseif ($therapyType == 3)
         {
             $medlist = $this->tripletherapy;
             $nMeds = count($this->tripletherapy);
-            $medicine = $this->medicine3;
+            //$medicine = $this->medicine3;
+            $medicine = "none";
             $prevmed2 = $this->medicine2;
             $prevmed1 = $this->medicine1;
         }
