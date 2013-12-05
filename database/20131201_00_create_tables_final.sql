@@ -135,8 +135,8 @@ CREATE TABLE `medhistory_complaints` (
 -- ----------------------------
 CREATE TABLE `medicines` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `created` datetime NOT NULL,
-  `modified` datetime NOT NULL,
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL,
   `medicine_class` varchar(255) COLLATE utf8_unicode_ci NULL,
   `medicine_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `min_dose` float NOT NULL,
