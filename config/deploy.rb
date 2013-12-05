@@ -16,7 +16,8 @@ set :keep_releases, 5
 
 #role :web, "cs673.jasonl.biz"                 # Your HTTP server, Apache/etc
 
-server "cs673.jasonl.biz", :app, :web, :db, :primary => true
+#server "cs673.jasonl.biz", :app, :web, :db, :primary => true
+server "128.197.103.118", :app, :web, :db, :primary => true
 set :deploy_to, "/srv/cs673/"
 
 #role :app, "your app-server here"                          # This may be the same as your `Web` server
