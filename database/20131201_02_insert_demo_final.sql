@@ -12,11 +12,11 @@ INSERT INTO `profiles` (`id`, `user_id`, `title`, `firstname`, `lastname`, `phon
 
 
 INSERT INTO `patients` (`id`, `created`, `modified`, `user_id`, `patient_number`, `patient_firstname`, `patient_lastname`, `patient_middlename`, `dob`, `occupation`, `gender`, `race`, `street`, `postal_code`, `city`, `state`) VALUES
-('529a80f7-a36c-4a18-9d82-1838cbdd56cb', '2012-11-28 19:31:01', '2012-11-28 19:31:01', 1, 'mlf12056', 'Larry', 'Ford', '', '1976-06-12', 'Bus Driver', 'Male', 'Caucasian or European American', NULL, '02472', 'Watertown', 'Massachusetts'),
-('529b9237-44dc-4370-8ea2-1838cbdd56cb', '2012-12-01 14:52:59', '2012-12-01 14:52:59', 1, 'mje01866', 'John', 'Everett', '', '1969-12-01', 'Recruiter', 'Male', 'African or African American', NULL, '02135', 'Boston', 'Massachusetts'),
-('529b97d0-57d4-41a6-9ddf-1838cbdd56cb', '2013-12-01 15:10:56', '2013-12-01 15:10:56', 1, 'med13882', 'Eric', 'Dearman', '', '1976-12-13', 'Dental technician', 'Male', 'Caucasian or European American', NULL, '02112', 'Boston', 'Massachusetts'),
-('529b986a-d868-4b08-9f09-1838cbdd56cb', '2013-12-01 15:13:30', '2013-12-01 15:13:30', 1, 'fnm11884', 'Natalya', 'Moffet', '', '1980-11-11', 'Administrative assistant', 'Female', 'Caucasian or European American', NULL, '02026', 'Dedham', 'Massachusetts'),
-('529b9956-c064-4c2d-a9d5-1838cbdd56cb', '2013-12-01 15:17:26', '2013-12-01 15:17:26', 1, 'mja01887', 'Jose', 'Adams', '', '1974-09-01', 'Administrative services manager', 'Male', 'African or African American', NULL, '01923', 'Danvers', 'Massachusetts');
+('529a80f7-a36c-4a18-9d82-1838cbdd56cb', '2012-11-28 19:31:01', '2012-11-28 19:31:01', 1, 'mlf12056', 'Larry', 'Ford', '', '1976-06-12', 'Bus Driver', 'Male', 'Caucasian or European American', '403 Lyon Avenue', '02472', 'Watertown', 'Massachusetts'),
+('529b9237-44dc-4370-8ea2-1838cbdd56cb', '2012-12-01 14:52:59', '2012-12-01 14:52:59', 1, 'fle01086', 'Lulu', 'Everett', '', '1969-12-01', 'Student', 'Female', 'African or African American', '24 Main Street', '02135', 'Boston', 'Massachusetts'),
+('529b97d0-57d4-41a6-9ddf-1838cbdd56cb', '2013-12-01 15:10:56', '2013-12-01 15:10:56', 1, 'med13882', 'Eric', 'Dearman', '', '1976-12-13', 'Dental technician', 'Male', 'Caucasian or European American', '67 Washington Street', '02112', 'Boston', 'Massachusetts'),
+('529b986a-d868-4b08-9f09-1838cbdd56cb', '2013-12-01 15:13:30', '2013-12-01 15:13:30', 1, 'fnm11884', 'Natalya', 'Moffet', '', '1980-11-11', 'Administrative assistant', 'Female', 'Caucasian or European American', '354 Tenmile Road', '02026', 'Dedham', 'Massachusetts'),
+('529b9956-c064-4c2d-a9d5-1838cbdd56cb', '2013-12-01 15:17:26', '2013-12-01 15:17:26', 1, 'mja01887', 'Jose', 'Adams', '', '1974-09-01', 'Administrative services manager', 'Male', 'African or African American', '2378 Ferguson Street', '01923', 'Danvers', 'Massachusetts');
 
 
 
