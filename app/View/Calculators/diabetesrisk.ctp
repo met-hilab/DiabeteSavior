@@ -1,3 +1,4 @@
+
 <h3 class="section-title">Type 2 Diabetes Risk Calculator</h3>
 
 <?php 
@@ -119,11 +120,19 @@ the selected risk factors below[1].  </p>
 
 
 <div style="padding-bottom:10px;">
-	<a href="#" onclick="calcRisk();" class="btn btn-primary" style="padding-left:5px;"><span class="">
+	<a href="#" class="btn btn-primary btnCalculate" style="padding-left:5px;"><span class="">
 		</span>Calculate Risk</a>
 </div>
 
-<button onclick="calcRisk()">Calculate Risk</button>
+<!--
+
+Don't bind event in DOM, this is a bad practice 
+http://stackoverflow.com/questions/6941483/onclick-vs-event-handler
+<button onclick="calcRisk()" class="btnCalculate">Calculate Risk</button>
+Give it a class or id and bind the event in JS script.
+In this case, I use "btnCalculate" class to find the button and link to trigger the event handler.
+-->
+<button class="btnCalculate">Calculate Risk</button>
 
 <h1>Risk Score: </h1> 
 <input name="score" type="number" value="">
