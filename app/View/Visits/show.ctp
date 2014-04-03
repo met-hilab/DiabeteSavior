@@ -65,5 +65,5 @@
 <hr>
 
 <div style="padding-bottom:10px;">
-	<a href="/patients/show" class="btn btn-primary" style="padding-left:10px;">Go Back</a>
+	<a href="<?php echo $this->webroot; ?>patients/show" class="btn btn-primary" style="padding-left:10px;">Go Back</a>
 </div>

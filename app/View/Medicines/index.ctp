@@ -6,7 +6,7 @@
 <h1> List of Medicines: </h1>
 <!-- DO NOT USE BR TO LAYOUT, USE CSS -->
     <div style="padding:5px; display: inline-block;">
-      <a href="/medicines/add" class="btn btn-primary" style="padding-left:5px; float: right;"><span class="glyphicon glyphicon-plus"></span> Add Medicine</a>
+      <a href="<?php echo $this->webroot; ?>medicines/add" class="btn btn-primary" style="padding-left:5px; float: right;"><span class="glyphicon glyphicon-plus"></span> Add Medicine</a>
     </div>
 
 <table class="table table-hover" >

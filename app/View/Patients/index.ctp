@@ -38,14 +38,12 @@
 $(document).ready(function(){
 $('.link-to-patient').click(function(){
   id = $(this).data('id');
-  $.post('/patients/set_patient_id', {'id':id}, function(res){
+  $.post(webroot + 'patients/set_patient_id', {'id':id}, function(res){
     if(res.status) {
-      window.location.href = '/patients/show';
+      window.location.href = webroot + 'patients/show';
     } else {
       alert('Wrong patient id!');
     }
-    //console.log(res);
-    
   }, 'json');
   return false;
 });

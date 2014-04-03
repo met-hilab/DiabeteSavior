@@ -59,6 +59,9 @@ $cakeDescription = __d('cake_dev', 'Diabetes Savior: Type II Diabetes Infomatic 
     echo $this->fetch('css');
     echo $this->fetch('script');
   ?>
+  <script>
+    window.webroot="<?php echo $this->webroot; ?>";
+  </script>
 </head>
 <body>
   <div id="container" class="container" style="min-height: 100%;">
@@ -71,7 +74,7 @@ $cakeDescription = __d('cake_dev', 'Diabetes Savior: Type II Diabetes Infomatic 
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <?php echo $this->Html->image('hilab-logo.png', array('alt' => 'MET HiLab')); ?>
+        <a href="http://www.met-hilab.org/"><?php echo $this->Html->image('hilab-logo.png', array('alt' => 'MET HiLab')); ?></a>
       </div>
 
 <!-- Collect the nav links, forms, and other content for toggling -->

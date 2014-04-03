@@ -1,37 +1,25 @@
 
 <div class='row' style='padding: 5px 0 25px 0;'>
-  <h2 class="section-title col-xs-12 col-sm-12 col-md-8" style="margin-bottom: 2px; margin-top:0; padding-bottom: 0;"><div style='font-family: sans-serif; color: darkgray; display: inline-block;'><?php
-                       echo $patient['Patient']['patient_number'].' '; ?> </div>
-                       <?php
-                       echo $patient['Patient']['patient_lastname'].", ";
-                       echo $patient['Patient']['patient_firstname']." ";
-                       echo $patient['Patient']['patient_middlename'];
-                      ?></h2>
-         <h4 class="col-xs-12 col-sm-12 col-md-4" style="margin-bottom: 0; font-family: sans-serif; font-style: italic; text-align:right;"><?php
-                       echo $patient['Patient']['gender'].',    Age ';
-                       echo $age = calculateAge( date("F j, Y", strtotime($patient['Patient']['dob'])));;
-                      ?></h4>
-<!--
-          <h4 class="col-xs-6 col-sm-6 col-md-4" style="padding: 2px 0 2px 0; margin-top: 0; margin-bottom: 0; text-align: right;"><small><em>dob </em></small><?php
-                       echo $date = date("F j, Y", strtotime($patient['Patient']['dob']));;
-                      // echo "<h4>Doris Lewis</h4>"
-                      ?></h4>-->
+  <h2 class="section-title col-xs-12 col-sm-12 col-md-8" style="margin-bottom: 2px; margin-top:0; padding-bottom: 0;">
+    <div style='font-family: sans-serif; color: darkgray; display: inline-block;'>
+      <?php echo $patient['Patient']['patient_number'].' '; ?>
+    </div>
+    <?php
+      echo $patient['Patient']['patient_lastname'].", ";
+      echo $patient['Patient']['patient_firstname']." ";
+      echo $patient['Patient']['patient_middlename'];
+    ?>
+  </h2>
+  <h4 class="col-xs-12 col-sm-12 col-md-4" style="margin-bottom: 0; font-family: sans-serif; font-style: italic; text-align:right;">
+    <?php
+      echo $patient['Patient']['gender'].',    Age ';
+      echo $age = calculateAge( date("F j, Y", strtotime($patient['Patient']['dob'])));
+      echo " (";
+      echo $date = date("F j, Y", strtotime($patient['Patient']['dob']));;
+      echo ")";
+    ?>
+  </h4>
 </div>
-<!--
-            <h1 >Patient Information </h1>
-
-			</br/>-->
-
-
-            <!-----Add Three Buttons------------------------------------------>
-<!--            <div style="padding-bottom:10px;">
-           <a href="/visits/add" class="btn btn-primary" style="padding-left:5px;"><span class="glyphicon glyphicon-plus"></span> Add Visit</a>
-           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-           <a href="/patients/edit" class="btn btn-primary" style="padding-left:5px;"><span class="glyphicon glyphicon-edit"></span> Update Patient</a>
-           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-           <a href="/patients/delete" data-confirm="Do you want to delete this patient record?" data-method="delete" class="btn btn-primary" style="padding-left:5px;"><span class="glyphicon glyphicon-trash"></span> Delete Patient</a>
-            </div>-->
-
 <div class='patient-tabs'>
 <ul class="nav nav-tabs">
  <li id="patient-tab-information" class="active nav-tab" data-tab-index="information">
@@ -61,19 +49,13 @@
 <!-- start patient information tab -->
 <div id="patient-tab-content" class="tab-content" style="height:auto;overflow:visible;">
     <div id="information" class="tab-pane active">
-<!--      <button type="button" class="btn btn-primary btn-update-patient"
-              style="padding:5px; float: right;">
-        <span class="glyphicon glyphicon-edit"></span>
-        Update Patient</button>
-      <button type="submit" class="btn btn-primary btn-delete-patient"
-              style="padding:5px; float: right;" method="POST">
-        <span class="glyphicon glyphicon-trash"></span>
-        Delete Patient</button>-->
-      <div style="padding:5px; display: inline-block;">
-            <a href="/patients/edit" class="btn btn-primary" style="padding:5px; float: right;"><span class="glyphicon glyphicon-edit"></span> Update Patient</a>
-      </div>
-      <div style="padding:5px; display: inline-block;">
-            <a href="/patients/delete" data-confirm="Do you want to delete this patient record?" data-method="delete" class="btn btn-primary" style="padding:5px; float: right;"><span class="glyphicon glyphicon-trash"></span> Delete Patient</a>
+      <div class="action-panel pull-right">
+            <a href="<?php echo $this->webroot; ?>patients/edit" class="btn btn-primary">
+              <span class="glyphicon glyphicon-edit"></span> Update Patient
+            </a>
+            <a href="<?php echo $this->webroot; ?>patients/delete" data-confirm="Do you want to delete this patient record?" data-method="delete" class="danger"> 
+              Delete Patient
+            </a>
       </div>
         <div class='col-md-8'>
         <div style="padding: 15px 15px 15px 0;"class="col-md-6">
@@ -146,7 +128,7 @@
   <!-- start visits tab -->
   <div id="visits" class="tab-pane">
     <div style="padding:5px; display: inline-block;">
-      <a href="/visits/add" class="btn btn-primary" style="padding-left:5px; float: right;"><span class="glyphicon glyphicon-plus"></span> Add Visit</a>
+      <a href="<?php echo $this->webroot; ?>visits/add" class="btn btn-primary" style="padding-left:5px; float: right;"><span class="glyphicon glyphicon-plus"></span> Add Visit</a>
     </div>
     <div class="col-md-8">
       <h3>Visit history </h3>
@@ -176,13 +158,12 @@
       <h3>Vitals and Lab Results <?php if ($lastVisit['Visit']!=null) { ?>as of last visit on <?php echo $lastVisitDate; }?></h3>
            <table  class="table table-condensed">
                   <?php
-                  if ($lastVisit['Visit']==null){
-                  echo 'This patient does not have any Vitals or Lab Results recorded.';}
-                  else{ ?>
+                  if ($lastVisit['Visit']==null):
+                    echo 'This patient does not have any Vitals or Lab Results recorded.';
+                  else: ?>
 
 	    <tr>
             <th class="dimgray-header">Weight: </th>
-<!--            <td> <?php echo $lastVisit['VitalsLab']['weight']?: 'unknown'; ?> kg</td> -->
             <td>
               <?php if($unitType == 'metric'): ?>
                 <?php echo $lastVisit['VitalsLab']['weight'] ?> kg
@@ -195,7 +176,6 @@
 
         <tr>
             <th class="dimgray-header">Height: </th>
-<!--            <td><?php echo $lastVisit['VitalsLab']['height']?: 'unknown'; ?> cm</td> -->
             <td>
               <?php if($unitType == 'metric'): ?>
                 <?php echo $lastVisit['VitalsLab']['height'] ?> cm
@@ -218,7 +198,7 @@
 			<td> Normal: 18.5 - 25.0 kg/m<sup>2</sup> </td>
         </tr>
         <tr>
-            <th class="dimgray-header"><a href=" /pages/weightclassification" target="_blank"> Weight Classification:</a>  </th>
+            <th class="dimgray-header"><a href="<?php echo $this->webroot; ?>pages/weightclassification" target="_blank"> Weight Classification:</a>  </th>
             <td><?php echo $lastVisit['VitalsLab']['bmi_status']?: 'unknown'; ?></td>
 			<td>  </td>
         </tr>
@@ -228,21 +208,7 @@
 			<td> Normal: 4.5 - 5.7% </td>
         </tr>
 
-
-		<!-- Commented blood pressure
-        <tr>
-             <th class="dimgray-header">Systolic Blood Pressure: </th>
-             <td><?php echo $lastVisit['VitalsLab']['bps']?: 'unknown';?>  mmHg</td>
-		     <td> Normal: 90 - 120 mmHg </td>
-        </tr>
-
-        <tr>
-            <th class="dimgray-header">Diastolic Blood Pressure: </th>
-            <td><?php echo $lastVisit['VitalsLab']['bpd']?: 'unknown';?> mmHg</td>
-			<td> Normal: 60 - 80 mmHg</td>
-        </tr>
-		-->
-                  <?php } ?>
+                  <?php endif; ?>
 
 </table>
 </div>
@@ -377,7 +343,7 @@
   $(document).ready(function(){
     a1cHistory = Array();
     bmiHistory = Array();
-        $.get("/patients/get_a1c_history", function(res){
+        $.get(webroot + "patients/get_a1c_history", function(res){
             count = 0;
             min = null;
             max = null;
@@ -459,7 +425,7 @@
 
 
    /**get bmi history */
-        $.get("/patients/get_bmi_history", function(res){
+        $.get(webroot + "patients/get_bmi_history", function(res){
            bmiCount = 0;
            bmiMin = null;
            bmiMax = null;
@@ -658,19 +624,19 @@ function showTooltip(x, y, contents) {
 //  })
 //
   $('.btn-update-patient').click(function () {
-    window.location.href = '/patients/edit';
+    window.location.href = webroot + 'patients/edit';
     });//end .click
     $('.btn-delete-patient').click(function () {
       var result = confirm("Are you sure you want to delete this patient?");
       if (result==true) {
 
-          window.location.href = '/patients/delete';
+          window.location.href = webroot + 'patients/delete';
       }
     });//end .click
 
      $('.btn-run-algorithm').click(function () {
 
-          window.location.href = '/visits/';
+          window.location.href = webroot + 'visits/';
 
     });//end .click
 
