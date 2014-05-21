@@ -1,12 +1,68 @@
 @charset "UTF-8";
 /* CSS for form */
 
+.form-horizontal .control-label{
+	
+	text-align:left;
+}
+#riskmain{
+	padding:50px;
+	width:700px;
+	height:800px;
 
-#riskform {background-color:#808080;
-	padding:1em;	
-	height:700px;
-	width:600px;
+	}
+
+#riskform {background-color:#E7E7E7;
+	padding:20px;	
+	height:750px;
+	width:700px;
 	border-radius: 15px;
 	box-shadow: 25px 25px 50px #333333;
 	}
 	
+
+#risk1 {
+	border-style:none;
+    border-width:1px;
+    border-color:#000000;
+   	border-radius: 10px;
+    padding:1em;
+	width:600px;
+	height:150px;
+    float:left;
+}
+
+#risk2 {
+	border-style:none;
+    border-width:1px;
+    border-color:#000000;
+   	border-radius: 10px;
+    padding:1em;
+	width:600px;
+	height:260px;
+    float:left;
+}
+
+#risk3 {
+	border-style:none;
+    border-width:1px;
+    border-color:#000000;
+   	border-radius: 10px;
+    padding:1em;
+	width:600px;
+	height:170px;
+    float:left;
+}
+#calculate {
+	border-style:none;
+    border-width:1px;
+    border-color:#000000;
+   	border-radius: 10px;
+    padding-left:30px;
+	width:600px;
+	height:150px;
+    float:left;
+}
+
+
+
