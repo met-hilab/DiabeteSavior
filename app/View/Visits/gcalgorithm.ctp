@@ -1,7 +1,7 @@
 <h2>Glycemic Control Algorithm Results</h2>
 
 <div class="col-md-9">
-<form id="algorithm_results" class="form-horizontal" role="form" action="/visits/gcalgorithm" method="post">
+<form id="algorithm_results" class="form-horizontal" role="form" action="<?php echo $this->webroot; ?>visits/gcalgorithm" method="post">
  <table  class="table table-condensed">      
     <tr>
       <th>Algorithm Decision: </th> 
@@ -45,7 +45,7 @@
   <label class="" for="Accept"></label>
   <div class="">
     <button id="Accept" name="Accept" class="btn btn-primary">Accept</button>&nbsp;&nbsp;
-    <a href="/visits/edit" class="btn btn-primary" style="padding-left:10px;">
+    <a href="<?php echo $this->webroot; ?>visits/edit" class="btn btn-primary" style="padding-left:10px;">
 		<span class="glyphicon glyphicon-edit"></span>Edit</a>
   </div>
 </div>

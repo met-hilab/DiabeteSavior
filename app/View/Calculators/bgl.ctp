@@ -64,7 +64,7 @@ echo $this->Html->script('a1c');
 
     <h3>A1C to eAG Conversion Table</h3>
     <div id="ac1table">
-        <img src="/img/a1cchart.png"/>
+        <img src="<?php echo $this->webroot; ?>/img/a1cchart.png"/>
 
     </div>
     <p>&nbsp;</p>

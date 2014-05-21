@@ -37,8 +37,8 @@ Height = </select></p><p>Height = &nbsp; &nbsp; &nbsp;<input id="value1" name="v
 
 <div>&nbsp;</div><div><span style="font-size: 9pt; font-family: &quot;Segoe UI&quot;,&quot;sans-serif&quot;;">* Disease risk for type 2 diabetes, hypertension, and cardiovascular diseases</span></div><div>&nbsp;</div><p class="MsoNormal" style="margin: 0px; font-size: 14px; line-height: normal; ">
 <div><font style="font-size: 12px; " face="arial, helvetica, sans-serif">Reference:</font></span></p><p class="MsoNormal" style="margin: 0px; font-size: 14px; line-height: normal; ">&nbsp;</p><font style="font-size: 12px; " face="arial, helvetica, sans-serif"><span style="font-size: 10pt; line-height: normal; ">US Department of Health and Human Services, Public Health Service, National Institutes of Health (HHLBI). The Practical Guide: Identification, Evaluation, and Treatment of Overweight and Obesity in Adults. Washington NIH Pub. no. 00-4084 2000.</span></font></div>
-<div id="table1"><img src="/img/table2.png"></div>
-<div id="table2"><img src="/img/table.png" ></div><span style="font-size: 11pt; "></div>
+<div id="table1"><img src="<?php echo $this->webroot; ?>/img/table2.png"></div>
+<div id="table2"><img src="<?php echo $this->webroot; ?>/img/table.png" ></div><span style="font-size: 11pt; "></div>
 </table>
 
 <!--
