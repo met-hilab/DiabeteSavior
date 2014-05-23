@@ -94,6 +94,7 @@ $cakeDescription = __d('cake_dev', 'Diabetes Savior: Type II Diabetes Infomatic 
               </svg>
             </a>
           </li>
+          <li><a href="<?php echo $this->webroot ?>pages/help">Help</a></li>
           <?php if(isset($current_user)): ?>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Patients <b class="caret"></b></a>

@@ -27,6 +27,7 @@
  * to use (in this case, /app/View/Pages/home.ctp)...
  */
 	Router::connect('/', array('controller' => 'pages', 'action' => 'welcome'));
+
 /**
  * ...and connect the rest of 'Pages' controller's urls.
  */
