@@ -16,6 +16,10 @@ function bmiCalculatorsController($scope) {
   $scope.obesityClass = "";
   $scope.unitW = "kg";
   $scope.unitH = "cm";
+
+  $scope.populationClass = function(race) {
+    return race === $scope.race ? "btn-selected" : undefined;
+  };
   
   $scope.submit = function() {
     return false;
@@ -23,20 +27,15 @@ function bmiCalculatorsController($scope) {
 
   $scope.setUnitH = function(unit) {
     $scope.unitH = unit;
-    $("#currentHeightUnit").text(unit);
   }
 
   $scope.setUnitW = function(unit) {
     $scope.unitW = unit;
-    $("#currentWeightUnit").text(unit);
   }
 
-  $scope.setPopulcation = function(sender, race) {
+  $scope.setPopulcation = function(race) {
     $scope.race = race;
-    $(sender).siblings("button").removeClass("btn-selected");
-    $(sender).addClass("btn-selected");
   }
-
 
   $scope.calculateBMI = function() {
     if($scope.race === '') {
@@ -83,10 +82,10 @@ function bmiCalculatorsController($scope) {
           } else if($scope.bmi < 18.5) {
             weightClass = "Underweight";
             obesityClass = "none";
-          } else if($scope.bmi < 25.0) {
+          } else if($scope.bmi < 23.0) {
             weightClass = "Normal";
             obesityClass = "none";
-          } else if($scope.bmi < 30.0) {
+          } else if($scope.bmi < 25.0) {
             weightClass = "Overweight";
             obesityClass = "none";
           } else if($scope.bmi < 35.0) {
@@ -121,8 +120,8 @@ BMI is used for assessment of obesity-related risk for heart disease, diabetes, 
     <label for="" class="col-sm-2 control-label">Population</label>
     <div class="col-sm-10">
       <div class="btn-group">
-        <button type="button" class="btn btn-default col-sm-x" ng-click="setPopulcation(this, 'caucasian')">US/European</button>
-        <button type="button" class="btn btn-default col-sm-x" ng-click="setPopulcation(this, 'asian')">Asian</button>
+        <button type="button" class="btn btn-default col-sm-x" ng-click="setPopulcation('caucasian')" ng-class="populationClass('caucasian')">US/European</button>
+        <button type="button" class="btn btn-default col-sm-x" ng-click="setPopulcation('asian')" ng-class="populationClass('asian')">Asian</button>
       </div>
     </div>
   </div>
@@ -132,7 +131,7 @@ BMI is used for assessment of obesity-related risk for heart disease, diabetes, 
     <div class="input-group col-sm-10">
       <input id="txtHeight" class="form-control" name="txtHeight" value="" type="text">
       <div class="input-group-btn">
-        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span id="currentHeightUnit">cm</span>  <span class="caret"></span></button>
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span id="currentHeightUnit">{{unitH}}</span>  <span class="caret"></span></button>
         <ul class="dropdown-menu pull-right">
           <li><a ng-click="setUnitH('cm');">cm</a></li>
           <li><a ng-click="setUnitH('ft');">ft</a></li>
@@ -146,7 +145,7 @@ BMI is used for assessment of obesity-related risk for heart disease, diabetes, 
     <div class="input-group col-sm-10">
       <input id="txtWeight" class="form-control" name="txtWeight" value="" type="text">
       <div class="input-group-btn">
-        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" ><span id="currentWeightUnit">kg</span> <span class="caret"></span></button>
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" ><span id="currentWeightUnit">{{unitW}}</span> <span class="caret"></span></button>
         <ul class="dropdown-menu pull-right">
           <li><a ng-click="setUnitW('kg');">kg</a></li>
           <li><a ng-click="setUnitW('lb');">lb</a></li>
@@ -219,54 +218,3 @@ p.note img {
   display: block;
 }
 </style>
-
-<!--
-<form class="form-horizontal" role="form">
-  <div class="form-group">
-    <label for="inputEmail1" class="col-sm-2 control-label">Population</label>
-    <div class="col-sm-10">
-      <div class="btn-group">
-        <button type="button" class="btn btn-default col-sm-x">US/European</button>
-        <button type="button" class="btn btn-default col-sm-x">Asian</button>
-      </div>
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="inputEmail1" class="col-sm-2 control-label">Unit</label>
-    <div class="col-sm-10">
-      <div class="btn-group">
-        <button type="button" class="btn btn-default col-sm-x">Inch/Lb</button>
-        <button type="button" class="btn btn-default col-sm-x">Cm/Kg</button>
-      </div>
-    </div>
-    
-  </div>
-
-  <div class="form-group">
-    <label for="inputPassword1" class="col-sm-2 control-label">Height</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" id="inputPassword1" placeholder="Height">
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="inputPassword1" class="col-sm-2 control-label">Weight</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" id="inputPassword1" placeholder="Weight">
-    </div>
-  </div>
-  <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-      <div class="checkbox">
-        <label>
-          <input type="checkbox"> Remember me
-        </label>
-      </div>
-    </div>
-  </div>
-  <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-      <button type="submit" class="btn btn-default">Do the math</button>
-    </div>
-  </div>
-</form>
--->
