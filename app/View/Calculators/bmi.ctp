@@ -1,82 +1,261 @@
-<h2 class="section-title">Body Mass Index (BMI)</h2>
-
 <?php
 echo $this->Html->script('bmi');
-?>
+echo $this->Html->script('angular.min');
+echo $this->Html->script('angular-route.min');
 
+?>
+<script>
+$(document).ready(function(){
+
+});
+
+function bmiCalculatorsController($scope) {
+  $scope.race = ""
+  $scope.bmi = "";
+  $scope.weightClassification = "";
+  $scope.obesityClass = "";
+  $scope.unitW = "kg";
+  $scope.unitH = "cm";
+  
+  $scope.submit = function() {
+    return false;
+  }
+
+  $scope.setUnitH = function(unit) {
+    $scope.unitH = unit;
+    $("#currentHeightUnit").text(unit);
+  }
+
+  $scope.setUnitW = function(unit) {
+    $scope.unitW = unit;
+    $("#currentWeightUnit").text(unit);
+  }
+
+  $scope.setPopulcation = function(sender, race) {
+    $scope.race = race;
+    $(sender).siblings("button").removeClass("btn-selected");
+    $(sender).addClass("btn-selected");
+  }
+
+
+  $scope.calculateBMI = function() {
+    if($scope.race === '') {
+      alert("Please select population.");
+    } else {
+      var h = parseFloat($("input[name=txtHeight]").val());
+      var w = parseFloat($("input[name=txtWeight]").val());
+
+      $scope.bmi = w / ((h / 100) * (h / 100));
+      $scope.bmi = $scope.bmi.toFixed(2);
+
+      var weightClass = "";
+      var obesityClass = "";
+
+      switch($scope.race) {
+        case "caucasian":
+          if($scope.bmi < 16.0) {
+            weightClass = "Severely underweight";
+            obesityClass = "none";
+          } else if($scope.bmi < 18.5) {
+            weightClass = "Underweight";
+            obesityClass = "none";
+          } else if($scope.bmi < 25.0) {
+            weightClass = "Normal";
+            obesityClass = "none";
+          } else if($scope.bmi < 30.0) {
+            weightClass = "Overweight";
+            obesityClass = "none";
+          } else if($scope.bmi < 35.0) {
+            weightClass = "Obese";
+            obesityClass = "I";
+          } else if($scope.bmi < 40.0) {
+            weightClass = "Extremely obese";
+            obesityClass = "II";  
+          } else {
+            weightClass = "Extremely obese";
+            obesityClass = "III";
+          }
+          break;
+        case "asian":
+          if($scope.bmi < 16.0) {
+            weightClass = "Severely underweight";
+            obesityClass = "none";
+          } else if($scope.bmi < 18.5) {
+            weightClass = "Underweight";
+            obesityClass = "none";
+          } else if($scope.bmi < 25.0) {
+            weightClass = "Normal";
+            obesityClass = "none";
+          } else if($scope.bmi < 30.0) {
+            weightClass = "Overweight";
+            obesityClass = "none";
+          } else if($scope.bmi < 35.0) {
+            weightClass = "Obese";
+            obesityClass = "I";
+          } else if($scope.bmi < 40.0) {
+            weightClass = "Extremely obese";
+            obesityClass = "II";  
+          } else {
+            weightClass = "Extremely obese";
+            obesityClass = "III";
+          }
+          break;
+      }
+
+      $scope.weightClassification = weightClass;
+      $scope.obesityClass = obesityClass;
+      //$scope.$apply();
+    }
+  }
+}
+</script>
+<h2 class="section-title">Body Mass Index (BMI)</h2>
 <p>
 BMI is used for assessment of obesity-related risk for heart disease, diabetes, osteoarthritis, cancer, sleep apnea, abdominal hernias, varicose veins, gout, gall bladder disease, respiratory problems, and liver malfunction. The increased risk for these diseases and conditions are calculated by observing population. BMI is not a very precise measure-there are differences in definition of BMI in different populations, and also between individuals. Nevertheless, BMI is broadly used. It is often combined with the measurement of waist circumference or waist-to-height ratio.
 </p>
+<p>BMI = Weight(kg) / Height<sup>2</sup>(m)</p>
 
-<table width="800" border="0" cellpadding="0" cellspacing="0">
-  <tr> 
-<p>Population : <select id="pop" name="pop">
-<option value="US/European">US/European</option>
-<option value="Asian">Asian</option>
-Height = </select></p><p>Height = &nbsp; &nbsp; &nbsp;<input id="value1" name="value1" value="" type="text">&nbsp;<select id="height" name="height" onchange="document.all.weight.options[this.selectedIndex].selected=true;">
-<option value="Inch">Inch</option>
-<option value="Cm">Cm</option>
-</select>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;BMI = Weight(kg) / Height<sup>2</sup>(m)</p><p>Weight = &nbsp; &nbsp;&nbsp;<input id="value2" name="value2" value="" type="text">
-        <select name="weight" id="weight" onchange="document.all.height.options[this.selectedIndex].selected=true;">
-<option value="Lb">Lb</option>
-<option value="Kg">Kg</option>
-</select>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;BMI = 703&nbsp;* &nbsp;Weight(lb) / Height<sup>2</sup>(inch)</p><p></p><p><input name="Sumbit" value="Calcuate" onclick="addNumbers();classification();" type="button"><p>&nbsp;BMI : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="answer" name="answer" value="" type="text"></p><p><a href="#table1">Weight Classification </a>:<input id="Cate" name="answer" value="" type="text"></p><p>Obesity Class : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="obclass" name="answer" value="" type="text"></p>
-<div>&nbsp;</div><div>&nbsp;</div><div><p>Gender : &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;<select id="sex" name="sex">
-<option value="men">Male</option>
-<option value="women">Female</option>
-</select>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Waist Circumference :&nbsp;<input id="waist" name="value4" value="" type="text">&nbsp;<select id="unit" name="unit">
-<option value="in">In</option>
-<option value="cm">Cm</option>
-</select></p>
-<p><input name="Sumbit" value="Calcuate" onclick="classification2();" type="button"></p><a href="#table2">&nbsp;Disease Risk</a><span style="font-size:9.0pt;font-family:&quot;Segoe UI&quot;,&quot;sans-serif&quot;">*</span> : <input id="answer2" name="answer2" value="" type="text">
+<div ng-controller="bmiCalculatorsController">
+<form class="form-horizontal" id="bmiForm" role="form" ng-submit="submit">
+  <div class="form-group">
+    <label for="" class="col-sm-2 control-label">Population</label>
+    <div class="col-sm-10">
+      <div class="btn-group">
+        <button type="button" class="btn btn-default col-sm-x" ng-click="setPopulcation(this, 'caucasian')">US/European</button>
+        <button type="button" class="btn btn-default col-sm-x" ng-click="setPopulcation(this, 'asian')">Asian</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="" class="col-sm-2 control-label">Height</label>
+    <div class="input-group col-sm-10">
+      <input id="txtHeight" class="form-control" name="txtHeight" value="" type="text">
+      <div class="input-group-btn">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span id="currentHeightUnit">cm</span>  <span class="caret"></span></button>
+        <ul class="dropdown-menu pull-right">
+          <li><a ng-click="setUnitH('cm');">cm</a></li>
+          <li><a ng-click="setUnitH('ft');">ft</a></li>
+        </ul>
+      </div><!-- /btn-group -->
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="" class="col-sm-2 control-label">Weight</label>
+    <div class="input-group col-sm-10">
+      <input id="txtWeight" class="form-control" name="txtWeight" value="" type="text">
+      <div class="input-group-btn">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" ><span id="currentWeightUnit">kg</span> <span class="caret"></span></button>
+        <ul class="dropdown-menu pull-right">
+          <li><a ng-click="setUnitW('kg');">kg</a></li>
+          <li><a ng-click="setUnitW('lb');">lb</a></li>
+        </ul>
+      </div><!-- /btn-group -->
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button class="btn btn-primary" id="btnCalculateBMI" ng-click="calculateBMI()">Calculate</button>
+    </div>
+  </div>
+
+</form>
+
+
+<p class="alert alert-info">
+  Subject is: {{race}}<br>
+  Subject's BMI: {{bmi}}<br>
+  Weight Classification: {{weightClassification}}<br>
+  Obesity Class: {{obesityClass}}<br>
+</p>
+</div>
+
+<hr>
+<!--
+<input id="answer" name="answer" value="" type="text">
+<a href="#table1">Weight Classification </a>:
+<input id="Cate" name="answer" value="" type="text">
+
+Obesity Class : 
+<input id="obclass" name="answer" value="" type="text">
+
+Gender
+<select id="sex" name="sex">
+  <option value="men">Male</option>
+  <option value="women">Female</option>
+</select>
+
+Waist Circumference
+<input id="waist" name="value4" value="" type="text">
+<input name="Sumbit" value="Calcuate" onclick="classification2();" type="button">
+
+<a href="#table2">&nbsp;Disease Risk</a><span style="font-size:9.0pt;">*</span>
+<input id="answer2" name="answer2" value="" type="text">
+
+-->
 
 
 
+<p>
+* Disease risk for type 2 diabetes, hypertension, and cardiovascular diseases
+</p>
+<h4>Reference:</h4>
+<p class="">US Department of Health and Human Services, Public Health Service, National Institutes of Health (HHLBI). The Practical Guide: Identification, Evaluation, and Treatment of Overweight and Obesity in Adults. Washington NIH Pub. no. 00-4084 2000.</p>
+<p class="note">
+  <img src="<?php echo $this->webroot; ?>/img/table2.png">
+  <img src="<?php echo $this->webroot; ?>/img/table.png" >
+</p>
 
+<style>
+.btn-selected {
+  background: #ebebeb;
+}
 
-
-<div>&nbsp;</div><div><span style="font-size: 9pt; font-family: &quot;Segoe UI&quot;,&quot;sans-serif&quot;;">* Disease risk for type 2 diabetes, hypertension, and cardiovascular diseases</span></div><div>&nbsp;</div><p class="MsoNormal" style="margin: 0px; font-size: 14px; line-height: normal; ">
-<div><font style="font-size: 12px; " face="arial, helvetica, sans-serif">Reference:</font></span></p><p class="MsoNormal" style="margin: 0px; font-size: 14px; line-height: normal; ">&nbsp;</p><font style="font-size: 12px; " face="arial, helvetica, sans-serif"><span style="font-size: 10pt; line-height: normal; ">US Department of Health and Human Services, Public Health Service, National Institutes of Health (HHLBI). The Practical Guide: Identification, Evaluation, and Treatment of Overweight and Obesity in Adults. Washington NIH Pub. no. 00-4084 2000.</span></font></div>
-<div id="table1"><img src="<?php echo $this->webroot; ?>/img/table2.png"></div>
-<div id="table2"><img src="<?php echo $this->webroot; ?>/img/table.png" ></div><span style="font-size: 11pt; "></div>
-</table>
+p.note img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+</style>
 
 <!--
 <form class="form-horizontal" role="form">
   <div class="form-group">
-    <label for="inputEmail1" class="col-lg-2 control-label">Population</label>
-    <div class="col-lg-10">
+    <label for="inputEmail1" class="col-sm-2 control-label">Population</label>
+    <div class="col-sm-10">
       <div class="btn-group">
-        <button type="button" class="btn btn-default col-lg-x">US/European</button>
-        <button type="button" class="btn btn-default col-lg-x">Asian</button>
+        <button type="button" class="btn btn-default col-sm-x">US/European</button>
+        <button type="button" class="btn btn-default col-sm-x">Asian</button>
       </div>
     </div>
   </div>
   <div class="form-group">
-    <label for="inputEmail1" class="col-lg-2 control-label">Unit</label>
-    <div class="col-lg-10">
+    <label for="inputEmail1" class="col-sm-2 control-label">Unit</label>
+    <div class="col-sm-10">
       <div class="btn-group">
-        <button type="button" class="btn btn-default col-lg-x">Inch/Lb</button>
-        <button type="button" class="btn btn-default col-lg-x">Cm/Kg</button>
+        <button type="button" class="btn btn-default col-sm-x">Inch/Lb</button>
+        <button type="button" class="btn btn-default col-sm-x">Cm/Kg</button>
       </div>
     </div>
     
   </div>
 
   <div class="form-group">
-    <label for="inputPassword1" class="col-lg-2 control-label">Height</label>
-    <div class="col-lg-10">
+    <label for="inputPassword1" class="col-sm-2 control-label">Height</label>
+    <div class="col-sm-10">
       <input type="text" class="form-control" id="inputPassword1" placeholder="Height">
     </div>
   </div>
   <div class="form-group">
-    <label for="inputPassword1" class="col-lg-2 control-label">Weight</label>
-    <div class="col-lg-10">
+    <label for="inputPassword1" class="col-sm-2 control-label">Weight</label>
+    <div class="col-sm-10">
       <input type="text" class="form-control" id="inputPassword1" placeholder="Weight">
     </div>
   </div>
   <div class="form-group">
-    <div class="col-lg-offset-2 col-lg-10">
+    <div class="col-sm-offset-2 col-sm-10">
       <div class="checkbox">
         <label>
           <input type="checkbox"> Remember me
@@ -85,7 +264,7 @@ Height = </select></p><p>Height = &nbsp; &nbsp; &nbsp;<input id="value1" name="v
     </div>
   </div>
   <div class="form-group">
-    <div class="col-lg-offset-2 col-lg-10">
+    <div class="col-sm-offset-2 col-sm-10">
       <button type="submit" class="btn btn-default">Do the math</button>
     </div>
   </div>

@@ -20,7 +20,7 @@
 $cakeDescription = __d('cake_dev', 'Diabetes Savior: Type II Diabetes Infomatic System');
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app>
 <head>
   <?php echo $this->Html->charset(); ?>
   <title>
