@@ -1,6 +1,6 @@
 Please click the link below to reset your password:
-
-<a href="<?php echo reset_token; ?>">link</a>
-
-Thank you,
+<br>
+<a href="<?php echo $reset_token; ?>"><?php echo $reset_token; ?></a>
+<br>
+Thank you,<br>
 DiabeteSavior Team.

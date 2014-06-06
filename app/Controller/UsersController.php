@@ -159,18 +159,31 @@ class UsersController extends AppController {
       $this->User->recursive = -1;  // Don't fetch associated models
       $user = $this->User->findByEmail($email);
       if($user) {
-        var_dump($user);
+        //var_dump($user);
         //exit;
-        $reset_token = "apple";
-        $this->set('reset_token',$reset_token);
-        $mail = new CakeEmail();
+        $reset_token = sha1(time() . $user["User"]["id"]);
+        $this->User->id = $user["User"]["id"];
+        $this->User->set(array(
+          'reset_token' => $reset_token
+        ));
+        $this->User->save();
+
+        $reset_token = "reset_password?token=" . $reset_token;
+        $user["reset_token"] = $reset_token;
+
+        $reset_url = "http://" . CakeRequest::host() . $this->request->webroot;
+        $reset_token = $reset_url . $reset_token;
+        
+
+        $mail = new CakeEmail('smtp');
+        $mail->viewVars(array('reset_token' => $reset_token));
         $mail->template('forgot_password', 'default')
           ->subject('DiabeteSavior: Reset your password')
           ->emailFormat('html')
           ->to($email)
           ->from('no-reply@diabetesavior.com')
           ->send();
-          var_dump($mail);
+          //var_dump($mail);
       } else {
         var_dump("notfound");
         exit;
@@ -341,6 +354,32 @@ class UsersController extends AppController {
   public function change_password() {
     $this->edit($this->current_user['id']);
     $this->render('password');
+  }
+
+  public function reset_password() {
+    $token = $this->params['url']['token'];
+    $this->User->recursive = -1;
+    $user = $this->User->findByReset_token($token);
+    if(!$user) {
+      throw new ForbiddenException('Who are you?');
+    }
+
+    if( $this->request->is( 'post' ) || $this->request->is( 'put' ) ){
+      $user['User']['password'] = $this->request->data['User']['password'];
+      $user['User']['confirm_password'] = $this->request->data['User']['password_confirm'];
+      $user['User']['reset_token'] = null;
+      $user['User']['reset_at'] = null;
+      if($this->User->save($user)){
+        $this->Session->setFlash('User updated successfully!', 'default', array('class' => 'alert alert-success'));
+        $this->render('reset_password_completed');
+      } else {
+        debug($this->User->validationErrors);
+        $this->render('reset_password_failed');
+      }
+    } else {
+      $this->render('password');
+    }
+    
   }
  /**
  * Delete user

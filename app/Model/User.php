@@ -53,6 +53,7 @@ public $validate = array(
         'message' => 'Password confirmation does not match password.'
       )
     ),
+  /*
   'username' => array(
     'alphanumeric' => array(
       'rule' => array('alphanumeric'),
@@ -62,7 +63,7 @@ public $validate = array(
         //'last' => false, // Stop validation after this rule
         //'on' => 'create', // Limit validation to 'create' or 'update' operations
       ),
-    ),
+    ),*/
   'created' => array(
     'datetime' => array(
       'rule' => array('datetime'),
