@@ -8,6 +8,7 @@ class DATABASE_CONFIG {
 		'login' => 'user',
 		'password' => 'password',
 		'database' => 'cs673_test',
+		'encoding' => 'utf8'
 	);
 	public $default = array(
 		'datasource' => 'Database/Mysql',

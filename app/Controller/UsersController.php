@@ -156,20 +156,24 @@ class UsersController extends AppController {
   public function forgot_password() {
     if ($this->request->is('post')){
       $email = $this->request->data['User']['email'];
-      //$user = $this->User->findByEmail($email);
-      $Email = new CakeEmail();
-      $Email->from(array('admin@diabetesavior.com' => 'DiabeteSavior'));
-      $Email->to($email);
-      $Email->subject('Test');
-      $Email->send('My message');
-      //var_dump($user);
-      //exit;
-      //check if a user with this id really exists
-      if( $this->User->exists() ){
-        var_dump($this->User);
-        exit;
+      $this->User->recursive = -1;  // Don't fetch associated models
+      $user = $this->User->findByEmail($email);
+      if($user) {
+        var_dump($user);
+        //exit;
+        $reset_token = "apple";
+        $this->set('reset_token',$reset_token);
+        $mail = new CakeEmail();
+        $mail->template('forgot_password', 'default')
+          ->subject('DiabeteSavior: Reset your password')
+          ->emailFormat('html')
+          ->to($email)
+          ->from('no-reply@diabetesavior.com')
+          ->send();
+          var_dump($mail);
       } else {
-
+        var_dump("notfound");
+        exit;
       }
     }
   }
