@@ -135,8 +135,10 @@ $cakeDescription = __d('cake_dev', 'Diabetes Savior: Type II Diabetes Infomatic 
                       <input type="checkbox" name="remember_me" value="yes"> Remember me for 90 days
                     </label>
                   </div>
+
                   <button type="submit" class="btn btn-default">Submit</button>
                 </form>
+                <a href="<?php echo $this->webroot; ?>forgot_password">Forgot password?</a>
               </li>
             </ul>
           </li>

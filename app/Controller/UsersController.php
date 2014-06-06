@@ -20,6 +20,7 @@
  */
 App::uses('AppController', 'Controller');
 App::uses('Security', 'Utility');
+App::uses('CakeEmail', 'Network/Email');
 
 /**
  * Static content controller
@@ -145,6 +146,35 @@ class UsersController extends AppController {
   }
 
 /**
+ * Forgot password
+ *
+ * @param email
+ * @return void
+ * @throws NotFoundException When the view file could not be found
+ *  or MissingViewException in debug mode.
+ */
+  public function forgot_password() {
+    if ($this->request->is('post')){
+      $email = $this->request->data['User']['email'];
+      //$user = $this->User->findByEmail($email);
+      $Email = new CakeEmail();
+      $Email->from(array('admin@diabetesavior.com' => 'DiabeteSavior'));
+      $Email->to($email);
+      $Email->subject('Test');
+      $Email->send('My message');
+      //var_dump($user);
+      //exit;
+      //check if a user with this id really exists
+      if( $this->User->exists() ){
+        var_dump($this->User);
+        exit;
+      } else {
+
+      }
+    }
+  }
+
+/**
  * Create new user
  *
  * @param email, password
@@ -159,6 +189,24 @@ class UsersController extends AppController {
       $this->User->create();
       try {
         $res = $this->User->saveAssociated($this->request->data);
+        $admin_emails = array();
+        $this->User->recursive = -1;
+        $conditions = array("User.role >" => 0);
+        $admins = $this->User->find('all', array('conditions' => $conditions));
+
+        foreach($admins as $u) {
+          if($u['User']['email'] != '') {
+            array_push($admin_emails, $u['User']['email']);
+          }
+        }
+        $mail = new CakeEmail();
+        $mail->template('notify_new_user', 'default')
+          ->subject('New user notification')
+          ->emailFormat('html')
+          ->to('admin@diabetesavior.com')
+          ->bcc($admin_emails)
+          ->from('admin@diabetesavior.com')
+          ->send();
         $this->redirect("/pages/after_sign_up");
       } catch(Exception $e) {
         $this->Session->setFlash($e->getMessage());

@@ -37,6 +37,7 @@
  * Our custom route here
  */
   Router::connect('/do_login', array('controller' => 'users', 'action' => 'do_login'));
+  Router::connect('/forgot_password', array('controller' => 'users', 'action' => 'forgot_password'));
   Router::connect('/sign_up', array('controller' => 'users', 'action' => 'sign_up'));
   Router::connect('/my/:action', array('controller' => 'users', 'action' => '*'));
   Router::connect('/logout', array('controller' => 'users', 'action' => 'logout'));
