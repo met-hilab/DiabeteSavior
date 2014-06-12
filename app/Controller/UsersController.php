@@ -175,7 +175,7 @@ class UsersController extends AppController {
         $reset_token = $reset_url . $reset_token;
         
 
-        $mail = new CakeEmail('smtp');
+        $mail = new CakeEmail();
         $mail->viewVars(array('reset_token' => $reset_token));
         $mail->template('forgot_password', 'default')
           ->subject('DiabeteSavior: Reset your password')
