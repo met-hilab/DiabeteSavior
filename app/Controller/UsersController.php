@@ -205,7 +205,14 @@ class UsersController extends AppController {
     if ($this->request->is('post')){
       $this->User->create();
       try {
+        $activate_token = sha1(time() . $userEmail . $userPassword);
+        $userEmail = $this->request->data["User"]["email"];
+        $userPassword = sha1($this->request->data["User"]["password"]);
+        $this->request->data["User"]["activate_token"] = $activate_token;
+        //var_dump($this->request->data);
+        //exit;
         $res = $this->User->saveAssociated($this->request->data);
+        
         $admin_emails = array();
         $this->User->recursive = -1;
         $conditions = array("User.role >" => 0);
@@ -216,6 +223,7 @@ class UsersController extends AppController {
             array_push($admin_emails, $u['User']['email']);
           }
         }
+        
         $mail = new CakeEmail();
         $mail->template('notify_new_user', 'default')
           ->subject('New user notification')
@@ -224,6 +232,19 @@ class UsersController extends AppController {
           ->bcc($admin_emails)
           ->from('admin@diabetesavior.com')
           ->send();
+        
+        $baseUrl = "http://" . CakeRequest::host() . $this->request->webroot;
+        $activate_url = $baseUrl . "activate?token=". $activate_token;
+
+        $mail = new CakeEmail();
+        $mail->viewVars(array('activate_url' => $activate_url));
+        $mail->template('user_confirmation', 'default')
+          ->subject('Activate you account')
+          ->emailFormat('html')
+          ->to($userEmail)
+          ->from('admin@diabetesavior.com')
+          ->send();
+        //var_dump($userEmail);
         $this->redirect("/pages/after_sign_up");
       } catch(Exception $e) {
         $this->Session->setFlash($e->getMessage());
