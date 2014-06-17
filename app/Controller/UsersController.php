@@ -275,8 +275,24 @@ class UsersController extends AppController {
       $this->redirect($this->referer());
     } else {
       throw new ForbiddenException();
-      
     }
+  }
+
+  public function self_activate() {
+    $token = $this->params['url']['token'];
+    $user = $this->User->findByActivate_token($token);
+    $user['User']['activated'] = 1;
+    $user['User']['activate_token'] = null;
+      
+    if($this->User->save($user)){
+      $this->Session->setFlash('Your account is now activated, please use your password to login', 'default', array('class' => 'alert alert-success'));
+      $this->redirect("/");
+    } else {
+      debug($this->User->validationErrors);
+      $this->render('reset_password_failed');
+    }
+
+
   }
 
 /**
