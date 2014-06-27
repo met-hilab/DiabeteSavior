@@ -71,7 +71,7 @@
     <button id="done" name="done" class="btn btn-primary">Done</button>
   </div>
   <div style="padding:5px; display: inline-block;">
-    <a href="/visits/gcalgorithm" class="btn btn-primary">Cancel</a>
+    <a href="<?php echo $this->webroot; ?>visits/gcalgorithm" class="btn btn-primary">Cancel</a>
   </div>
 </div>
 
