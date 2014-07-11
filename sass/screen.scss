@@ -1,0 +1,136 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+
+// @import "compass/reset";
+
+.text-left {
+  text-align: left !important;
+}
+.text-center {
+  text-align: center !important;
+}
+.text-right {
+  text-align: right !important;
+}
+.videoWrapper {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 */
+  padding-top: 25px;
+  height: 0;
+}
+.videoWrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+a.danger {
+  color: #c7254e;
+}
+.action-panel {
+  padding: 5px;
+}
+.bs-social-buttons {
+display: inline-block;
+margin-bottom: 0;
+padding-left: 0;
+list-style: none;
+}
+
+.bs-social-buttons li {
+display: inline-block;
+line-height: 1;
+padding: 5px 8px;
+}
+
+.bs-social-buttons li:first-child {
+padding-left: 0;
+}
+
+.login-form {
+  padding:20px;
+  min-width: 250px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+h2 img {
+    display: block;
+    margin: 5px auto;
+  }
+@media (min-width: 768px) {
+  h2 img {
+    display: inline;
+  }
+}
+
+html,body{
+  height: 100%;
+}
+body{
+  padding-bottom: 75px;
+}
+footer#footer{
+  height: 45px;
+  padding: 75px 0px 20px 0px;
+  ul.bu-logo {
+    text-align: center;
+    li {
+      display: inline-block;
+    }
+  }
+  p.disclaimer {
+    font-size:11px; color: gray; padding:10px 0 10px 0;
+    width: 80%;
+    margin:0 auto;
+  }
+}
+
+.section-title{
+  padding-bottom: 25px;
+}
+
+.dimgray-header{
+  font-family:sans-serif; 
+  color: dimgray; 
+  font-weight: normal;
+}
+.vital-group:last-child {
+  border-bottom: #ccc 1px solid;
+}
+
+.vital-toggle {
+  display: block;
+  padding: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+  background: #D6EBFF;
+}
+.vital-name {
+  font-weight: bold !important;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+
+.vital-name:before {
+  font-family: FontAwesome;
+  font-weight: normal;
+  content: "\f147";
+}
+
+.collapsed .vital-name:before {
+  font-family: FontAwesome;
+  font-weight: normal;
+  content: "\f196";
+}
+
+
+/* Form validator */
+label.error.valid {
+  display: none !important;
+}

@@ -1,0 +1,171 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+/* line 8, ../../../sass/screen.scss */
+.text-left {
+  text-align: left !important;
+}
+
+/* line 11, ../../../sass/screen.scss */
+.text-center {
+  text-align: center !important;
+}
+
+/* line 14, ../../../sass/screen.scss */
+.text-right {
+  text-align: right !important;
+}
+
+/* line 17, ../../../sass/screen.scss */
+.videoWrapper {
+  position: relative;
+  padding-bottom: 56.25%;
+  /* 16:9 */
+  padding-top: 25px;
+  height: 0;
+}
+
+/* line 23, ../../../sass/screen.scss */
+.videoWrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* line 31, ../../../sass/screen.scss */
+a.danger {
+  color: #c7254e;
+}
+
+/* line 34, ../../../sass/screen.scss */
+.action-panel {
+  padding: 5px;
+}
+
+/* line 37, ../../../sass/screen.scss */
+.bs-social-buttons {
+  display: inline-block;
+  margin-bottom: 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+/* line 44, ../../../sass/screen.scss */
+.bs-social-buttons li {
+  display: inline-block;
+  line-height: 1;
+  padding: 5px 8px;
+}
+
+/* line 50, ../../../sass/screen.scss */
+.bs-social-buttons li:first-child {
+  padding-left: 0;
+}
+
+/* line 54, ../../../sass/screen.scss */
+.login-form {
+  padding: 20px;
+  min-width: 250px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* line 61, ../../../sass/screen.scss */
+h2 img {
+  display: block;
+  margin: 5px auto;
+}
+
+@media (min-width: 768px) {
+  /* line 66, ../../../sass/screen.scss */
+  h2 img {
+    display: inline;
+  }
+}
+/* line 71, ../../../sass/screen.scss */
+html, body {
+  height: 100%;
+}
+
+/* line 74, ../../../sass/screen.scss */
+body {
+  padding-bottom: 75px;
+}
+
+/* line 77, ../../../sass/screen.scss */
+footer#footer {
+  height: 45px;
+  padding: 75px 0px 20px 0px;
+}
+/* line 80, ../../../sass/screen.scss */
+footer#footer ul.bu-logo {
+  text-align: center;
+}
+/* line 82, ../../../sass/screen.scss */
+footer#footer ul.bu-logo li {
+  display: inline-block;
+}
+/* line 86, ../../../sass/screen.scss */
+footer#footer p.disclaimer {
+  font-size: 11px;
+  color: gray;
+  padding: 10px 0 10px 0;
+  width: 80%;
+  margin: 0 auto;
+}
+
+/* line 93, ../../../sass/screen.scss */
+.section-title {
+  padding-bottom: 25px;
+}
+
+/* line 97, ../../../sass/screen.scss */
+.dimgray-header {
+  font-family: sans-serif;
+  color: dimgray;
+  font-weight: normal;
+}
+
+/* line 102, ../../../sass/screen.scss */
+.vital-group:last-child {
+  border-bottom: #ccc 1px solid;
+}
+
+/* line 106, ../../../sass/screen.scss */
+.vital-toggle {
+  display: block;
+  padding: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+  background: #D6EBFF;
+}
+
+/* line 114, ../../../sass/screen.scss */
+.vital-name {
+  font-weight: bold !important;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+/* line 120, ../../../sass/screen.scss */
+.vital-name:before {
+  font-family: FontAwesome;
+  font-weight: normal;
+  content: "\f147";
+}
+
+/* line 126, ../../../sass/screen.scss */
+.collapsed .vital-name:before {
+  font-family: FontAwesome;
+  font-weight: normal;
+  content: "\f196";
+}
+
+/* Form validator */
+/* line 134, ../../../sass/screen.scss */
+label.error.valid {
+  display: none !important;
+}
