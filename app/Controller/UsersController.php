@@ -173,9 +173,6 @@ class UsersController extends AppController {
 
         $reset_url = "http://" . CakeRequest::host() . $this->request->webroot;
         $reset_token = $reset_url . $reset_token;
-        
-
-        //$mail = new CakeEmail('smtp');
         $mail = new CakeEmail();
         $mail->viewVars(array('reset_token' => $reset_token));
         $mail->template('forgot_password', 'default')
@@ -206,7 +203,14 @@ class UsersController extends AppController {
     if ($this->request->is('post')){
       $this->User->create();
       try {
+        $activate_token = sha1(time() . $userEmail . $userPassword);
+        $userEmail = $this->request->data["User"]["email"];
+        $userPassword = sha1($this->request->data["User"]["password"]);
+        $this->request->data["User"]["activate_token"] = $activate_token;
+        //var_dump($this->request->data);
+        //exit;
         $res = $this->User->saveAssociated($this->request->data);
+        
         $admin_emails = array();
         $this->User->recursive = -1;
         $conditions = array("User.role >" => 0);
@@ -217,6 +221,7 @@ class UsersController extends AppController {
             array_push($admin_emails, $u['User']['email']);
           }
         }
+        
         $mail = new CakeEmail();
         $mail->template('notify_new_user', 'default')
           ->subject('New user notification')
@@ -225,6 +230,19 @@ class UsersController extends AppController {
           ->bcc($admin_emails)
           ->from('admin@diabetesavior.com')
           ->send();
+        
+        $baseUrl = "http://" . CakeRequest::host() . $this->request->webroot;
+        $activate_url = $baseUrl . "activate?token=". $activate_token;
+
+        $mail = new CakeEmail();
+        $mail->viewVars(array('activate_url' => $activate_url));
+        $mail->template('user_confirmation', 'default')
+          ->subject('Activate you account')
+          ->emailFormat('html')
+          ->to($userEmail)
+          ->from('admin@diabetesavior.com')
+          ->send();
+        //var_dump($userEmail);
         $this->redirect("/pages/after_sign_up");
       } catch(Exception $e) {
         $this->Session->setFlash($e->getMessage());
@@ -255,8 +273,29 @@ class UsersController extends AppController {
       $this->redirect($this->referer());
     } else {
       throw new ForbiddenException();
-      
     }
+  }
+
+  public function self_activate() {
+    $token = $this->params['url']['token'];
+    $user = $this->User->findByActivate_token($token);
+    //var_dump($user);
+    //exit;
+    if(count($user) > 1) {
+      $user['User']['activated'] = 1;
+      $user['User']['activate_token'] = null;
+      if($this->User->save($user)){
+        $this->Session->setFlash('Your account is now activated, please use your password to login', 'default', array('class' => 'alert alert-success'));
+        $this->redirect("/");
+      } else {
+        debug($this->User->validationErrors);
+        $this->render('reset_password_failed');
+      }
+    } else {
+      throw new ForbiddenException();
+    }
+
+
   }
 
 /**
@@ -285,7 +324,6 @@ class UsersController extends AppController {
       //$this->render("/layouts/debug");
     } else {
       throw new ForbiddenException();
-      
     }
   }
 

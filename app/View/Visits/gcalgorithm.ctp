@@ -39,7 +39,7 @@
        <p>*See further details on medicine side effects at: <a href= "https://www.aace.com/files/consensus-statement.pdf" 
       target="_blank">AACE Comprehensive Diabetes Management, Endocr Pract. 2013;19(Suppl 2)</a></p>
 
-       <p><a href=" /pages/algorithm_diagrams" target="_blank"> Algorithm flowchart diagrams </a> </p>	  
+       <p><a href="<?php echo $this->webroot; ?>pages/algorithm_diagrams" target="_blank"> Algorithm flowchart diagrams </a> </p>	  
     
 <div class="control-group">
   <label class="" for="Accept"></label>

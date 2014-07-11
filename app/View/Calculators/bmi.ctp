@@ -163,7 +163,7 @@ BMI is used for assessment of obesity-related risk for heart disease, diabetes, 
 </form>
 
 
-<p class="alert alert-info">
+<p class="alert alert-info text-left">
   Subject is: {{race}}<br>
   Subject's BMI: {{bmi}}<br>
   Weight Classification: {{weightClassification}}<br>
