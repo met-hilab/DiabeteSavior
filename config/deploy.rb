@@ -37,6 +37,15 @@ set :deploy_to, "/srv/110_hilab_projects_php/101_diabetesavior_src/"
 
 namespace :deploy do
 
+  desc 'set permissions'
+  task :set_permissions do
+    on roles(:web) do
+      within "#{fetch :deploy_to}/current" do
+        execute :chmod, "-R 777 ./app/tmp"
+      end
+    end
+  end
+
   desc 'Restart application'
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
@@ -45,8 +54,8 @@ namespace :deploy do
     end
   end
 
-  after :publishing, :restart
-
+  after :published, :set_permissions
+  after :set_permissions, :restart
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
       # Here we can do anything such as:
