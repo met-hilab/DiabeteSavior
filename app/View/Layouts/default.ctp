@@ -22,6 +22,7 @@ $cakeDescription = __d('cake_dev', 'Diabetes Savior: Type II Diabetes Infomatic 
 <html lang="en" ng-app>
 <head>
   <?php echo $this->Html->charset(); ?>
+  <link rel="shortcut icon" href="/favicon.ico">
   <title>
     <?php echo $cakeDescription ?>:
     <?php echo $title_for_layout; ?>
