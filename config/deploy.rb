@@ -1,15 +1,15 @@
 # config valid only for Capistrano 3.1
-lock '3.1.0'
+lock '3.2.1'
 
-set :application, "CS673 - DiabeteSavior"
-set :repo_url,  "git@github.com:bumetcs/cs673.git"
+set :application, "DiabeteSavior"
+set :repo_url,  "git@github.com:met-hilab/DiabeteSavior.git"
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 
 # Default deploy_to directory is /var/www/my_app
 # set :deploy_to, '/var/www/my_app'
-set :deploy_to, "/srv/110_hilab_projects_php/101_diabetesavior/"
+set :deploy_to, "/srv/110_hilab_projects_php/101_diabetesavior_src/"
 
 # Default value for :scm is :git
 # set :scm, :git
