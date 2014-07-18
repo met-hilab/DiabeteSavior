@@ -101,11 +101,13 @@ CakeLog::config('debug', array(
 	'engine' => 'File',
 	'types' => array('notice', 'info', 'debug'),
 	'file' => 'debug',
+  'mask' => 0775
 ));
 CakeLog::config('error', array(
 	'engine' => 'File',
 	'types' => array('warning', 'error', 'critical', 'alert', 'emergency'),
 	'file' => 'error',
+  'mask' => 0775
 ));
 
 /** 
