@@ -122,16 +122,16 @@ Body surface area (BSA) can be calculated with several different formulas which 
 
 <p class="alert alert-info text-left">
   Subject's BSA: <br>
-  &nbsp;&nbsp; Mosteller: {{bsa_mosteller()}}<br>
-  &nbsp;&nbsp; &nbsp;&nbsp;  = ((height (cm) x weight (kg)) / 3600 ) <sup>0.5</sup><br>
-  &nbsp;&nbsp; DuBois: {{bsa_dubois()}}<br>
-  &nbsp;&nbsp; &nbsp;&nbsp;  = 0.20247 x height (m)<sup>0.725</sup> x weight (kg)<sup>0.425</sup><br>
-  &nbsp;&nbsp; Haycock: {{bsa_haycock()}}<br>
-  &nbsp;&nbsp; &nbsp;&nbsp;  = 0.024265 x height (cm)<sup>0.3964</sup> x weight (kg)<sup>0.5378</sup><br>
-  &nbsp;&nbsp; Gehan &amp; George: {{bsa_gehan()}}<br>
-  &nbsp;&nbsp; &nbsp;&nbsp;  = 0.0235 x height (cm)<sup>0.42246</sup> x weight (kg)<sup>0.51456</sup><br>
-  &nbsp;&nbsp; Boyd: {{bsa_boyd()}}<br>
-  &nbsp;&nbsp; &nbsp;&nbsp;  = 0.0003207 x height (cm)<sup>0.3</sup> x weight (grams)<sup>0.7285 - (0.0188 x log(weight))</sup><br>
+  &nbsp;&nbsp; Mosteller: <br>
+  &nbsp;&nbsp; &nbsp;&nbsp; {{bsa_mosteller()}} = ((height (cm) x weight (kg)) / 3600 ) <sup>0.5</sup><br>
+  &nbsp;&nbsp; DuBois: <br>
+  &nbsp;&nbsp; &nbsp;&nbsp; {{bsa_dubois()}} = 0.20247 x height (m)<sup>0.725</sup> x weight (kg)<sup>0.425</sup><br>
+  &nbsp;&nbsp; Haycock: <br>
+  &nbsp;&nbsp; &nbsp;&nbsp; {{bsa_haycock()}} = 0.024265 x height (cm)<sup>0.3964</sup> x weight (kg)<sup>0.5378</sup><br>
+  &nbsp;&nbsp; Gehan &amp; George: <br>
+  &nbsp;&nbsp; &nbsp;&nbsp; {{bsa_gehan()}} = 0.0235 x height (cm)<sup>0.42246</sup> x weight (kg)<sup>0.51456</sup><br>
+  &nbsp;&nbsp; Boyd: <br>
+  &nbsp;&nbsp; &nbsp;&nbsp; {{bsa_boyd()}} = 0.0003207 x height (cm)<sup>0.3</sup> x weight (grams)<sup>0.7285 - (0.0188 x log(weight))</sup><br>
 </p>
 </div>
 
