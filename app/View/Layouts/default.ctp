@@ -106,7 +106,7 @@ $cakeDescription = __d('cake_dev', 'Diabetes Savior: Type II Diabetes Infomatic 
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Calculators <b class="caret"></b></a>
             <ul class="dropdown-menu">
               <li><a href="<?php echo $this->webroot; ?>calculators/bmi">Body Mass Index</a></li>
-              <!--<li><a href="<?php echo $this->webroot; ?>calculators/bsa">Body Surface Area</a></li>-->
+              <li><a href="<?php echo $this->webroot; ?>calculators/bsa">Body Surface Area</a></li>
               <li><a href="<?php echo $this->webroot; ?>calculators/bgl">A1C to eAG Calculator</a></li>
               <li><a href="<?php echo $this->webroot; ?>calculators/diabetesrisk">Diabetes Risk</a></li>
             </ul>
