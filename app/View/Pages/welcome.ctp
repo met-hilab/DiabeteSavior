@@ -4,6 +4,7 @@
   <ul>
     <li><a href="<?php echo $this->webroot; ?>calculators/bmi">BMI calculator<a></li>
     <li><a href="<?php echo $this->webroot; ?>calculators/bgl">BGI calculator<a></li>
+    <li><a href="<?php echo $this->webroot; ?>calculators/bsa">BSA calculator<a></li>
     <li><a href="<?php echo $this->webroot; ?>calculators/diabetesrisk">Diabetes risk calculator</a></li>
   </ul>
 </p>

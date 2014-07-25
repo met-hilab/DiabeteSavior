@@ -110,31 +110,32 @@ footer#footer ul.bu-logo li {
 }
 /* line 86, ../../../sass/screen.scss */
 footer#footer p.disclaimer {
-  font-size: 11px;
+  font-size: 12px;
   color: gray;
   padding: 10px 0 10px 0;
+  font-weight: bold;
   width: 80%;
   margin: 0 auto;
 }
 
-/* line 93, ../../../sass/screen.scss */
+/* line 96, ../../../sass/screen.scss */
 .section-title {
   padding-bottom: 25px;
 }
 
-/* line 97, ../../../sass/screen.scss */
+/* line 100, ../../../sass/screen.scss */
 .dimgray-header {
   font-family: sans-serif;
   color: dimgray;
   font-weight: normal;
 }
 
-/* line 102, ../../../sass/screen.scss */
+/* line 105, ../../../sass/screen.scss */
 .vital-group:last-child {
   border-bottom: #ccc 1px solid;
 }
 
-/* line 106, ../../../sass/screen.scss */
+/* line 109, ../../../sass/screen.scss */
 .vital-toggle {
   display: block;
   padding: 10px;
@@ -144,20 +145,20 @@ footer#footer p.disclaimer {
   background: #D6EBFF;
 }
 
-/* line 114, ../../../sass/screen.scss */
+/* line 117, ../../../sass/screen.scss */
 .vital-name {
   font-weight: bold !important;
   font-family: Helvetica, Arial, sans-serif;
 }
 
-/* line 120, ../../../sass/screen.scss */
+/* line 123, ../../../sass/screen.scss */
 .vital-name:before {
   font-family: FontAwesome;
   font-weight: normal;
   content: "\f147";
 }
 
-/* line 126, ../../../sass/screen.scss */
+/* line 129, ../../../sass/screen.scss */
 .collapsed .vital-name:before {
   font-family: FontAwesome;
   font-weight: normal;
@@ -165,7 +166,7 @@ footer#footer p.disclaimer {
 }
 
 /* Form validator */
-/* line 134, ../../../sass/screen.scss */
+/* line 137, ../../../sass/screen.scss */
 label.error.valid {
   display: none !important;
 }
