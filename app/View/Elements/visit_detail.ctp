@@ -159,7 +159,7 @@
             <?php } ?>
         </tr>
         <tr>  
-            <th class="dimgray-header"> <a href=" /pages/weightclassification" target="_blank"> Weight Classification:</a> </th>
+            <th class="dimgray-header"> <a href="<?php echo $this->webroot; ?>pages/weightclassification" target="_blank"> Weight Classification:</a> </th>
             <td><?php echo $visit['VitalsLab']['bmi_status'] ?></td>
 			<td> </td>
         </tr>
