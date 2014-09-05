@@ -6,8 +6,54 @@ echo $this->Html->script('angular-route.min');
 ?>
 <script>
 $(document).ready(function(){
+unit = {
+  'imperial' : {
+    'weightFormat': 'lb',
+    'heightFormat': 'ft\'inch"'
+  },
+  'metric' : {
+    'weightFormat': 'kg',
+    'heightFormat': 'cm'
+  }
+};
+unitType = 'imperial';
+unitFormat = unit[unitType];
+unitSwitcher = $('.switch-unit');
 
 });
+
+function mToFt(value) {
+  inches = 0;
+  inches = value * 0.3937008;
+  feets = Math.floor(inches / 12);
+  inches = Math.round(inches % 12);//.toFixed(1);
+  value = feets + ("'") + inches + ('"');
+  return value;
+}
+function ftToM(value) {
+  if(value.indexOf("'") > 0) {
+    inches = value.split("'")[1];
+    if(inches.length == 0) {
+      inches = 0;
+    } else if(inches.indexOf('"') > 0) {
+      inches = inches.substring(0, inches.length - 1);
+    }
+    feets = value.split("'")[0];
+    feetsAsInches = feets * 12;
+    inches = parseFloat(inches) + feetsAsInches;
+  } else {
+    feets = value;
+    inches = feets * 12;
+  }
+  value = (inches * 2.54).toFixed(0);
+  return value;
+}
+function lbToKg(value) {
+  return (value * 0.453592).toFixed(1);
+}
+function kgToLb(value) {
+  return (value * 2.20462).toFixed(1);
+}
 
 function bmiCalculatorsController($scope) {
   $scope.race = ""
@@ -43,6 +89,11 @@ function bmiCalculatorsController($scope) {
     } else {
       var h = parseFloat($("input[name=txtHeight]").val());
       var w = parseFloat($("input[name=txtWeight]").val());
+      if($scope.unitType == 'imperial') {
+        h = inchToCm();
+        w = poundToKg();
+      }
+      
 
       $scope.bmi = w / ((h / 100) * (h / 100));
       $scope.bmi = $scope.bmi.toFixed(2);
@@ -127,32 +178,37 @@ BMI is used for assessment of obesity-related risk for heart disease, diabetes, 
   </div>
 
   <div class="form-group">
-    <label for="" class="col-sm-2 control-label">Height</label>
-    <div class="input-group col-sm-10">
-      <input id="txtHeight" class="form-control" name="txtHeight" value="" type="text">
-      <div class="input-group-btn">
-        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span id="currentHeightUnit">{{unitH}}</span>  <span class="caret"></span></button>
-        <ul class="dropdown-menu pull-right">
-          <li><a ng-click="setUnitH('cm');">cm</a></li>
-          <li><a ng-click="setUnitH('ft');">ft</a></li>
-        </ul>
-      </div><!-- /btn-group -->
+    <label class="col-sm-2 control-label">Unit type</label>
+    <div class="col-sm-10">
+      <div class="btn-group">
+        <?php if($unitType == 'imperial'): ?>
+        <a href="#" class="btn btn-primary switch-unit" data-unit='imperial'>lbs / ft</a>
+        <a href="#" class="btn btn-default switch-unit" data-unit='metric'>kg / cm</a>
+        <?php else: ?>
+        <a href="#" class="btn btn-default switch-unit" data-unit='imperial'>lbs / ft</a>
+        <a href="#" class="btn btn-primary switch-unit" data-unit='metric'>kg / cm</a>
+        <?php endif; ?>
+      </div>  
     </div>
   </div>
 
   <div class="form-group">
-    <label for="" class="col-sm-2 control-label">Weight</label>
-    <div class="input-group col-sm-10">
+    <label class="col-sm-2 control-label">Weight</label>
+    <div class="col-sm-10">
       <input id="txtWeight" class="form-control" name="txtWeight" value="" type="text">
-      <div class="input-group-btn">
-        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" ><span id="currentWeightUnit">{{unitW}}</span> <span class="caret"></span></button>
-        <ul class="dropdown-menu pull-right">
-          <li><a ng-click="setUnitW('kg');">kg</a></li>
-          <li><a ng-click="setUnitW('lb');">lb</a></li>
-        </ul>
-      </div><!-- /btn-group -->
     </div>
   </div>
+
+  <div class="form-group">
+    <label class="col-sm-2 control-label">Height</label>
+    <div class="col-sm-10">
+      <input id="txtHeight" class="form-control" name="txtHeight" value="" type="text">
+    </div>
+  </div>
+
+<?php echo $this->Form->hidden('weight') ?>
+<?php echo $this->Form->hidden('height') ?>
+
 
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
@@ -172,30 +228,6 @@ BMI is used for assessment of obesity-related risk for heart disease, diabetes, 
 </div>
 
 <hr>
-<!--
-<input id="answer" name="answer" value="" type="text">
-<a href="#table1">Weight Classification </a>:
-<input id="Cate" name="answer" value="" type="text">
-
-Obesity Class : 
-<input id="obclass" name="answer" value="" type="text">
-
-Gender
-<select id="sex" name="sex">
-  <option value="men">Male</option>
-  <option value="women">Female</option>
-</select>
-
-Waist Circumference
-<input id="waist" name="value4" value="" type="text">
-<input name="Sumbit" value="Calcuate" onclick="classification2();" type="button">
-
-<a href="#table2">&nbsp;Disease Risk</a><span style="font-size:9.0pt;">*</span>
-<input id="answer2" name="answer2" value="" type="text">
-
--->
-
-
 
 <p>
 * Disease risk for type 2 diabetes, hypertension, and cardiovascular diseases
