@@ -1,76 +1,248 @@
-// BMI - JavaScript Document
+lbToKg = function(value) {
+  return (value * 0.453592).toFixed(1);
+}
+kgToLb = function(value) {
+  return (value * 2.20462).toFixed(1);
+}
+mToFt = function(value) {
+  inches = 0;
+  inches = value * 0.3937008;
+  feets = Math.floor(inches / 12);
+  inches = Math.round(inches % 12);//.toFixed(1);
+  value = feets + ("'") + inches + ('"');
+  return value;
+}
+ftToM = function(value) {
+  if(value.indexOf("'") > 0) {
+    inches = value.split("'")[1];
+    if(inches.length == 0) {
+      inches = 0;
+    } else if(inches.indexOf('"') > 0) {
+      inches = inches.substring(0, inches.length - 1);
+    }
+    feets = value.split("'")[0];
+    feetsAsInches = feets * 12;
+    inches = parseFloat(inches) + feetsAsInches;
+  } else {
+    feets = value;
+    inches = feets * 12;
+  }
+  value = (inches * 2.54).toFixed(0);
+  return value;
+}
 
-                function addNumbers()
-                {
-                        var wei=document.getElementById("weight");
-                        var hei=document.getElementById("height");
-                        var heivalue=document.getElementById("height").value;
-                        var weivalue=document.getElementById("weight").value;
-                        var val1 = document.getElementById("value1").value;
-                        var val2 = document.getElementById("value2").value;
-                        var ansD = document.getElementById("answer");
-                        var bmi;
-                        if (heivalue=="Cm" && weivalue=="Kg") {bmi = (10000*val2/val1/val1); ansD.value = bmi.toFixed(1);}
-                        if (heivalue=="Inch" && weivalue=="Lb") {bmi = (703*val2/val1/val1); ansD.value = bmi.toFixed(1);};
-                        
-                }
-               function classification()
-                {
-                       var pop = document.getElementById("pop").value;
-                       var ansD = document.getElementById("answer");
-                       var cate = document.getElementById("Cate");
-                       var obclass = document.getElementById("obclass");
-                       if (pop=="US/European"&&ansD.value < 16.0) {cate.value = "Severely underweight";obclass.value = "N/A"}
-                       if (pop=="US/European"&&ansD.value>=16.0&&ansD.value<18.5) {cate.value = "Underweight";obclass.value = "N/A"}
-                       if (pop=="US/European"&&ansD.value>=18.5&&ansD.value<25.0) {cate.value = "Normal";obclass.value = "N/A"}
-                       if (pop=="US/European"&&ansD.value>=25.0&&ansD.value<30.0) {cate.value = "Overweight";obclass.value = "N/A"}
-                       if (pop=="US/European"&&ansD.value>=30.0&&ansD.value<35.0) {cate.value = "Obese";obclass.value = "I"}
-                       if (pop=="US/European"&&ansD.value>=35.0&&ansD.value<40.0) {cate.value = "Obese";obclass.value = "II"}
-                       if (pop=="US/European"&&ansD.value>40.0) {cate.value = "Extremely obese";obclass.value = "III"}
-                       if (pop=="Asian"&&ansD.value>=18.5&&ansD.value<22.9) {cate.value = "Normal";obclass.value = "N/A"}
-                       if (pop=="Asian"&&ansD.value>=23.0&&ansD.value<24.9) {cate.value = "Overweight";obclass.value = "N/A"}
-                       if (pop=="Asian"&&ansD.value>25.0) {cate.value = "Obese";obclass.value = "N/A"}
-                       
-                       
-                       
-                 } 
-function classification2()
-                  {   
-                       var cate = document.getElementById("Cate");
-                       var sex = document.getElementById("sex");
-                       var wai = document.getElementById("waist");
-                       var unit = document.getElementById("unit");
-                       var ansD = document.getElementById("answer");
-                       var dis = document.getElementById("answer2");
-                       if (sex.value == "men"||"women"&&cate.value =="Severely underweight"||"Underweight"||"Normal") {dis.value = "N/A"}
-               if (sex.value == "men"&&cate.value =="Overweight"&&unit.value=="in"&&wai.value<=40) {dis.value = "Increased"}
-                       if (sex.value == "men"&&cate.value =="Overweight"&&unit.value=="cm"&&wai.value<=102) {dis.value = "Increased"}
-               if (sex.value == "men"&&cate.value =="Overweight"&&unit.value=="in"&&wai.value>40) {dis.value = "High"}
-                       if (sex.value == "men"&&cate.value =="Overweight"&&unit.value=="cm"&&wai.value>102) {dis.value = "High"}
-                       if (sex.value == "men"&&ansD.value>=30.0&&ansD.value<35.0&&unit.value=="in"&&wai.value<=40) {dis.value = "High"}
-                       if (sex.value == "men"&&ansD.value>=30.0&&ansD.value<35.0&&unit.value=="cm"&&wai.value<=102) {dis.value = "High"}
-                       if (sex.value == "men"&&ansD.value>=30.0&&ansD.value<35.0&&unit.value=="in"&&wai.value>40) {dis.value = "Very High"}
-                       if (sex.value == "men"&&ansD.value>=30.0&&ansD.value<35.0&&unit.value=="cm"&&wai.value>102) {dis.value = "Very High"}
-                       if (sex.value == "men"&&ansD.value>=35.0&&ansD.value<40.0&&unit.value=="in"&&wai.value<=40) {dis.value = "Very High"}
-                       if (sex.value == "men"&&ansD.value>=35.0&&ansD.value<40.0&&unit.value=="cm"&&wai.value<=102) {dis.value = "Very High"}
-                       if (sex.value == "men"&&ansD.value>=35.0&&ansD.value<40.0&&unit.value=="in"&&wai.value>40) {dis.value = "Very High"}
-                       if (sex.value == "men"&&ansD.value>=35.0&&ansD.value<40.0&&unit.value=="cm"&&wai.value>102) {dis.value = "Very High"}
-               if (sex.value == "men"&&cate.value =="Extremely obese"&&unit.value=="in"&&wai.value<=40) {dis.value = "Extremely High"}
-                       if (sex.value == "men"&&cate.value =="Extremely obese"&&unit.value=="cm"&&wai.value<=102) {dis.value = "Extremely High"}
-               if (sex.value == "men"&&cate.value =="Extremely obese"&&unit.value=="in"&&wai.value>40) {dis.value = "Extremely High"}
-                       if (sex.value == "men"&&cate.value =="Extremely obese"&&unit.value=="cm"&&wai.value>102) {dis.value = "Extremely High"}
-                       if (sex.value == "women"&&cate.value =="Overweight"&&unit.value=="in"&&wai.value<=35) {dis.value = "Increased"}
-                       if (sex.value == "women"&&cate.value =="Overweight"&&unit.value=="cm"&&wai.value<=88) {dis.value = "Increased"}
-               if (sex.value == "women"&&cate.value =="Overweight"&&unit.value=="in"&&wai.value>35) {dis.value = "High"}
-                       if (sex.value == "women"&&cate.value =="Overweight"&&unit.value=="cm"&&wai.value>88) {dis.value = "High"}
-                       if (sex.value == "women"&&ansD.value>=30.0&&ansD.value<35.0&&unit.value=="in"&&wai.value<=35) {dis.value = "High"}
-                       if (sex.value == "women"&&ansD.value>=30.0&&ansD.value<35.0&&unit.value=="cm"&&wai.value<=88) {dis.value = "High"}
-                       if (sex.value == "women"&&ansD.value>=30.0&&ansD.value<35.0&&unit.value=="in"&&wai.value>35) {dis.value = "Very High"}
-                       if (sex.value == "women"&&ansD.value>=30.0&&ansD.value<35.0&&unit.value=="cm"&&wai.value>88) {dis.value = "Very High"}
-                       if (sex.value == "women"&&ansD.value>=35.0&&ansD.value<40.0&&unit.value=="in"&&wai.value<=35) {dis.value = "Very High"}
-                       if (sex.value == "women"&&ansD.value>=35.0&&ansD.value<40.0&&unit.value=="cm"&&wai.value<=88) {dis.value = "Very High"}
-                       if (sex.value == "women"&&ansD.value>=35.0&&ansD.value<40.0&&unit.value=="in"&&wai.value>35) {dis.value = "Very High"}
-                       if (sex.value == "women"&&ansD.value>=35.0&&ansD.value<40.0&&unit.value=="cm"&&wai.value>88) {dis.value = "Very High"}
-               if (sex.value == "women"&&cate.value =="Extremely obese"&&unit.value=="in"&&wai.value<=35) {dis.value = "Extremely High"}                                   if (sex.value == "women"&&cate.value =="Extremely obese"&&unit.value=="cm"&&wai.value<=88) {dis.value = "Extremely High"}                                   if (sex.value == "women"&&cate.value =="Extremely obese"&&unit.value=="in"&&wai.value>35) {dis.value = "Extremely High"}
-                       if (sex.value == "women"&&cate.value =="Extremely obese"&&unit.value=="cm"&&wai.value>88) {dis.value = "Extremely High"};
+var bmiApp = angular.module('diabeteSavior', ['ngCookies']);
+bmiApp.controller('bmiCalculatorsController', ['$scope','$cookies', '$cookieStore', bmiCalculatorsController]);
+
+
+function bmiCalculatorsController($scope, $cookies, $cookieStore) {
+  $scope.race = ""
+  $scope.bmi = "";
+  $scope.weightClassification = "";
+  $scope.obesityClass = "";
+
+  $scope.unit = {
+    'imperial' : {
+      'weightFormat': 'lb',
+      'heightFormat': 'ft\'inch"'
+    },
+    'metric' : {
+      'weightFormat': 'kg',
+      'heightFormat': 'cm'
+    }
+  };
+  $scope.unitType = null;
+  $scope.unitFormat = null;
+
+  setPlaceholders = function() {
+    $('#txtWeight').attr('placeholder', $scope.unitFormat.weightFormat);
+    $('#txtHeight').attr('placeholder', $scope.unitFormat.heightFormat);
+  }
+
+  init = function() {
+    // Retrieving a cookie
+    if($cookies.unitType == '') {
+      $cookies.unitType = 'imperial';
+    }
+    $scope.unitType = $cookies.unitType;
+    $scope.unitFormat = $scope.unit[$scope.unitType];    
+    setPlaceholders();
+  }
+  init();
+
+  $scope.enterInput = function(ev) {
+    tgt = ev.target;
+    setTimeout(function() { 
+      tgt.setSelectionRange(0, tgt.value.length);
+    },10);    
+  }
+
+  $scope.weightKeyUp = function(ev) {
+    
+  }
+
+  $scope.heightKeyDown = function(ev) {
+    // Only allow numbers, ., ', " in this field.
+    // Keydown trigger before change, thus the value still old.
+    value = ev.target.value;
+
+    if($scope.unitType == 'imperial') {
+      // . ' "
+      if(value.indexOf('"') >  -1) {
+        if(ev.keyCode == 8 || ev.keyCode == 46 || ev.keyCode == 9) {
+          // Only allow to delete string.
+          return true;
+        }
+        ev.preventDefault();
+        return false;
+      }
+      if(value.indexOf("'") > -1 && (ev.keyCode == 222 && !ev.shiftKey)) {
+        // Not allow "'" key
+        ev.preventDefault();
+        return false;
+      }
+      allowedKeys = [190, 222, 16];
+    } else {
+      allowedKeys = [190];
+    }
+
+    if(value.indexOf('.') >  -1 && ev.keyCode == 190) {
+      // Not allow '.' key
+      ev.preventDefault();
+      return false;
+    } 
+    // arrow keys: 37 - 40, ctrl 17, cmd 91, backspace 8, del 46, c 67, v 86, x 88, tab 9
+    actionKeys = [67, 86, 88, 82, 65];
+    modKeys = [37, 38, 39, 40, 17, 91, 8, 46, 9];
+    ctrlDown = ev.ctrlKey || ev.metaKey // Mac support
+    allowedKeys = allowedKeys.concat(modKeys);
+    //console.log('keycode: ' + ev.keyCode);
+    
+    if(ev.keyCode >= 48 && ev.keyCode <= 57) {
+      // is a digit.
+      return true;
+    } else if($.inArray(ev.keyCode, allowedKeys) > -1){
+      // is allowd keys: . ' "
+      return true;
+    } else if(ctrlDown && $.inArray(ev.keyCode, actionKeys) > -1) {
+      return true;
+    } else {
+      ev.preventDefault();
+      return false;
+    }
+  }
+
+  $scope.unitTypeClass = function(type) {
+    return type === $scope.unitType ? 'btn-primary' : '';
+  }
+
+  $scope.setUnitType = function(type) {
+    if($scope.unitType === type) {
+      return false;
+    }
+    $scope.unitType = type;
+    $cookies.unitType = type;
+    $scope.unitFormat = $scope.unit[type];    
+    setPlaceholders();
+    if(type == 'imperial') {
+      newW = kgToLb($('#txtWeight').val());
+      newH = mToFt($('#txtHeight').val());
+    } else {
+      newW = lbToKg($('#txtWeight').val());
+      newH = ftToM($('#txtHeight').val());
+    }
+    $('#txtWeight').val(newW);
+    $('#txtHeight').val(newH);
+    return false;
+  }
+
+  $scope.populationClass = function(race) {
+    return race === $scope.race ? "btn-primary" : '';
+  };
+
+  $scope.setPopulcation = function(race) {
+    $scope.race = race;
+  }
+  
+  $scope.submit = function() {
+    return false;
+  }
+
+  $scope.calculateBMI = function() {
+    if($scope.race === '') {
+      alert("Please select population.");
+    } else {
+      var h = 0;
+      var w = 0;
+      if($scope.unitType == 'imperial') {
+        h = ftToM($("input[name=txtHeight]").val());
+        w = lbToKg($("input[name=txtWeight]").val());
+      } else {
+        h = parseFloat($("input[name=txtHeight]").val());
+        w = parseFloat($("input[name=txtWeight]").val());
+      }
+      
+
+      $scope.bmi = w / ((h / 100) * (h / 100));
+      $scope.bmi = $scope.bmi.toFixed(2);
+
+      var weightClass = "";
+      var obesityClass = "";
+
+      switch($scope.race) {
+        case "caucasian":
+          if($scope.bmi < 16.0) {
+            weightClass = "Severely underweight";
+            obesityClass = "none";
+          } else if($scope.bmi < 18.5) {
+            weightClass = "Underweight";
+            obesityClass = "none";
+          } else if($scope.bmi < 25.0) {
+            weightClass = "Normal";
+            obesityClass = "none";
+          } else if($scope.bmi < 30.0) {
+            weightClass = "Overweight";
+            obesityClass = "none";
+          } else if($scope.bmi < 35.0) {
+            weightClass = "Obese";
+            obesityClass = "I";
+          } else if($scope.bmi < 40.0) {
+            weightClass = "Extremely obese";
+            obesityClass = "II";  
+          } else {
+            weightClass = "Extremely obese";
+            obesityClass = "III";
+          }
+          break;
+        case "asian":
+          if($scope.bmi < 16.0) {
+            weightClass = "Severely underweight";
+            obesityClass = "none";
+          } else if($scope.bmi < 18.5) {
+            weightClass = "Underweight";
+            obesityClass = "none";
+          } else if($scope.bmi < 23.0) {
+            weightClass = "Normal";
+            obesityClass = "none";
+          } else if($scope.bmi < 25.0) {
+            weightClass = "Overweight";
+            obesityClass = "none";
+          } else if($scope.bmi < 35.0) {
+            weightClass = "Obese";
+            obesityClass = "I";
+          } else if($scope.bmi < 40.0) {
+            weightClass = "Extremely obese";
+            obesityClass = "II";  
+          } else {
+            weightClass = "Extremely obese";
+            obesityClass = "III";
+          }
+          break;
+      }
+
+      $scope.weightClassification = weightClass;
+      $scope.obesityClass = obesityClass;
+      //$scope.$apply();
+    }
+  }
 }
