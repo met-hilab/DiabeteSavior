@@ -1,113 +1,11 @@
 <?php
+
+echo $this->Html->script('angular/angular.min');
+echo $this->Html->script('angular/angular-cookies');
+echo $this->Html->script('angular/angular-route.min');
 echo $this->Html->script('bmi');
-echo $this->Html->script('angular.min');
-echo $this->Html->script('angular-route.min');
-
 ?>
-<script>
-$(document).ready(function(){
 
-});
-
-function bmiCalculatorsController($scope) {
-  $scope.race = ""
-  $scope.bmi = "";
-  $scope.weightClassification = "";
-  $scope.obesityClass = "";
-  $scope.unitW = "kg";
-  $scope.unitH = "cm";
-
-  $scope.populationClass = function(race) {
-    return race === $scope.race ? "btn-selected" : undefined;
-  };
-  
-  $scope.submit = function() {
-    return false;
-  }
-
-  $scope.setUnitH = function(unit) {
-    $scope.unitH = unit;
-  }
-
-  $scope.setUnitW = function(unit) {
-    $scope.unitW = unit;
-  }
-
-  $scope.setPopulcation = function(race) {
-    $scope.race = race;
-  }
-
-  $scope.calculateBMI = function() {
-    if($scope.race === '') {
-      alert("Please select population.");
-    } else {
-      var h = parseFloat($("input[name=txtHeight]").val());
-      var w = parseFloat($("input[name=txtWeight]").val());
-
-      $scope.bmi = w / ((h / 100) * (h / 100));
-      $scope.bmi = $scope.bmi.toFixed(2);
-
-      var weightClass = "";
-      var obesityClass = "";
-
-      switch($scope.race) {
-        case "caucasian":
-          if($scope.bmi < 16.0) {
-            weightClass = "Severely underweight";
-            obesityClass = "none";
-          } else if($scope.bmi < 18.5) {
-            weightClass = "Underweight";
-            obesityClass = "none";
-          } else if($scope.bmi < 25.0) {
-            weightClass = "Normal";
-            obesityClass = "none";
-          } else if($scope.bmi < 30.0) {
-            weightClass = "Overweight";
-            obesityClass = "none";
-          } else if($scope.bmi < 35.0) {
-            weightClass = "Obese";
-            obesityClass = "I";
-          } else if($scope.bmi < 40.0) {
-            weightClass = "Extremely obese";
-            obesityClass = "II";  
-          } else {
-            weightClass = "Extremely obese";
-            obesityClass = "III";
-          }
-          break;
-        case "asian":
-          if($scope.bmi < 16.0) {
-            weightClass = "Severely underweight";
-            obesityClass = "none";
-          } else if($scope.bmi < 18.5) {
-            weightClass = "Underweight";
-            obesityClass = "none";
-          } else if($scope.bmi < 23.0) {
-            weightClass = "Normal";
-            obesityClass = "none";
-          } else if($scope.bmi < 25.0) {
-            weightClass = "Overweight";
-            obesityClass = "none";
-          } else if($scope.bmi < 35.0) {
-            weightClass = "Obese";
-            obesityClass = "I";
-          } else if($scope.bmi < 40.0) {
-            weightClass = "Extremely obese";
-            obesityClass = "II";  
-          } else {
-            weightClass = "Extremely obese";
-            obesityClass = "III";
-          }
-          break;
-      }
-
-      $scope.weightClassification = weightClass;
-      $scope.obesityClass = obesityClass;
-      //$scope.$apply();
-    }
-  }
-}
-</script>
 <h2 class="section-title">Body Mass Index (BMI)</h2>
 <p>
 BMI is used for assessment of obesity-related risk for heart disease, diabetes, osteoarthritis, cancer, sleep apnea, abdominal hernias, varicose veins, gout, gall bladder disease, respiratory problems, and liver malfunction. The increased risk for these diseases and conditions are calculated by observing population. BMI is not a very precise measure-there are differences in definition of BMI in different populations, and also between individuals. Nevertheless, BMI is broadly used. It is often combined with the measurement of waist circumference or waist-to-height ratio.
@@ -127,32 +25,34 @@ BMI is used for assessment of obesity-related risk for heart disease, diabetes, 
   </div>
 
   <div class="form-group">
-    <label for="" class="col-sm-2 control-label">Height</label>
-    <div class="input-group col-sm-10">
-      <input id="txtHeight" class="form-control" name="txtHeight" value="" type="text">
-      <div class="input-group-btn">
-        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span id="currentHeightUnit">{{unitH}}</span>  <span class="caret"></span></button>
-        <ul class="dropdown-menu pull-right">
-          <li><a ng-click="setUnitH('cm');">cm</a></li>
-          <li><a ng-click="setUnitH('ft');">ft</a></li>
-        </ul>
-      </div><!-- /btn-group -->
+    <label class="col-sm-2 control-label">Unit type</label>
+    <div class="col-sm-10">
+      <div class="btn-group">
+        
+        <button class="btn btn-default switch-unit" data-unit='imperial' ng-class="unitTypeClass('imperial')" ng-click="setUnitType('imperial')" >lbs / ft</button>
+        <button class="btn btn-default switch-unit" data-unit='metric' ng-class="unitTypeClass('metric')" ng-click="setUnitType('metric')" >kg / cm</button>
+        
+      </div>  
     </div>
   </div>
 
   <div class="form-group">
-    <label for="" class="col-sm-2 control-label">Weight</label>
-    <div class="input-group col-sm-10">
-      <input id="txtWeight" class="form-control" name="txtWeight" value="" type="text">
-      <div class="input-group-btn">
-        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" ><span id="currentWeightUnit">{{unitW}}</span> <span class="caret"></span></button>
-        <ul class="dropdown-menu pull-right">
-          <li><a ng-click="setUnitW('kg');">kg</a></li>
-          <li><a ng-click="setUnitW('lb');">lb</a></li>
-        </ul>
-      </div><!-- /btn-group -->
+    <label class="col-sm-2 control-label">Weight</label>
+    <div class="col-sm-10">
+      <input id="txtWeight" class="form-control" name="txtWeight" value="" type="text" ng-focus="enterInput($event)" ng-keyup="weightKeyUp($event)">
     </div>
   </div>
+
+  <div class="form-group">
+    <label class="col-sm-2 control-label">Height</label>
+    <div class="col-sm-10">
+      <input id="txtHeight" class="form-control" name="txtHeight" value="" type="text" ng-focus="enterInput($event)" ng-keydown="heightKeyDown($event)">
+    </div>
+  </div>
+
+<?php echo $this->Form->hidden('weight') ?>
+<?php echo $this->Form->hidden('height') ?>
+
 
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
@@ -172,30 +72,6 @@ BMI is used for assessment of obesity-related risk for heart disease, diabetes, 
 </div>
 
 <hr>
-<!--
-<input id="answer" name="answer" value="" type="text">
-<a href="#table1">Weight Classification </a>:
-<input id="Cate" name="answer" value="" type="text">
-
-Obesity Class : 
-<input id="obclass" name="answer" value="" type="text">
-
-Gender
-<select id="sex" name="sex">
-  <option value="men">Male</option>
-  <option value="women">Female</option>
-</select>
-
-Waist Circumference
-<input id="waist" name="value4" value="" type="text">
-<input name="Sumbit" value="Calcuate" onclick="classification2();" type="button">
-
-<a href="#table2">&nbsp;Disease Risk</a><span style="font-size:9.0pt;">*</span>
-<input id="answer2" name="answer2" value="" type="text">
-
--->
-
-
 
 <p>
 * Disease risk for type 2 diabetes, hypertension, and cardiovascular diseases
