@@ -1,5 +1,10 @@
+<?php echo $this->Html->css('joint'); ?>
+<script>
+window.decisionPath = <?php echo json_encode($decisionPath); ?>;
+console.log(decisionPath);
+</script>
 <h2>Glycemic Control Algorithm Results</h2>
-
+<div id="graph2"></div>
 <div class="col-md-9">
 <form id="algorithm_results" class="form-horizontal" role="form" action="<?php echo $this->webroot; ?>visits/gcalgorithm" method="post">
  <table  class="table table-condensed">      
@@ -51,5 +56,15 @@
 </div>
 </form>
 </div>
-
+<?php
+echo $this->Html->script('lodash');
+echo $this->Html->script('backbone');
+echo $this->Html->script('vectorizer');
+echo $this->Html->script('geometry');
+echo $this->Html->script('joint.clean');
+//echo $this->Html->script('joint');
+echo $this->Html->script('joint.layout.DirectedGraph');
+echo $this->Html->script('joint.shapes');
+echo $this->Html->script('decisionPath');
+?>
 

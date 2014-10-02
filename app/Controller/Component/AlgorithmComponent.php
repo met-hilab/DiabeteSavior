@@ -36,6 +36,7 @@ class AlgorithmComponent extends Component {
 
     // algorithm decision, side effects message for medicines, and alert message for patient contraindications,
     var $decision ="";
+    var $decisionPath = array();
     var $medeffects = '<b>Reported medicine side effects:</b><br>';
     var $patientAlert = '<b><font color="red">Patient is at higher risk of side effects due to contraindications with following medications:</font></b><br>';
     var $alert = "";
@@ -102,12 +103,17 @@ class AlgorithmComponent extends Component {
      * Glycemic control algorithm provides therapy results based on patient A1c levels and allergies.
      */
     public function gcAlgorithm( ) {
-
+        $graph1 = array("begin", "input", "db", "decision1");
+        $graph2 = array();
+        $graph3 = array();
+        
         // hypoglycemic ac1 < 4.1
+        // Graph 1
         if ($this->a1c < 4.1)
         {
             $this->therapy = "none";
             $this->decision = "Warning: Patient is Hypoglycemic";
+            array_push($graph1, "end");
         }
 
         // normal range (not diabetic) 4.1 <= a1c < 5.7
@@ -115,6 +121,7 @@ class AlgorithmComponent extends Component {
         {
             $this->therapy = "none";
             $this->decision = "Patient is normal (not at risk of diabetes).";
+            array_push($graph1, "end");
         }
 
         // pre-diabetic range 5.7 <= a1c < 6.5
@@ -122,103 +129,110 @@ class AlgorithmComponent extends Component {
         {
             $this->therapy = "lifestyle modification";
             $this->decision = "Patient is at risk of diabetes.";
+            array_push($graph1, "end");
         }
-
-        // start or remain at mono therapy: select medicine 1 if no therapy or if a1c <= target 
-        // or if a1c > target and a1c is decreasing
-        elseif ((($this->a1c >= 6.5)&&($this->a1c < 7.5)&&($this->noTherapy() )) 
-        		|| ($this->isMono() && ($this->a1c <= $this->a1cTarget)) 
-        		|| ($this->isMono() && ($this->a1c > $this->a1cTarget) && $this->a1cDecrease()) )
-        {
-        	if ($this->noTherapy())
-            	$this->selectMedicine(1);
-            $this->therapy = "lifestyle + monotherapy";
-        	$this->decision = "Start or continue with mono therapy.";
-        }
-
-        // mono to dual therapy: add medicine 2 if at mono therapy and a1c > target and a1c is not decreasing
-        elseif ( $this->isMono() && ($this->a1c > $this->a1cTarget) && !$this->a1cDecrease()){
-        	$this->selectMedicine(1);
-        	$this->selectMedicine(2);
-            $this->therapy = "lifestyle + dual therapy";
-            $this->decision = "A1c greater than target and A1c not decreasing, so adding second medicine for dual therapy.";
-        }
-
-        // start at dual therapy: select medicine 1 & 2 if 7.5 <= a1c < 9 and no medicine selected
-        elseif( (($this->a1c >= 7.5) && (($this->a1c <= 9) && $this->noTherapy() )) )
-        {
-            $this->selectMedicine(1);
-            $this->selectMedicine(2);
-            $this->therapy = "lifestyle + dual therapy";
-            $this->decision = "Starting with dual therapy.";
-        }
-
-        // remain at dual therapy if at dual therapy and a1c <= target 
-        // or if a1c > target and a1c is decreasing
-        elseif ( ($this->isDual() && ($this->a1c <= $this->a1cTarget))
-        		|| ($this->isDual() && ($this->a1c > $this->a1cTarget) && $this->a1cDecrease())){
-            $this->selectMedicine(1);	
-        	$this->selectMedicine(2);
-            $this->therapy = "lifestyle + dual therapy";
-        	$this->decision = "A1c less than or equal to target or A1c greater than target and decreasing, so continue with dual therapy.";
-        }
-
-        // dual to triple therapy: add medicine 3 if at dual therapy and a1c > target and a1c not decreasing
-        elseif ( ($this->isDual() && ($this->a1c > $this->a1cTarget)) && !$this->a1cDecrease() )
-        {
-            $this->selectMedicine(1);
-        	$this->selectMedicine(2);
-            $this->selectMedicine(3);
-            $this->therapy = "lifestyle + triple therapy";
-            $this->decision = "A1c greater than target and A1C not decreasing, so adding third medicine for triple therapy.";
-        }
-
-        // start at triple therapy: select medicine 1 and 2 if a1c > 9 with no symptoms, and no medicine selected
-        elseif (($this->a1c > 9) && $this->noTherapy() && !$this->symptoms)
-        {
-            $this->selectMedicine(1);
-            $this->selectMedicine(2);
-            $this->selectMedicine(3);
-            $this->therapy = "lifestyle + triple therapy";
-            $this->decision = "Start with triple therapy.";
-
-        }
-        
-        // remain at triple therapy if at triple therapy and a1c <= target
-        // or if a1c > target and a1c is decreasing
-        elseif ( ($this->isTriple() && ($this->a1c <= $this->a1cTarget)) 
-        		|| ($this->isTriple() && ($this->a1c > $this->a1cTarget) && $this->a1cDecrease()) )
-        {
-            $this->selectMedicine(1);
-        	$this->selectMedicine(2);
-            $this->selectMedicine(3);
-        	$this->therapy = "lifestyle + triple therapy";
-        	$this->decision = "A1c less than or equal to target or A1c is decreasing, so continue with triple therapy.";
-        }
-                
-        // insulin therapy: at triple therapy and a1c > target and a1c not decreasing
-        elseif (($this->isTriple() && ($this->a1c > $this->a1cTarget)&& !$this->a1cDecrease()))
-        {
-            $this->selectMedicine(1);
-            $this->selectMedicine(2);
-            $this->selectMedicine(3);
-            $this->therapy = "lifestyle + triple therapy + insulin";
-            $this->decision = "Add or intensify insulin";
-            $this->medicine4 = "Insulin";
-        }
-        
-        // insulin therapy: if a1c > 9 and symptoms 
-        elseif ((($this->a1c > 9) && $this->noTherapy() && $this->symptoms))
-        {
-        	$this->therapy = "lifestyle + insulin";
-        	$this->decision = "Start with insulin";
-            $this->medicine4 = "Insulin";
-        }
-        
         else
         {
-            $this->therapy = "No therapy";
-            $this->decision = "No therapy selected.";
+            array_push($graph1, "connectorP2");
+            array_push($graph2, "begin", "decision1");
+            // start or remain at mono therapy: select medicine 1 if no therapy or if a1c <= target 
+            // or if a1c > target and a1c is decreasing
+            if ((($this->a1c >= 6.5)&&($this->a1c < 7.5)&&($this->noTherapy() )) 
+            		|| ($this->isMono() && ($this->a1c <= $this->a1cTarget)) 
+            		|| ($this->isMono() && ($this->a1c > $this->a1cTarget) && $this->a1cDecrease()) )
+            {
+            	if ($this->noTherapy())
+                	$this->selectMedicine(1);
+                $this->therapy = "lifestyle + monotherapy";
+            	$this->decision = "Start or continue with mono therapy.";
+                array_push($graph2, "decision11", "process1");
+                
+            }
+
+            // mono to dual therapy: add medicine 2 if at mono therapy and a1c > target and a1c is not decreasing
+            elseif ( $this->isMono() && ($this->a1c > $this->a1cTarget) && !$this->a1cDecrease()){
+            	$this->selectMedicine(1);
+            	$this->selectMedicine(2);
+                $this->therapy = "lifestyle + dual therapy";
+                $this->decision = "A1c greater than target and A1c not decreasing, so adding second medicine for dual therapy.";
+            }
+
+            // start at dual therapy: select medicine 1 & 2 if 7.5 <= a1c < 9 and no medicine selected
+            elseif( (($this->a1c >= 7.5) && (($this->a1c <= 9) && $this->noTherapy() )) )
+            {
+                $this->selectMedicine(1);
+                $this->selectMedicine(2);
+                $this->therapy = "lifestyle + dual therapy";
+                $this->decision = "Starting with dual therapy.";
+            }
+
+            // remain at dual therapy if at dual therapy and a1c <= target 
+            // or if a1c > target and a1c is decreasing
+            elseif ( ($this->isDual() && ($this->a1c <= $this->a1cTarget))
+            		|| ($this->isDual() && ($this->a1c > $this->a1cTarget) && $this->a1cDecrease())){
+                $this->selectMedicine(1);	
+            	$this->selectMedicine(2);
+                $this->therapy = "lifestyle + dual therapy";
+            	$this->decision = "A1c less than or equal to target or A1c greater than target and decreasing, so continue with dual therapy.";
+            }
+
+            // dual to triple therapy: add medicine 3 if at dual therapy and a1c > target and a1c not decreasing
+            elseif ( ($this->isDual() && ($this->a1c > $this->a1cTarget)) && !$this->a1cDecrease() )
+            {
+                $this->selectMedicine(1);
+            	$this->selectMedicine(2);
+                $this->selectMedicine(3);
+                $this->therapy = "lifestyle + triple therapy";
+                $this->decision = "A1c greater than target and A1C not decreasing, so adding third medicine for triple therapy.";
+            }
+
+            // start at triple therapy: select medicine 1 and 2 if a1c > 9 with no symptoms, and no medicine selected
+            elseif (($this->a1c > 9) && $this->noTherapy() && !$this->symptoms)
+            {
+                $this->selectMedicine(1);
+                $this->selectMedicine(2);
+                $this->selectMedicine(3);
+                $this->therapy = "lifestyle + triple therapy";
+                $this->decision = "Start with triple therapy.";
+
+            }
+            
+            // remain at triple therapy if at triple therapy and a1c <= target
+            // or if a1c > target and a1c is decreasing
+            elseif ( ($this->isTriple() && ($this->a1c <= $this->a1cTarget)) 
+            		|| ($this->isTriple() && ($this->a1c > $this->a1cTarget) && $this->a1cDecrease()) )
+            {
+                $this->selectMedicine(1);
+            	$this->selectMedicine(2);
+                $this->selectMedicine(3);
+            	$this->therapy = "lifestyle + triple therapy";
+            	$this->decision = "A1c less than or equal to target or A1c is decreasing, so continue with triple therapy.";
+            }
+                    
+            // insulin therapy: at triple therapy and a1c > target and a1c not decreasing
+            elseif (($this->isTriple() && ($this->a1c > $this->a1cTarget)&& !$this->a1cDecrease()))
+            {
+                $this->selectMedicine(1);
+                $this->selectMedicine(2);
+                $this->selectMedicine(3);
+                $this->therapy = "lifestyle + triple therapy + insulin";
+                $this->decision = "Add or intensify insulin";
+                $this->medicine4 = "Insulin";
+            }
+            
+            // insulin therapy: if a1c > 9 and symptoms 
+            elseif ((($this->a1c > 9) && $this->noTherapy() && $this->symptoms))
+            {
+            	$this->therapy = "lifestyle + insulin";
+            	$this->decision = "Start with insulin";
+                $this->medicine4 = "Insulin";
+            }
+            
+            else
+            {
+                $this->therapy = "No therapy";
+                $this->decision = "No therapy selected.";
+            }
         }
         
         // generate side effects message for each selected medicine
@@ -227,7 +241,7 @@ class AlgorithmComponent extends Component {
         // generate alert message for side effects related to patient problems for each medicine
         $this->genAlert();
         $this->alert .= "<br>". $this->medeffects;	// append medicine side effects
-        
+        $this->decisionPath = array($graph1, $graph2, $graph3);
     }
     
     /**
@@ -559,6 +573,10 @@ class AlgorithmComponent extends Component {
     public function getDecision()
     {
         return $this->decision;
+    }
+    public function getDecisionPath()
+    {
+        return $this->decisionPath;
     }
     public function getEffects()
     {
