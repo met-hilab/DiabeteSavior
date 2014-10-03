@@ -8,7 +8,9 @@
     <li><a href="<?php echo $this->webroot; ?>calculators/diabetesrisk">Diabetes risk calculator</a></li>
   </ul>
 </p>
-<p>&nbsp;</p>
+<p class="alert alert-success text-left">
+  DISCLAIMER:The patient records in this system are simplified simulations of Electronic Health Records (EHRs) for research and teaching purpose only. They are different from EHRs and do not comply with HIPAA. All patient data are fictional and no actual patient data are used.
+</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>

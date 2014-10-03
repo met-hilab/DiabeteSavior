@@ -423,6 +423,7 @@ class VisitsController extends AppController {
       $this->Algorithm->gcAlgorithm();
   	
       /* get algorithm results */
+      $decisionPath = $this->Algorithm->getDecisionPath();
       $decision = $this->Algorithm->getDecision();
       $therapy = $this->Algorithm->getTherapy();
       $med1 = $this->Algorithm->getMedicine1();
@@ -430,6 +431,7 @@ class VisitsController extends AppController {
       $med3 = $this->Algorithm->getMedicine3();
       $medalert = $this->Algorithm->getAlert();
       
+      $this->set('decisionPath', $decisionPath);
       $this->set('decision', $decision);
       $this->set('therapy', $therapy);
       $this->Session->write('therapy', $therapy);
