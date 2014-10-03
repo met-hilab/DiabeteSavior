@@ -249,7 +249,7 @@ for (var el in gArray) {
     gArray[el].attr('path/fill', 'white');
     gArray[el].attr('text/fill', '#333');
     if(decisionPath[1].indexOf(thisName) > -1) {
-        //gArray[el].attr('rect/fill', 'red');
+        gArray[el].attr('rect/fill', 'red');
         gArray[el].attr('path/fill', 'red');
         gArray[el].attr('text/fill', 'white');
         gArray[el].attr('text/font-weight', 'bold');

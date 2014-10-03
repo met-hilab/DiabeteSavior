@@ -155,6 +155,7 @@ class AlgorithmComponent extends Component {
             	$this->selectMedicine(2);
                 $this->therapy = "lifestyle + dual therapy";
                 $this->decision = "A1c greater than target and A1c not decreasing, so adding second medicine for dual therapy.";
+                array_push($graph2, "decision11", "decision21", "process2", "connectorp3");
             }
 
             // start at dual therapy: select medicine 1 & 2 if 7.5 <= a1c < 9 and no medicine selected
@@ -164,6 +165,7 @@ class AlgorithmComponent extends Component {
                 $this->selectMedicine(2);
                 $this->therapy = "lifestyle + dual therapy";
                 $this->decision = "Starting with dual therapy.";
+                array_push($graph2, "decision2", "decision21", "process2", "connectorp3");
             }
 
             // remain at dual therapy if at dual therapy and a1c <= target 
@@ -174,6 +176,7 @@ class AlgorithmComponent extends Component {
             	$this->selectMedicine(2);
                 $this->therapy = "lifestyle + dual therapy";
             	$this->decision = "A1c less than or equal to target or A1c greater than target and decreasing, so continue with dual therapy.";
+                array_push($graph2, "decision2", "decision21", "process2", "connectorp3");
             }
 
             // dual to triple therapy: add medicine 3 if at dual therapy and a1c > target and a1c not decreasing
@@ -184,6 +187,7 @@ class AlgorithmComponent extends Component {
                 $this->selectMedicine(3);
                 $this->therapy = "lifestyle + triple therapy";
                 $this->decision = "A1c greater than target and A1C not decreasing, so adding third medicine for triple therapy.";
+                array_push($graph2, "decision2", "decision21", "decision31","process3", "connectorp3");
             }
 
             // start at triple therapy: select medicine 1 and 2 if a1c > 9 with no symptoms, and no medicine selected
@@ -194,6 +198,7 @@ class AlgorithmComponent extends Component {
                 $this->selectMedicine(3);
                 $this->therapy = "lifestyle + triple therapy";
                 $this->decision = "Start with triple therapy.";
+                array_push($graph2, "decision2", "decision3", "decision31","process3", "connectorp3");
 
             }
             
@@ -207,6 +212,7 @@ class AlgorithmComponent extends Component {
                 $this->selectMedicine(3);
             	$this->therapy = "lifestyle + triple therapy";
             	$this->decision = "A1c less than or equal to target or A1c is decreasing, so continue with triple therapy.";
+                array_push($graph2, "decision2", "decision3", "decision31","process3", "connectorp3");
             }
                     
             // insulin therapy: at triple therapy and a1c > target and a1c not decreasing
@@ -218,6 +224,7 @@ class AlgorithmComponent extends Component {
                 $this->therapy = "lifestyle + triple therapy + insulin";
                 $this->decision = "Add or intensify insulin";
                 $this->medicine4 = "Insulin";
+                array_push($graph2, "decision2", "decision3", "decision31","process4", "connectorp4");
             }
             
             // insulin therapy: if a1c > 9 and symptoms 
@@ -226,6 +233,7 @@ class AlgorithmComponent extends Component {
             	$this->therapy = "lifestyle + insulin";
             	$this->decision = "Start with insulin";
                 $this->medicine4 = "Insulin";
+                array_push($graph2, "decision2", "decision3", "decision4","process4", "connectorp4");
             }
             
             else
