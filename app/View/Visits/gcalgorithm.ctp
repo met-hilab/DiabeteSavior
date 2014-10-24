@@ -4,7 +4,7 @@ window.decisionPath = <?php echo json_encode($decisionPath); ?>;
 console.log(decisionPath);
 </script>
 <h2>Glycemic Control Algorithm Results</h2>
-<div id="graph2"></div>
+
 <div class="col-md-9">
 <form id="algorithm_results" class="form-horizontal" role="form" action="<?php echo $this->webroot; ?>visits/gcalgorithm" method="post">
  <table  class="table table-condensed">      
@@ -45,24 +45,25 @@ console.log(decisionPath);
       target="_blank">AACE Comprehensive Diabetes Management, Endocr Pract. 2013;19(Suppl 2)</a></p>
 
        <p><a href="<?php echo $this->webroot; ?>pages/algorithm_diagrams" target="_blank"> Algorithm flowchart diagrams </a> </p>	  
-    
-<div class="control-group">
-  <label class="" for="Accept"></label>
-  <div class="">
-    <button id="Accept" name="Accept" class="btn btn-primary">Accept</button>&nbsp;&nbsp;
-    <a href="<?php echo $this->webroot; ?>visits/edit" class="btn btn-primary" style="padding-left:10px;">
-		<span class="glyphicon glyphicon-edit"></span>Edit</a>
-  </div>
-</div>
-</form>
+    <div id="graph1"></div>
+    <div id="graph2"></div>
+    <div id="graph3"></div>
+    <div class="control-group">
+      <label class="" for="Accept"></label>
+      <div class="">
+        <button id="Accept" name="Accept" class="btn btn-primary">Accept</button>&nbsp;&nbsp;
+        <a href="<?php echo $this->webroot; ?>visits/edit" class="btn btn-primary" style="padding-left:10px;">
+    		<span class="glyphicon glyphicon-edit"></span>Edit</a>
+      </div>
+    </div>
+  </form>
 </div>
 <?php
-echo $this->Html->script('lodash');
-echo $this->Html->script('backbone');
-echo $this->Html->script('vectorizer');
-echo $this->Html->script('geometry');
-echo $this->Html->script('joint.clean');
-//echo $this->Html->script('joint');
+echo $this->Html->script('lodash.min');
+echo $this->Html->script('backbone-min');
+echo $this->Html->script('vectorizer.min');
+echo $this->Html->script('geometry.min');
+echo $this->Html->script('joint.clean.min');
 echo $this->Html->script('joint.layout.DirectedGraph');
 echo $this->Html->script('joint.shapes');
 echo $this->Html->script('decisionPath');
