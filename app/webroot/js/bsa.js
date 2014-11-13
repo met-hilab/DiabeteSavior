@@ -1,3 +1,8 @@
+//(function(){
+
+var app = angular.module('diabeteSavior', ['ngRoute']);
+
+
 function bsaCalculatorsController($scope) {
   
   $scope.unitW = "kg";
@@ -64,3 +69,4 @@ function bsaCalculatorsController($scope) {
   
   }
 }
+//})();
