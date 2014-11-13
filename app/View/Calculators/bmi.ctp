@@ -1,5 +1,5 @@
 <?php
-
+echo $this->Html->script('utilities');
 echo $this->Html->script('angular/angular.min');
 echo $this->Html->script('angular/angular-cookies.min');
 echo $this->Html->script('angular/angular-route.min');
