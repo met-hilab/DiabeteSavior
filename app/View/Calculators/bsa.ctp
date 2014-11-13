@@ -1,6 +1,7 @@
 <?php
 
 echo $this->Html->script('angular/angular.min');
+echo $this->Html->script('angular/angular-cookies.min');
 echo $this->Html->script('angular/angular-route.min');
 echo $this->Html->script('bsa');
 ?>
@@ -12,31 +13,30 @@ Body surface area (BSA) can be calculated with several different formulas which 
 
 <div ng-controller="bsaCalculatorsController">
 <form class="form-horizontal" id="bsaForm" role="form" ng-submit="submit">
+
   <div class="form-group">
-    <label for="" class="col-sm-2 control-label">Height</label>
-    <div class="input-group col-sm-10">
-      <input id="txtHeight" class="form-control" name="txtHeight" value="" type="text">
-      <div class="input-group-btn">
-        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span id="currentHeightUnit">{{unitH}}</span>  <span class="caret"></span></button>
-        <ul class="dropdown-menu pull-right">
-          <li><a ng-click="setUnitH('cm');">cm</a></li>
-          <li><a ng-click="setUnitH('ft');">ft</a></li>
-        </ul>
-      </div><!-- /btn-group -->
+    <label class="col-sm-2 control-label">Unit type</label>
+    <div class="col-sm-10">
+      <div class="btn-group">
+        
+        <button class="btn btn-default switch-unit" data-unit='imperial' ng-class="unitTypeClass('imperial')" ng-click="setUnitType('imperial')" >lbs / ft</button>
+        <button class="btn btn-default switch-unit" data-unit='metric' ng-class="unitTypeClass('metric')" ng-click="setUnitType('metric')" >kg / cm</button>
+        
+      </div>  
     </div>
   </div>
 
   <div class="form-group">
-    <label for="" class="col-sm-2 control-label">Weight</label>
-    <div class="input-group col-sm-10">
-      <input id="txtWeight" class="form-control" name="txtWeight" value="" type="text">
-      <div class="input-group-btn">
-        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" ><span id="currentWeightUnit">{{unitW}}</span> <span class="caret"></span></button>
-        <ul class="dropdown-menu pull-right">
-          <li><a ng-click="setUnitW('kg');">kg</a></li>
-          <li><a ng-click="setUnitW('lb');">lb</a></li>
-        </ul>
-      </div><!-- /btn-group -->
+    <label class="col-sm-2 control-label">Weight</label>
+    <div class="col-sm-10">
+      <input id="txtWeight" class="form-control" name="txtWeight" value="" type="text" ng-focus="enterInput($event)" ng-keyup="weightKeyUp($event)">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-sm-2 control-label">Height</label>
+    <div class="col-sm-10">
+      <input id="txtHeight" class="form-control" name="txtHeight" value="" type="text" ng-focus="enterInput($event)" ng-keydown="heightKeyDown($event)">
     </div>
   </div>
 

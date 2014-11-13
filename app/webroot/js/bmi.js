@@ -77,10 +77,6 @@ function bmiCalculatorsController($scope, $cookies, $cookieStore) {
     },10);    
   }
 
-  $scope.weightKeyUp = function(ev) {
-    
-  }
-
   $scope.heightKeyDown = function(ev) {
     // Only allow numbers, ., ', " in this field.
     // Keydown trigger before change, thus the value still old.
