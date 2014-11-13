@@ -1,7 +1,7 @@
 <?php
 
 echo $this->Html->script('angular/angular.min');
-echo $this->Html->script('angular/angular-cookies');
+echo $this->Html->script('angular/angular-cookies.min');
 echo $this->Html->script('angular/angular-route.min');
 echo $this->Html->script('bmi');
 ?>

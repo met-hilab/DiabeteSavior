@@ -31,7 +31,7 @@ ftToM = function(value) {
   return value;
 }
 
-var bmiApp = angular.module('diabeteSavior', ['ngCookies']);
+var bmiApp = angular.module('diabeteSavior', ['ngRoute', 'ngCookies']);
 bmiApp.controller('bmiCalculatorsController', ['$scope','$cookies', '$cookieStore', bmiCalculatorsController]);
 
 
