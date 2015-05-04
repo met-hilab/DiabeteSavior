@@ -1,7 +1,6 @@
 <?php echo $this->Html->css('joint'); ?>
 <script>
 window.decisionPath = <?php echo json_encode($decisionPath); ?>;
-console.log(decisionPath);
 </script>
 <h2>Glycemic Control Algorithm Results</h2>
 
