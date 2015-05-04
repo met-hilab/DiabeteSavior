@@ -209,44 +209,55 @@ class UsersController extends AppController {
         $this->request->data["User"]["activate_token"] = $activate_token;
         //var_dump($this->request->data);
         //exit;
-        $res = $this->User->saveAssociated($this->request->data);
-        
-        $admin_emails = array();
-        $this->User->recursive = -1;
-        $conditions = array("User.role >" => 0);
-        $admins = $this->User->find('all', array('conditions' => $conditions));
+        if ($res = $this->User->saveAssociated($this->request->data)) {
+            $admin_emails = array();
+            $this->User->recursive = -1;
+            $conditions = array("User.role >" => 0);
+            $admins = $this->User->find('all', array('conditions' => $conditions));
 
-        foreach($admins as $u) {
-          if($u['User']['email'] != '') {
-            array_push($admin_emails, $u['User']['email']);
-          }
+            foreach($admins as $u) {
+              if($u['User']['email'] != '') {
+                array_push($admin_emails, $u['User']['email']);
+              }
+            }
+            
+            $mail = new CakeEmail();
+            $mail->template('notify_new_user', 'default')
+              ->subject('New user notification')
+              ->emailFormat('html')
+              ->to('admin@diabetesavior.com')
+              ->bcc($admin_emails)
+              ->from('admin@diabetesavior.com')
+              ->send();
+            
+            $baseUrl = "http://" . CakeRequest::host() . $this->request->webroot;
+            $activate_url = $baseUrl . "activate?token=". $activate_token;
+
+            $mail = new CakeEmail();
+            $mail->viewVars(array('activate_url' => $activate_url));
+            $mail->template('user_confirmation', 'default')
+              ->subject('Activate you account')
+              ->emailFormat('html')
+              ->to($userEmail)
+              ->from('admin@diabetesavior.com')
+              ->send();
+            //var_dump($userEmail);
+            $this->redirect("/pages/after_sign_up");
+        } else {
+            $errorOutput = "";
+            foreach($this->User->validationErrors as $attr) {
+                $this->Session->setFlash($this->User->validationErrors);
+                foreach($attr as $attrErrors) {
+                      $errorOutput .= $attrErrors . "\n";
+                }
+            }
+            $errorOutput = nl2br($errorOutput);
+            $this->Session->setFlash($errorOutput, "flash_error");
+            $this->render('sign_up');
         }
-        
-        $mail = new CakeEmail();
-        $mail->template('notify_new_user', 'default')
-          ->subject('New user notification')
-          ->emailFormat('html')
-          ->to('admin@diabetesavior.com')
-          ->bcc($admin_emails)
-          ->from('admin@diabetesavior.com')
-          ->send();
-        
-        $baseUrl = "http://" . CakeRequest::host() . $this->request->webroot;
-        $activate_url = $baseUrl . "activate?token=". $activate_token;
-
-        $mail = new CakeEmail();
-        $mail->viewVars(array('activate_url' => $activate_url));
-        $mail->template('user_confirmation', 'default')
-          ->subject('Activate you account')
-          ->emailFormat('html')
-          ->to($userEmail)
-          ->from('admin@diabetesavior.com')
-          ->send();
-        //var_dump($userEmail);
-        $this->redirect("/pages/after_sign_up");
       } catch(Exception $e) {
-        $this->Session->setFlash($e->getMessage());
-        $this->redirect("/sign_up");
+        $this->Session->setFlash($e->getMessage(), "flash_error");
+        $this->redirect("/sign_up");  
       }
     } else {
       throw new ForbiddenException();

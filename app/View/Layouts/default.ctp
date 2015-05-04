@@ -164,7 +164,7 @@ $cakeDescription = __d('cake_dev', 'Diabetes Savior: Type II Diabetes Infomatic 
     </nav>
     <hr style="padding-top:0;">
     <div id="content" style="padding-bottom:45px; min-height: 500px;">
-      <?php echo $this->Session->flash(); ?>
+      <?= $this->Session->flash(); ?>
       <!-- The main content from controller / view START -->
       <?php echo $this->fetch('content'); ?>
       <!-- The main content from controller / view END -->
