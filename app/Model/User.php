@@ -12,7 +12,6 @@ class User extends AppModel {
  * @var string
  */
 public $displayField = 'email';
-
 /**
  * Validation rules
  *
@@ -22,20 +21,10 @@ public $validate = array(
   'email' => array(
     'email' => array(
       'rule' => array('isUnique', array('email'), false),
-        'message' => 'This email has already been used.'
-        //'message' => 'Your custom message here',
-        //'allowEmpty' => false,
-        //'required' => false,
-        //'last' => false, // Stop validation after this rule
-        //'on' => 'create', // Limit validation to 'create' or 'update' operations
+        'message' => 'The email address has been used for registration previously. <br> If you forgot your password, <a href="./forgot_password" >click here</a> to recover it.'
       ),
     'notempty' => array(
       'rule' => array('notempty'),
-        //'message' => 'Your custom message here',
-        //'allowEmpty' => false,
-        //'required' => false,
-        //'last' => false, // Stop validation after this rule
-        //'on' => 'create', // Limit validation to 'create' or 'update' operations
       ),
     ),
   'password' => array(
