@@ -95,8 +95,9 @@ function bmiCalculatorsController($scope, $cookies, $cookieStore) {
     }
     $scope.unitType = type;
     $cookies.unitType = type;
-    $scope.unitFormat = $scope.unit[type];    
+    $scope.unitFormat = unit[type];
     setPlaceholders();
+    
     if(type == 'imperial') {
       newW = kgToLb($('#txtWeight').val());
       newH = mToFt($('#txtHeight').val());
@@ -104,8 +105,13 @@ function bmiCalculatorsController($scope, $cookies, $cookieStore) {
       newW = lbToKg($('#txtWeight').val());
       newH = ftToM($('#txtHeight').val());
     }
-    $('#txtWeight').val(newW);
-    $('#txtHeight').val(newH);
+   
+    //Update the value only if the textbox is not empty 
+    if($('#txtWeight').val().length > 0)
+      $('#txtWeight').val(newW);
+    if($('#txtHeight').val().length > 0)
+      $('#txtHeight').val(newH);
+    
     return false;
   }
 
