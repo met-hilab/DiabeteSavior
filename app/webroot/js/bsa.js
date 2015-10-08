@@ -19,7 +19,7 @@ function bsaCalculatorsController($scope, $cookies, $cookieStore) {
       $cookies.unitType = 'imperial';
     }
     $scope.unitType = $cookies.unitType;
-    $scope.unitFormat = $scope.unit[$scope.unitType];    
+    $scope.unitFormat = unit[$scope.unitType];    
     setPlaceholders();
   }
   init();
@@ -50,8 +50,11 @@ function bsaCalculatorsController($scope, $cookies, $cookieStore) {
       newW = lbToKg($('#txtWeight').val());
       newH = ftToM($('#txtHeight').val());
     }
-    $('#txtWeight').val(newW);
-    $('#txtHeight').val(newH);
+    if($('#txtWeight').val().length > 0)
+      $('#txtWeight').val(newW);
+    if($('#txtHeight').val().length > 0)
+      $('#txtHeight').val(newH);
+
     return false;
   }
 
